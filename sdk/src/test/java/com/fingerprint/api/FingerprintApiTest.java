@@ -401,8 +401,8 @@ public class FingerprintApiTest {
         final List<String> ENVIRONMENT = new ArrayList<String>();
         ENVIRONMENT.add("env1");
         ENVIRONMENT.add("env2");
-        final String PROXIMITY_ID = "testProximityId";
-        final Integer PROXIMITY_PRECISION_RADIUS = 10;
+//        final String PROXIMITY_ID = "testProximityId";
+//        final Integer PROXIMITY_PRECISION_RADIUS = 10;
 
         Map<String, String> expectedQueryParams = new HashMap<>();
         expectedQueryParams.put("limit", String.valueOf(LIMIT));
