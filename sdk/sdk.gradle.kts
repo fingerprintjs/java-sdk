@@ -68,10 +68,6 @@ openApiGenerate {
     gitUserId.set("fingerprintjs")
     configOptions.put("hideGenerationTimestamp", "true")
     configOptions.put("openApiNullable", "false")
-
-    globalProperties.put("apis", "Fingerprint")
-    globalProperties.put("models", "")
-    globalProperties.put("supportingFiles", "Configuration.java, JSON.java, README.md")
 }
 
 tasks.register("removeDocs") {
@@ -91,51 +87,35 @@ tasks.register("removeClasses") {
     }
 }
 
+tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
+    from("$rootDir/.openapi-generator-ignore")
+    into(layout.buildDirectory.dir("generated"))
+}
+
 tasks.register<Copy>("copyDocs") {
     from(layout.buildDirectory.dir("generated/docs"))
     into("$rootDir/docs")
+    dependsOn(tasks.openApiGenerate)
 }
 
 tasks.register<Copy>("copyClasses") {
     from(layout.buildDirectory.dir("generated/src/main/java"))
     into("src/main/java")
+    dependsOn(tasks.openApiGenerate)
 }
 
 tasks.register<Copy>("copyReadme") {
     from(file(layout.buildDirectory.file("generated/README.md")))
     into(file("$rootDir/"))
-}
-
-tasks.register("removeWrongDocumentationLinks") {
-    // TODO remove?
-    doLast {
-        fileTree("$rootDir/docs").files
-            .filter { it.isFile }
-            .forEach {
-                val content = it.readText()
-                    .replace("[**OffsetDateTime**](OffsetDateTime.md)", "**OffsetDateTime**")
-                    .replace("[**URI**](URI.md)", "**URI**")
-                it.writeText(content)
-            }
-    }
-}
-
-tasks.named("copyDocs") {
-    dependsOn(tasks.openApiGenerate)
-    dependsOn("removeDocs")
-}
-tasks.named("copyClasses") {
-    dependsOn(tasks.openApiGenerate)
-    dependsOn("removeClasses")
-}
-
-tasks.named("removeWrongDocumentationLinks") {
     dependsOn("copyDocs")
-    finalizedBy("copyReadme")
+}
+
+tasks.openApiGenerate {
+    dependsOn("removeDocs", "removeClasses", "copyOpenApiGeneratorIgnore")
 }
 
 tasks.named("build") {
-    finalizedBy("removeWrongDocumentationLinks")
+    finalizedBy("copyReadme")
 }
 
 tasks.compileJava {
