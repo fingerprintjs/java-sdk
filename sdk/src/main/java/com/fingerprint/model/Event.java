@@ -60,6 +60,7 @@ import com.fingerprint.sdk.JSON;
   Event.JSON_PROPERTY_PACKAGE_NAME,
   Event.JSON_PROPERTY_IP_ADDRESS,
   Event.JSON_PROPERTY_USER_AGENT,
+  Event.JSON_PROPERTY_CLIENT_REFERRER,
   Event.JSON_PROPERTY_BROWSER_DETAILS,
   Event.JSON_PROPERTY_PROXIMITY,
   Event.JSON_PROPERTY_BOT,
@@ -89,16 +90,17 @@ import com.fingerprint.sdk.JSON;
   Event.JSON_PROPERTY_VPN_CONFIDENCE,
   Event.JSON_PROPERTY_VPN_ORIGIN_TIMEZONE,
   Event.JSON_PROPERTY_VPN_ORIGIN_COUNTRY,
-  Event.JSON_PROPERTY_VPN_METHODS
+  Event.JSON_PROPERTY_VPN_METHODS,
+  Event.JSON_PROPERTY_HIGH_ACTIVITY_DEVICE
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
 public class Event {
   public static final String JSON_PROPERTY_EVENT_ID = "event_id";
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   private String eventId;
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   private Long timestamp;
 
   public static final String JSON_PROPERTY_LINKED_ID = "linked_id";
@@ -152,6 +154,10 @@ public class Event {
   public static final String JSON_PROPERTY_USER_AGENT = "user_agent";
   @jakarta.annotation.Nullable
   private String userAgent;
+
+  public static final String JSON_PROPERTY_CLIENT_REFERRER = "client_referrer";
+  @jakarta.annotation.Nullable
+  private String clientReferrer;
 
   public static final String JSON_PROPERTY_BROWSER_DETAILS = "browser_details";
   @jakarta.annotation.Nullable
@@ -273,10 +279,14 @@ public class Event {
   @jakarta.annotation.Nullable
   private VpnMethods vpnMethods;
 
+  public static final String JSON_PROPERTY_HIGH_ACTIVITY_DEVICE = "high_activity_device";
+  @jakarta.annotation.Nullable
+  private Boolean highActivityDevice;
+
   public Event() { 
   }
 
-  public Event eventId(@jakarta.annotation.Nullable String eventId) {
+  public Event eventId(@jakarta.annotation.Nonnull String eventId) {
     this.eventId = eventId;
     return this;
   }
@@ -285,23 +295,23 @@ public class Event {
    * Unique identifier of the user&#39;s request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: &#x60;1758130560902.8tRtrH&#x60; 
    * @return eventId
    */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_EVENT_ID, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @jakarta.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_EVENT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getEventId() {
     return eventId;
   }
 
 
-  @JsonProperty(value = JSON_PROPERTY_EVENT_ID, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEventId(@jakarta.annotation.Nullable String eventId) {
+  @JsonProperty(value = JSON_PROPERTY_EVENT_ID, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setEventId(@jakarta.annotation.Nonnull String eventId) {
     this.eventId = eventId;
   }
 
 
-  public Event timestamp(@jakarta.annotation.Nullable Long timestamp) {
+  public Event timestamp(@jakarta.annotation.Nonnull Long timestamp) {
     this.timestamp = timestamp;
     return this;
   }
@@ -310,18 +320,18 @@ public class Event {
    * Timestamp of the event with millisecond precision in Unix time.
    * @return timestamp
    */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_TIMESTAMP, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @jakarta.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_TIMESTAMP, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Long getTimestamp() {
     return timestamp;
   }
 
 
-  @JsonProperty(value = JSON_PROPERTY_TIMESTAMP, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTimestamp(@jakarta.annotation.Nullable Long timestamp) {
+  @JsonProperty(value = JSON_PROPERTY_TIMESTAMP, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setTimestamp(@jakarta.annotation.Nonnull Long timestamp) {
     this.timestamp = timestamp;
   }
 
@@ -648,6 +658,31 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setUserAgent(@jakarta.annotation.Nullable String userAgent) {
     this.userAgent = userAgent;
+  }
+
+
+  public Event clientReferrer(@jakarta.annotation.Nullable String clientReferrer) {
+    this.clientReferrer = clientReferrer;
+    return this;
+  }
+
+  /**
+   * Client Referrer field corresponds to the &#x60;document.referrer&#x60; field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: &#x60;https://example.com/blog/my-article&#x60; 
+   * @return clientReferrer
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_CLIENT_REFERRER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getClientReferrer() {
+    return clientReferrer;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_CLIENT_REFERRER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setClientReferrer(@jakarta.annotation.Nullable String clientReferrer) {
+    this.clientReferrer = clientReferrer;
   }
 
 
@@ -1401,6 +1436,31 @@ public class Event {
   }
 
 
+  public Event highActivityDevice(@jakarta.annotation.Nullable Boolean highActivityDevice) {
+    this.highActivityDevice = highActivityDevice;
+    return this;
+  }
+
+  /**
+   * Flag indicating if the request came from a high-activity visitor.
+   * @return highActivityDevice
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_HIGH_ACTIVITY_DEVICE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Boolean getHighActivityDevice() {
+    return highActivityDevice;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_HIGH_ACTIVITY_DEVICE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setHighActivityDevice(@jakarta.annotation.Nullable Boolean highActivityDevice) {
+    this.highActivityDevice = highActivityDevice;
+  }
+
+
   /**
    * Return true if this Event object is equal to o.
    */
@@ -1428,6 +1488,7 @@ public class Event {
         Objects.equals(this.packageName, event.packageName) &&
         Objects.equals(this.ipAddress, event.ipAddress) &&
         Objects.equals(this.userAgent, event.userAgent) &&
+        Objects.equals(this.clientReferrer, event.clientReferrer) &&
         Objects.equals(this.browserDetails, event.browserDetails) &&
         Objects.equals(this.proximity, event.proximity) &&
         Objects.equals(this.bot, event.bot) &&
@@ -1457,12 +1518,13 @@ public class Event {
         Objects.equals(this.vpnConfidence, event.vpnConfidence) &&
         Objects.equals(this.vpnOriginTimezone, event.vpnOriginTimezone) &&
         Objects.equals(this.vpnOriginCountry, event.vpnOriginCountry) &&
-        Objects.equals(this.vpnMethods, event.vpnMethods);
+        Objects.equals(this.vpnMethods, event.vpnMethods) &&
+        Objects.equals(this.highActivityDevice, event.highActivityDevice);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(eventId, timestamp, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, browserDetails, proximity, bot, botType, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods);
+    return Objects.hash(eventId, timestamp, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice);
   }
 
   @Override
@@ -1484,6 +1546,7 @@ public class Event {
     sb.append("    packageName: ").append(toIndentedString(packageName)).append("\n");
     sb.append("    ipAddress: ").append(toIndentedString(ipAddress)).append("\n");
     sb.append("    userAgent: ").append(toIndentedString(userAgent)).append("\n");
+    sb.append("    clientReferrer: ").append(toIndentedString(clientReferrer)).append("\n");
     sb.append("    browserDetails: ").append(toIndentedString(browserDetails)).append("\n");
     sb.append("    proximity: ").append(toIndentedString(proximity)).append("\n");
     sb.append("    bot: ").append(toIndentedString(bot)).append("\n");
@@ -1514,6 +1577,7 @@ public class Event {
     sb.append("    vpnOriginTimezone: ").append(toIndentedString(vpnOriginTimezone)).append("\n");
     sb.append("    vpnOriginCountry: ").append(toIndentedString(vpnOriginCountry)).append("\n");
     sb.append("    vpnMethods: ").append(toIndentedString(vpnMethods)).append("\n");
+    sb.append("    highActivityDevice: ").append(toIndentedString(highActivityDevice)).append("\n");
     sb.append("}");
     return sb.toString();
   }

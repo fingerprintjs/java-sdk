@@ -37,6 +37,7 @@ import com.fingerprint.sdk.JSON;
   IPInfoV4.JSON_PROPERTY_ASN,
   IPInfoV4.JSON_PROPERTY_ASN_NAME,
   IPInfoV4.JSON_PROPERTY_ASN_NETWORK,
+  IPInfoV4.JSON_PROPERTY_ASN_TYPE,
   IPInfoV4.JSON_PROPERTY_DATACENTER_RESULT,
   IPInfoV4.JSON_PROPERTY_DATACENTER_NAME
 })
@@ -61,6 +62,10 @@ public class IPInfoV4 {
   public static final String JSON_PROPERTY_ASN_NETWORK = "asn_network";
   @jakarta.annotation.Nullable
   private String asnNetwork;
+
+  public static final String JSON_PROPERTY_ASN_TYPE = "asn_type";
+  @jakarta.annotation.Nullable
+  private String asnType;
 
   public static final String JSON_PROPERTY_DATACENTER_RESULT = "datacenter_result";
   @jakarta.annotation.Nullable
@@ -198,6 +203,31 @@ public class IPInfoV4 {
   }
 
 
+  public IPInfoV4 asnType(@jakarta.annotation.Nullable String asnType) {
+    this.asnType = asnType;
+    return this;
+  }
+
+  /**
+   * Get asnType
+   * @return asnType
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ASN_TYPE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getAsnType() {
+    return asnType;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_ASN_TYPE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAsnType(@jakarta.annotation.Nullable String asnType) {
+    this.asnType = asnType;
+  }
+
+
   public IPInfoV4 datacenterResult(@jakarta.annotation.Nullable Boolean datacenterResult) {
     this.datacenterResult = datacenterResult;
     return this;
@@ -265,13 +295,14 @@ public class IPInfoV4 {
         Objects.equals(this.asn, ipInfoV4.asn) &&
         Objects.equals(this.asnName, ipInfoV4.asnName) &&
         Objects.equals(this.asnNetwork, ipInfoV4.asnNetwork) &&
+        Objects.equals(this.asnType, ipInfoV4.asnType) &&
         Objects.equals(this.datacenterResult, ipInfoV4.datacenterResult) &&
         Objects.equals(this.datacenterName, ipInfoV4.datacenterName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(address, geolocation, asn, asnName, asnNetwork, datacenterResult, datacenterName);
+    return Objects.hash(address, geolocation, asn, asnName, asnNetwork, asnType, datacenterResult, datacenterName);
   }
 
   @Override
@@ -283,6 +314,7 @@ public class IPInfoV4 {
     sb.append("    asn: ").append(toIndentedString(asn)).append("\n");
     sb.append("    asnName: ").append(toIndentedString(asnName)).append("\n");
     sb.append("    asnNetwork: ").append(toIndentedString(asnNetwork)).append("\n");
+    sb.append("    asnType: ").append(toIndentedString(asnType)).append("\n");
     sb.append("    datacenterResult: ").append(toIndentedString(datacenterResult)).append("\n");
     sb.append("    datacenterName: ").append(toIndentedString(datacenterName)).append("\n");
     sb.append("}");

@@ -182,8 +182,8 @@ public class FingerprintApiExample {
 | **200** | OK. |  -  |
 | **400** | Bad request. The event Id provided is not valid. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **404** | Not found. The event Id cannot be found in this application&#39;s data. |  -  |
-| **500** | Application error. |  -  |
+| **404** | Not found. The event Id cannot be found in this workspace&#39;s data. |  -  |
+| **500** | Workspace error. |  -  |
 
 
 ## searchEvents
@@ -202,7 +202,7 @@ The `/v4/events` endpoint provides a convenient way to search for past events ba
 
 If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.
 
-### Filtering events with the`suspect` flag
+### Filtering events with the `suspect` flag
 
 The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.
 
@@ -245,6 +245,7 @@ public class FingerprintApiExample {
         String visitorId = "visitorId_example"; // String | Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`. 
         String bot = "all"; // String | Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. 
         String ipAddress = "ipAddress_example"; // String | Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32 
+        String asn = "asn_example"; // String | 
         String linkedId = "linkedId_example"; // String | Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. 
         String url = "url_example"; // String | Filter events by the URL (`url` property) associated with the event. 
         String origin = "origin_example"; // String | Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar) 
@@ -273,6 +274,7 @@ public class FingerprintApiExample {
         String sdkVersion = "sdkVersion_example"; // String | Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14` 
         String sdkPlatform = "js"; // String | Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
         List<String> environment = Arrays.asList(); // List<String> | Filter for events by providing one or more environment IDs (`environment_id` property). 
+        String proximityId = "proximityId_example"; // String | Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response. 
         Long totalHits = 56L; // Long | When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit. 
         try {
             EventSearch result = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams()
@@ -281,6 +283,7 @@ public class FingerprintApiExample {
                 .setVisitorId(visitorId)
                 .setBot(bot)
                 .setIpAddress(ipAddress)
+                .setAsn(asn)
                 .setLinkedId(linkedId)
                 .setUrl(url)
                 .setOrigin(origin)
@@ -309,6 +312,7 @@ public class FingerprintApiExample {
                 .setSdkVersion(sdkVersion)
                 .setSdkPlatform(sdkPlatform)
                 .setEnvironment(environment)
+                .setProximityId(proximityId)
                 .setTotalHits(totalHits));
             System.out.println(result);
         } catch (ApiException e) {
@@ -337,6 +341,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **visitorId** | **String**| Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  | [optional] |
 | **bot** | **String**| Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  | [optional] [enum: all, good, bad, none] |
 | **ipAddress** | **String**| Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  | [optional] |
+| **asn** | **String**|  | [optional] |
 | **linkedId** | **String**| Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] |
 | **url** | **String**| Filter events by the URL (`url` property) associated with the event.  | [optional] |
 | **origin** | **String**| Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  | [optional] |
@@ -365,6 +370,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **sdkVersion** | **String**| Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  | [optional] |
 | **sdkPlatform** | **String**| Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  | [optional] [enum: js, android, ios] |
 | **environment** | **List&lt;String&gt;**| Filter for events by providing one or more environment IDs (`environment_id` property).  | [optional] |
+| **proximityId** | **String**| Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response.  | [optional] |
 | **totalHits** | **Long**| When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit.  | [optional] |
 
 ### Return type
@@ -386,7 +392,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **200** | Events matching the filter(s). |  -  |
 | **400** | Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **500** | Application error. |  -  |
+| **500** | Workspace error. |  -  |
 
 
 ## updateEvent
@@ -470,6 +476,6 @@ null (empty response body)
 | **200** | OK. |  -  |
 | **400** | Bad request. The request payload is not valid. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **404** | Not found. The event Id cannot be found in this application&#39;s data. |  -  |
+| **404** | Not found. The event Id cannot be found in this workspace&#39;s data. |  -  |
 | **409** | Conflict. The event is not mutable yet. |  -  |
 

@@ -8,8 +8,8 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**eventId** | **String** | Unique identifier of the user&#39;s request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: &#x60;1758130560902.8tRtrH&#x60;  |  [optional] |
-|**timestamp** | **Long** | Timestamp of the event with millisecond precision in Unix time. |  [optional] |
+|**eventId** | **String** | Unique identifier of the user&#39;s request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: &#x60;1758130560902.8tRtrH&#x60;  |  |
+|**timestamp** | **Long** | Timestamp of the event with millisecond precision in Unix time. |  |
 |**linkedId** | **String** | A customer-provided id that was sent with the request. |  [optional] |
 |**environmentId** | **String** | Environment Id of the event. For example: &#x60;ae_47abaca3db2c7c43&#x60;  |  [optional] |
 |**suspect** | **Boolean** | Field is &#x60;true&#x60; if you have previously set the &#x60;suspect&#x60; flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent). |  [optional] |
@@ -23,6 +23,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**packageName** | **String** | Package name of the Android application integrated with the Fingerprint SDK for the event. For example: &#x60;com.foo.app&#x60;  |  [optional] |
 |**ipAddress** | **String** | IP address of the requesting browser or bot. |  [optional] |
 |**userAgent** | **String** | User Agent of the client, for example: &#x60;Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....&#x60;  |  [optional] |
+|**clientReferrer** | **String** | Client Referrer field corresponds to the &#x60;document.referrer&#x60; field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: &#x60;https://example.com/blog/my-article&#x60;  |  [optional] |
 |**browserDetails** | [**BrowserDetails**](BrowserDetails.md) |  |  [optional] |
 |**proximity** | [**Proximity**](Proximity.md) |  |  [optional] |
 |**bot** | **BotResult** |  |  [optional] |
@@ -53,6 +54,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**vpnOriginTimezone** | **String** | Local timezone which is used in timezone_mismatch method.  |  [optional] |
 |**vpnOriginCountry** | **String** | Country of the request (only for Android SDK version &gt;&#x3D; 2.4.0, ISO 3166 format or unknown).  |  [optional] |
 |**vpnMethods** | [**VpnMethods**](VpnMethods.md) |  |  [optional] |
+|**highActivityDevice** | **Boolean** | Flag indicating if the request came from a high-activity visitor. |  [optional] |
 
 
 

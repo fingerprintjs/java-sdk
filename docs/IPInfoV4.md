@@ -12,6 +12,7 @@
 |**asn** | **String** |  |  [optional] |
 |**asnName** | **String** |  |  [optional] |
 |**asnNetwork** | **String** |  |  [optional] |
+|**asnType** | **String** |  |  [optional] |
 |**datacenterResult** | **Boolean** |  |  [optional] |
 |**datacenterName** | **String** |  |  [optional] |
 

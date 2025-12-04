@@ -132,8 +132,8 @@ import java.util.Map;
        <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this application&#39;s data. </td><td>  -  </td></tr>
-       <tr><td> 500 </td><td> Application error. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
      </table>
    */
   public Event getEvent(String eventId) throws ApiException {
@@ -152,8 +152,8 @@ import java.util.Map;
        <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this application&#39;s data. </td><td>  -  </td></tr>
-       <tr><td> 500 </td><td> Application error. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
      </table>
    */
   public ApiResponse<Event> getEventWithHttpInfo(String eventId) throws ApiException {
@@ -192,6 +192,7 @@ import java.util.Map;
     private String visitorId;
     private String bot;
     private String ipAddress;
+    private String asn;
     private String linkedId;
     private String url;
     private String origin;
@@ -220,6 +221,7 @@ import java.util.Map;
     private String sdkVersion;
     private String sdkPlatform;
     private List<String> environment;
+    private String proximityId;
     private Long totalHits;
 
     /**
@@ -294,6 +296,21 @@ import java.util.Map;
      */
     public SearchEventsOptionalParams setIpAddress(String ipAddress) {
       this.ipAddress = ipAddress;
+      return this;
+    }
+
+    /**
+     * getter for asn - 
+     */
+    public String getAsn() {
+      return asn;
+    }
+
+    /**
+     * setter for asn - 
+     */
+    public SearchEventsOptionalParams setAsn(String asn) {
+      this.asn = asn;
       return this;
     }
 
@@ -718,6 +735,21 @@ import java.util.Map;
     }
 
     /**
+     * getter for proximityId - Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response. 
+     */
+    public String getProximityId() {
+      return proximityId;
+    }
+
+    /**
+     * setter for proximityId - Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response. 
+     */
+    public SearchEventsOptionalParams setProximityId(String proximityId) {
+      this.proximityId = proximityId;
+      return this;
+    }
+
+    /**
      * getter for totalHits - When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit. 
      */
     public Long getTotalHits() {
@@ -735,7 +767,7 @@ import java.util.Map;
   }
   /**
    * Search events
-   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the`suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
+   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
    * @param searchEventsOptionalParams Object containing optional parameters for API method.  (optional)
    * @return EventSearch
    * @throws ApiException if fails to make API call
@@ -745,7 +777,7 @@ import java.util.Map;
        <tr><td> 200 </td><td> Events matching the filter(s). </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 500 </td><td> Application error. </td><td>  -  </td></tr>
+       <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
      </table>
    */
   public EventSearch searchEvents(SearchEventsOptionalParams searchEventsOptionalParams) throws ApiException {
@@ -754,7 +786,7 @@ import java.util.Map;
 
   /**
    * Search events
-   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the`suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
+   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response. 
    * @param searchEventsOptionalParams Object containing optional parameters for API method.  (optional)
    * @return ApiResponse<EventSearch>
    * @throws ApiException if fails to make API call
@@ -764,7 +796,7 @@ import java.util.Map;
        <tr><td> 200 </td><td> Events matching the filter(s). </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 500 </td><td> Application error. </td><td>  -  </td></tr>
+       <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
      </table>
    */
   public ApiResponse<EventSearch> searchEventsWithHttpInfo(SearchEventsOptionalParams searchEventsOptionalParams) throws ApiException {
@@ -786,6 +818,7 @@ import java.util.Map;
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "visitor_id", searchEventsOptionalParams.getVisitorId()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "bot", searchEventsOptionalParams.getBot()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "ip_address", searchEventsOptionalParams.getIpAddress()));
+      localVarQueryParams.addAll(apiClient.parameterToPairs("", "asn", searchEventsOptionalParams.getAsn()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "linked_id", searchEventsOptionalParams.getLinkedId()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "url", searchEventsOptionalParams.getUrl()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "origin", searchEventsOptionalParams.getOrigin()));
@@ -814,6 +847,7 @@ import java.util.Map;
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "sdk_version", searchEventsOptionalParams.getSdkVersion()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "sdk_platform", searchEventsOptionalParams.getSdkPlatform()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "environment", searchEventsOptionalParams.getEnvironment()));
+      localVarQueryParams.addAll(apiClient.parameterToPairs("", "proximity_id", searchEventsOptionalParams.getProximityId()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "total_hits", searchEventsOptionalParams.getTotalHits()));
     }
 
@@ -839,7 +873,7 @@ import java.util.Map;
        <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. The request payload is not valid. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this application&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
        <tr><td> 409 </td><td> Conflict. The event is not mutable yet. </td><td>  -  </td></tr>
      </table>
    */
@@ -860,7 +894,7 @@ import java.util.Map;
        <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. The request payload is not valid. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this application&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
        <tr><td> 409 </td><td> Conflict. The event is not mutable yet. </td><td>  -  </td></tr>
      </table>
    */
