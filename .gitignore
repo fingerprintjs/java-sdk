@@ -16,3 +16,7 @@ build
 .DS_Store
 .openapi-generator
 **/node_modules
+
+# Covers the case where test resources are copied to the bin
+# directory by Java tools
+sdk/bin
