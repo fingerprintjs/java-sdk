@@ -8,10 +8,10 @@
     </a>
 </p>
 <p align="center">
-    <a href="https://jitpack.io/#fingerprintjs/fingerprint-pro-server-api-java-sdk"><img src="https://jitpack.io/v/fingerprintjs/fingerprint-pro-server-api-java-sdk.svg" alt="Jitpack Release" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/test.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/test.yml/badge.svg" alt="CI badge" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/functional.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/functional.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://jitpack.io/#fingerprintjs/java-sdk"><img src="https://jitpack.io/v/fingerprintjs/java-sdk.svg" alt="Jitpack Release" /></a>
+    <a href="https://github.com/fingerprintjs/java-sdk/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/java-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://github.com/fingerprintjs/java-sdk/actions/workflows/test.yml"><img src="https://github.com/fingerprintjs/java-sdk/actions/workflows/test.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://github.com/fingerprintjs/java-sdk/actions/workflows/functional.yml"><img src="https://github.com/fingerprintjs/java-sdk/actions/workflows/functional.yml/badge.svg" alt="CI badge" /></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/:license-mit-blue.svg?style=flat"/></a>
     <a href="https://discord.gg/39EpE2neBg"><img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server"></a>
 </p>
@@ -55,7 +55,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>com.github.fingerprintjs</groupId>
-  <artifactId>fingerprint-pro-server-api-java-sdk</artifactId>
+  <artifactId>java-sdk</artifactId>
   <version>v7.10.0</version>
 </dependency>
 ```
@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
-  implementation "com.github.fingerprintjs:fingerprint-pro-server-api-java-sdk:v7.10.0"
+  implementation "com.github.fingerprintjs:java-sdk:v7.10.0"
 }
 ```
 
@@ -86,7 +86,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.github.fingerprintjs:fingerprint-pro-server-api-java-sdk:v7.10.0")
+  implementation("com.github.fingerprintjs:java-sdk:v7.10.0")
 }
 ```
 
@@ -100,7 +100,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- `target/fingerprint-pro-server-api-sdk-7.10.0.jar`
+- `sdk/build/libs/java-sdk-7.10.0.jar`
 
 ## Getting Started
 
@@ -321,10 +321,10 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 ## Support
 
-To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/issues).
+To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/java-sdk/issues).
 If you need private support, you can email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
 
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/fingerprintjs/java-sdk/blob/main/LICENSE).

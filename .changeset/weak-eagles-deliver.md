@@ -1,5 +1,5 @@
 ---
-"fingerprint-pro-server-api-java-sdk": major
+"java-sdk": major
 ---
 
 Migrate to Server API v4

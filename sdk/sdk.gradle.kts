@@ -1,6 +1,6 @@
 val projectVersion: String by project
 
-group = "com.fingerprint"
+group = "com.github.fingerprintjs"
 version = projectVersion
 
 plugins {
@@ -17,8 +17,8 @@ repositories {
 publishing {
     publications {
         register("localMavenJava", MavenPublication::class) {
-            groupId = "com.fingerprint"
-            artifactId = "fingerprint-pro-server-api-sdk"
+            groupId = "com.github.fingerprintjs"
+            artifactId = "java-sdk"
             version = projectVersion
             from(components["java"])
         }
@@ -55,7 +55,7 @@ openApiGenerate {
     inputSpec.set("$rootDir/res/fingerprint-server-api.yaml")
     outputDir.set(layout.buildDirectory.dir("generated").get().asFile.path)
     groupId.set("com.fingerprint")
-    id.set("fingerprint-pro-server-api-sdk")
+    id.set("java-sdk")
     version.set(projectVersion)
     apiPackage.set("com.fingerprint.api")
     modelPackage.set("com.fingerprint.model")
@@ -64,7 +64,7 @@ openApiGenerate {
     templateDir.set("$rootDir/template")
 
     gitHost.set("github.com")
-    gitRepoId.set("fingerprint-pro-server-api-java-sdk")
+    gitRepoId.set("java-sdk")
     gitUserId.set("fingerprintjs")
     configOptions.put("hideGenerationTimestamp", "true")
     configOptions.put("openApiNullable", "false")
@@ -128,5 +128,5 @@ tasks.test {
 }
 
 tasks.jar {
-    archiveBaseName = "fingerprint-pro-server-api-sdk"
+    archiveBaseName = "java-sdk"
 }
