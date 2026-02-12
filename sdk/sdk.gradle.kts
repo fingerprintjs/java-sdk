@@ -102,6 +102,7 @@ tasks.register<Copy>("copyClasses") {
     from(layout.buildDirectory.dir("generated/src/main/java"))
     into("src/main/java")
     dependsOn(tasks.openApiGenerate)
+    dependsOn("copyReadme")
 }
 
 tasks.register<Copy>("copyReadme") {
