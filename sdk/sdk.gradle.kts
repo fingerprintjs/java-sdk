@@ -92,35 +92,34 @@ tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
     into(layout.buildDirectory.dir("generated"))
 }
 
-tasks.register<Copy>("copyDocs") {
-    from(layout.buildDirectory.dir("generated/docs"))
-    into("$rootDir/docs")
+tasks.register("copyGeneratedArtifacts") {
     dependsOn(tasks.openApiGenerate)
-}
 
-tasks.register<Copy>("copyClasses") {
-    from(layout.buildDirectory.dir("generated/src/main/java"))
-    into("src/main/java")
-    dependsOn(tasks.openApiGenerate)
-    dependsOn("copyReadme")
-}
+    doLast {
+        copy {
+            from(layout.buildDirectory.dir("generated/docs"))
+            into("$rootDir/docs")
+        }
 
-tasks.register<Copy>("copyReadme") {
-    from(file(layout.buildDirectory.file("generated/README.md")))
-    into(file("$rootDir/"))
-    dependsOn("copyDocs")
+        copy {
+            from(layout.buildDirectory.dir("generated/src/main/java"))
+            into("$rootDir/sdk/src/main/java")
+        }
+
+        copy {
+            from(layout.buildDirectory.file("generated/README.md"))
+            into("$rootDir/")
+        }
+    }
 }
 
 tasks.openApiGenerate {
     dependsOn("removeDocs", "removeClasses", "copyOpenApiGeneratorIgnore")
-}
-
-tasks.named("build") {
-    finalizedBy("copyReadme")
+    finalizedBy("copyGeneratedArtifacts")
 }
 
 tasks.compileJava {
-    dependsOn("copyClasses")
+    dependsOn("copyGeneratedArtifacts")
 }
 
 tasks.test {
