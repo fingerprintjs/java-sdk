@@ -24,6 +24,7 @@ Error code:
 * `missing_module` - The request is invalid because it is missing a required module.
 * `payload_too_large` - The request payload is too large and cannot be processed.
 * `service_unavailable` - The service was unable to process the request.
+* `ruleset_not_found` - The specified ruleset was not found. It never existed or it has been deleted.
 
 
 ## Enum
@@ -62,6 +63,8 @@ Error code:
 * `PAYLOAD_TOO_LARGE` (value: `"payload_too_large"`)
 
 * `SERVICE_UNAVAILABLE` (value: `"service_unavailable"`)
+
+* `RULESET_NOT_FOUND` (value: `"ruleset_not_found"`)
 
 
 

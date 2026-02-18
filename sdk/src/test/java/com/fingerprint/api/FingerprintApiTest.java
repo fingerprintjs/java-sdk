@@ -64,7 +64,7 @@ public class FingerprintApiTest {
     public void before() {
         ApiClient realApiClient = new ApiClient();
         ApiClient apiClient = Mockito.spy(realApiClient);
-//        apiClient.setBearerToken("MOCK_API_KEY");
+        // apiClient.setBearerToken("MOCK_API_KEY");
         api = new FingerprintApi(apiClient);
     }
 
@@ -113,10 +113,10 @@ public class FingerprintApiTest {
                 throw new ApiException(result.getStatusCode(), result.getHeaders(), result.getData().toString());
             }
         }).when(apiClient).invokeAPI(
-                eq(operationName),   // operation, for example "FingerprintApi.getEvent"
-                eq(path),            // path
-                eq(httpMethod),      // HTTP-method
-                any(),               // queryParams
+                eq(operationName), // operation, for example "FingerprintApi.getEvent"
+                eq(path), // path
+                eq(httpMethod), // HTTP-method
+                any(), // queryParams
                 argThat(body -> {
                     if (httpMethod.equals("PATCH")) {
                         return body != null;
@@ -124,27 +124,29 @@ public class FingerprintApiTest {
                         return body == null;
                     }
                 }),
-                any(),               // headerParams
-                any(),               // cookieParams
-                any(),               // formParams
-                any(),               // accept
-                any(),               // contentType
-                any(),               // authNames
-                any(),               // returnType
-                eq(false)      // isBodyNullable
+                any(), // headerParams
+                any(), // cookieParams
+                any(), // formParams
+                any(), // accept
+                any(), // contentType
+                any(), // authNames
+                any(), // returnType
+                eq(false) // isBodyNullable
         );
     }
 
     ApiResponse mockFileToResponse(int statusCode, InvocationOnMock invocation, String path) throws IOException {
         GenericType returnType = invocation.getArgument(11);
         if (statusCode == 200) {
-            return new ApiResponse<>(statusCode, null, path != null ? MAPPER.readValue(getFileAsIOStream(path), returnType.getRawType()) : null);
+            return new ApiResponse<>(statusCode, null,
+                    path != null ? MAPPER.readValue(getFileAsIOStream(path), returnType.getRawType()) : null);
         } else {
-            return new ApiResponse<>(statusCode, null, new String(getFileAsIOStream(path).readAllBytes(), StandardCharsets.UTF_8));
+            return new ApiResponse<>(statusCode, null,
+                    new String(getFileAsIOStream(path).readAllBytes(), StandardCharsets.UTF_8));
         }
     }
 
-    public static boolean listContainsPair(List<Pair> pairs, String key, String value) {
+    public static boolean listContainsPair(List<Pair> pairs, String key, Object value) {
         if (pairs == null) {
             return false;
         }
@@ -158,7 +160,10 @@ public class FingerprintApiTest {
 
     /**
      * Get event by requestId
-     * This endpoint allows you to get events with all the information from each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path :request_id parameter. This API method is scoped to a request, i.e. all returned information is by requestId.
+     * This endpoint allows you to get events with all the information from each
+     * activated product (Fingerprint Pro or Bot Detection). Use the requestId as a
+     * URL path :request_id parameter. This API method is scoped to a request, i.e.
+     * all returned information is by requestId.
      *
      * @throws ApiException if the Api call fails
      */
@@ -216,13 +221,15 @@ public class FingerprintApiTest {
         TAG.put("booleanPositiveKey", true);
         TAG.put("booleanNegativeKey", false);
         TAG.put("numberKey", 123);
-        TAG.put("arrayStringKey", new String[]{"value1", "value2"});
-        TAG.put("arrayIntKey", new int[]{1, 2, 7});
-        TAG.put("arrayEmptyKey", new int[]{});
-        TAG.put("mapKey", new HashMap<String, Object>() {{
-            put("key1", "value1");
-            put("key2", 2);
-        }});
+        TAG.put("arrayStringKey", new String[] { "value1", "value2" });
+        TAG.put("arrayIntKey", new int[] { 1, 2, 7 });
+        TAG.put("arrayEmptyKey", new int[] {});
+        TAG.put("mapKey", new HashMap<String, Object>() {
+            {
+                put("key1", "value1");
+                put("key2", 2);
+            }
+        });
         EventUpdate request = new EventUpdate();
         request.setTags(TAG);
 
@@ -282,7 +289,7 @@ public class FingerprintApiTest {
         TAG.put("stringKey", "value");
         TAG.put("booleanKey", true);
         TAG.put("numberKey", 123);
-        TAG.put("arrayStringKey", new String[]{"value1", "value2"});
+        TAG.put("arrayStringKey", new String[] { "value1", "value2" });
         EventUpdate request = new EventUpdate();
         request.setLinkedId(LINKED_ID);
         request.setTags(TAG);
@@ -314,7 +321,8 @@ public class FingerprintApiTest {
 
     /**
      * Webhook
-     * Check that webhook correctly deserializes the JSON payload to the WebhookVisit object.
+     * Check that webhook correctly deserializes the JSON payload to the
+     * WebhookVisit object.
      *
      * @throws Exception if the file reading or deserialization fails.
      */
@@ -369,7 +377,7 @@ public class FingerprintApiTest {
     public void searchEventsMaximumParamsTest() throws ApiException {
         final int LIMIT = 1;
         final String PAGINATION_KEY = "1741187431959";
-        final String BOT = "good";
+        final SearchEventsBot BOT = SearchEventsBot.GOOD;
         final String IP_ADDRESS = "192.168.0.1/32";
         final String LINKED_ID = "some_id";
         final Long START = 1582299576511L;
@@ -387,7 +395,7 @@ public class FingerprintApiTest {
         final Boolean TAMPERING = true;
         final Boolean VIRTUAL_MACHINE = true;
         final Boolean VPN = true;
-        final String VPN_CONFIDENCE = "medium";
+        final SearchEventsVpnConfidence VPN_CONFIDENCE = SearchEventsVpnConfidence.MEDIUM;
         final Boolean EMULATOR = true;
         final Boolean INCOGNITO = true;
         final Boolean IP_BLOCKLIST = true;
@@ -397,19 +405,19 @@ public class FingerprintApiTest {
         final Boolean MITM_ATTACK = true;
         final Boolean PROXY = true;
         final String SDK_VERSION = "testSdkVersion";
-        final String SDK_PLATFORM = "testSdkPlatform";
+        final SearchEventsSdkPlatform SDK_PLATFORM = SearchEventsSdkPlatform.JS;
         final List<String> ENVIRONMENT = new ArrayList<String>();
         ENVIRONMENT.add("env1");
         ENVIRONMENT.add("env2");
         final String PROXIMITY_ID = "testProximityId";
         final String ASN = "testAsn";
-//        final Integer PROXIMITY_PRECISION_RADIUS = 10;
+        // final Integer PROXIMITY_PRECISION_RADIUS = 10;
 
         Map<String, String> expectedQueryParams = new HashMap<>();
         expectedQueryParams.put("limit", String.valueOf(LIMIT));
         expectedQueryParams.put("pagination_key", PAGINATION_KEY);
         expectedQueryParams.put("visitor_id", MOCK_VISITOR_ID);
-        expectedQueryParams.put("bot", BOT);
+        expectedQueryParams.put("bot", String.valueOf(BOT));
         expectedQueryParams.put("ip_address", IP_ADDRESS);
         expectedQueryParams.put("linked_id", LINKED_ID);
         expectedQueryParams.put("start", START.toString());
@@ -427,20 +435,21 @@ public class FingerprintApiTest {
         expectedQueryParams.put("tampering", String.valueOf(TAMPERING));
         expectedQueryParams.put("virtual_machine", String.valueOf(VIRTUAL_MACHINE));
         expectedQueryParams.put("vpn", String.valueOf(VPN));
-        expectedQueryParams.put("vpn_confidence", VPN_CONFIDENCE);
+        expectedQueryParams.put("vpn_confidence", String.valueOf(VPN_CONFIDENCE));
         expectedQueryParams.put("emulator", String.valueOf(EMULATOR));
         expectedQueryParams.put("incognito", String.valueOf(INCOGNITO));
-//        expectedQueryParams.put("ip_blocklist", String.valueOf(IP_BLOCKLIST));
-//        expectedQueryParams.put("datacenter", String.valueOf(DATACENTER));
+        // expectedQueryParams.put("ip_blocklist", String.valueOf(IP_BLOCKLIST));
+        // expectedQueryParams.put("datacenter", String.valueOf(DATACENTER));
         expectedQueryParams.put("developer_tools", String.valueOf(DEVELOPER_TOOLS));
         expectedQueryParams.put("location_spoofing", String.valueOf(LOCATION_SPOOFING));
         expectedQueryParams.put("mitm_attack", String.valueOf(MITM_ATTACK));
         expectedQueryParams.put("proxy", String.valueOf(PROXY));
         expectedQueryParams.put("sdk_version", SDK_VERSION);
-        expectedQueryParams.put("sdk_platform", SDK_PLATFORM);
+        expectedQueryParams.put("sdk_platform", String.valueOf(SDK_PLATFORM));
         expectedQueryParams.put("proximity_id", PROXIMITY_ID);
         expectedQueryParams.put("asn", ASN);
-//        expectedQueryParams.put("proximity_precision_radius", String.valueOf(PROXIMITY_PRECISION_RADIUS));
+        // expectedQueryParams.put("proximity_precision_radius",
+        // String.valueOf(PROXIMITY_PRECISION_RADIUS));
 
         addMock("searchEvents", null, invocation -> {
             List<Pair> queryParams = invocation.getArgument(3);
@@ -484,8 +493,8 @@ public class FingerprintApiTest {
                 .setVpnConfidence(VPN_CONFIDENCE)
                 .setEmulator(EMULATOR)
                 .setIncognito(INCOGNITO)
-//                .setIpBlocklist(IP_BLOCKLIST)
-//                .setDatacenter(DATACENTER)
+                // .setIpBlocklist(IP_BLOCKLIST)
+                // .setDatacenter(DATACENTER)
                 .setDeveloperTools(DEVELOPER_TOOLS)
                 .setLocationSpoofing(LOCATION_SPOOFING)
                 .setMitmAttack(MITM_ATTACK)
@@ -495,7 +504,7 @@ public class FingerprintApiTest {
                 .setEnvironment(ENVIRONMENT)
                 .setProximityId(PROXIMITY_ID)
                 .setAsn(ASN)
-//                .setProximityPrecisionRadius(PROXIMITY_PRECISION_RADIUS)
+        // .setProximityPrecisionRadius(PROXIMITY_PRECISION_RADIUS)
         );
         List<Event> events = response.getEvents();
         assertEquals(events.size(), 1);

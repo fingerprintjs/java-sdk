@@ -19,8 +19,11 @@ public class WebhookSignatureSample {
             } else {
                 System.out.println("Webhook signature is not valid");
             }
+            System.exit(0);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            System.err.println("Failed to validate webhook signature");
+            e.printStackTrace(System.err);
+            System.exit(1);
         }
     }
 

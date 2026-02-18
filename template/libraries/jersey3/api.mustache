@@ -87,6 +87,47 @@ public class {{classname}} {
     {{/allParams}}
   }
   {{/hasOptionalParams}}
+  {{#hasOptionalParams}}
+  {{#hasRequiredParams}}
+
+  /**
+   * {{summary}}
+   * {{{notes}}}
+   {{#allParams}}
+   {{#required}}
+   * @param {{paramName}} {{{description}}} (required)
+   {{/required}}
+   {{/allParams}}
+   {{#returnType}}
+   * @return {{.}}
+   {{/returnType}}
+   * @throws ApiException if fails to make API call
+   {{#responses.0}}
+   * @http.response.details
+     <table summary="Response Details" border="1">
+       <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+       {{#responses}}
+       <tr><td> {{code}} </td><td> {{message}} </td><td> {{#headers}} * {{baseName}} - {{{description}}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} </td></tr>
+       {{/responses}}
+     </table>
+   {{/responses.0}}
+   {{#isDeprecated}}
+   * @deprecated
+   {{/isDeprecated}}
+   {{#externalDocs}}
+   * {{{description}}}
+   * @see <a href="{{url}}">{{summary}} Documentation</a>
+   {{/externalDocs}}
+   */
+  {{#isDeprecated}}
+  @Deprecated
+  {{/isDeprecated}}
+  public {{#returnType}}{{{.}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#requiredParams}}{{{dataType}}} {{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}) throws ApiException {
+    {{#returnType}}return {{/returnType}}{{operationId}}WithHttpInfo({{#requiredParams}}{{paramName}}{{^-last}}, {{/-last}}{{/requiredParams}}, null){{#returnType}}.getData(){{/returnType}};
+  }
+
+  {{/hasRequiredParams}}
+  {{/hasOptionalParams}}
   /**
    * {{summary}}
    * {{{notes}}}

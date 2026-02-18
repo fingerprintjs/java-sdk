@@ -1,0 +1,14 @@
+# {{classname}}
+
+{{#description}}
+{{&description}}
+
+{{/description}}
+## oneOf schemas
+{{#oneOf}}
+* [{{{.}}}]({{{.}}}.md)
+{{/oneOf}}
+{{#isNullable}}
+NOTE: this class is nullable.
+
+{{/isNullable}}

@@ -1,6 +1,6 @@
 /*
  * Server API
- * # Overview Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -32,7 +32,8 @@ import com.fingerprint.sdk.JSON;
  */
 @JsonPropertyOrder({
   ProxyDetails.JSON_PROPERTY_PROXY_TYPE,
-  ProxyDetails.JSON_PROPERTY_LAST_SEEN_AT
+  ProxyDetails.JSON_PROPERTY_LAST_SEEN_AT,
+  ProxyDetails.JSON_PROPERTY_PROVIDER
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
 public class ProxyDetails {
@@ -78,6 +79,10 @@ public class ProxyDetails {
   public static final String JSON_PROPERTY_LAST_SEEN_AT = "last_seen_at";
   @jakarta.annotation.Nullable
   private Long lastSeenAt;
+
+  public static final String JSON_PROPERTY_PROVIDER = "provider";
+  @jakarta.annotation.Nullable
+  private String provider;
 
   public ProxyDetails() { 
   }
@@ -132,6 +137,31 @@ public class ProxyDetails {
   }
 
 
+  public ProxyDetails provider(@jakarta.annotation.Nullable String provider) {
+    this.provider = provider;
+    return this;
+  }
+
+  /**
+   * String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers. 
+   * @return provider
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getProvider() {
+    return provider;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProvider(@jakarta.annotation.Nullable String provider) {
+    this.provider = provider;
+  }
+
+
   /**
    * Return true if this ProxyDetails object is equal to o.
    */
@@ -145,12 +175,13 @@ public class ProxyDetails {
     }
     ProxyDetails proxyDetails = (ProxyDetails) o;
     return Objects.equals(this.proxyType, proxyDetails.proxyType) &&
-        Objects.equals(this.lastSeenAt, proxyDetails.lastSeenAt);
+        Objects.equals(this.lastSeenAt, proxyDetails.lastSeenAt) &&
+        Objects.equals(this.provider, proxyDetails.provider);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(proxyType, lastSeenAt);
+    return Objects.hash(proxyType, lastSeenAt, provider);
   }
 
   @Override
@@ -159,6 +190,7 @@ public class ProxyDetails {
     sb.append("class ProxyDetails {\n");
     sb.append("    proxyType: ").append(toIndentedString(proxyType)).append("\n");
     sb.append("    lastSeenAt: ").append(toIndentedString(lastSeenAt)).append("\n");
+    sb.append("    provider: ").append(toIndentedString(provider)).append("\n");
     sb.append("}");
     return sb.toString();
   }

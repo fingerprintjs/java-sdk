@@ -1,6 +1,6 @@
 /*
  * Server API
- * # Overview Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -26,15 +26,15 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.Locale;
 
 /**
- * Bot detection result:  * `not_detected` - the visitor is not a bot  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on 
+ * Bot detection result:  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on  * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on  * `not_detected` - the visitor is not a bot 
  */
 public enum BotResult {
   
-  NOT_DETECTED("not_detected"),
+  BAD("bad"),
   
   GOOD("good"),
   
-  BAD("bad");
+  NOT_DETECTED("not_detected");
 
   private String value;
 

@@ -28,6 +28,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**proximity** | [**Proximity**](Proximity.md) |  |  [optional] |
 |**bot** | **BotResult** |  |  [optional] |
 |**botType** | **String** | Additional classification of the bot type if detected.  |  [optional] |
+|**botInfo** | [**BotInfo**](BotInfo.md) |  |  [optional] |
 |**clonedApp** | **Boolean** | Android specific cloned application detection. There are 2 values:  * &#x60;true&#x60; - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * &#x60;false&#x60; - No signs of cloned application detected or the client is not Android.  |  [optional] |
 |**developerTools** | **Boolean** | &#x60;true&#x60; if the browser is Chrome with DevTools open or Firefox with Developer Tools open, &#x60;false&#x60; otherwise.  |  [optional] |
 |**emulator** | **Boolean** | Android specific emulator detection. There are 2 values:  * &#x60;true&#x60; - Emulated environment detected (e.g. launch inside of AVD).  * &#x60;false&#x60; - No signs of emulated environment detected or the client is not Android.  |  [optional] |
@@ -44,6 +45,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**mitmAttack** | **Boolean** | * &#x60;true&#x60; - When requests made from your users&#39; mobile devices to Fingerprint servers have been intercepted and potentially modified.  * &#x60;false&#x60; - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal.  |  [optional] |
 |**privacySettings** | **Boolean** | &#x60;true&#x60; if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise &#x60;false&#x60;.  |  [optional] |
 |**rootApps** | **Boolean** | Android specific root management apps detection. There are 2 values:  * &#x60;true&#x60; - Root Management Apps detected (e.g. Magisk). * &#x60;false&#x60; - No Root Management Apps detected or the client isn&#39;t Android.  |  [optional] |
+|**ruleAction** | [**EventRuleAction**](EventRuleAction.md) |  |  [optional] |
 |**suspectScore** | **Integer** | Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://dev.fingerprint.com/docs/suspect-score  |  [optional] |
 |**tampering** | **Boolean** | Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see &#x60;tampering_details.anomaly_score&#x60;).   * The browser signature resembles an \&quot;anti-detect\&quot; browser specifically designed to evade fingerprinting (see &#x60;tampering_details.anti_detect_browser&#x60;).  |  [optional] |
 |**tamperingDetails** | [**TamperingDetails**](TamperingDetails.md) |  |  [optional] |
@@ -55,6 +57,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**vpnOriginCountry** | **String** | Country of the request (only for Android SDK version &gt;&#x3D; 2.4.0, ISO 3166 format or unknown).  |  [optional] |
 |**vpnMethods** | [**VpnMethods**](VpnMethods.md) |  |  [optional] |
 |**highActivityDevice** | **Boolean** | Flag indicating if the request came from a high-activity visitor. |  [optional] |
+|**rawDeviceAttributes** | [**RawDeviceAttributes**](RawDeviceAttributes.md) |  |  [optional] |
 
 
 

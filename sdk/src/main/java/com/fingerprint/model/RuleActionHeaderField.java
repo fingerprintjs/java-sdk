@@ -1,6 +1,6 @@
 /*
  * Server API
- * # Overview Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -28,63 +28,32 @@ import com.fingerprint.sdk.JSON;
 
 
 /**
- * TriggeredByInner
+ * RuleActionHeaderField
  */
 @JsonPropertyOrder({
-  TriggeredByInner.JSON_PROPERTY_ID,
-  TriggeredByInner.JSON_PROPERTY_NAME,
-  TriggeredByInner.JSON_PROPERTY_DESCRIPTION
+  RuleActionHeaderField.JSON_PROPERTY_NAME,
+  RuleActionHeaderField.JSON_PROPERTY_VALUE
 })
-@JsonTypeName("TriggeredBy_inner")
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
-public class TriggeredByInner {
-  public static final String JSON_PROPERTY_ID = "id";
-  @jakarta.annotation.Nonnull
-  private String id;
-
+public class RuleActionHeaderField {
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nonnull
   private String name;
 
-  public static final String JSON_PROPERTY_DESCRIPTION = "description";
+  public static final String JSON_PROPERTY_VALUE = "value";
   @jakarta.annotation.Nonnull
-  private String description;
+  private String value;
 
-  public TriggeredByInner() { 
+  public RuleActionHeaderField() { 
   }
 
-  public TriggeredByInner id(@jakarta.annotation.Nonnull String id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-   */
-  @jakarta.annotation.Nonnull
-  @JsonProperty(value = JSON_PROPERTY_ID, required = true)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public String getId() {
-    return id;
-  }
-
-
-  @JsonProperty(value = JSON_PROPERTY_ID, required = true)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setId(@jakarta.annotation.Nonnull String id) {
-    this.id = id;
-  }
-
-
-  public TriggeredByInner name(@jakarta.annotation.Nonnull String name) {
+  public RuleActionHeaderField name(@jakarta.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
 
   /**
-   * Get name
+   * The header field name.
    * @return name
    */
   @jakarta.annotation.Nonnull
@@ -103,33 +72,33 @@ public class TriggeredByInner {
   }
 
 
-  public TriggeredByInner description(@jakarta.annotation.Nonnull String description) {
-    this.description = description;
+  public RuleActionHeaderField value(@jakarta.annotation.Nonnull String value) {
+    this.value = value;
     return this;
   }
 
   /**
-   * Get description
-   * @return description
+   * The value of the header field.
+   * @return value
    */
   @jakarta.annotation.Nonnull
-  @JsonProperty(value = JSON_PROPERTY_DESCRIPTION, required = true)
+  @JsonProperty(value = JSON_PROPERTY_VALUE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getDescription() {
-    return description;
+  public String getValue() {
+    return value;
   }
 
 
-  @JsonProperty(value = JSON_PROPERTY_DESCRIPTION, required = true)
+  @JsonProperty(value = JSON_PROPERTY_VALUE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setDescription(@jakarta.annotation.Nonnull String description) {
-    this.description = description;
+  public void setValue(@jakarta.annotation.Nonnull String value) {
+    this.value = value;
   }
 
 
   /**
-   * Return true if this TriggeredBy_inner object is equal to o.
+   * Return true if this RuleActionHeaderField object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -139,24 +108,22 @@ public class TriggeredByInner {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TriggeredByInner triggeredByInner = (TriggeredByInner) o;
-    return Objects.equals(this.id, triggeredByInner.id) &&
-        Objects.equals(this.name, triggeredByInner.name) &&
-        Objects.equals(this.description, triggeredByInner.description);
+    RuleActionHeaderField ruleActionHeaderField = (RuleActionHeaderField) o;
+    return Objects.equals(this.name, ruleActionHeaderField.name) &&
+        Objects.equals(this.value, ruleActionHeaderField.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description);
+    return Objects.hash(name, value);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TriggeredByInner {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("class RuleActionHeaderField {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("}");
     return sb.toString();
   }

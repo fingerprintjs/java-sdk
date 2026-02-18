@@ -2,19 +2,19 @@
 
 # BotResult
 Bot detection result:
- * `not_detected` - the visitor is not a bot
- * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on
  * `bad` - bad bot detected, such as Selenium, Puppeteer, Playwright, headless browsers, and so on
+ * `good` - good bot detected, such as Google bot, Baidu Spider, AlexaBot and so on
+ * `not_detected` - the visitor is not a bot
 
 
 ## Enum
 
 
-* `NOT_DETECTED` (value: `"not_detected"`)
+* `BAD` (value: `"bad"`)
 
 * `GOOD` (value: `"good"`)
 
-* `BAD` (value: `"bad"`)
+* `NOT_DETECTED` (value: `"not_detected"`)
 
 
 

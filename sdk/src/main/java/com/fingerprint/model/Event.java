@@ -1,6 +1,6 @@
 /*
  * Server API
- * # Overview Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -22,14 +22,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fingerprint.model.BotInfo;
 import com.fingerprint.model.BotResult;
 import com.fingerprint.model.BrowserDetails;
+import com.fingerprint.model.EventRuleAction;
 import com.fingerprint.model.IPBlockList;
 import com.fingerprint.model.IPInfo;
 import com.fingerprint.model.Identification;
 import com.fingerprint.model.Proximity;
 import com.fingerprint.model.ProxyConfidence;
 import com.fingerprint.model.ProxyDetails;
+import com.fingerprint.model.RawDeviceAttributes;
 import com.fingerprint.model.SDK;
 import com.fingerprint.model.SupplementaryIDHighRecall;
 import com.fingerprint.model.TamperingDetails;
@@ -65,6 +68,7 @@ import com.fingerprint.sdk.JSON;
   Event.JSON_PROPERTY_PROXIMITY,
   Event.JSON_PROPERTY_BOT,
   Event.JSON_PROPERTY_BOT_TYPE,
+  Event.JSON_PROPERTY_BOT_INFO,
   Event.JSON_PROPERTY_CLONED_APP,
   Event.JSON_PROPERTY_DEVELOPER_TOOLS,
   Event.JSON_PROPERTY_EMULATOR,
@@ -81,6 +85,7 @@ import com.fingerprint.sdk.JSON;
   Event.JSON_PROPERTY_MITM_ATTACK,
   Event.JSON_PROPERTY_PRIVACY_SETTINGS,
   Event.JSON_PROPERTY_ROOT_APPS,
+  Event.JSON_PROPERTY_RULE_ACTION,
   Event.JSON_PROPERTY_SUSPECT_SCORE,
   Event.JSON_PROPERTY_TAMPERING,
   Event.JSON_PROPERTY_TAMPERING_DETAILS,
@@ -91,7 +96,8 @@ import com.fingerprint.sdk.JSON;
   Event.JSON_PROPERTY_VPN_ORIGIN_TIMEZONE,
   Event.JSON_PROPERTY_VPN_ORIGIN_COUNTRY,
   Event.JSON_PROPERTY_VPN_METHODS,
-  Event.JSON_PROPERTY_HIGH_ACTIVITY_DEVICE
+  Event.JSON_PROPERTY_HIGH_ACTIVITY_DEVICE,
+  Event.JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
 public class Event {
@@ -175,6 +181,10 @@ public class Event {
   @jakarta.annotation.Nullable
   private String botType;
 
+  public static final String JSON_PROPERTY_BOT_INFO = "bot_info";
+  @jakarta.annotation.Nullable
+  private BotInfo botInfo;
+
   public static final String JSON_PROPERTY_CLONED_APP = "cloned_app";
   @jakarta.annotation.Nullable
   private Boolean clonedApp;
@@ -239,6 +249,10 @@ public class Event {
   @jakarta.annotation.Nullable
   private Boolean rootApps;
 
+  public static final String JSON_PROPERTY_RULE_ACTION = "rule_action";
+  @jakarta.annotation.Nullable
+  private EventRuleAction ruleAction;
+
   public static final String JSON_PROPERTY_SUSPECT_SCORE = "suspect_score";
   @jakarta.annotation.Nullable
   private Integer suspectScore;
@@ -282,6 +296,10 @@ public class Event {
   public static final String JSON_PROPERTY_HIGH_ACTIVITY_DEVICE = "high_activity_device";
   @jakarta.annotation.Nullable
   private Boolean highActivityDevice;
+
+  public static final String JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES = "raw_device_attributes";
+  @jakarta.annotation.Nullable
+  private RawDeviceAttributes rawDeviceAttributes;
 
   public Event() { 
   }
@@ -786,6 +804,31 @@ public class Event {
   }
 
 
+  public Event botInfo(@jakarta.annotation.Nullable BotInfo botInfo) {
+    this.botInfo = botInfo;
+    return this;
+  }
+
+  /**
+   * Get botInfo
+   * @return botInfo
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_BOT_INFO, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public BotInfo getBotInfo() {
+    return botInfo;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_BOT_INFO, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setBotInfo(@jakarta.annotation.Nullable BotInfo botInfo) {
+    this.botInfo = botInfo;
+  }
+
+
   public Event clonedApp(@jakarta.annotation.Nullable Boolean clonedApp) {
     this.clonedApp = clonedApp;
     return this;
@@ -1186,6 +1229,31 @@ public class Event {
   }
 
 
+  public Event ruleAction(@jakarta.annotation.Nullable EventRuleAction ruleAction) {
+    this.ruleAction = ruleAction;
+    return this;
+  }
+
+  /**
+   * Get ruleAction
+   * @return ruleAction
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_RULE_ACTION, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public EventRuleAction getRuleAction() {
+    return ruleAction;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_RULE_ACTION, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRuleAction(@jakarta.annotation.Nullable EventRuleAction ruleAction) {
+    this.ruleAction = ruleAction;
+  }
+
+
   public Event suspectScore(@jakarta.annotation.Nullable Integer suspectScore) {
     this.suspectScore = suspectScore;
     return this;
@@ -1461,6 +1529,31 @@ public class Event {
   }
 
 
+  public Event rawDeviceAttributes(@jakarta.annotation.Nullable RawDeviceAttributes rawDeviceAttributes) {
+    this.rawDeviceAttributes = rawDeviceAttributes;
+    return this;
+  }
+
+  /**
+   * Get rawDeviceAttributes
+   * @return rawDeviceAttributes
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public RawDeviceAttributes getRawDeviceAttributes() {
+    return rawDeviceAttributes;
+  }
+
+
+  @JsonProperty(value = JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRawDeviceAttributes(@jakarta.annotation.Nullable RawDeviceAttributes rawDeviceAttributes) {
+    this.rawDeviceAttributes = rawDeviceAttributes;
+  }
+
+
   /**
    * Return true if this Event object is equal to o.
    */
@@ -1493,6 +1586,7 @@ public class Event {
         Objects.equals(this.proximity, event.proximity) &&
         Objects.equals(this.bot, event.bot) &&
         Objects.equals(this.botType, event.botType) &&
+        Objects.equals(this.botInfo, event.botInfo) &&
         Objects.equals(this.clonedApp, event.clonedApp) &&
         Objects.equals(this.developerTools, event.developerTools) &&
         Objects.equals(this.emulator, event.emulator) &&
@@ -1509,6 +1603,7 @@ public class Event {
         Objects.equals(this.mitmAttack, event.mitmAttack) &&
         Objects.equals(this.privacySettings, event.privacySettings) &&
         Objects.equals(this.rootApps, event.rootApps) &&
+        Objects.equals(this.ruleAction, event.ruleAction) &&
         Objects.equals(this.suspectScore, event.suspectScore) &&
         Objects.equals(this.tampering, event.tampering) &&
         Objects.equals(this.tamperingDetails, event.tamperingDetails) &&
@@ -1519,12 +1614,13 @@ public class Event {
         Objects.equals(this.vpnOriginTimezone, event.vpnOriginTimezone) &&
         Objects.equals(this.vpnOriginCountry, event.vpnOriginCountry) &&
         Objects.equals(this.vpnMethods, event.vpnMethods) &&
-        Objects.equals(this.highActivityDevice, event.highActivityDevice);
+        Objects.equals(this.highActivityDevice, event.highActivityDevice) &&
+        Objects.equals(this.rawDeviceAttributes, event.rawDeviceAttributes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(eventId, timestamp, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice);
+    return Objects.hash(eventId, timestamp, linkedId, environmentId, suspect, sdk, replayed, identification, supplementaryIdHighRecall, tags, url, bundleId, packageName, ipAddress, userAgent, clientReferrer, browserDetails, proximity, bot, botType, botInfo, clonedApp, developerTools, emulator, factoryResetTimestamp, frida, ipBlocklist, ipInfo, proxy, proxyConfidence, proxyDetails, incognito, jailbroken, locationSpoofing, mitmAttack, privacySettings, rootApps, ruleAction, suspectScore, tampering, tamperingDetails, velocity, virtualMachine, vpn, vpnConfidence, vpnOriginTimezone, vpnOriginCountry, vpnMethods, highActivityDevice, rawDeviceAttributes);
   }
 
   @Override
@@ -1551,6 +1647,7 @@ public class Event {
     sb.append("    proximity: ").append(toIndentedString(proximity)).append("\n");
     sb.append("    bot: ").append(toIndentedString(bot)).append("\n");
     sb.append("    botType: ").append(toIndentedString(botType)).append("\n");
+    sb.append("    botInfo: ").append(toIndentedString(botInfo)).append("\n");
     sb.append("    clonedApp: ").append(toIndentedString(clonedApp)).append("\n");
     sb.append("    developerTools: ").append(toIndentedString(developerTools)).append("\n");
     sb.append("    emulator: ").append(toIndentedString(emulator)).append("\n");
@@ -1567,6 +1664,7 @@ public class Event {
     sb.append("    mitmAttack: ").append(toIndentedString(mitmAttack)).append("\n");
     sb.append("    privacySettings: ").append(toIndentedString(privacySettings)).append("\n");
     sb.append("    rootApps: ").append(toIndentedString(rootApps)).append("\n");
+    sb.append("    ruleAction: ").append(toIndentedString(ruleAction)).append("\n");
     sb.append("    suspectScore: ").append(toIndentedString(suspectScore)).append("\n");
     sb.append("    tampering: ").append(toIndentedString(tampering)).append("\n");
     sb.append("    tamperingDetails: ").append(toIndentedString(tamperingDetails)).append("\n");
@@ -1578,6 +1676,7 @@ public class Event {
     sb.append("    vpnOriginCountry: ").append(toIndentedString(vpnOriginCountry)).append("\n");
     sb.append("    vpnMethods: ").append(toIndentedString(vpnMethods)).append("\n");
     sb.append("    highActivityDevice: ").append(toIndentedString(highActivityDevice)).append("\n");
+    sb.append("    rawDeviceAttributes: ").append(toIndentedString(rawDeviceAttributes)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -104,13 +104,13 @@ null (empty response body)
 | **200** | OK. The visitor ID is scheduled for deletion. |  -  |
 | **400** | Bad request. The visitor ID parameter is missing or in the wrong format. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **404** | Not found. The visitor ID cannot be found in this application&#39;s data. |  -  |
+| **404** | Not found. The visitor ID cannot be found in this workspace&#39;s data. |  -  |
 | **429** | Too Many Requests. The request is throttled. |  -  |
 
 
 ## getEvent
 
-> Event getEvent(eventId)
+> Event getEvent(eventId, getEventOptionalParams)
 
 Get an event by event ID
 
@@ -145,8 +145,10 @@ public class FingerprintApiExample {
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
         String eventId = "eventId_example"; // String | The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request (`requestId` can be used in its place).
+        String rulesetId = "rulesetId_example"; // String | The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response. 
         try {
-            Event result = api.getEvent(eventId);
+            Event result = api.getEvent(eventId, new FingerprintApi.GetEventOptionalParams()
+                .setRulesetId(rulesetId));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.getEvent:" + e.getMessage());
@@ -162,6 +164,15 @@ public class FingerprintApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **eventId** | **String**| The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request (`requestId` can be used in its place). | |
+| **getEventOptionalParams** | [**FingerprintApi.GetEventOptionalParams**](#fingerprintapigeteventoptionalparams) | | [optional] |
+
+#### FingerprintApi.GetEventOptionalParams
+
+Object containing optional parameters for API method. Supports a fluent interface for convenient method chaining.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **rulesetId** | **String**| The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response.  | [optional] |
 
 ### Return type
 
@@ -183,6 +194,7 @@ public class FingerprintApiExample {
 | **400** | Bad request. The event Id provided is not valid. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
 | **404** | Not found. The event Id cannot be found in this workspace&#39;s data. |  -  |
+| **429** | Too Many Requests. The request is throttled. |  -  |
 | **500** | Workspace error. |  -  |
 
 
@@ -241,14 +253,16 @@ public class FingerprintApiExample {
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
         Integer limit = 10; // Integer | Limit the number of events returned. 
-        String paginationKey = "paginationKey_example"; // String | Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
+        String paginationKey = "paginationKey_example"; // String | Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
         String visitorId = "visitorId_example"; // String | Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`. 
-        String bot = "all"; // String | Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. 
+        SearchEventsBot bot = SearchEventsBot.fromValue("all"); // SearchEventsBot | Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. 
         String ipAddress = "ipAddress_example"; // String | Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32 
-        String asn = "asn_example"; // String | 
+        String asn = "asn_example"; // String | Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response. 
         String linkedId = "linkedId_example"; // String | Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. 
         String url = "url_example"; // String | Filter events by the URL (`url` property) associated with the event. 
-        String origin = "origin_example"; // String | Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar) 
+        String bundleId = "bundleId_example"; // String | Filter events by the Bundle ID (iOS) associated with the event. 
+        String packageName = "packageName_example"; // String | Filter events by the Package Name (Android) associated with the event. 
+        String origin = "origin_example"; // String | Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com) 
         Long start = 56L; // Long | Filter events with a timestamp greater than the start time, in Unix time (milliseconds). 
         Long end = 56L; // Long | Filter events with a timestamp smaller than the end time, in Unix time (milliseconds). 
         Boolean reverse = true; // Boolean | Sort events in reverse timestamp order. 
@@ -265,17 +279,18 @@ public class FingerprintApiExample {
         Boolean clonedApp = true; // Boolean | Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response. 
         Boolean emulator = true; // Boolean | Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response. 
         Boolean rootApps = true; // Boolean | Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response. 
-        String vpnConfidence = "high,"; // String | Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response. 
+        SearchEventsVpnConfidence vpnConfidence = SearchEventsVpnConfidence.fromValue("high"); // SearchEventsVpnConfidence | Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response. 
         Float minSuspectScore = 3.4F; // Float | Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response. 
         Boolean developerTools = true; // Boolean | Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response. 
         Boolean locationSpoofing = true; // Boolean | Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response. 
         Boolean mitmAttack = true; // Boolean | Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response. 
         Boolean proxy = true; // Boolean | Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response. 
         String sdkVersion = "sdkVersion_example"; // String | Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14` 
-        String sdkPlatform = "js"; // String | Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
+        SearchEventsSdkPlatform sdkPlatform = SearchEventsSdkPlatform.fromValue("js"); // SearchEventsSdkPlatform | Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
         List<String> environment = Arrays.asList(); // List<String> | Filter for events by providing one or more environment IDs (`environment_id` property). 
         String proximityId = "proximityId_example"; // String | Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response. 
         Long totalHits = 56L; // Long | When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit. 
+        Boolean torNode = true; // Boolean | Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response. 
         try {
             EventSearch result = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams()
                 .setLimit(limit)
@@ -286,6 +301,8 @@ public class FingerprintApiExample {
                 .setAsn(asn)
                 .setLinkedId(linkedId)
                 .setUrl(url)
+                .setBundleId(bundleId)
+                .setPackageName(packageName)
                 .setOrigin(origin)
                 .setStart(start)
                 .setEnd(end)
@@ -313,7 +330,8 @@ public class FingerprintApiExample {
                 .setSdkPlatform(sdkPlatform)
                 .setEnvironment(environment)
                 .setProximityId(proximityId)
-                .setTotalHits(totalHits));
+                .setTotalHits(totalHits)
+                .setTorNode(torNode));
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.searchEvents:" + e.getMessage());
@@ -337,14 +355,16 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **limit** | **Integer**| Limit the number of events returned.  | [optional] [default to 10] |
-| **paginationKey** | **String**| Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  | [optional] |
+| **paginationKey** | **String**| Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  | [optional] |
 | **visitorId** | **String**| Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  | [optional] |
-| **bot** | **String**| Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  | [optional] [enum: all, good, bad, none] |
+| **bot** | **SearchEventsBot**| Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  | [optional] [enum: all, good, bad, none] |
 | **ipAddress** | **String**| Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  | [optional] |
-| **asn** | **String**|  | [optional] |
+| **asn** | **String**| Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response.  | [optional] |
 | **linkedId** | **String**| Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] |
 | **url** | **String**| Filter events by the URL (`url` property) associated with the event.  | [optional] |
-| **origin** | **String**| Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar)  | [optional] |
+| **bundleId** | **String**| Filter events by the Bundle ID (iOS) associated with the event.  | [optional] |
+| **packageName** | **String**| Filter events by the Package Name (Android) associated with the event.  | [optional] |
+| **origin** | **String**| Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com)  | [optional] |
 | **start** | **Long**| Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  | [optional] |
 | **end** | **Long**| Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  | [optional] |
 | **reverse** | **Boolean**| Sort events in reverse timestamp order.  | [optional] |
@@ -361,17 +381,18 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **clonedApp** | **Boolean**| Filter events by Cloned App Detection result. > Note: When using this parameter, only events with the `cloned_app` property set to `true` or `false` are returned. Events without a `cloned_app` Smart Signal result are left out of the response.  | [optional] |
 | **emulator** | **Boolean**| Filter events by Android Emulator Detection result. > Note: When using this parameter, only events with the `emulator` property set to `true` or `false` are returned. Events without an `emulator` Smart Signal result are left out of the response.  | [optional] |
 | **rootApps** | **Boolean**| Filter events by Rooted Device Detection result. > Note: When using this parameter, only events with the `root_apps` property set to `true` or `false` are returned. Events without a `root_apps` Smart Signal result are left out of the response.  | [optional] |
-| **vpnConfidence** | **String**| Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  | [optional] [enum: high,, medium, low] |
+| **vpnConfidence** | **SearchEventsVpnConfidence**| Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response.  | [optional] [enum: high, medium, low] |
 | **minSuspectScore** | **Float**| Filter events with Suspect Score result above a provided minimum threshold. > Note: When using this parameter, only events where the `suspect_score` property set to a value exceeding your threshold are returned. Events without a `suspect_score` Smart Signal result are left out of the response.  | [optional] |
 | **developerTools** | **Boolean**| Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response.  | [optional] |
 | **locationSpoofing** | **Boolean**| Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response.  | [optional] |
 | **mitmAttack** | **Boolean**| Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response.  | [optional] |
 | **proxy** | **Boolean**| Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.  | [optional] |
 | **sdkVersion** | **String**| Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  | [optional] |
-| **sdkPlatform** | **String**| Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  | [optional] [enum: js, android, ios] |
+| **sdkPlatform** | **SearchEventsSdkPlatform**| Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  | [optional] [enum: js, android, ios] |
 | **environment** | **List&lt;String&gt;**| Filter for events by providing one or more environment IDs (`environment_id` property).  | [optional] |
 | **proximityId** | **String**| Filter events by the most precise Proximity ID provided by default. > Note: When using this parameter, only events with the `proximity.id` property matching the provided ID are returned. Events without a `proximity` result are left out of the response.  | [optional] |
 | **totalHits** | **Long**| When set, the response will include a `total_hits` property with a count of total query matches across all pages, up to the specified limit.  | [optional] |
+| **torNode** | **Boolean**| Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response.  | [optional] |
 
 ### Return type
 

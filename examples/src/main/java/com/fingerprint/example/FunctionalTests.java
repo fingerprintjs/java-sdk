@@ -36,8 +36,7 @@ public class FunctionalTests {
             final EventSearch events = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams()
                     .setLimit(2)
                     .setStart(start)
-                    .setEnd(end)
-            );
+                    .setEnd(end));
             assert events.getEvents() != null;
             if (events.getEvents().isEmpty()) {
                 System.err.println("FingerprintApi.searchEvents: is empty");
@@ -65,9 +64,11 @@ public class FunctionalTests {
         final String requestIdToUpdate = System.getenv("FPJS_REQUEST_ID_TO_UPDATE");
         if (requestIdToUpdate != null) {
             try {
-                final HashMap<String, Object> tags = new HashMap() {{
-                    put("timestamp", new Timestamp(new Date().getTime()));
-                }};
+                final HashMap<String, Object> tags = new HashMap<>() {
+                    {
+                        put("timestamp", new Timestamp(new Date().getTime()));
+                    }
+                };
                 api.updateEvent(requestIdToUpdate, new EventUpdate().tags(tags));
             } catch (ApiException e) {
                 System.err.println("Exception when calling FingerprintApi.updateEvent:" + e.getMessage());
@@ -92,8 +93,7 @@ public class FunctionalTests {
                     .setLimit(2)
                     .setStart(start)
                     .setEnd(end)
-                    .setReverse(true)
-            );
+                    .setReverse(true));
             assert oldEvents.getEvents() != null;
             if (oldEvents.getEvents().isEmpty()) {
                 System.err.println("FingerprintApi.searchEvents: is empty for old events");

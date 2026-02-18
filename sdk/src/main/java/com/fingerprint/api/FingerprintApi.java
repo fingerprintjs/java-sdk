@@ -13,6 +13,9 @@ import com.fingerprint.model.ErrorResponse;
 import com.fingerprint.model.Event;
 import com.fingerprint.model.EventSearch;
 import com.fingerprint.model.EventUpdate;
+import com.fingerprint.model.SearchEventsBot;
+import com.fingerprint.model.SearchEventsSdkPlatform;
+import com.fingerprint.model.SearchEventsVpnConfidence;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,7 +71,7 @@ import java.util.Map;
        <tr><td> 200 </td><td> OK. The visitor ID is scheduled for deletion. </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. The visitor ID parameter is missing or in the wrong format. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 404 </td><td> Not found. The visitor ID cannot be found in this application&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The visitor ID cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
        <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
      </table>
    */
@@ -88,7 +91,7 @@ import java.util.Map;
        <tr><td> 200 </td><td> OK. The visitor ID is scheduled for deletion. </td><td>  -  </td></tr>
        <tr><td> 400 </td><td> Bad request. The visitor ID parameter is missing or in the wrong format. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
-       <tr><td> 404 </td><td> Not found. The visitor ID cannot be found in this application&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The visitor ID cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
        <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
      </table>
    */
@@ -120,6 +123,27 @@ import java.util.Map;
                                localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType,
                                localVarAuthNames, null, false);
   }
+  public static class GetEventOptionalParams {
+    
+    private String rulesetId;
+
+    /**
+     * getter for rulesetId - The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response. 
+     */
+    public String getRulesetId() {
+      return rulesetId;
+    }
+
+    /**
+     * setter for rulesetId - The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response. 
+     */
+    public GetEventOptionalParams setRulesetId(String rulesetId) {
+      this.rulesetId = rulesetId;
+      return this;
+    }
+
+  }
+
   /**
    * Get an event by event ID
    * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
@@ -133,17 +157,41 @@ import java.util.Map;
        <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
        <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
        <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
      </table>
    */
   public Event getEvent(String eventId) throws ApiException {
-    return getEventWithHttpInfo(eventId).getData();
+    return getEventWithHttpInfo(eventId, null).getData();
   }
 
   /**
    * Get an event by event ID
    * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
    * @param eventId The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request (`requestId` can be used in its place). (required)
+   * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
+   * @return Event
+   * @throws ApiException if fails to make API call
+   * @http.response.details
+     <table summary="Response Details" border="1">
+       <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+       <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
+       <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
+       <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
+       <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
+       <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+     </table>
+   */
+  public Event getEvent(String eventId, GetEventOptionalParams getEventOptionalParams) throws ApiException {
+    return getEventWithHttpInfo(eventId, getEventOptionalParams).getData();
+  }
+
+  /**
+   * Get an event by event ID
+   * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`. 
+   * @param eventId The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request (`requestId` can be used in its place). (required)
+   * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return ApiResponse<Event>
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -153,10 +201,11 @@ import java.util.Map;
        <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
        <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
        <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
+       <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
        <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
      </table>
    */
-  public ApiResponse<Event> getEventWithHttpInfo(String eventId) throws ApiException {
+  public ApiResponse<Event> getEventWithHttpInfo(String eventId, GetEventOptionalParams getEventOptionalParams) throws ApiException {
     Object localVarPostBody = null;
     
     // verify the required parameter 'eventId' is set
@@ -175,6 +224,9 @@ import java.util.Map;
     Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
     localVarQueryParams.add(new Pair("ii", INTEGRATION_INFO));
+    if (getEventOptionalParams != null) {
+      localVarQueryParams.addAll(apiClient.parameterToPairs("", "ruleset_id", getEventOptionalParams.getRulesetId()));
+    }
 
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
@@ -190,11 +242,13 @@ import java.util.Map;
     private Integer limit;
     private String paginationKey;
     private String visitorId;
-    private String bot;
+    private SearchEventsBot bot;
     private String ipAddress;
     private String asn;
     private String linkedId;
     private String url;
+    private String bundleId;
+    private String packageName;
     private String origin;
     private Long start;
     private Long end;
@@ -212,17 +266,18 @@ import java.util.Map;
     private Boolean clonedApp;
     private Boolean emulator;
     private Boolean rootApps;
-    private String vpnConfidence;
+    private SearchEventsVpnConfidence vpnConfidence;
     private Float minSuspectScore;
     private Boolean developerTools;
     private Boolean locationSpoofing;
     private Boolean mitmAttack;
     private Boolean proxy;
     private String sdkVersion;
-    private String sdkPlatform;
+    private SearchEventsSdkPlatform sdkPlatform;
     private List<String> environment;
     private String proximityId;
     private Long totalHits;
+    private Boolean torNode;
 
     /**
      * getter for limit - Limit the number of events returned. 
@@ -240,14 +295,14 @@ import java.util.Map;
     }
 
     /**
-     * getter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
+     * getter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
      */
     public String getPaginationKey() {
       return paginationKey;
     }
 
     /**
-     * setter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The key corresponds to the `timestamp` of the last returned event. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
+     * setter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
      */
     public SearchEventsOptionalParams setPaginationKey(String paginationKey) {
       this.paginationKey = paginationKey;
@@ -272,14 +327,14 @@ import java.util.Map;
     /**
      * getter for bot - Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. 
      */
-    public String getBot() {
+    public SearchEventsBot getBot() {
       return bot;
     }
 
     /**
      * setter for bot - Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. 
      */
-    public SearchEventsOptionalParams setBot(String bot) {
+    public SearchEventsOptionalParams setBot(SearchEventsBot bot) {
       this.bot = bot;
       return this;
     }
@@ -300,14 +355,14 @@ import java.util.Map;
     }
 
     /**
-     * getter for asn - 
+     * getter for asn - Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response. 
      */
     public String getAsn() {
       return asn;
     }
 
     /**
-     * setter for asn - 
+     * setter for asn - Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response. 
      */
     public SearchEventsOptionalParams setAsn(String asn) {
       this.asn = asn;
@@ -345,14 +400,44 @@ import java.util.Map;
     }
 
     /**
-     * getter for origin - Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar) 
+     * getter for bundleId - Filter events by the Bundle ID (iOS) associated with the event. 
+     */
+    public String getBundleId() {
+      return bundleId;
+    }
+
+    /**
+     * setter for bundleId - Filter events by the Bundle ID (iOS) associated with the event. 
+     */
+    public SearchEventsOptionalParams setBundleId(String bundleId) {
+      this.bundleId = bundleId;
+      return this;
+    }
+
+    /**
+     * getter for packageName - Filter events by the Package Name (Android) associated with the event. 
+     */
+    public String getPackageName() {
+      return packageName;
+    }
+
+    /**
+     * setter for packageName - Filter events by the Package Name (Android) associated with the event. 
+     */
+    public SearchEventsOptionalParams setPackageName(String packageName) {
+      this.packageName = packageName;
+      return this;
+    }
+
+    /**
+     * getter for origin - Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com) 
      */
     public String getOrigin() {
       return origin;
     }
 
     /**
-     * setter for origin - Filter events by the origin field of the event. Origin could be the website domain or mobile app bundle ID (eg: com.foo.bar) 
+     * setter for origin - Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com) 
      */
     public SearchEventsOptionalParams setOrigin(String origin) {
       this.origin = origin;
@@ -602,14 +687,14 @@ import java.util.Map;
     /**
      * getter for vpnConfidence - Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response. 
      */
-    public String getVpnConfidence() {
+    public SearchEventsVpnConfidence getVpnConfidence() {
       return vpnConfidence;
     }
 
     /**
      * setter for vpnConfidence - Filter events by VPN Detection result confidence level. `high` - events with high VPN Detection confidence. `medium` - events with medium VPN Detection confidence. `low` - events with low VPN Detection confidence. > Note: When using this parameter, only events with the `vpn.confidence` property set to a valid value are returned. Events without a `vpn` Smart Signal result are left out of the response. 
      */
-    public SearchEventsOptionalParams setVpnConfidence(String vpnConfidence) {
+    public SearchEventsOptionalParams setVpnConfidence(SearchEventsVpnConfidence vpnConfidence) {
       this.vpnConfidence = vpnConfidence;
       return this;
     }
@@ -707,14 +792,14 @@ import java.util.Map;
     /**
      * getter for sdkPlatform - Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
      */
-    public String getSdkPlatform() {
+    public SearchEventsSdkPlatform getSdkPlatform() {
       return sdkPlatform;
     }
 
     /**
      * setter for sdkPlatform - Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
      */
-    public SearchEventsOptionalParams setSdkPlatform(String sdkPlatform) {
+    public SearchEventsOptionalParams setSdkPlatform(SearchEventsSdkPlatform sdkPlatform) {
       this.sdkPlatform = sdkPlatform;
       return this;
     }
@@ -761,6 +846,21 @@ import java.util.Map;
      */
     public SearchEventsOptionalParams setTotalHits(Long totalHits) {
       this.totalHits = totalHits;
+      return this;
+    }
+
+    /**
+     * getter for torNode - Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response. 
+     */
+    public Boolean getTorNode() {
+      return torNode;
+    }
+
+    /**
+     * setter for torNode - Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response. 
+     */
+    public SearchEventsOptionalParams setTorNode(Boolean torNode) {
+      this.torNode = torNode;
       return this;
     }
 
@@ -821,6 +921,8 @@ import java.util.Map;
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "asn", searchEventsOptionalParams.getAsn()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "linked_id", searchEventsOptionalParams.getLinkedId()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "url", searchEventsOptionalParams.getUrl()));
+      localVarQueryParams.addAll(apiClient.parameterToPairs("", "bundle_id", searchEventsOptionalParams.getBundleId()));
+      localVarQueryParams.addAll(apiClient.parameterToPairs("", "package_name", searchEventsOptionalParams.getPackageName()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "origin", searchEventsOptionalParams.getOrigin()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "start", searchEventsOptionalParams.getStart()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "end", searchEventsOptionalParams.getEnd()));
@@ -849,6 +951,7 @@ import java.util.Map;
       localVarQueryParams.addAll(apiClient.parameterToPairs("multi", "environment", searchEventsOptionalParams.getEnvironment()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "proximity_id", searchEventsOptionalParams.getProximityId()));
       localVarQueryParams.addAll(apiClient.parameterToPairs("", "total_hits", searchEventsOptionalParams.getTotalHits()));
+      localVarQueryParams.addAll(apiClient.parameterToPairs("", "tor_node", searchEventsOptionalParams.getTorNode()));
     }
 
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
