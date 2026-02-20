@@ -26,7 +26,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**clientReferrer** | **String** | Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: `https://example.com/blog/my-article`  |  [optional] |
 |**browserDetails** | [**BrowserDetails**](BrowserDetails.md) |  |  [optional] |
 |**proximity** | [**Proximity**](Proximity.md) |  |  [optional] |
-|**bot** | **BotResult** |  |  [optional] |
+|**bot** | [**BotResult**](BotResult.md) |  |  [optional] |
 |**botType** | **String** | Additional classification of the bot type if detected.  |  [optional] |
 |**botInfo** | [**BotInfo**](BotInfo.md) |  |  [optional] |
 |**clonedApp** | **Boolean** | Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android.  |  [optional] |
@@ -37,7 +37,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**ipBlocklist** | [**IPBlockList**](IPBlockList.md) |  |  [optional] |
 |**ipInfo** | [**IPInfo**](IPInfo.md) |  |  [optional] |
 |**proxy** | **Boolean** | IP address was used by a public proxy provider or belonged to a known recent residential proxy  |  [optional] |
-|**proxyConfidence** | **ProxyConfidence** |  |  [optional] |
+|**proxyConfidence** | [**ProxyConfidence**](ProxyConfidence.md) |  |  [optional] |
 |**proxyDetails** | [**ProxyDetails**](ProxyDetails.md) |  |  [optional] |
 |**incognito** | **Boolean** | `true` if we detected incognito mode used in the browser, `false` otherwise.  |  [optional] |
 |**jailbroken** | **Boolean** | iOS specific jailbreak detection. There are 2 values:  * `true` - Jailbreak detected. * `false` - No signs of jailbreak or the client is not iOS.  |  [optional] |
@@ -52,7 +52,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**velocity** | [**Velocity**](Velocity.md) |  |  [optional] |
 |**virtualMachine** | **Boolean** | `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise.  |  [optional] |
 |**vpn** | **Boolean** | VPN or other anonymizing service has been used when sending the request.  |  [optional] |
-|**vpnConfidence** | **VpnConfidence** |  |  [optional] |
+|**vpnConfidence** | [**VpnConfidence**](VpnConfidence.md) |  |  [optional] |
 |**vpnOriginTimezone** | **String** | Local timezone which is used in timezone_mismatch method.  |  [optional] |
 |**vpnOriginCountry** | **String** | Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).  |  [optional] |
 |**vpnMethods** | [**VpnMethods**](VpnMethods.md) |  |  [optional] |
