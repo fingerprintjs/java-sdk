@@ -18,8 +18,8 @@ Proxy detection details (present if `proxy` is `true`)
 
 | Name | Value |
 |---- | -----|
-| RESIDENTIAL | &quot;residential&quot; |
-| DATA_CENTER | &quot;data_center&quot; |
+| RESIDENTIAL | "residential" |
+| DATA_CENTER | "data_center" |
 
 
 

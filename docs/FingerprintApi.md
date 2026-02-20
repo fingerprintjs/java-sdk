@@ -104,7 +104,7 @@ null (empty response body)
 | **200** | OK. The visitor ID is scheduled for deletion. |  -  |
 | **400** | Bad request. The visitor ID parameter is missing or in the wrong format. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **404** | Not found. The visitor ID cannot be found in this workspace&#39;s data. |  -  |
+| **404** | Not found. The visitor ID cannot be found in this workspace's data. |  -  |
 | **429** | Too Many Requests. The request is throttled. |  -  |
 
 
@@ -193,7 +193,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **200** | OK. |  -  |
 | **400** | Bad request. The event Id provided is not valid. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **404** | Not found. The event Id cannot be found in this workspace&#39;s data. |  -  |
+| **404** | Not found. The event Id cannot be found in this workspace's data. |  -  |
 | **429** | Too Many Requests. The request is throttled. |  -  |
 | **500** | Workspace error. |  -  |
 
@@ -497,6 +497,6 @@ null (empty response body)
 | **200** | OK. |  -  |
 | **400** | Bad request. The request payload is not valid. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
-| **404** | Not found. The event Id cannot be found in this workspace&#39;s data. |  -  |
+| **404** | Not found. The event Id cannot be found in this workspace's data. |  -  |
 | **409** | Conflict. The event is not mutable yet. |  -  |
 

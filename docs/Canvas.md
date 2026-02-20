@@ -9,8 +9,8 @@ Canvas fingerprint containing winding flag plus geometry/text hashes.
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**winding** | **Boolean** |  |  [optional] |
-|**geometry** | **String** | Hash of geometry rendering output or &#x60;unsupported&#x60; markers. |  [optional] |
-|**text** | **String** | Hash of text rendering output or &#x60;unsupported&#x60; markers. |  [optional] |
+|**geometry** | **String** | Hash of geometry rendering output or `unsupported` markers. |  [optional] |
+|**text** | **String** | Hash of text rendering output or `unsupported` markers. |  [optional] |
 
 
 
