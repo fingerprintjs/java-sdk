@@ -69,8 +69,6 @@ openApiGenerate {
     configOptions.put("hideGenerationTimestamp", "true")
     configOptions.put("openApiNullable", "false")
     configOptions.put("disallowAdditionalPropertiesIfNotPresent", "false")
-    configOptions.put("useOneOfDiscriminatorLookup"," true")
-    configOptions.put("legacyDiscriminatorLookup", "false")
     configOptions.put("useOneOfInterfaces", "true")
 }
 
