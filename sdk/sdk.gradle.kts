@@ -38,6 +38,7 @@ dependencies {
     api(libs.jackson.jsr310)
     api(libs.jakarta.annotation.api)
     testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.platform.launcher)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.mockito)
 }
