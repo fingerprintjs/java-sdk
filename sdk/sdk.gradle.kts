@@ -120,7 +120,7 @@ tasks.openApiGenerate {
 }
 
 tasks.compileJava {
-    dependsOn("copyGeneratedArtifacts")
+    dependsOn("openApiGenerate")
 }
 
 tasks.test {
