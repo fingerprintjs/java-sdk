@@ -95,8 +95,6 @@ tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
 }
 
 tasks.register("copyGeneratedArtifacts") {
-    dependsOn(tasks.openApiGenerate)
-
     doLast {
         copy {
             from(layout.buildDirectory.dir("generated/docs"))
