@@ -1,7 +1,14 @@
+
 val projectVersion: String by project
 
 group = "com.github.fingerprintjs"
 version = projectVersion
+
+java {
+    // Target the earliest support Java version
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
 plugins {
     alias(libs.plugins.openapi.generator)
@@ -96,6 +103,7 @@ tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
 }
 
 tasks.register("copyGeneratedArtifacts") {
+    finalizedBy("format")
     doLast {
         copy {
             from(layout.buildDirectory.dir("generated/docs"))
