@@ -33,3 +33,5 @@ The Gradle configuration defines the options for `openapi-generator`, within the
 ### How to publish
 
 We use [changesets](https://github.com/changesets/changesets) for handling release notes. If there are relevant changes, please add them to changeset via `pnpm exec changeset`. You need to run `pnpm install` before doing so.
+
+When creating [prereleases](https://github.com/changesets/changesets/blob/main/docs/prereleases.md), the `rc` tag must be used. This ensures that version ranges in Maven/Gradle do not pick the prerelease as a new version. For more information, refer to the [Version Order Specification Maven Documentation](https://maven.apache.org/pom.html#version-order-specification).
