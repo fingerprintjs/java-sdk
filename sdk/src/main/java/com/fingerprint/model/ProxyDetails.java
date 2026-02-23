@@ -28,7 +28,7 @@ import com.fingerprint.sdk.JSON;
 
 
 /**
- * Proxy detection details (present if &#x60;proxy&#x60; is &#x60;true&#x60;)
+ * Proxy detection details (present if `proxy` is `true`)
  */
 @JsonPropertyOrder({
   ProxyDetails.JSON_PROPERTY_PROXY_TYPE,

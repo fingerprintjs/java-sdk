@@ -199,7 +199,7 @@ public class BotInfo {
   }
 
   /**
-   * The URL of the bot provider&#39;s website.
+   * The URL of the bot provider's website.
    * @return providerUrl
    */
   @jakarta.annotation.Nullable
@@ -249,7 +249,7 @@ public class BotInfo {
   }
 
   /**
-   * The verification status of the bot&#39;s identity:  * &#x60;verified&#x60; - well-known bot with publicly verifiable identity, directed by the bot provider.  * &#x60;signed&#x60; - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * &#x60;spoofed&#x60; - bot that claims a public identity but fails verification.  * &#x60;unknown&#x60; - bot that does not publish a verifiable identity. 
+   * The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
    * @return identity
    */
   @jakarta.annotation.Nonnull

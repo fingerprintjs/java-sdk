@@ -59,7 +59,7 @@ public class Integration {
   }
 
   /**
-   * The name of the specific integration, e.g. \&quot;fingerprint-pro-react\&quot;.
+   * The name of the specific integration, e.g. \"fingerprint-pro-react\".
    * @return name
    */
   @jakarta.annotation.Nullable
@@ -84,7 +84,7 @@ public class Integration {
   }
 
   /**
-   * The version of the specific integration, e.g. \&quot;3.11.10\&quot;.
+   * The version of the specific integration, e.g. \"3.11.10\".
    * @return version
    */
   @jakarta.annotation.Nullable

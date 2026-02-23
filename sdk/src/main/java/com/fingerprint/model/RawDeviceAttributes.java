@@ -477,7 +477,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Navigator &#x60;oscpu&#x60; string.
+   * Navigator `oscpu` string.
    * @return oscpu
    */
   @jakarta.annotation.Nullable
@@ -578,7 +578,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Locale derived from the Intl.DateTimeFormat API. Negative values indicate known error states. The negative statuses can be: - \&quot;-1\&quot;: A permanent status for browsers that don&#39;t support Intl API. - \&quot;-2\&quot;: A permanent status for browsers that don&#39;t supportDateTimeFormat constructor. - \&quot;-3\&quot;: A permanent status for browsers in which DateTimeFormat locale is undefined or null. 
+   * Locale derived from the Intl.DateTimeFormat API. Negative values indicate known error states. The negative statuses can be: - \"-1\": A permanent status for browsers that don't support Intl API. - \"-2\": A permanent status for browsers that don't supportDateTimeFormat constructor. - \"-3\": A permanent status for browsers in which DateTimeFormat locale is undefined or null. 
    * @return dateTimeLocale
    */
   @jakarta.annotation.Nullable
@@ -728,7 +728,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * AudioContext fingerprint or negative status when unavailable. The negative statuses can be: - -1: A permanent status for those browsers which are known to always suspend audio context - -2: A permanent status for browsers that don&#39;t support the signal - -3: A temporary status that means that an unexpected timeout has happened 
+   * AudioContext fingerprint or negative status when unavailable. The negative statuses can be: - -1: A permanent status for those browsers which are known to always suspend audio context - -2: A permanent status for browsers that don't support the signal - -3: A temporary status that means that an unexpected timeout has happened 
    * @return audio
    */
   @jakarta.annotation.Nullable
@@ -761,7 +761,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Browser plugins reported by &#x60;navigator.plugins&#x60;.
+   * Browser plugins reported by `navigator.plugins`.
    * @return plugins
    */
   @jakarta.annotation.Nullable

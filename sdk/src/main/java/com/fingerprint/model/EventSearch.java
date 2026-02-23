@@ -94,7 +94,7 @@ public class EventSearch {
   }
 
   /**
-   * Use this value in the &#x60;pagination_key&#x60; parameter to request the next page of search results.
+   * Use this value in the `pagination_key` parameter to request the next page of search results.
    * @return paginationKey
    */
   @jakarta.annotation.Nullable
@@ -119,7 +119,7 @@ public class EventSearch {
   }
 
   /**
-   * This value represents the total number of events matching the search query, up to the limit provided in the &#x60;total_hits&#x60; query parameter. Only present if the &#x60;total_hits&#x60; query parameter was provided.
+   * This value represents the total number of events matching the search query, up to the limit provided in the `total_hits` query parameter. Only present if the `total_hits` query parameter was provided.
    * @return totalHits
    */
   @jakarta.annotation.Nullable

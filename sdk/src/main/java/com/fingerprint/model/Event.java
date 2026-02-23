@@ -310,7 +310,7 @@ public class Event {
   }
 
   /**
-   * Unique identifier of the user&#39;s request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: &#x60;1758130560902.8tRtrH&#x60; 
+   * Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH` 
    * @return eventId
    */
   @jakarta.annotation.Nonnull
@@ -385,7 +385,7 @@ public class Event {
   }
 
   /**
-   * Environment Id of the event. For example: &#x60;ae_47abaca3db2c7c43&#x60; 
+   * Environment Id of the event. For example: `ae_47abaca3db2c7c43` 
    * @return environmentId
    */
   @jakarta.annotation.Nullable
@@ -410,7 +410,7 @@ public class Event {
   }
 
   /**
-   * Field is &#x60;true&#x60; if you have previously set the &#x60;suspect&#x60; flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).
+   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).
    * @return suspect
    */
   @jakarta.annotation.Nullable
@@ -460,7 +460,7 @@ public class Event {
   }
 
   /**
-   * &#x60;true&#x60; if we determined that this payload was replayed, &#x60;false&#x60; otherwise. 
+   * `true` if we determined that this payload was replayed, `false` otherwise. 
    * @return replayed
    */
   @jakarta.annotation.Nullable
@@ -560,7 +560,7 @@ public class Event {
   }
 
   /**
-   * Page URL from which the request was sent. For example &#x60;https://example.com/&#x60; 
+   * Page URL from which the request was sent. For example `https://example.com/` 
    * @return url
    */
   @jakarta.annotation.Nullable
@@ -585,7 +585,7 @@ public class Event {
   }
 
   /**
-   * Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. For example: &#x60;com.foo.app&#x60; 
+   * Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` 
    * @return bundleId
    */
   @jakarta.annotation.Nullable
@@ -610,7 +610,7 @@ public class Event {
   }
 
   /**
-   * Package name of the Android application integrated with the Fingerprint SDK for the event. For example: &#x60;com.foo.app&#x60; 
+   * Package name of the Android application integrated with the Fingerprint SDK for the event. For example: `com.foo.app` 
    * @return packageName
    */
   @jakarta.annotation.Nullable
@@ -660,7 +660,7 @@ public class Event {
   }
 
   /**
-   * User Agent of the client, for example: &#x60;Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....&#x60; 
+   * User Agent of the client, for example: `Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....` 
    * @return userAgent
    */
   @jakarta.annotation.Nullable
@@ -685,7 +685,7 @@ public class Event {
   }
 
   /**
-   * Client Referrer field corresponds to the &#x60;document.referrer&#x60; field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: &#x60;https://example.com/blog/my-article&#x60; 
+   * Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: `https://example.com/blog/my-article` 
    * @return clientReferrer
    */
   @jakarta.annotation.Nullable
@@ -835,7 +835,7 @@ public class Event {
   }
 
   /**
-   * Android specific cloned application detection. There are 2 values:  * &#x60;true&#x60; - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * &#x60;false&#x60; - No signs of cloned application detected or the client is not Android. 
+   * Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android. 
    * @return clonedApp
    */
   @jakarta.annotation.Nullable
@@ -860,7 +860,7 @@ public class Event {
   }
 
   /**
-   * &#x60;true&#x60; if the browser is Chrome with DevTools open or Firefox with Developer Tools open, &#x60;false&#x60; otherwise. 
+   * `true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise. 
    * @return developerTools
    */
   @jakarta.annotation.Nullable
@@ -885,7 +885,7 @@ public class Event {
   }
 
   /**
-   * Android specific emulator detection. There are 2 values:  * &#x60;true&#x60; - Emulated environment detected (e.g. launch inside of AVD).  * &#x60;false&#x60; - No signs of emulated environment detected or the client is not Android. 
+   * Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android. 
    * @return emulator
    */
   @jakarta.annotation.Nullable
@@ -935,7 +935,7 @@ public class Event {
   }
 
   /**
-   * [Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * &#x60;true&#x60; - Frida detected * &#x60;false&#x60; - No signs of Frida or the client is not a mobile device. 
+   * [Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * `true` - Frida detected * `false` - No signs of Frida or the client is not a mobile device. 
    * @return frida
    */
   @jakarta.annotation.Nullable
@@ -1085,7 +1085,7 @@ public class Event {
   }
 
   /**
-   * &#x60;true&#x60; if we detected incognito mode used in the browser, &#x60;false&#x60; otherwise. 
+   * `true` if we detected incognito mode used in the browser, `false` otherwise. 
    * @return incognito
    */
   @jakarta.annotation.Nullable
@@ -1110,7 +1110,7 @@ public class Event {
   }
 
   /**
-   * iOS specific jailbreak detection. There are 2 values:  * &#x60;true&#x60; - Jailbreak detected. * &#x60;false&#x60; - No signs of jailbreak or the client is not iOS. 
+   * iOS specific jailbreak detection. There are 2 values:  * `true` - Jailbreak detected. * `false` - No signs of jailbreak or the client is not iOS. 
    * @return jailbroken
    */
   @jakarta.annotation.Nullable
@@ -1160,7 +1160,7 @@ public class Event {
   }
 
   /**
-   * * &#x60;true&#x60; - When requests made from your users&#39; mobile devices to Fingerprint servers have been intercepted and potentially modified.  * &#x60;false&#x60; - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. 
+   * * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal. 
    * @return mitmAttack
    */
   @jakarta.annotation.Nullable
@@ -1185,7 +1185,7 @@ public class Event {
   }
 
   /**
-   * &#x60;true&#x60; if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise &#x60;false&#x60;. 
+   * `true` if the request is from a privacy aware browser (e.g. Tor) or from a browser in which fingerprinting is blocked. Otherwise `false`. 
    * @return privacySettings
    */
   @jakarta.annotation.Nullable
@@ -1210,7 +1210,7 @@ public class Event {
   }
 
   /**
-   * Android specific root management apps detection. There are 2 values:  * &#x60;true&#x60; - Root Management Apps detected (e.g. Magisk). * &#x60;false&#x60; - No Root Management Apps detected or the client isn&#39;t Android. 
+   * Android specific root management apps detection. There are 2 values:  * `true` - Root Management Apps detected (e.g. Magisk). * `false` - No Root Management Apps detected or the client isn't Android. 
    * @return rootApps
    */
   @jakarta.annotation.Nullable
@@ -1285,7 +1285,7 @@ public class Event {
   }
 
   /**
-   * Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see &#x60;tampering_details.anomaly_score&#x60;).   * The browser signature resembles an \&quot;anti-detect\&quot; browser specifically designed to evade fingerprinting (see &#x60;tampering_details.anti_detect_browser&#x60;). 
+   * Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`). 
    * @return tampering
    */
   @jakarta.annotation.Nullable
@@ -1360,7 +1360,7 @@ public class Event {
   }
 
   /**
-   * &#x60;true&#x60; if the request came from a browser running inside a virtual machine (e.g. VMWare), &#x60;false&#x60; otherwise. 
+   * `true` if the request came from a browser running inside a virtual machine (e.g. VMWare), `false` otherwise. 
    * @return virtualMachine
    */
   @jakarta.annotation.Nullable
@@ -1460,7 +1460,7 @@ public class Event {
   }
 
   /**
-   * Country of the request (only for Android SDK version &gt;&#x3D; 2.4.0, ISO 3166 format or unknown). 
+   * Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown). 
    * @return vpnOriginCountry
    */
   @jakarta.annotation.Nullable

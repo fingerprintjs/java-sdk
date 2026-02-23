@@ -125,7 +125,7 @@ public class SDK {
   }
 
   /**
-   * Version string of the SDK used for the identification request. For example: &#x60;\&quot;3.12.1\&quot;&#x60; 
+   * Version string of the SDK used for the identification request. For example: `\"3.12.1\"` 
    * @return version
    */
   @jakarta.annotation.Nonnull

@@ -83,7 +83,7 @@ public class Canvas {
   }
 
   /**
-   * Hash of geometry rendering output or &#x60;unsupported&#x60; markers.
+   * Hash of geometry rendering output or `unsupported` markers.
    * @return geometry
    */
   @jakarta.annotation.Nullable
@@ -108,7 +108,7 @@ public class Canvas {
   }
 
   /**
-   * Hash of text rendering output or &#x60;unsupported&#x60; markers.
+   * Hash of text rendering output or `unsupported` markers.
    * @return text
    */
   @jakarta.annotation.Nullable

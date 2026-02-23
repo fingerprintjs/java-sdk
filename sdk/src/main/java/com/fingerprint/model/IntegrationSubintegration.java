@@ -54,7 +54,7 @@ public class IntegrationSubintegration {
   }
 
   /**
-   * The name of the specific subintegration, e.g. \&quot;preact\&quot;.
+   * The name of the specific subintegration, e.g. \"preact\".
    * @return name
    */
   @jakarta.annotation.Nullable
@@ -79,7 +79,7 @@ public class IntegrationSubintegration {
   }
 
   /**
-   * The version of the specific subintegration, e.g. \&quot;10.21.0\&quot;.
+   * The version of the specific subintegration, e.g. \"10.21.0\".
    * @return version
    */
   @jakarta.annotation.Nullable

@@ -53,7 +53,7 @@ public class TamperingDetails {
   }
 
   /**
-   * Confidence score (&#x60;0.0 - 1.0&#x60;) for tampering detection:   * Values above &#x60;0.5&#x60; indicate tampering.   * Values below &#x60;0.5&#x60; indicate genuine browsers. 
+   * Confidence score (`0.0 - 1.0`) for tampering detection:   * Values above `0.5` indicate tampering.   * Values below `0.5` indicate genuine browsers. 
    * minimum: 0
    * maximum: 1
    * @return anomalyScore
@@ -80,7 +80,7 @@ public class TamperingDetails {
   }
 
   /**
-   * True if the identified browser resembles an \&quot;anti-detect\&quot; browser, such as Incognition, which attempts to evade identification by manipulating its fingerprint. 
+   * True if the identified browser resembles an \"anti-detect\" browser, such as Incognition, which attempts to evade identification by manipulating its fingerprint. 
    * @return antiDetectBrowser
    */
   @jakarta.annotation.Nullable

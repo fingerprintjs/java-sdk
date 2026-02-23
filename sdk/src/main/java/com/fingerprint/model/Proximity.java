@@ -157,7 +157,7 @@ public class Proximity {
   }
 
   /**
-   * A value between &#x60;0&#x60; and &#x60;1&#x60; representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to &#x60;1&#x60; indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to &#x60;0&#x60; indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
+   * A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
    * minimum: 0
    * maximum: 1
    * @return confidence
