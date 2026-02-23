@@ -37,6 +37,14 @@ fun Project.registerFormatTasks() {
         include("**/*.java")
     }.files.map { it.absolutePath }
 
+    val googleJavaFormatVmArgs = listOf(
+        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+    )
 
     tasks.register<JavaExec>("format") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
@@ -49,6 +57,7 @@ fun Project.registerFormatTasks() {
 
         classpath = files(googleJavaFormatJarFile)
         args = listOf("--replace") + inputFiles
+        jvmArgs = googleJavaFormatVmArgs
     }
 
     tasks.register<JavaExec>("formatCheck") {
@@ -66,6 +75,7 @@ fun Project.registerFormatTasks() {
 
         classpath = files(googleJavaFormatJarFile)
         args = listOf("--dry-run", "--set-exit-if-changed") + inputFiles
+        jvmArgs = googleJavaFormatVmArgs
     }
 }
 
