@@ -128,7 +128,9 @@ public class Sealed {
 
         Event value = mapper.readValue(unsealed, Event.class);
 
-        if (value.getTimestamp() == null) { // TODO decide how to check
+        if (value.getEventId() == null) {
+            // The event ID must always be present so its absence indicates the
+            // sealed data is invalid.
             throw new InvalidSealedDataException();
         }
 

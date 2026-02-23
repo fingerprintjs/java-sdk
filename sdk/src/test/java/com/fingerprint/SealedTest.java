@@ -1,6 +1,7 @@
 package com.fingerprint;
 
 import com.fasterxml.jackson.core.io.JsonEOFException;
+import com.fingerprint.Sealed.InvalidSealedDataException;
 import com.fingerprint.model.Event;
 import com.fingerprint.sdk.JSON;
 import org.junit.jupiter.api.Test;
@@ -170,6 +171,23 @@ public class SealedTest {
                         )
                 }
         ));
+    }
+
+    @Test
+    public void unsealEventResponseWithEmptyEventTest() throws Exception {
+        byte[] sealedResult = Base64.getDecoder().decode("noXc7enbFVmf0ITsHkrqGgSDC0UNR/MIVD3hvIBk8qL1Y2/SHzr5S2E=");
+        byte[] key = Base64.getDecoder().decode("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq53=");
+
+        InvalidSealedDataException ex = assertThrows(Sealed.InvalidSealedDataException.class, () -> Sealed.unsealEventResponse(
+                sealedResult,
+                new Sealed.DecryptionKey[]{
+                        new Sealed.DecryptionKey(
+                                key,
+                                Sealed.DecryptionAlgorithm.AES_256_GCM
+                        )
+                }
+        ));
+        assertEquals("Invalid sealed data", ex.getMessage());
     }
 
     @Test
