@@ -62,7 +62,7 @@ fun Project.registerFormatTasks() {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
         executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
-        args = listOf("--replace") + inputFiles
+        args = listOf("--replace", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
     }
 
     tasks.register<Exec>("formatCheck") {
@@ -73,7 +73,7 @@ fun Project.registerFormatTasks() {
         }
 
         executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
-        args = listOf("--dry-run", "--set-exit-if-changed") + inputFiles
+        args = listOf("--dry-run", "--set-exit-if-changed", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
     }
 }
 
