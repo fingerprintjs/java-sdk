@@ -8,6 +8,7 @@ junit-platform-launcher = "1.14.3"
 mockito = "3.12.4"
 openapi = "7.16.0"
 swagger-annotations = "2.2.22"
+google-java-format = "1.34.1"
 
 [libraries]
 jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }

@@ -35,7 +35,8 @@ tasks.register("downloadGoogleJavaFormat") {
     val osSuffix = googleJavaFormatOsSuffixMap[osdetector.os]
     val archSuffix = googleJavaFormatArchSuffixMap[osdetector.arch]
     val binarySuffix = googleJavaFormatBinarySuffixMap[osdetector.os]
-    val downloadUrl = "https://github.com/google/google-java-format/releases/download/v1.34.1/google-java-format_$osSuffix-$archSuffix$binarySuffix"
+    val googleJavaFormatVersion = libs.versions.google.java.format.get()
+    val downloadUrl = "https://github.com/google/google-java-format/releases/download/v$googleJavaFormatVersion/google-java-format_${osSuffix}-${archSuffix}${binarySuffix}"
     outputs.file(googleJavaFormatExeFile)
 
     doLast {
