@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * RuleActionHeaderField
@@ -34,18 +24,17 @@ import com.fingerprint.v4.sdk.JSON;
   RuleActionHeaderField.JSON_PROPERTY_NAME,
   RuleActionHeaderField.JSON_PROPERTY_VALUE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class RuleActionHeaderField {
   public static final String JSON_PROPERTY_NAME = "name";
-  @jakarta.annotation.Nonnull
-  private String name;
+  @jakarta.annotation.Nonnull private String name;
 
   public static final String JSON_PROPERTY_VALUE = "value";
-  @jakarta.annotation.Nonnull
-  private String value;
+  @jakarta.annotation.Nonnull private String value;
 
-  public RuleActionHeaderField() { 
-  }
+  public RuleActionHeaderField() {}
 
   public RuleActionHeaderField name(@jakarta.annotation.Nonnull String name) {
     this.name = name;
@@ -59,18 +48,15 @@ public class RuleActionHeaderField {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getName() {
     return name;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(@jakarta.annotation.Nonnull String name) {
     this.name = name;
   }
-
 
   public RuleActionHeaderField value(@jakarta.annotation.Nonnull String value) {
     this.value = value;
@@ -84,18 +70,15 @@ public class RuleActionHeaderField {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_VALUE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getValue() {
     return value;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VALUE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setValue(@jakarta.annotation.Nonnull String value) {
     this.value = value;
   }
-
 
   /**
    * Return true if this RuleActionHeaderField object is equal to o.
@@ -109,8 +92,8 @@ public class RuleActionHeaderField {
       return false;
     }
     RuleActionHeaderField ruleActionHeaderField = (RuleActionHeaderField) o;
-    return Objects.equals(this.name, ruleActionHeaderField.name) &&
-        Objects.equals(this.value, ruleActionHeaderField.value);
+    return Objects.equals(this.name, ruleActionHeaderField.name)
+        && Objects.equals(this.value, ruleActionHeaderField.value);
   }
 
   @Override
@@ -138,6 +121,4 @@ public class RuleActionHeaderField {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

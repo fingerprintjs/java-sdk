@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,87 +10,96 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * API Exception
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class ApiException extends Exception {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private int code = 0;
-    private Map<String, List<String>> responseHeaders = null;
-    private String responseBody = null;
+  private int code = 0;
+  private Map<String, List<String>> responseHeaders = null;
+  private String responseBody = null;
 
-    public ApiException() {}
+  public ApiException() {}
 
-    public ApiException(Throwable throwable) {
-        super(throwable);
-    }
+  public ApiException(Throwable throwable) {
+    super(throwable);
+  }
 
-    public ApiException(String message) {
-        super(message);
-    }
+  public ApiException(String message) {
+    super(message);
+  }
 
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        super(message, throwable);
-        this.code = code;
-        this.responseHeaders = responseHeaders;
-        this.responseBody = responseBody;
-    }
+  public ApiException(
+      String message,
+      Throwable throwable,
+      int code,
+      Map<String, List<String>> responseHeaders,
+      String responseBody) {
+    super(message, throwable);
+    this.code = code;
+    this.responseHeaders = responseHeaders;
+    this.responseBody = responseBody;
+  }
 
-    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        this(message, (Throwable) null, code, responseHeaders, responseBody);
-    }
+  public ApiException(
+      String message, int code, Map<String, List<String>> responseHeaders, String responseBody) {
+    this(message, (Throwable) null, code, responseHeaders, responseBody);
+  }
 
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders) {
-        this(message, throwable, code, responseHeaders, null);
-    }
+  public ApiException(
+      String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders) {
+    this(message, throwable, code, responseHeaders, null);
+  }
 
-    public ApiException(int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        this((String) null, (Throwable) null, code, responseHeaders, responseBody);
-    }
+  public ApiException(int code, Map<String, List<String>> responseHeaders, String responseBody) {
+    this((String) null, (Throwable) null, code, responseHeaders, responseBody);
+  }
 
-    public ApiException(int code, String message) {
-        super(message);
-        this.code = code;
-    }
+  public ApiException(int code, String message) {
+    super(message);
+    this.code = code;
+  }
 
-    public ApiException(int code, String message, Map<String, List<String>> responseHeaders, String responseBody) {
-        this(code, message);
-        this.responseHeaders = responseHeaders;
-        this.responseBody = responseBody;
-    }
+  public ApiException(
+      int code, String message, Map<String, List<String>> responseHeaders, String responseBody) {
+    this(code, message);
+    this.responseHeaders = responseHeaders;
+    this.responseBody = responseBody;
+  }
 
-    /**
-     * Get the HTTP status code.
-     *
-     * @return HTTP status code
-     */
-    public int getCode() {
-        return code;
-    }
+  /**
+   * Get the HTTP status code.
+   *
+   * @return HTTP status code
+   */
+  public int getCode() {
+    return code;
+  }
 
-    /**
-     * Get the HTTP response headers.
-     *
-     * @return A map of list of string
-     */
-    public Map<String, List<String>> getResponseHeaders() {
-        return responseHeaders;
-    }
+  /**
+   * Get the HTTP response headers.
+   *
+   * @return A map of list of string
+   */
+  public Map<String, List<String>> getResponseHeaders() {
+    return responseHeaders;
+  }
 
-    /**
-     * Get the HTTP response body.
-     *
-     * @return Response body in the form of string
-     */
-    public String getResponseBody() {
-        return responseBody;
-    }
+  /**
+   * Get the HTTP response body.
+   *
+   * @return Response body in the form of string
+   */
+  public String getResponseBody() {
+    return responseBody;
+  }
 }

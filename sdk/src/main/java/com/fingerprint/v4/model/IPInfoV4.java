@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,23 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.Geolocation;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * IPInfoV4
@@ -41,42 +30,35 @@ import com.fingerprint.v4.sdk.JSON;
   IPInfoV4.JSON_PROPERTY_DATACENTER_RESULT,
   IPInfoV4.JSON_PROPERTY_DATACENTER_NAME
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class IPInfoV4 {
   public static final String JSON_PROPERTY_ADDRESS = "address";
-  @jakarta.annotation.Nonnull
-  private String address;
+  @jakarta.annotation.Nonnull private String address;
 
   public static final String JSON_PROPERTY_GEOLOCATION = "geolocation";
-  @jakarta.annotation.Nullable
-  private Geolocation geolocation;
+  @jakarta.annotation.Nullable private Geolocation geolocation;
 
   public static final String JSON_PROPERTY_ASN = "asn";
-  @jakarta.annotation.Nullable
-  private String asn;
+  @jakarta.annotation.Nullable private String asn;
 
   public static final String JSON_PROPERTY_ASN_NAME = "asn_name";
-  @jakarta.annotation.Nullable
-  private String asnName;
+  @jakarta.annotation.Nullable private String asnName;
 
   public static final String JSON_PROPERTY_ASN_NETWORK = "asn_network";
-  @jakarta.annotation.Nullable
-  private String asnNetwork;
+  @jakarta.annotation.Nullable private String asnNetwork;
 
   public static final String JSON_PROPERTY_ASN_TYPE = "asn_type";
-  @jakarta.annotation.Nullable
-  private String asnType;
+  @jakarta.annotation.Nullable private String asnType;
 
   public static final String JSON_PROPERTY_DATACENTER_RESULT = "datacenter_result";
-  @jakarta.annotation.Nullable
-  private Boolean datacenterResult;
+  @jakarta.annotation.Nullable private Boolean datacenterResult;
 
   public static final String JSON_PROPERTY_DATACENTER_NAME = "datacenter_name";
-  @jakarta.annotation.Nullable
-  private String datacenterName;
+  @jakarta.annotation.Nullable private String datacenterName;
 
-  public IPInfoV4() { 
-  }
+  public IPInfoV4() {}
 
   public IPInfoV4 address(@jakarta.annotation.Nonnull String address) {
     this.address = address;
@@ -90,18 +72,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getAddress() {
     return address;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ADDRESS, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddress(@jakarta.annotation.Nonnull String address) {
     this.address = address;
   }
-
 
   public IPInfoV4 geolocation(@jakarta.annotation.Nullable Geolocation geolocation) {
     this.geolocation = geolocation;
@@ -115,18 +94,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_GEOLOCATION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Geolocation getGeolocation() {
     return geolocation;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_GEOLOCATION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGeolocation(@jakarta.annotation.Nullable Geolocation geolocation) {
     this.geolocation = geolocation;
   }
-
 
   public IPInfoV4 asn(@jakarta.annotation.Nullable String asn) {
     this.asn = asn;
@@ -140,18 +116,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ASN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getAsn() {
     return asn;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ASN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAsn(@jakarta.annotation.Nullable String asn) {
     this.asn = asn;
   }
-
 
   public IPInfoV4 asnName(@jakarta.annotation.Nullable String asnName) {
     this.asnName = asnName;
@@ -165,18 +138,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ASN_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getAsnName() {
     return asnName;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ASN_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAsnName(@jakarta.annotation.Nullable String asnName) {
     this.asnName = asnName;
   }
-
 
   public IPInfoV4 asnNetwork(@jakarta.annotation.Nullable String asnNetwork) {
     this.asnNetwork = asnNetwork;
@@ -190,18 +160,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ASN_NETWORK, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getAsnNetwork() {
     return asnNetwork;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ASN_NETWORK, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAsnNetwork(@jakarta.annotation.Nullable String asnNetwork) {
     this.asnNetwork = asnNetwork;
   }
-
 
   public IPInfoV4 asnType(@jakarta.annotation.Nullable String asnType) {
     this.asnType = asnType;
@@ -215,18 +182,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ASN_TYPE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getAsnType() {
     return asnType;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ASN_TYPE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAsnType(@jakarta.annotation.Nullable String asnType) {
     this.asnType = asnType;
   }
-
 
   public IPInfoV4 datacenterResult(@jakarta.annotation.Nullable Boolean datacenterResult) {
     this.datacenterResult = datacenterResult;
@@ -240,18 +204,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DATACENTER_RESULT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getDatacenterResult() {
     return datacenterResult;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DATACENTER_RESULT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDatacenterResult(@jakarta.annotation.Nullable Boolean datacenterResult) {
     this.datacenterResult = datacenterResult;
   }
-
 
   public IPInfoV4 datacenterName(@jakarta.annotation.Nullable String datacenterName) {
     this.datacenterName = datacenterName;
@@ -265,18 +226,15 @@ public class IPInfoV4 {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DATACENTER_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getDatacenterName() {
     return datacenterName;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DATACENTER_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDatacenterName(@jakarta.annotation.Nullable String datacenterName) {
     this.datacenterName = datacenterName;
   }
-
 
   /**
    * Return true if this IPInfoV4 object is equal to o.
@@ -290,19 +248,20 @@ public class IPInfoV4 {
       return false;
     }
     IPInfoV4 ipInfoV4 = (IPInfoV4) o;
-    return Objects.equals(this.address, ipInfoV4.address) &&
-        Objects.equals(this.geolocation, ipInfoV4.geolocation) &&
-        Objects.equals(this.asn, ipInfoV4.asn) &&
-        Objects.equals(this.asnName, ipInfoV4.asnName) &&
-        Objects.equals(this.asnNetwork, ipInfoV4.asnNetwork) &&
-        Objects.equals(this.asnType, ipInfoV4.asnType) &&
-        Objects.equals(this.datacenterResult, ipInfoV4.datacenterResult) &&
-        Objects.equals(this.datacenterName, ipInfoV4.datacenterName);
+    return Objects.equals(this.address, ipInfoV4.address)
+        && Objects.equals(this.geolocation, ipInfoV4.geolocation)
+        && Objects.equals(this.asn, ipInfoV4.asn)
+        && Objects.equals(this.asnName, ipInfoV4.asnName)
+        && Objects.equals(this.asnNetwork, ipInfoV4.asnNetwork)
+        && Objects.equals(this.asnType, ipInfoV4.asnType)
+        && Objects.equals(this.datacenterResult, ipInfoV4.datacenterResult)
+        && Objects.equals(this.datacenterName, ipInfoV4.datacenterName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(address, geolocation, asn, asnName, asnNetwork, asnType, datacenterResult, datacenterName);
+    return Objects.hash(
+        address, geolocation, asn, asnName, asnNetwork, asnType, datacenterResult, datacenterName);
   }
 
   @Override
@@ -331,6 +290,4 @@ public class IPInfoV4 {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

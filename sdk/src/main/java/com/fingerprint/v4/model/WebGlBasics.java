@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * Render and vendor strings reported by the WebGL context.
@@ -38,34 +28,29 @@ import com.fingerprint.v4.sdk.JSON;
   WebGlBasics.JSON_PROPERTY_RENDERER_UNMASKED,
   WebGlBasics.JSON_PROPERTY_SHADING_LANGUAGE_VERSION
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class WebGlBasics {
   public static final String JSON_PROPERTY_VERSION = "version";
-  @jakarta.annotation.Nullable
-  private String version;
+  @jakarta.annotation.Nullable private String version;
 
   public static final String JSON_PROPERTY_VENDOR = "vendor";
-  @jakarta.annotation.Nullable
-  private String vendor;
+  @jakarta.annotation.Nullable private String vendor;
 
   public static final String JSON_PROPERTY_VENDOR_UNMASKED = "vendor_unmasked";
-  @jakarta.annotation.Nullable
-  private String vendorUnmasked;
+  @jakarta.annotation.Nullable private String vendorUnmasked;
 
   public static final String JSON_PROPERTY_RENDERER = "renderer";
-  @jakarta.annotation.Nullable
-  private String renderer;
+  @jakarta.annotation.Nullable private String renderer;
 
   public static final String JSON_PROPERTY_RENDERER_UNMASKED = "renderer_unmasked";
-  @jakarta.annotation.Nullable
-  private String rendererUnmasked;
+  @jakarta.annotation.Nullable private String rendererUnmasked;
 
   public static final String JSON_PROPERTY_SHADING_LANGUAGE_VERSION = "shading_language_version";
-  @jakarta.annotation.Nullable
-  private String shadingLanguageVersion;
+  @jakarta.annotation.Nullable private String shadingLanguageVersion;
 
-  public WebGlBasics() { 
-  }
+  public WebGlBasics() {}
 
   public WebGlBasics version(@jakarta.annotation.Nullable String version) {
     this.version = version;
@@ -79,18 +64,15 @@ public class WebGlBasics {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVersion() {
     return version;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVersion(@jakarta.annotation.Nullable String version) {
     this.version = version;
   }
-
 
   public WebGlBasics vendor(@jakarta.annotation.Nullable String vendor) {
     this.vendor = vendor;
@@ -104,18 +86,15 @@ public class WebGlBasics {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VENDOR, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVendor() {
     return vendor;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VENDOR, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVendor(@jakarta.annotation.Nullable String vendor) {
     this.vendor = vendor;
   }
-
 
   public WebGlBasics vendorUnmasked(@jakarta.annotation.Nullable String vendorUnmasked) {
     this.vendorUnmasked = vendorUnmasked;
@@ -129,18 +108,15 @@ public class WebGlBasics {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VENDOR_UNMASKED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVendorUnmasked() {
     return vendorUnmasked;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VENDOR_UNMASKED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVendorUnmasked(@jakarta.annotation.Nullable String vendorUnmasked) {
     this.vendorUnmasked = vendorUnmasked;
   }
-
 
   public WebGlBasics renderer(@jakarta.annotation.Nullable String renderer) {
     this.renderer = renderer;
@@ -154,18 +130,15 @@ public class WebGlBasics {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_RENDERER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getRenderer() {
     return renderer;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RENDERER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRenderer(@jakarta.annotation.Nullable String renderer) {
     this.renderer = renderer;
   }
-
 
   public WebGlBasics rendererUnmasked(@jakarta.annotation.Nullable String rendererUnmasked) {
     this.rendererUnmasked = rendererUnmasked;
@@ -179,11 +152,9 @@ public class WebGlBasics {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_RENDERER_UNMASKED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getRendererUnmasked() {
     return rendererUnmasked;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RENDERER_UNMASKED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -191,8 +162,8 @@ public class WebGlBasics {
     this.rendererUnmasked = rendererUnmasked;
   }
 
-
-  public WebGlBasics shadingLanguageVersion(@jakarta.annotation.Nullable String shadingLanguageVersion) {
+  public WebGlBasics shadingLanguageVersion(
+      @jakarta.annotation.Nullable String shadingLanguageVersion) {
     this.shadingLanguageVersion = shadingLanguageVersion;
     return this;
   }
@@ -204,18 +175,16 @@ public class WebGlBasics {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SHADING_LANGUAGE_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getShadingLanguageVersion() {
     return shadingLanguageVersion;
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SHADING_LANGUAGE_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setShadingLanguageVersion(@jakarta.annotation.Nullable String shadingLanguageVersion) {
+  public void setShadingLanguageVersion(
+      @jakarta.annotation.Nullable String shadingLanguageVersion) {
     this.shadingLanguageVersion = shadingLanguageVersion;
   }
-
 
   /**
    * Return true if this WebGlBasics object is equal to o.
@@ -229,17 +198,18 @@ public class WebGlBasics {
       return false;
     }
     WebGlBasics webGlBasics = (WebGlBasics) o;
-    return Objects.equals(this.version, webGlBasics.version) &&
-        Objects.equals(this.vendor, webGlBasics.vendor) &&
-        Objects.equals(this.vendorUnmasked, webGlBasics.vendorUnmasked) &&
-        Objects.equals(this.renderer, webGlBasics.renderer) &&
-        Objects.equals(this.rendererUnmasked, webGlBasics.rendererUnmasked) &&
-        Objects.equals(this.shadingLanguageVersion, webGlBasics.shadingLanguageVersion);
+    return Objects.equals(this.version, webGlBasics.version)
+        && Objects.equals(this.vendor, webGlBasics.vendor)
+        && Objects.equals(this.vendorUnmasked, webGlBasics.vendorUnmasked)
+        && Objects.equals(this.renderer, webGlBasics.renderer)
+        && Objects.equals(this.rendererUnmasked, webGlBasics.rendererUnmasked)
+        && Objects.equals(this.shadingLanguageVersion, webGlBasics.shadingLanguageVersion);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(version, vendor, vendorUnmasked, renderer, rendererUnmasked, shadingLanguageVersion);
+    return Objects.hash(
+        version, vendor, vendorUnmasked, renderer, rendererUnmasked, shadingLanguageVersion);
   }
 
   @Override
@@ -251,7 +221,9 @@ public class WebGlBasics {
     sb.append("    vendorUnmasked: ").append(toIndentedString(vendorUnmasked)).append("\n");
     sb.append("    renderer: ").append(toIndentedString(renderer)).append("\n");
     sb.append("    rendererUnmasked: ").append(toIndentedString(rendererUnmasked)).append("\n");
-    sb.append("    shadingLanguageVersion: ").append(toIndentedString(shadingLanguageVersion)).append("\n");
+    sb.append("    shadingLanguageVersion: ")
+        .append(toIndentedString(shadingLanguageVersion))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -266,6 +238,4 @@ public class WebGlBasics {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

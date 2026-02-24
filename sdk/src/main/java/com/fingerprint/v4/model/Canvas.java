@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * Canvas fingerprint containing winding flag plus geometry/text hashes.
@@ -35,22 +25,20 @@ import com.fingerprint.v4.sdk.JSON;
   Canvas.JSON_PROPERTY_GEOMETRY,
   Canvas.JSON_PROPERTY_TEXT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class Canvas {
   public static final String JSON_PROPERTY_WINDING = "winding";
-  @jakarta.annotation.Nullable
-  private Boolean winding;
+  @jakarta.annotation.Nullable private Boolean winding;
 
   public static final String JSON_PROPERTY_GEOMETRY = "geometry";
-  @jakarta.annotation.Nullable
-  private String geometry;
+  @jakarta.annotation.Nullable private String geometry;
 
   public static final String JSON_PROPERTY_TEXT = "text";
-  @jakarta.annotation.Nullable
-  private String text;
+  @jakarta.annotation.Nullable private String text;
 
-  public Canvas() { 
-  }
+  public Canvas() {}
 
   public Canvas winding(@jakarta.annotation.Nullable Boolean winding) {
     this.winding = winding;
@@ -64,18 +52,15 @@ public class Canvas {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_WINDING, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getWinding() {
     return winding;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_WINDING, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setWinding(@jakarta.annotation.Nullable Boolean winding) {
     this.winding = winding;
   }
-
 
   public Canvas geometry(@jakarta.annotation.Nullable String geometry) {
     this.geometry = geometry;
@@ -89,18 +74,15 @@ public class Canvas {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_GEOMETRY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getGeometry() {
     return geometry;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_GEOMETRY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGeometry(@jakarta.annotation.Nullable String geometry) {
     this.geometry = geometry;
   }
-
 
   public Canvas text(@jakarta.annotation.Nullable String text) {
     this.text = text;
@@ -114,18 +96,15 @@ public class Canvas {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TEXT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getText() {
     return text;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TEXT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setText(@jakarta.annotation.Nullable String text) {
     this.text = text;
   }
-
 
   /**
    * Return true if this Canvas object is equal to o.
@@ -139,9 +118,9 @@ public class Canvas {
       return false;
     }
     Canvas canvas = (Canvas) o;
-    return Objects.equals(this.winding, canvas.winding) &&
-        Objects.equals(this.geometry, canvas.geometry) &&
-        Objects.equals(this.text, canvas.text);
+    return Objects.equals(this.winding, canvas.winding)
+        && Objects.equals(this.geometry, canvas.geometry)
+        && Objects.equals(this.text, canvas.text);
   }
 
   @Override
@@ -170,6 +149,4 @@ public class Canvas {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

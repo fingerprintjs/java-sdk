@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,29 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.RuleActionHeaderField;
-import com.fingerprint.v4.model.RuleActionType;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Informs the client the request should be blocked using the response described by this rule action.
@@ -46,38 +31,32 @@ import com.fingerprint.v4.sdk.JSON;
   EventRuleActionBlock.JSON_PROPERTY_HEADERS,
   EventRuleActionBlock.JSON_PROPERTY_BODY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class EventRuleActionBlock implements EventRuleAction {
   public static final String JSON_PROPERTY_RULESET_ID = "ruleset_id";
-  @jakarta.annotation.Nonnull
-  private String rulesetId;
+  @jakarta.annotation.Nonnull private String rulesetId;
 
   public static final String JSON_PROPERTY_RULE_ID = "rule_id";
-  @jakarta.annotation.Nullable
-  private String ruleId;
+  @jakarta.annotation.Nullable private String ruleId;
 
   public static final String JSON_PROPERTY_RULE_EXPRESSION = "rule_expression";
-  @jakarta.annotation.Nullable
-  private String ruleExpression;
+  @jakarta.annotation.Nullable private String ruleExpression;
 
   public static final String JSON_PROPERTY_TYPE = "type";
-  @jakarta.annotation.Nonnull
-  private RuleActionType type;
+  @jakarta.annotation.Nonnull private RuleActionType type;
 
   public static final String JSON_PROPERTY_STATUS_CODE = "status_code";
-  @jakarta.annotation.Nullable
-  private Integer statusCode;
+  @jakarta.annotation.Nullable private Integer statusCode;
 
   public static final String JSON_PROPERTY_HEADERS = "headers";
-  @jakarta.annotation.Nullable
-  private List<RuleActionHeaderField> headers = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<RuleActionHeaderField> headers = new ArrayList<>();
 
   public static final String JSON_PROPERTY_BODY = "body";
-  @jakarta.annotation.Nullable
-  private String body;
+  @jakarta.annotation.Nullable private String body;
 
-  public EventRuleActionBlock() { 
-  }
+  public EventRuleActionBlock() {}
 
   public EventRuleActionBlock rulesetId(@jakarta.annotation.Nonnull String rulesetId) {
     this.rulesetId = rulesetId;
@@ -91,18 +70,15 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_RULESET_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getRulesetId() {
     return rulesetId;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RULESET_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setRulesetId(@jakarta.annotation.Nonnull String rulesetId) {
     this.rulesetId = rulesetId;
   }
-
 
   public EventRuleActionBlock ruleId(@jakarta.annotation.Nullable String ruleId) {
     this.ruleId = ruleId;
@@ -116,18 +92,15 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_RULE_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getRuleId() {
     return ruleId;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RULE_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRuleId(@jakarta.annotation.Nullable String ruleId) {
     this.ruleId = ruleId;
   }
-
 
   public EventRuleActionBlock ruleExpression(@jakarta.annotation.Nullable String ruleExpression) {
     this.ruleExpression = ruleExpression;
@@ -141,18 +114,15 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_RULE_EXPRESSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getRuleExpression() {
     return ruleExpression;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RULE_EXPRESSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRuleExpression(@jakarta.annotation.Nullable String ruleExpression) {
     this.ruleExpression = ruleExpression;
   }
-
 
   public EventRuleActionBlock type(@jakarta.annotation.Nonnull RuleActionType type) {
     this.type = type;
@@ -166,18 +136,15 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public RuleActionType getType() {
     return type;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setType(@jakarta.annotation.Nonnull RuleActionType type) {
     this.type = type;
   }
-
 
   public EventRuleActionBlock statusCode(@jakarta.annotation.Nullable Integer statusCode) {
     this.statusCode = statusCode;
@@ -191,11 +158,9 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_STATUS_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getStatusCode() {
     return statusCode;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_STATUS_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -203,8 +168,8 @@ public class EventRuleActionBlock implements EventRuleAction {
     this.statusCode = statusCode;
   }
 
-
-  public EventRuleActionBlock headers(@jakarta.annotation.Nullable List<RuleActionHeaderField> headers) {
+  public EventRuleActionBlock headers(
+      @jakarta.annotation.Nullable List<RuleActionHeaderField> headers) {
     this.headers = headers;
     return this;
   }
@@ -224,18 +189,15 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<RuleActionHeaderField> getHeaders() {
     return headers;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_HEADERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setHeaders(@jakarta.annotation.Nullable List<RuleActionHeaderField> headers) {
     this.headers = headers;
   }
-
 
   public EventRuleActionBlock body(@jakarta.annotation.Nullable String body) {
     this.body = body;
@@ -249,18 +211,15 @@ public class EventRuleActionBlock implements EventRuleAction {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_BODY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getBody() {
     return body;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_BODY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBody(@jakarta.annotation.Nullable String body) {
     this.body = body;
   }
-
 
   /**
    * Return true if this EventRuleActionBlock object is equal to o.
@@ -274,13 +233,13 @@ public class EventRuleActionBlock implements EventRuleAction {
       return false;
     }
     EventRuleActionBlock eventRuleActionBlock = (EventRuleActionBlock) o;
-    return Objects.equals(this.rulesetId, eventRuleActionBlock.rulesetId) &&
-        Objects.equals(this.ruleId, eventRuleActionBlock.ruleId) &&
-        Objects.equals(this.ruleExpression, eventRuleActionBlock.ruleExpression) &&
-        Objects.equals(this.type, eventRuleActionBlock.type) &&
-        Objects.equals(this.statusCode, eventRuleActionBlock.statusCode) &&
-        Objects.equals(this.headers, eventRuleActionBlock.headers) &&
-        Objects.equals(this.body, eventRuleActionBlock.body);
+    return Objects.equals(this.rulesetId, eventRuleActionBlock.rulesetId)
+        && Objects.equals(this.ruleId, eventRuleActionBlock.ruleId)
+        && Objects.equals(this.ruleExpression, eventRuleActionBlock.ruleExpression)
+        && Objects.equals(this.type, eventRuleActionBlock.type)
+        && Objects.equals(this.statusCode, eventRuleActionBlock.statusCode)
+        && Objects.equals(this.headers, eventRuleActionBlock.headers)
+        && Objects.equals(this.body, eventRuleActionBlock.body);
   }
 
   @Override
@@ -313,6 +272,4 @@ public class EventRuleActionBlock implements EventRuleAction {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

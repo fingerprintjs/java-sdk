@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk;
 
 import java.util.HashSet;
@@ -18,20 +17,22 @@ import java.util.HashSet;
 /**
  * Representing a Server Variable for server URL template substitution.
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class ServerVariable {
-    public String description;
-    public String defaultValue;
-    public HashSet<String> enumValues = null;
+  public String description;
+  public String defaultValue;
+  public HashSet<String> enumValues = null;
 
-    /**
-     * @param description A description for the server variable.
-     * @param defaultValue The default value to use for substitution.
-     * @param enumValues An enumeration of string values to be used if the substitution options are from a limited set.
-     */
-    public ServerVariable(String description, String defaultValue, HashSet<String> enumValues) {
-        this.description = description;
-        this.defaultValue = defaultValue;
-        this.enumValues = enumValues;
-    }
+  /**
+   * @param description A description for the server variable.
+   * @param defaultValue The default value to use for substitution.
+   * @param enumValues An enumeration of string values to be used if the substitution options are from a limited set.
+   */
+  public ServerVariable(String description, String defaultValue, HashSet<String> enumValues) {
+    this.description = description;
+    this.defaultValue = defaultValue;
+    this.enumValues = enumValues;
+  }
 }

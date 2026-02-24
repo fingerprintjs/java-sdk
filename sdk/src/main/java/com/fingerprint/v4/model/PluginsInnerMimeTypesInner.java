@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,13 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.Objects;
 
 /**
  * PluginsInnerMimeTypesInner
@@ -36,22 +27,20 @@ import com.fingerprint.v4.sdk.JSON;
   PluginsInnerMimeTypesInner.JSON_PROPERTY_DESCRIPTION
 })
 @JsonTypeName("Plugins_inner_mimeTypes_inner")
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class PluginsInnerMimeTypesInner {
   public static final String JSON_PROPERTY_TYPE = "type";
-  @jakarta.annotation.Nullable
-  private String type;
+  @jakarta.annotation.Nullable private String type;
 
   public static final String JSON_PROPERTY_SUFFIXES = "suffixes";
-  @jakarta.annotation.Nullable
-  private String suffixes;
+  @jakarta.annotation.Nullable private String suffixes;
 
   public static final String JSON_PROPERTY_DESCRIPTION = "description";
-  @jakarta.annotation.Nullable
-  private String description;
+  @jakarta.annotation.Nullable private String description;
 
-  public PluginsInnerMimeTypesInner() { 
-  }
+  public PluginsInnerMimeTypesInner() {}
 
   public PluginsInnerMimeTypesInner type(@jakarta.annotation.Nullable String type) {
     this.type = type;
@@ -65,18 +54,15 @@ public class PluginsInnerMimeTypesInner {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TYPE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getType() {
     return type;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TYPE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setType(@jakarta.annotation.Nullable String type) {
     this.type = type;
   }
-
 
   public PluginsInnerMimeTypesInner suffixes(@jakarta.annotation.Nullable String suffixes) {
     this.suffixes = suffixes;
@@ -90,18 +76,15 @@ public class PluginsInnerMimeTypesInner {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SUFFIXES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getSuffixes() {
     return suffixes;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SUFFIXES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSuffixes(@jakarta.annotation.Nullable String suffixes) {
     this.suffixes = suffixes;
   }
-
 
   public PluginsInnerMimeTypesInner description(@jakarta.annotation.Nullable String description) {
     this.description = description;
@@ -115,18 +98,15 @@ public class PluginsInnerMimeTypesInner {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DESCRIPTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getDescription() {
     return description;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DESCRIPTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDescription(@jakarta.annotation.Nullable String description) {
     this.description = description;
   }
-
 
   /**
    * Return true if this Plugins_inner_mimeTypes_inner object is equal to o.
@@ -140,9 +120,9 @@ public class PluginsInnerMimeTypesInner {
       return false;
     }
     PluginsInnerMimeTypesInner pluginsInnerMimeTypesInner = (PluginsInnerMimeTypesInner) o;
-    return Objects.equals(this.type, pluginsInnerMimeTypesInner.type) &&
-        Objects.equals(this.suffixes, pluginsInnerMimeTypesInner.suffixes) &&
-        Objects.equals(this.description, pluginsInnerMimeTypesInner.description);
+    return Objects.equals(this.type, pluginsInnerMimeTypesInner.type)
+        && Objects.equals(this.suffixes, pluginsInnerMimeTypesInner.suffixes)
+        && Objects.equals(this.description, pluginsInnerMimeTypesInner.description);
   }
 
   @Override
@@ -171,6 +151,4 @@ public class PluginsInnerMimeTypesInner {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

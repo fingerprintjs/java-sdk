@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * IPBlockList
@@ -35,22 +25,20 @@ import com.fingerprint.v4.sdk.JSON;
   IPBlockList.JSON_PROPERTY_ATTACK_SOURCE,
   IPBlockList.JSON_PROPERTY_TOR_NODE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class IPBlockList {
   public static final String JSON_PROPERTY_EMAIL_SPAM = "email_spam";
-  @jakarta.annotation.Nullable
-  private Boolean emailSpam;
+  @jakarta.annotation.Nullable private Boolean emailSpam;
 
   public static final String JSON_PROPERTY_ATTACK_SOURCE = "attack_source";
-  @jakarta.annotation.Nullable
-  private Boolean attackSource;
+  @jakarta.annotation.Nullable private Boolean attackSource;
 
   public static final String JSON_PROPERTY_TOR_NODE = "tor_node";
-  @jakarta.annotation.Nullable
-  private Boolean torNode;
+  @jakarta.annotation.Nullable private Boolean torNode;
 
-  public IPBlockList() { 
-  }
+  public IPBlockList() {}
 
   public IPBlockList emailSpam(@jakarta.annotation.Nullable Boolean emailSpam) {
     this.emailSpam = emailSpam;
@@ -64,18 +52,15 @@ public class IPBlockList {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_EMAIL_SPAM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getEmailSpam() {
     return emailSpam;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_EMAIL_SPAM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setEmailSpam(@jakarta.annotation.Nullable Boolean emailSpam) {
     this.emailSpam = emailSpam;
   }
-
 
   public IPBlockList attackSource(@jakarta.annotation.Nullable Boolean attackSource) {
     this.attackSource = attackSource;
@@ -89,18 +74,15 @@ public class IPBlockList {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ATTACK_SOURCE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getAttackSource() {
     return attackSource;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ATTACK_SOURCE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAttackSource(@jakarta.annotation.Nullable Boolean attackSource) {
     this.attackSource = attackSource;
   }
-
 
   public IPBlockList torNode(@jakarta.annotation.Nullable Boolean torNode) {
     this.torNode = torNode;
@@ -114,18 +96,15 @@ public class IPBlockList {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TOR_NODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getTorNode() {
     return torNode;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TOR_NODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTorNode(@jakarta.annotation.Nullable Boolean torNode) {
     this.torNode = torNode;
   }
-
 
   /**
    * Return true if this IPBlockList object is equal to o.
@@ -139,9 +118,9 @@ public class IPBlockList {
       return false;
     }
     IPBlockList ipBlockList = (IPBlockList) o;
-    return Objects.equals(this.emailSpam, ipBlockList.emailSpam) &&
-        Objects.equals(this.attackSource, ipBlockList.attackSource) &&
-        Objects.equals(this.torNode, ipBlockList.torNode);
+    return Objects.equals(this.emailSpam, ipBlockList.emailSpam)
+        && Objects.equals(this.attackSource, ipBlockList.attackSource)
+        && Objects.equals(this.torNode, ipBlockList.torNode);
   }
 
   @Override
@@ -170,6 +149,4 @@ public class IPBlockList {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

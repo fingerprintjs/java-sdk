@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,25 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.Event;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Contains a list of all identification events matching the specified search criteria.
@@ -38,22 +27,20 @@ import com.fingerprint.v4.sdk.JSON;
   EventSearch.JSON_PROPERTY_PAGINATION_KEY,
   EventSearch.JSON_PROPERTY_TOTAL_HITS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class EventSearch {
   public static final String JSON_PROPERTY_EVENTS = "events";
-  @jakarta.annotation.Nonnull
-  private List<Event> events = new ArrayList<>();
+  @jakarta.annotation.Nonnull private List<Event> events = new ArrayList<>();
 
   public static final String JSON_PROPERTY_PAGINATION_KEY = "pagination_key";
-  @jakarta.annotation.Nullable
-  private String paginationKey;
+  @jakarta.annotation.Nullable private String paginationKey;
 
   public static final String JSON_PROPERTY_TOTAL_HITS = "total_hits";
-  @jakarta.annotation.Nullable
-  private Long totalHits;
+  @jakarta.annotation.Nullable private Long totalHits;
 
-  public EventSearch() { 
-  }
+  public EventSearch() {}
 
   public EventSearch events(@jakarta.annotation.Nonnull List<Event> events) {
     this.events = events;
@@ -75,18 +62,15 @@ public class EventSearch {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_EVENTS, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public List<Event> getEvents() {
     return events;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_EVENTS, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setEvents(@jakarta.annotation.Nonnull List<Event> events) {
     this.events = events;
   }
-
 
   public EventSearch paginationKey(@jakarta.annotation.Nullable String paginationKey) {
     this.paginationKey = paginationKey;
@@ -100,18 +84,15 @@ public class EventSearch {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PAGINATION_KEY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getPaginationKey() {
     return paginationKey;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PAGINATION_KEY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPaginationKey(@jakarta.annotation.Nullable String paginationKey) {
     this.paginationKey = paginationKey;
   }
-
 
   public EventSearch totalHits(@jakarta.annotation.Nullable Long totalHits) {
     this.totalHits = totalHits;
@@ -125,18 +106,15 @@ public class EventSearch {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TOTAL_HITS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getTotalHits() {
     return totalHits;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TOTAL_HITS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTotalHits(@jakarta.annotation.Nullable Long totalHits) {
     this.totalHits = totalHits;
   }
-
 
   /**
    * Return true if this EventSearch object is equal to o.
@@ -150,9 +128,9 @@ public class EventSearch {
       return false;
     }
     EventSearch eventSearch = (EventSearch) o;
-    return Objects.equals(this.events, eventSearch.events) &&
-        Objects.equals(this.paginationKey, eventSearch.paginationKey) &&
-        Objects.equals(this.totalHits, eventSearch.totalHits);
+    return Objects.equals(this.events, eventSearch.events)
+        && Objects.equals(this.paginationKey, eventSearch.paginationKey)
+        && Objects.equals(this.totalHits, eventSearch.totalHits);
   }
 
   @Override
@@ -181,6 +159,4 @@ public class EventSearch {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

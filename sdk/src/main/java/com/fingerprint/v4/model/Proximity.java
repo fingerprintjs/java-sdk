@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,57 +10,50 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
 
 /**
- * Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed. 
+ * Proximity ID represents a fixed geographical zone in a discrete global grid within which the device is observed.
  */
 @JsonPropertyOrder({
   Proximity.JSON_PROPERTY_ID,
   Proximity.JSON_PROPERTY_PRECISION_RADIUS,
   Proximity.JSON_PROPERTY_CONFIDENCE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class Proximity {
   public static final String JSON_PROPERTY_ID = "id";
-  @jakarta.annotation.Nonnull
-  private String id;
+  @jakarta.annotation.Nonnull private String id;
 
   /**
-   * The radius of the proximity zone’s precision level, in meters. 
+   * The radius of the proximity zone’s precision level, in meters.
    */
   public enum PrecisionRadiusEnum {
     NUMBER_10(Integer.valueOf(10)),
-    
+
     NUMBER_25(Integer.valueOf(25)),
-    
+
     NUMBER_65(Integer.valueOf(65)),
-    
+
     NUMBER_175(Integer.valueOf(175)),
-    
+
     NUMBER_450(Integer.valueOf(450)),
-    
+
     NUMBER_1200(Integer.valueOf(1200)),
-    
+
     NUMBER_3300(Integer.valueOf(3300)),
-    
+
     NUMBER_8500(Integer.valueOf(8500)),
-    
+
     NUMBER_22500(Integer.valueOf(22500));
 
     private Integer value;
@@ -91,15 +84,12 @@ public class Proximity {
   }
 
   public static final String JSON_PROPERTY_PRECISION_RADIUS = "precision_radius";
-  @jakarta.annotation.Nonnull
-  private PrecisionRadiusEnum precisionRadius;
+  @jakarta.annotation.Nonnull private PrecisionRadiusEnum precisionRadius;
 
   public static final String JSON_PROPERTY_CONFIDENCE = "confidence";
-  @jakarta.annotation.Nonnull
-  private Float confidence;
+  @jakarta.annotation.Nonnull private Float confidence;
 
-  public Proximity() { 
-  }
+  public Proximity() {}
 
   public Proximity id(@jakarta.annotation.Nonnull String id) {
     this.id = id;
@@ -107,17 +97,15 @@ public class Proximity {
   }
 
   /**
-   * A stable privacy-preserving identifier for a given proximity zone. 
+   * A stable privacy-preserving identifier for a given proximity zone.
    * @return id
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getId() {
     return id;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -125,24 +113,22 @@ public class Proximity {
     this.id = id;
   }
 
-
-  public Proximity precisionRadius(@jakarta.annotation.Nonnull PrecisionRadiusEnum precisionRadius) {
+  public Proximity precisionRadius(
+      @jakarta.annotation.Nonnull PrecisionRadiusEnum precisionRadius) {
     this.precisionRadius = precisionRadius;
     return this;
   }
 
   /**
-   * The radius of the proximity zone’s precision level, in meters. 
+   * The radius of the proximity zone’s precision level, in meters.
    * @return precisionRadius
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_PRECISION_RADIUS, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public PrecisionRadiusEnum getPrecisionRadius() {
     return precisionRadius;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PRECISION_RADIUS, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -150,14 +136,13 @@ public class Proximity {
     this.precisionRadius = precisionRadius;
   }
 
-
   public Proximity confidence(@jakarta.annotation.Nonnull Float confidence) {
     this.confidence = confidence;
     return this;
   }
 
   /**
-   * A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone. 
+   * A value between `0` and `1` representing the likelihood that the true device location lies within the mapped proximity zone.   * Scores closer to `1` indicate high confidence that the location is inside the mapped proximity zone.   * Scores closer to `0` indicate lower confidence, suggesting the true location may fall in an adjacent zone.
    * minimum: 0
    * maximum: 1
    * @return confidence
@@ -165,18 +150,15 @@ public class Proximity {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_CONFIDENCE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Float getConfidence() {
     return confidence;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CONFIDENCE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setConfidence(@jakarta.annotation.Nonnull Float confidence) {
     this.confidence = confidence;
   }
-
 
   /**
    * Return true if this Proximity object is equal to o.
@@ -190,9 +172,9 @@ public class Proximity {
       return false;
     }
     Proximity proximity = (Proximity) o;
-    return Objects.equals(this.id, proximity.id) &&
-        Objects.equals(this.precisionRadius, proximity.precisionRadius) &&
-        Objects.equals(this.confidence, proximity.confidence);
+    return Objects.equals(this.id, proximity.id)
+        && Objects.equals(this.precisionRadius, proximity.precisionRadius)
+        && Objects.equals(this.confidence, proximity.confidence);
   }
 
   @Override
@@ -221,6 +203,4 @@ public class Proximity {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-
