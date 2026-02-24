@@ -12,7 +12,6 @@
 
 package com.fingerprint.v4.sdk;
 
-import com.fasterxml.jackson.databind.Module.SetupContext;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.time.Instant;
 import java.time.OffsetDateTime;
