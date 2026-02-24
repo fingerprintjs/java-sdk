@@ -8,6 +8,12 @@ plugins {
     java
 }
 
+java {
+    // Target the earliest support Java version
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 repositories {
     mavenLocal()
     mavenCentral()
