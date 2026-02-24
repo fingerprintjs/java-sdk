@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * EventUpdate
@@ -35,22 +25,20 @@ import com.fingerprint.v4.sdk.JSON;
   EventUpdate.JSON_PROPERTY_TAGS,
   EventUpdate.JSON_PROPERTY_SUSPECT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class EventUpdate {
   public static final String JSON_PROPERTY_LINKED_ID = "linked_id";
-  @jakarta.annotation.Nullable
-  private String linkedId;
+  @jakarta.annotation.Nullable private String linkedId;
 
   public static final String JSON_PROPERTY_TAGS = "tags";
-  @jakarta.annotation.Nullable
-  private Object tags;
+  @jakarta.annotation.Nullable private Object tags;
 
   public static final String JSON_PROPERTY_SUSPECT = "suspect";
-  @jakarta.annotation.Nullable
-  private Boolean suspect;
+  @jakarta.annotation.Nullable private Boolean suspect;
 
-  public EventUpdate() { 
-  }
+  public EventUpdate() {}
 
   public EventUpdate linkedId(@jakarta.annotation.Nullable String linkedId) {
     this.linkedId = linkedId;
@@ -64,18 +52,15 @@ public class EventUpdate {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getLinkedId() {
     return linkedId;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLinkedId(@jakarta.annotation.Nullable String linkedId) {
     this.linkedId = linkedId;
   }
-
 
   public EventUpdate tags(@jakarta.annotation.Nullable Object tags) {
     this.tags = tags;
@@ -89,18 +74,15 @@ public class EventUpdate {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Object getTags() {
     return tags;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTags(@jakarta.annotation.Nullable Object tags) {
     this.tags = tags;
   }
-
 
   public EventUpdate suspect(@jakarta.annotation.Nullable Boolean suspect) {
     this.suspect = suspect;
@@ -114,18 +96,15 @@ public class EventUpdate {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SUSPECT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getSuspect() {
     return suspect;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SUSPECT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSuspect(@jakarta.annotation.Nullable Boolean suspect) {
     this.suspect = suspect;
   }
-
 
   /**
    * Return true if this EventUpdate object is equal to o.
@@ -139,9 +118,9 @@ public class EventUpdate {
       return false;
     }
     EventUpdate eventUpdate = (EventUpdate) o;
-    return Objects.equals(this.linkedId, eventUpdate.linkedId) &&
-        Objects.equals(this.tags, eventUpdate.tags) &&
-        Objects.equals(this.suspect, eventUpdate.suspect);
+    return Objects.equals(this.linkedId, eventUpdate.linkedId)
+        && Objects.equals(this.tags, eventUpdate.tags)
+        && Objects.equals(this.suspect, eventUpdate.suspect);
   }
 
   @Override
@@ -170,6 +149,4 @@ public class EventUpdate {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

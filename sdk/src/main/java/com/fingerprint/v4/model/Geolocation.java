@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,25 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.GeolocationSubdivisionsInner;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Geolocation
@@ -46,54 +35,46 @@ import com.fingerprint.v4.sdk.JSON;
   Geolocation.JSON_PROPERTY_CONTINENT_NAME,
   Geolocation.JSON_PROPERTY_SUBDIVISIONS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class Geolocation {
   public static final String JSON_PROPERTY_ACCURACY_RADIUS = "accuracy_radius";
-  @jakarta.annotation.Nullable
-  private Integer accuracyRadius;
+  @jakarta.annotation.Nullable private Integer accuracyRadius;
 
   public static final String JSON_PROPERTY_LATITUDE = "latitude";
-  @jakarta.annotation.Nullable
-  private Double latitude;
+  @jakarta.annotation.Nullable private Double latitude;
 
   public static final String JSON_PROPERTY_LONGITUDE = "longitude";
-  @jakarta.annotation.Nullable
-  private Double longitude;
+  @jakarta.annotation.Nullable private Double longitude;
 
   public static final String JSON_PROPERTY_POSTAL_CODE = "postal_code";
-  @jakarta.annotation.Nullable
-  private String postalCode;
+  @jakarta.annotation.Nullable private String postalCode;
 
   public static final String JSON_PROPERTY_TIMEZONE = "timezone";
-  @jakarta.annotation.Nullable
-  private String timezone;
+  @jakarta.annotation.Nullable private String timezone;
 
   public static final String JSON_PROPERTY_CITY_NAME = "city_name";
-  @jakarta.annotation.Nullable
-  private String cityName;
+  @jakarta.annotation.Nullable private String cityName;
 
   public static final String JSON_PROPERTY_COUNTRY_CODE = "country_code";
-  @jakarta.annotation.Nullable
-  private String countryCode;
+  @jakarta.annotation.Nullable private String countryCode;
 
   public static final String JSON_PROPERTY_COUNTRY_NAME = "country_name";
-  @jakarta.annotation.Nullable
-  private String countryName;
+  @jakarta.annotation.Nullable private String countryName;
 
   public static final String JSON_PROPERTY_CONTINENT_CODE = "continent_code";
-  @jakarta.annotation.Nullable
-  private String continentCode;
+  @jakarta.annotation.Nullable private String continentCode;
 
   public static final String JSON_PROPERTY_CONTINENT_NAME = "continent_name";
-  @jakarta.annotation.Nullable
-  private String continentName;
+  @jakarta.annotation.Nullable private String continentName;
 
   public static final String JSON_PROPERTY_SUBDIVISIONS = "subdivisions";
+
   @jakarta.annotation.Nullable
   private List<GeolocationSubdivisionsInner> subdivisions = new ArrayList<>();
 
-  public Geolocation() { 
-  }
+  public Geolocation() {}
 
   public Geolocation accuracyRadius(@jakarta.annotation.Nullable Integer accuracyRadius) {
     this.accuracyRadius = accuracyRadius;
@@ -108,18 +89,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ACCURACY_RADIUS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getAccuracyRadius() {
     return accuracyRadius;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ACCURACY_RADIUS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAccuracyRadius(@jakarta.annotation.Nullable Integer accuracyRadius) {
     this.accuracyRadius = accuracyRadius;
   }
-
 
   public Geolocation latitude(@jakarta.annotation.Nullable Double latitude) {
     this.latitude = latitude;
@@ -135,18 +113,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LATITUDE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getLatitude() {
     return latitude;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LATITUDE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLatitude(@jakarta.annotation.Nullable Double latitude) {
     this.latitude = latitude;
   }
-
 
   public Geolocation longitude(@jakarta.annotation.Nullable Double longitude) {
     this.longitude = longitude;
@@ -162,18 +137,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LONGITUDE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getLongitude() {
     return longitude;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LONGITUDE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLongitude(@jakarta.annotation.Nullable Double longitude) {
     this.longitude = longitude;
   }
-
 
   public Geolocation postalCode(@jakarta.annotation.Nullable String postalCode) {
     this.postalCode = postalCode;
@@ -187,18 +159,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_POSTAL_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getPostalCode() {
     return postalCode;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_POSTAL_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPostalCode(@jakarta.annotation.Nullable String postalCode) {
     this.postalCode = postalCode;
   }
-
 
   public Geolocation timezone(@jakarta.annotation.Nullable String timezone) {
     this.timezone = timezone;
@@ -212,18 +181,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TIMEZONE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getTimezone() {
     return timezone;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TIMEZONE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimezone(@jakarta.annotation.Nullable String timezone) {
     this.timezone = timezone;
   }
-
 
   public Geolocation cityName(@jakarta.annotation.Nullable String cityName) {
     this.cityName = cityName;
@@ -237,18 +203,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_CITY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getCityName() {
     return cityName;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CITY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCityName(@jakarta.annotation.Nullable String cityName) {
     this.cityName = cityName;
   }
-
 
   public Geolocation countryCode(@jakarta.annotation.Nullable String countryCode) {
     this.countryCode = countryCode;
@@ -262,18 +225,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_COUNTRY_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getCountryCode() {
     return countryCode;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_COUNTRY_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCountryCode(@jakarta.annotation.Nullable String countryCode) {
     this.countryCode = countryCode;
   }
-
 
   public Geolocation countryName(@jakarta.annotation.Nullable String countryName) {
     this.countryName = countryName;
@@ -287,18 +247,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_COUNTRY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getCountryName() {
     return countryName;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_COUNTRY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCountryName(@jakarta.annotation.Nullable String countryName) {
     this.countryName = countryName;
   }
-
 
   public Geolocation continentCode(@jakarta.annotation.Nullable String continentCode) {
     this.continentCode = continentCode;
@@ -312,18 +269,15 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_CONTINENT_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getContinentCode() {
     return continentCode;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CONTINENT_CODE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setContinentCode(@jakarta.annotation.Nullable String continentCode) {
     this.continentCode = continentCode;
   }
-
 
   public Geolocation continentName(@jakarta.annotation.Nullable String continentName) {
     this.continentName = continentName;
@@ -337,11 +291,9 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_CONTINENT_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getContinentName() {
     return continentName;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CONTINENT_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -349,8 +301,8 @@ public class Geolocation {
     this.continentName = continentName;
   }
 
-
-  public Geolocation subdivisions(@jakarta.annotation.Nullable List<GeolocationSubdivisionsInner> subdivisions) {
+  public Geolocation subdivisions(
+      @jakarta.annotation.Nullable List<GeolocationSubdivisionsInner> subdivisions) {
     this.subdivisions = subdivisions;
     return this;
   }
@@ -370,18 +322,16 @@ public class Geolocation {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SUBDIVISIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<GeolocationSubdivisionsInner> getSubdivisions() {
     return subdivisions;
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SUBDIVISIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSubdivisions(@jakarta.annotation.Nullable List<GeolocationSubdivisionsInner> subdivisions) {
+  public void setSubdivisions(
+      @jakarta.annotation.Nullable List<GeolocationSubdivisionsInner> subdivisions) {
     this.subdivisions = subdivisions;
   }
-
 
   /**
    * Return true if this Geolocation object is equal to o.
@@ -395,22 +345,33 @@ public class Geolocation {
       return false;
     }
     Geolocation geolocation = (Geolocation) o;
-    return Objects.equals(this.accuracyRadius, geolocation.accuracyRadius) &&
-        Objects.equals(this.latitude, geolocation.latitude) &&
-        Objects.equals(this.longitude, geolocation.longitude) &&
-        Objects.equals(this.postalCode, geolocation.postalCode) &&
-        Objects.equals(this.timezone, geolocation.timezone) &&
-        Objects.equals(this.cityName, geolocation.cityName) &&
-        Objects.equals(this.countryCode, geolocation.countryCode) &&
-        Objects.equals(this.countryName, geolocation.countryName) &&
-        Objects.equals(this.continentCode, geolocation.continentCode) &&
-        Objects.equals(this.continentName, geolocation.continentName) &&
-        Objects.equals(this.subdivisions, geolocation.subdivisions);
+    return Objects.equals(this.accuracyRadius, geolocation.accuracyRadius)
+        && Objects.equals(this.latitude, geolocation.latitude)
+        && Objects.equals(this.longitude, geolocation.longitude)
+        && Objects.equals(this.postalCode, geolocation.postalCode)
+        && Objects.equals(this.timezone, geolocation.timezone)
+        && Objects.equals(this.cityName, geolocation.cityName)
+        && Objects.equals(this.countryCode, geolocation.countryCode)
+        && Objects.equals(this.countryName, geolocation.countryName)
+        && Objects.equals(this.continentCode, geolocation.continentCode)
+        && Objects.equals(this.continentName, geolocation.continentName)
+        && Objects.equals(this.subdivisions, geolocation.subdivisions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accuracyRadius, latitude, longitude, postalCode, timezone, cityName, countryCode, countryName, continentCode, continentName, subdivisions);
+    return Objects.hash(
+        accuracyRadius,
+        latitude,
+        longitude,
+        postalCode,
+        timezone,
+        cityName,
+        countryCode,
+        countryName,
+        continentCode,
+        continentName,
+        subdivisions);
   }
 
   @Override
@@ -442,6 +403,4 @@ public class Geolocation {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

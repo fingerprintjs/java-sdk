@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,23 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.IdentificationConfidence;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * A supplementary browser identifier that prioritizes coverage over precision. The High Recall ID algorithm matches more generously, i.e., this identifier will remain the same even when there are subtle differences between two requests. This algorithm does not create as many new visitor IDs as the standard algorithms do, but there could be an increase in false-positive identification.
@@ -38,30 +27,26 @@ import com.fingerprint.v4.sdk.JSON;
   SupplementaryIDHighRecall.JSON_PROPERTY_FIRST_SEEN_AT,
   SupplementaryIDHighRecall.JSON_PROPERTY_LAST_SEEN_AT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class SupplementaryIDHighRecall {
   public static final String JSON_PROPERTY_VISITOR_ID = "visitor_id";
-  @jakarta.annotation.Nonnull
-  private String visitorId;
+  @jakarta.annotation.Nonnull private String visitorId;
 
   public static final String JSON_PROPERTY_VISITOR_FOUND = "visitor_found";
-  @jakarta.annotation.Nonnull
-  private Boolean visitorFound;
+  @jakarta.annotation.Nonnull private Boolean visitorFound;
 
   public static final String JSON_PROPERTY_CONFIDENCE = "confidence";
-  @jakarta.annotation.Nullable
-  private IdentificationConfidence confidence;
+  @jakarta.annotation.Nullable private IdentificationConfidence confidence;
 
   public static final String JSON_PROPERTY_FIRST_SEEN_AT = "first_seen_at";
-  @jakarta.annotation.Nullable
-  private Long firstSeenAt;
+  @jakarta.annotation.Nullable private Long firstSeenAt;
 
   public static final String JSON_PROPERTY_LAST_SEEN_AT = "last_seen_at";
-  @jakarta.annotation.Nullable
-  private Long lastSeenAt;
+  @jakarta.annotation.Nullable private Long lastSeenAt;
 
-  public SupplementaryIDHighRecall() { 
-  }
+  public SupplementaryIDHighRecall() {}
 
   public SupplementaryIDHighRecall visitorId(@jakarta.annotation.Nonnull String visitorId) {
     this.visitorId = visitorId;
@@ -75,18 +60,15 @@ public class SupplementaryIDHighRecall {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_VISITOR_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getVisitorId() {
     return visitorId;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VISITOR_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVisitorId(@jakarta.annotation.Nonnull String visitorId) {
     this.visitorId = visitorId;
   }
-
 
   public SupplementaryIDHighRecall visitorFound(@jakarta.annotation.Nonnull Boolean visitorFound) {
     this.visitorFound = visitorFound;
@@ -100,11 +82,9 @@ public class SupplementaryIDHighRecall {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_VISITOR_FOUND, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Boolean getVisitorFound() {
     return visitorFound;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VISITOR_FOUND, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -112,8 +92,8 @@ public class SupplementaryIDHighRecall {
     this.visitorFound = visitorFound;
   }
 
-
-  public SupplementaryIDHighRecall confidence(@jakarta.annotation.Nullable IdentificationConfidence confidence) {
+  public SupplementaryIDHighRecall confidence(
+      @jakarta.annotation.Nullable IdentificationConfidence confidence) {
     this.confidence = confidence;
     return this;
   }
@@ -125,11 +105,9 @@ public class SupplementaryIDHighRecall {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_CONFIDENCE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public IdentificationConfidence getConfidence() {
     return confidence;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CONFIDENCE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -137,24 +115,21 @@ public class SupplementaryIDHighRecall {
     this.confidence = confidence;
   }
 
-
   public SupplementaryIDHighRecall firstSeenAt(@jakarta.annotation.Nullable Long firstSeenAt) {
     this.firstSeenAt = firstSeenAt;
     return this;
   }
 
   /**
-   * Unix epoch time milliseconds timestamp indicating the time at which this ID was first seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 
+   * Unix epoch time milliseconds timestamp indicating the time at which this ID was first seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000
    * @return firstSeenAt
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_FIRST_SEEN_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getFirstSeenAt() {
     return firstSeenAt;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_FIRST_SEEN_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -162,31 +137,27 @@ public class SupplementaryIDHighRecall {
     this.firstSeenAt = firstSeenAt;
   }
 
-
   public SupplementaryIDHighRecall lastSeenAt(@jakarta.annotation.Nullable Long lastSeenAt) {
     this.lastSeenAt = lastSeenAt;
     return this;
   }
 
   /**
-   * Unix epoch time milliseconds timestamp indicating the time at which this ID was last seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000 
+   * Unix epoch time milliseconds timestamp indicating the time at which this ID was last seen. example: `1758069706642` - Corresponding to Wed Sep 17 2025 00:41:46 GMT+0000
    * @return lastSeenAt
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LAST_SEEN_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getLastSeenAt() {
     return lastSeenAt;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LAST_SEEN_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLastSeenAt(@jakarta.annotation.Nullable Long lastSeenAt) {
     this.lastSeenAt = lastSeenAt;
   }
-
 
   /**
    * Return true if this SupplementaryIDHighRecall object is equal to o.
@@ -200,11 +171,11 @@ public class SupplementaryIDHighRecall {
       return false;
     }
     SupplementaryIDHighRecall supplementaryIDHighRecall = (SupplementaryIDHighRecall) o;
-    return Objects.equals(this.visitorId, supplementaryIDHighRecall.visitorId) &&
-        Objects.equals(this.visitorFound, supplementaryIDHighRecall.visitorFound) &&
-        Objects.equals(this.confidence, supplementaryIDHighRecall.confidence) &&
-        Objects.equals(this.firstSeenAt, supplementaryIDHighRecall.firstSeenAt) &&
-        Objects.equals(this.lastSeenAt, supplementaryIDHighRecall.lastSeenAt);
+    return Objects.equals(this.visitorId, supplementaryIDHighRecall.visitorId)
+        && Objects.equals(this.visitorFound, supplementaryIDHighRecall.visitorFound)
+        && Objects.equals(this.confidence, supplementaryIDHighRecall.confidence)
+        && Objects.equals(this.firstSeenAt, supplementaryIDHighRecall.firstSeenAt)
+        && Objects.equals(this.lastSeenAt, supplementaryIDHighRecall.lastSeenAt);
   }
 
   @Override
@@ -235,6 +206,4 @@ public class SupplementaryIDHighRecall {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

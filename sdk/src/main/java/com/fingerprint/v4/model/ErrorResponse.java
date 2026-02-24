@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,38 +10,25 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.Error;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * ErrorResponse
  */
-@JsonPropertyOrder({
-  ErrorResponse.JSON_PROPERTY_ERROR
-})
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@JsonPropertyOrder({ErrorResponse.JSON_PROPERTY_ERROR})
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class ErrorResponse {
   public static final String JSON_PROPERTY_ERROR = "error";
-  @jakarta.annotation.Nonnull
-  private Error error;
+  @jakarta.annotation.Nonnull private Error error;
 
-  public ErrorResponse() { 
-  }
+  public ErrorResponse() {}
 
   public ErrorResponse error(@jakarta.annotation.Nonnull Error error) {
     this.error = error;
@@ -55,18 +42,15 @@ public class ErrorResponse {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_ERROR, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Error getError() {
     return error;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ERROR, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setError(@jakarta.annotation.Nonnull Error error) {
     this.error = error;
   }
-
 
   /**
    * Return true if this ErrorResponse object is equal to o.
@@ -107,6 +91,4 @@ public class ErrorResponse {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,30 +10,20 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
-
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Locale;
 
 /**
- * Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
+ * Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.
  */
 public enum SearchEventsSdkPlatform {
-  
   JS("js"),
-  
+
   ANDROID("android"),
-  
+
   IOS("ios");
 
   private String value;
@@ -62,4 +52,3 @@ public enum SearchEventsSdkPlatform {
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 }
-

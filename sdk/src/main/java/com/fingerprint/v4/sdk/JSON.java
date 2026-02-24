@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,28 +10,29 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.ext.ContextResolver;
 import java.text.DateFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import jakarta.ws.rs.core.GenericType;
-import jakarta.ws.rs.ext.ContextResolver;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class JSON implements ContextResolver<ObjectMapper> {
   private ObjectMapper mapper;
 
   public JSON() {
-    mapper = JsonMapper.builder()
+    mapper =
+        JsonMapper.builder()
             .serializationInclusion(JsonInclude.Include.NON_NULL)
             .configure(MapperFeature.ALLOW_COERCION_OF_SCALARS, false)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -63,7 +64,9 @@ public class JSON implements ContextResolver<ObjectMapper> {
    *
    * @return object mapper
    */
-  public ObjectMapper getMapper() { return mapper; }
+  public ObjectMapper getMapper() {
+    return mapper;
+  }
 
   /**
    * Returns the target model class that should be used to deserialize the input data.
@@ -177,7 +180,8 @@ public class JSON implements ContextResolver<ObjectMapper> {
    * @param modelClass A OpenAPI model class.
    * @param inst The instance object.
    */
-  public static boolean isInstanceOf(Class<?> modelClass, Object inst, Set<Class<?>> visitedClasses) {
+  public static boolean isInstanceOf(
+      Class<?> modelClass, Object inst, Set<Class<?>> visitedClasses) {
     if (modelClass.isInstance(inst)) {
       // This handles the 'allOf' use case with single parent inheritance.
       return true;
@@ -212,48 +216,50 @@ public class JSON implements ContextResolver<ObjectMapper> {
   private static Map<Class<?>, Map<String, GenericType<?>>> modelDescendants = new HashMap<>();
 
   /**
-    * Register a model class discriminator.
-    *
-    * @param modelClass the model class
-    * @param discriminatorPropertyName the name of the discriminator property
-    * @param mappings a map with the discriminator mappings.
-    */
-  public static void registerDiscriminator(Class<?> modelClass, String discriminatorPropertyName, Map<String, Class<?>> mappings) {
-    ClassDiscriminatorMapping m = new ClassDiscriminatorMapping(modelClass, discriminatorPropertyName, mappings);
+   * Register a model class discriminator.
+   *
+   * @param modelClass the model class
+   * @param discriminatorPropertyName the name of the discriminator property
+   * @param mappings a map with the discriminator mappings.
+   */
+  public static void registerDiscriminator(
+      Class<?> modelClass, String discriminatorPropertyName, Map<String, Class<?>> mappings) {
+    ClassDiscriminatorMapping m =
+        new ClassDiscriminatorMapping(modelClass, discriminatorPropertyName, mappings);
     modelDiscriminators.put(modelClass, m);
   }
 
   /**
-    * Register the oneOf/anyOf descendants of the modelClass.
-    *
-    * @param modelClass the model class
-    * @param descendants a map of oneOf/anyOf descendants.
-    */
-  public static void registerDescendants(Class<?> modelClass, Map<String, GenericType<?>> descendants) {
+   * Register the oneOf/anyOf descendants of the modelClass.
+   *
+   * @param modelClass the model class
+   * @param descendants a map of oneOf/anyOf descendants.
+   */
+  public static void registerDescendants(
+      Class<?> modelClass, Map<String, GenericType<?>> descendants) {
     modelDescendants.put(modelClass, descendants);
   }
 
   private static JSON json;
 
-  static
-  {
+  static {
     json = new JSON();
   }
 
   /**
-    * Get the default JSON instance.
-    *
-    * @return the default JSON instance
-    */
+   * Get the default JSON instance.
+   *
+   * @return the default JSON instance
+   */
   public static JSON getDefault() {
     return json;
   }
 
   /**
-    * Set the default JSON instance.
-    *
-    * @param json JSON instance to be used
-    */
+   * Set the default JSON instance.
+   *
+   * @param json JSON instance to be used
+   */
   public static void setDefault(JSON json) {
     JSON.json = json;
   }

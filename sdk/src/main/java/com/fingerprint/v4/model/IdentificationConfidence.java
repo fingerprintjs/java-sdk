@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * IdentificationConfidence
@@ -35,22 +25,20 @@ import com.fingerprint.v4.sdk.JSON;
   IdentificationConfidence.JSON_PROPERTY_VERSION,
   IdentificationConfidence.JSON_PROPERTY_COMMENT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class IdentificationConfidence {
   public static final String JSON_PROPERTY_SCORE = "score";
-  @jakarta.annotation.Nonnull
-  private Double score;
+  @jakarta.annotation.Nonnull private Double score;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  @jakarta.annotation.Nullable
-  private String version;
+  @jakarta.annotation.Nullable private String version;
 
   public static final String JSON_PROPERTY_COMMENT = "comment";
-  @jakarta.annotation.Nullable
-  private String comment;
+  @jakarta.annotation.Nullable private String comment;
 
-  public IdentificationConfidence() { 
-  }
+  public IdentificationConfidence() {}
 
   public IdentificationConfidence score(@jakarta.annotation.Nonnull Double score) {
     this.score = score;
@@ -66,18 +54,15 @@ public class IdentificationConfidence {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_SCORE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Double getScore() {
     return score;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SCORE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setScore(@jakarta.annotation.Nonnull Double score) {
     this.score = score;
   }
-
 
   public IdentificationConfidence version(@jakarta.annotation.Nullable String version) {
     this.version = version;
@@ -91,18 +76,15 @@ public class IdentificationConfidence {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVersion() {
     return version;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVersion(@jakarta.annotation.Nullable String version) {
     this.version = version;
   }
-
 
   public IdentificationConfidence comment(@jakarta.annotation.Nullable String comment) {
     this.comment = comment;
@@ -116,18 +98,15 @@ public class IdentificationConfidence {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_COMMENT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getComment() {
     return comment;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_COMMENT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setComment(@jakarta.annotation.Nullable String comment) {
     this.comment = comment;
   }
-
 
   /**
    * Return true if this IdentificationConfidence object is equal to o.
@@ -141,9 +120,9 @@ public class IdentificationConfidence {
       return false;
     }
     IdentificationConfidence identificationConfidence = (IdentificationConfidence) o;
-    return Objects.equals(this.score, identificationConfidence.score) &&
-        Objects.equals(this.version, identificationConfidence.version) &&
-        Objects.equals(this.comment, identificationConfidence.comment);
+    return Objects.equals(this.score, identificationConfidence.score)
+        && Objects.equals(this.version, identificationConfidence.version)
+        && Objects.equals(this.comment, identificationConfidence.comment);
   }
 
   @Override
@@ -172,6 +151,4 @@ public class IdentificationConfidence {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

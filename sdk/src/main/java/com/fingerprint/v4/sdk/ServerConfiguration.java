@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk;
 
 import java.util.Map;
@@ -18,55 +17,59 @@ import java.util.Map;
 /**
  * Representing a Server configuration.
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class ServerConfiguration {
-    public String URL;
-    public String description;
-    public Map<String, ServerVariable> variables;
+  public String URL;
+  public String description;
+  public Map<String, ServerVariable> variables;
 
-    /**
-     * @param URL A URL to the target host.
-     * @param description A description of the host designated by the URL.
-     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
-     */
-    public ServerConfiguration(String URL, String description, Map<String, ServerVariable> variables) {
-        this.URL = URL;
-        this.description = description;
-        this.variables = variables;
-    }
+  /**
+   * @param URL A URL to the target host.
+   * @param description A description of the host designated by the URL.
+   * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
+   */
+  public ServerConfiguration(
+      String URL, String description, Map<String, ServerVariable> variables) {
+    this.URL = URL;
+    this.description = description;
+    this.variables = variables;
+  }
 
-    /**
-     * Format URL template using given variables.
-     *
-     * @param variables A map between a variable name and its value.
-     * @return Formatted URL.
-     */
-    public String URL(Map<String, String> variables) {
-        String url = this.URL;
+  /**
+   * Format URL template using given variables.
+   *
+   * @param variables A map between a variable name and its value.
+   * @return Formatted URL.
+   */
+  public String URL(Map<String, String> variables) {
+    String url = this.URL;
 
-        // go through variables and replace placeholders
-        for (Map.Entry<String, ServerVariable> variable: this.variables.entrySet()) {
-            String name = variable.getKey();
-            ServerVariable serverVariable = variable.getValue();
-            String value = serverVariable.defaultValue;
+    // go through variables and replace placeholders
+    for (Map.Entry<String, ServerVariable> variable : this.variables.entrySet()) {
+      String name = variable.getKey();
+      ServerVariable serverVariable = variable.getValue();
+      String value = serverVariable.defaultValue;
 
-            if (variables != null && variables.containsKey(name)) {
-                value = variables.get(name);
-                if (serverVariable.enumValues.size() > 0 && !serverVariable.enumValues.contains(value)) {
-                    throw new IllegalArgumentException("The variable " + name + " in the server URL has invalid value " + value + ".");
-                }
-            }
-            url = url.replace("{" + name + "}", value);
+      if (variables != null && variables.containsKey(name)) {
+        value = variables.get(name);
+        if (serverVariable.enumValues.size() > 0 && !serverVariable.enumValues.contains(value)) {
+          throw new IllegalArgumentException(
+              "The variable " + name + " in the server URL has invalid value " + value + ".");
         }
-        return url;
+      }
+      url = url.replace("{" + name + "}", value);
     }
+    return url;
+  }
 
-    /**
-     * Format URL template using default server variables.
-     *
-     * @return Formatted URL.
-     */
-    public String URL() {
-        return URL(null);
-    }
+  /**
+   * Format URL template using default server variables.
+   *
+   * @return Formatted URL.
+   */
+  public String URL() {
+    return URL(null);
+  }
 }

@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,25 +10,15 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
- * Baseline measurement of canonical fonts rendered on the device. Numeric width metrics, in CSS pixels, for the canonical fonts collected by the agent. 
+ * Baseline measurement of canonical fonts rendered on the device. Numeric width metrics, in CSS pixels, for the canonical fonts collected by the agent.
  */
 @JsonPropertyOrder({
   FontPreferences.JSON_PROPERTY_DEFAULT,
@@ -39,38 +29,32 @@ import com.fingerprint.v4.sdk.JSON;
   FontPreferences.JSON_PROPERTY_MIN,
   FontPreferences.JSON_PROPERTY_SYSTEM
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class FontPreferences {
   public static final String JSON_PROPERTY_DEFAULT = "default";
-  @jakarta.annotation.Nullable
-  private Double _default;
+  @jakarta.annotation.Nullable private Double _default;
 
   public static final String JSON_PROPERTY_SERIF = "serif";
-  @jakarta.annotation.Nullable
-  private Double serif;
+  @jakarta.annotation.Nullable private Double serif;
 
   public static final String JSON_PROPERTY_SANS = "sans";
-  @jakarta.annotation.Nullable
-  private Double sans;
+  @jakarta.annotation.Nullable private Double sans;
 
   public static final String JSON_PROPERTY_MONO = "mono";
-  @jakarta.annotation.Nullable
-  private Double mono;
+  @jakarta.annotation.Nullable private Double mono;
 
   public static final String JSON_PROPERTY_APPLE = "apple";
-  @jakarta.annotation.Nullable
-  private Double apple;
+  @jakarta.annotation.Nullable private Double apple;
 
   public static final String JSON_PROPERTY_MIN = "min";
-  @jakarta.annotation.Nullable
-  private Double min;
+  @jakarta.annotation.Nullable private Double min;
 
   public static final String JSON_PROPERTY_SYSTEM = "system";
-  @jakarta.annotation.Nullable
-  private Double system;
+  @jakarta.annotation.Nullable private Double system;
 
-  public FontPreferences() { 
-  }
+  public FontPreferences() {}
 
   public FontPreferences _default(@jakarta.annotation.Nullable Double _default) {
     this._default = _default;
@@ -84,18 +68,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DEFAULT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getDefault() {
     return _default;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DEFAULT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDefault(@jakarta.annotation.Nullable Double _default) {
     this._default = _default;
   }
-
 
   public FontPreferences serif(@jakarta.annotation.Nullable Double serif) {
     this.serif = serif;
@@ -109,18 +90,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SERIF, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getSerif() {
     return serif;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SERIF, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSerif(@jakarta.annotation.Nullable Double serif) {
     this.serif = serif;
   }
-
 
   public FontPreferences sans(@jakarta.annotation.Nullable Double sans) {
     this.sans = sans;
@@ -134,18 +112,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SANS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getSans() {
     return sans;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SANS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSans(@jakarta.annotation.Nullable Double sans) {
     this.sans = sans;
   }
-
 
   public FontPreferences mono(@jakarta.annotation.Nullable Double mono) {
     this.mono = mono;
@@ -159,18 +134,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_MONO, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getMono() {
     return mono;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_MONO, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMono(@jakarta.annotation.Nullable Double mono) {
     this.mono = mono;
   }
-
 
   public FontPreferences apple(@jakarta.annotation.Nullable Double apple) {
     this.apple = apple;
@@ -184,18 +156,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_APPLE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getApple() {
     return apple;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_APPLE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setApple(@jakarta.annotation.Nullable Double apple) {
     this.apple = apple;
   }
-
 
   public FontPreferences min(@jakarta.annotation.Nullable Double min) {
     this.min = min;
@@ -209,18 +178,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_MIN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getMin() {
     return min;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_MIN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMin(@jakarta.annotation.Nullable Double min) {
     this.min = min;
   }
-
 
   public FontPreferences system(@jakarta.annotation.Nullable Double system) {
     this.system = system;
@@ -234,18 +200,15 @@ public class FontPreferences {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SYSTEM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getSystem() {
     return system;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SYSTEM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSystem(@jakarta.annotation.Nullable Double system) {
     this.system = system;
   }
-
 
   /**
    * Return true if this FontPreferences object is equal to o.
@@ -259,13 +222,13 @@ public class FontPreferences {
       return false;
     }
     FontPreferences fontPreferences = (FontPreferences) o;
-    return Objects.equals(this._default, fontPreferences._default) &&
-        Objects.equals(this.serif, fontPreferences.serif) &&
-        Objects.equals(this.sans, fontPreferences.sans) &&
-        Objects.equals(this.mono, fontPreferences.mono) &&
-        Objects.equals(this.apple, fontPreferences.apple) &&
-        Objects.equals(this.min, fontPreferences.min) &&
-        Objects.equals(this.system, fontPreferences.system);
+    return Objects.equals(this._default, fontPreferences._default)
+        && Objects.equals(this.serif, fontPreferences.serif)
+        && Objects.equals(this.sans, fontPreferences.sans)
+        && Objects.equals(this.mono, fontPreferences.mono)
+        && Objects.equals(this.apple, fontPreferences.apple)
+        && Objects.equals(this.min, fontPreferences.min)
+        && Objects.equals(this.system, fontPreferences.system);
   }
 
   @Override
@@ -298,6 +261,4 @@ public class FontPreferences {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-
