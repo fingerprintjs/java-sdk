@@ -58,14 +58,26 @@ fun Project.registerFormatTasks() {
         include("**/*.java")
     }.files.map { it.absolutePath }
 
-    tasks.register<Exec>("format") {
+    tasks.register("format") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
-        executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
-        args = listOf("--replace", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
+        doLast {
+            // First, fix the imports
+            exec {
+                executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
+                args = listOf("--replace", "--fix-imports-only") + inputFiles
+            }
+
+            // Second, format the code. This ensures that the removal of unused imports does not
+            // introduce the need to run another formatting pass to pass the formatting checks.
+            exec {
+                executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
+                args = listOf("--replace", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
+            }
+        }
     }
 
-    tasks.register<Exec>("formatCheck") {
+    tasks.register<Exec>("checkFormat") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
         doFirst {
