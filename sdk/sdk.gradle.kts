@@ -10,6 +10,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+tasks.withType<JavaCompile> {
+    options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
+}
+
 plugins {
     alias(libs.plugins.openapi.generator)
     `java-library`
