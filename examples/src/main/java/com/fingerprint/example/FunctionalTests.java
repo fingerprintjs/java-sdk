@@ -121,6 +121,50 @@ public class FunctionalTests {
       System.exit(1);
     }
 
+    // Evaluate a ruleset
+    final String rulesetId = System.getenv("FPJS_RULESET_ID");
+    if (rulesetId != null) {
+      try {
+        final Event event =
+            api.getEvent(
+                eventId, new FingerprintApi.GetEventOptionalParams().setRulesetId(rulesetId));
+        if (event.getRuleAction() instanceof EventRuleActionAllow) {
+          EventRuleActionAllow allow = (EventRuleActionAllow) event.getRuleAction();
+          System.out.printf(
+              "Rule action is allow\nRule id: %s\nRule expression: %s\n",
+              allow.getRuleId(), allow.getRuleExpression());
+          if (allow.getRequestHeaderModifications() != null) {
+            RequestHeaderModifications requestHeaderModifications =
+                allow.getRequestHeaderModifications();
+            System.out.printf(
+                "Request header modifications to set %s, to append %s, to remove %s\n",
+                requestHeaderModifications.getSet(),
+                requestHeaderModifications.getAppend(),
+                requestHeaderModifications.getRemove());
+          }
+        } else if (event.getRuleAction() instanceof EventRuleActionBlock) {
+          EventRuleActionBlock block = (EventRuleActionBlock) event.getRuleAction();
+          System.out.printf(
+              "Rule action is block. Rule id: %s\nRule expression: %s\nStatus code: %d\nHeaders: %s\nBody: %s\n",
+              block.getRuleId(),
+              block.getRuleExpression(),
+              block.getStatusCode(),
+              block.getHeaders(),
+              block.getBody());
+        } else if (event.getRuleAction() != null) {
+          System.out.println(
+              "Action type is unexpected (please make sure the library is at the latest version");
+        } else {
+          System.err.println(
+              "Fingerprint.getEvent ruleset evaluation: failed to produce a rule action");
+          System.exit(1);
+        }
+      } catch (ApiException e) {
+        System.err.println("Exception when trying to evaluate ruleset:" + e.getMessage());
+        System.exit(1);
+      }
+    }
+
     System.out.println("Checks Passed");
     System.exit(0);
   }

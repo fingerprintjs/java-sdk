@@ -7,6 +7,7 @@ curl -s -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fin
 examplesList=(
   'webhook/webhook_event.json'
   'events/get_event_200.json'
+  'events/get_event_ruleset_200.json'
   'events/search/get_event_search_200.json'
   'events/update_event_multiple_fields_request.json'
   'events/update_event_one_field_request.json'
@@ -19,6 +20,7 @@ examplesList=(
   'errors/400_pagination_key_invalid.json'
   'errors/400_request_body_invalid.json'
   'errors/400_reverse_invalid.json'
+  'errors/400_ruleset_not_found.json'
   'errors/400_start_time_invalid.json'
   'errors/400_visitor_id_invalid.json'
   'errors/400_visitor_id_required.json'

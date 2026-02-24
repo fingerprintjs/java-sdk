@@ -13,13 +13,13 @@ import static org.mockito.ArgumentMatchers.eq;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.ApiResponse;
+import com.fingerprint.v4.sdk.JSON;
 import com.fingerprint.v4.sdk.Pair;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +47,7 @@ public class FingerprintApiTest {
   private static final String MOCK_WEBHOOK_VISITOR_ID = "Ibk1527CUFmcnjLwIs4A9";
   private static final String MOCK_WEBHOOK_EVENT_ID = "1708102555327.NLOjmg";
 
-  private static final ObjectMapper MAPPER = getMapper();
+  private static final ObjectMapper MAPPER = JSON.getDefault().getMapper();
 
   private InputStream getFileAsIOStream(final String fileName) {
     InputStream ioStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
@@ -72,15 +72,7 @@ public class FingerprintApiTest {
   public void before() {
     ApiClient realApiClient = new ApiClient();
     ApiClient apiClient = Mockito.spy(realApiClient);
-    // apiClient.setBearerToken("MOCK_API_KEY");
     api = new FingerprintApi(apiClient);
-  }
-
-  private static ObjectMapper getMapper() {
-    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    return mapper;
   }
 
   @FunctionalInterface
@@ -126,7 +118,8 @@ public class FingerprintApiTest {
             })
         .when(apiClient)
         .invokeAPI(
-            eq(operationName), // operation, for example "FingerprintApi.getEvent"
+            eq(operationName), // operation, for example
+            // "FingerprintApi.getEvent"
             eq(path), // path
             eq(httpMethod), // HTTP-method
             any(), // queryParams
@@ -615,5 +608,51 @@ public class FingerprintApiTest {
     ErrorResponse response = MAPPER.readValue(exception.getResponseBody(), ErrorResponse.class);
     assertEquals(ErrorCode.FEATURE_NOT_ENABLED, response.getError().getCode());
     assertEquals("feature not enabled", response.getError().getMessage());
+  }
+
+  @Test
+  public void getEventEvaluateRulesetTest() throws ApiException {
+    addMock(
+        "getEvent",
+        MOCK_REQUEST_ID,
+        invocation -> {
+          return mockFileToResponse(
+              200, invocation, "mocks/events/get_event_ruleset_200.json", Event.class);
+        });
+
+    Event response = api.getEvent(MOCK_REQUEST_ID);
+    assertNotNull(response);
+    assertNotNull(response.getRuleAction());
+    assertInstanceOf(EventRuleActionBlock.class, response.getRuleAction());
+
+    EventRuleActionBlock ruleAction = (EventRuleActionBlock) response.getRuleAction();
+    assertEquals(RuleActionType.BLOCK, ruleAction.getType());
+    assertEquals(403, ruleAction.getStatusCode());
+    assertEquals("{\"title\":\"Forbidden\"}", ruleAction.getBody());
+    assertEquals("rs_b1k1blhqpOX3kU", ruleAction.getRulesetId());
+    assertEquals("r_uE0af8497PFAOD", ruleAction.getRuleId());
+    assertEquals("bot in [\"bad\"] || incognito", ruleAction.getRuleExpression());
+    assertNotNull(ruleAction.getHeaders());
+    assertEquals(1, ruleAction.getHeaders().size());
+    assertEquals("Content-Type", ruleAction.getHeaders().get(0).getName());
+    assertEquals("application/json", ruleAction.getHeaders().get(0).getValue());
+  }
+
+  @Test
+  public void getEventRulesetNotFoundErrorTest() throws ApiException, JsonProcessingException {
+    addMock(
+        "getEvent",
+        MOCK_REQUEST_ID,
+        invocation -> {
+          return mockFileToResponse(
+              400, invocation, "mocks/errors/400_ruleset_not_found.json", ErrorResponse.class);
+        });
+
+    ApiException exception = assertThrows(ApiException.class, () -> api.getEvent(MOCK_REQUEST_ID));
+
+    assertEquals(400, exception.getCode());
+    ErrorResponse response = MAPPER.readValue(exception.getResponseBody(), ErrorResponse.class);
+    assertEquals(ErrorCode.RULESET_NOT_FOUND, response.getError().getCode());
+    assertEquals("ruleset not found", response.getError().getMessage());
   }
 }

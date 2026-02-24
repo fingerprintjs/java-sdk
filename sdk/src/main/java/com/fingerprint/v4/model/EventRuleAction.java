@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "type",
-    defaultImpl = EventRuleAction.UnknownEventRuleAction.class)
+    defaultImpl = EventRuleAction.UnknownEventRuleAction.class,
+    visible = true)
 @JsonSubTypes({
   @JsonSubTypes.Type(value = EventRuleActionAllow.class, name = "allow"),
   @JsonSubTypes.Type(value = EventRuleActionBlock.class, name = "block")
