@@ -9,18 +9,39 @@ allprojects {
     version = projectVersion
 }
 
+plugins {
+    alias(libs.plugins.google.osdetector)
+}
+
 // Register formatting tasks for each subproject
 
-val googleJavaFormatJarFile = layout.buildDirectory.file("google-java-format-all-deps.jar")
+val googleJavaFormatExeFile = layout.buildDirectory.file("google-java-format.exe")
+val googleJavaFormatOsSuffixMap = mapOf(
+    "osx" to "darwin",
+    "linux" to "linux",
+    "windows" to "windows",
+)
+val googleJavaFormatArchSuffixMap = mapOf(
+    "x86_64" to "x86-64",
+    "aarch_64" to "arm64"
+)
+val googleJavaFormatBinarySuffixMap = mapOf(
+    "osx" to "",
+    "linux" to "",
+    "windows" to ".exe"
+)
 
 tasks.register("downloadGoogleJavaFormat") {
-    val downloadUrl = "https://github.com/google/google-java-format/releases/download/v1.34.1/google-java-format-1.34.1-all-deps.jar"
-    outputs.file(googleJavaFormatJarFile)
+    val osSuffix = googleJavaFormatOsSuffixMap[osdetector.os]
+    val archSuffix = googleJavaFormatArchSuffixMap[osdetector.arch]
+    val binarySuffix = googleJavaFormatBinarySuffixMap[osdetector.os]
+    val downloadUrl = "https://github.com/google/google-java-format/releases/download/v1.34.1/google-java-format_$osSuffix-$archSuffix$binarySuffix"
+    outputs.file(googleJavaFormatExeFile)
 
     doLast {
-        val file = googleJavaFormatJarFile.get().asFile
+        val file = googleJavaFormatExeFile.get().asFile
         if (!file.exists()) {
-            println("Downloading google-java-format")
+            println("Downloading google-java-format for $osSuffix-$archSuffix")
             URL(downloadUrl).openStream().use { input ->
                 Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING)
             }
@@ -37,45 +58,22 @@ fun Project.registerFormatTasks() {
         include("**/*.java")
     }.files.map { it.absolutePath }
 
-    val googleJavaFormatVmArgs = listOf(
-        "--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
-        "--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
-    )
-
-    tasks.register<JavaExec>("format") {
+    tasks.register<Exec>("format") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
-        onlyIf {
-            // google-java-format requires Java 17 or later.
-            // Skip if running with Java 11
-            JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
-        }
-
-        classpath = files(googleJavaFormatJarFile)
+        executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
         args = listOf("--replace") + inputFiles
-        jvmArgs = googleJavaFormatVmArgs
     }
 
-    tasks.register<JavaExec>("formatCheck") {
+    tasks.register<Exec>("formatCheck") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
         doFirst {
             println("The following source files need to be formatted:")
         }
 
-        onlyIf {
-            // google-java-format requires Java 17 or later.
-            // Skip if running with Java 11
-            JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)
-        }
-
-        classpath = files(googleJavaFormatJarFile)
+        executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
         args = listOf("--dry-run", "--set-exit-if-changed") + inputFiles
-        jvmArgs = googleJavaFormatVmArgs
     }
 }
 
