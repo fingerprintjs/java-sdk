@@ -56,7 +56,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.github.fingerprintjs</groupId>
   <artifactId>java-sdk</artifactId>
-  <version>v7.10.0</version>
+  <version>v8.0.0-rc.0</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ repositories {
 }
 
 dependencies {
-  implementation "com.github.fingerprintjs:java-sdk:v7.10.0"
+  implementation "com.github.fingerprintjs:java-sdk:v8.0.0-rc.0"
 }
 ```
 
@@ -86,7 +86,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.github.fingerprintjs:java-sdk:v7.10.0")
+  implementation("com.github.fingerprintjs:java-sdk:v8.0.0-rc.0")
 }
 ```
 
@@ -100,7 +100,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- `sdk/build/libs/java-sdk-7.10.0.jar`
+- `sdk/build/libs/java-sdk-8.0.0-rc.0.jar`
 
 ## Getting Started
 
