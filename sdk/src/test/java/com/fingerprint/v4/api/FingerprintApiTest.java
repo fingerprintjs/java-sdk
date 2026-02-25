@@ -202,6 +202,8 @@ public class FingerprintApiTest {
     assertInstanceOf(VelocityData.class, response.getVelocity().getDistinctCountry());
     assertFalse(response.getLocationSpoofing());
     assertEquals(0L, response.getFactoryResetTimestamp());
+    assertNotNull(response.getTags());
+    assertTrue(response.getTags().isEmpty());
   }
 
   @Test
@@ -219,7 +221,8 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertEquals(LINKED_ID, body.getLinkedId());
-          assertNull(body.getTags());
+          assertNotNull(request.getTags());
+          assertTrue(request.getTags().isEmpty());
           assertNull(body.getSuspect());
           return mockFileToResponse(200, invocation, null, Void.class);
         });
@@ -277,7 +280,8 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertNull(body.getLinkedId());
-          assertNull(body.getTags());
+          assertNotNull(body.getTags());
+          assertTrue(body.getTags().isEmpty());
           assertTrue(body.getSuspect());
           return mockFileToResponse(200, invocation, null, Void.class);
         });
@@ -298,7 +302,8 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertNull(body.getLinkedId());
-          assertNull(body.getTags());
+          assertNotNull(body.getTags());
+          assertTrue(body.getTags().isEmpty());
           assertFalse(body.getSuspect());
           return mockFileToResponse(200, invocation, null, Void.class);
         });

@@ -15,6 +15,8 @@ package com.fingerprint.v4.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -33,7 +35,7 @@ public class EventUpdate {
   @jakarta.annotation.Nullable private String linkedId;
 
   public static final String JSON_PROPERTY_TAGS = "tags";
-  @jakarta.annotation.Nullable private Object tags;
+  @jakarta.annotation.Nullable private Map<String, Object> tags = new HashMap<>();
 
   public static final String JSON_PROPERTY_SUSPECT = "suspect";
   @jakarta.annotation.Nullable private Boolean suspect;
@@ -62,8 +64,16 @@ public class EventUpdate {
     this.linkedId = linkedId;
   }
 
-  public EventUpdate tags(@jakarta.annotation.Nullable Object tags) {
+  public EventUpdate tags(@jakarta.annotation.Nullable Map<String, Object> tags) {
     this.tags = tags;
+    return this;
+  }
+
+  public EventUpdate putTagsItem(String key, Object tagsItem) {
+    if (this.tags == null) {
+      this.tags = new HashMap<>();
+    }
+    this.tags.put(key, tagsItem);
     return this;
   }
 
@@ -73,14 +83,14 @@ public class EventUpdate {
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Object getTags() {
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  public Map<String, Object> getTags() {
     return tags;
   }
 
   @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTags(@jakarta.annotation.Nullable Object tags) {
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTags(@jakarta.annotation.Nullable Map<String, Object> tags) {
     this.tags = tags;
   }
 
