@@ -8,10 +8,10 @@
     </a>
 </p>
 <p align="center">
-    <a href="https://jitpack.io/#fingerprintjs/fingerprint-pro-server-api-java-sdk"><img src="https://jitpack.io/v/fingerprintjs/fingerprint-pro-server-api-java-sdk.svg" alt="Jitpack Release" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/test.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/test.yml/badge.svg" alt="CI badge" /></a>
-    <a href="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/functional.yml"><img src="https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/actions/workflows/functional.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://jitpack.io/#fingerprintjs/java-sdk"><img src="https://jitpack.io/v/fingerprintjs/java-sdk.svg" alt="Jitpack Release" /></a>
+    <a href="https://github.com/fingerprintjs/java-sdk/actions/workflows/release.yml"><img src="https://github.com/fingerprintjs/java-sdk/actions/workflows/release.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://github.com/fingerprintjs/java-sdk/actions/workflows/test.yml"><img src="https://github.com/fingerprintjs/java-sdk/actions/workflows/test.yml/badge.svg" alt="CI badge" /></a>
+    <a href="https://github.com/fingerprintjs/java-sdk/actions/workflows/functional.yml"><img src="https://github.com/fingerprintjs/java-sdk/actions/workflows/functional.yml/badge.svg" alt="CI badge" /></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/:license-mit-blue.svg?style=flat"/></a>
     <a href="https://discord.gg/39EpE2neBg"><img src="https://img.shields.io/discord/852099967190433792?style=logo&label=Discord&logo=Discord&logoColor=white" alt="Discord server"></a>
 </p>
@@ -35,6 +35,7 @@ The following versions of Java are supported
 - Java 11
 - Java 17
 - Java 21
+- Java 25
 
 ## Installation
 
@@ -54,7 +55,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
   <groupId>com.github.fingerprintjs</groupId>
-  <artifactId>fingerprint-pro-server-api-java-sdk</artifactId>
+  <artifactId>java-sdk</artifactId>
   <version>v{{{artifactVersion}}}</version>
 </dependency>
 ```
@@ -70,7 +71,7 @@ repositories {
 }
 
 dependencies {
-  implementation "com.github.fingerprintjs:fingerprint-pro-server-api-java-sdk:v{{{artifactVersion}}}"
+  implementation "com.github.fingerprintjs:java-sdk:v{{{artifactVersion}}}"
 }
 ```
 
@@ -85,7 +86,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.github.fingerprintjs:fingerprint-pro-server-api-java-sdk:v{{{artifactVersion}}}")
+  implementation("com.github.fingerprintjs:java-sdk:v{{{artifactVersion}}}")
 }
 ```
 
@@ -99,7 +100,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-- `target/{{{artifactId}}}-{{{artifactVersion}}}.jar`
+- `sdk/build/libs/{{{artifactId}}}-{{{artifactVersion}}}.jar`
 
 {{#jersey2}}
 ## Usage
@@ -136,8 +137,8 @@ Please follow the [installation](#installation) instruction and execute the foll
 package main;
 
 import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.model.EventsGetResponse;
-import com.fingerprint.model.EventsUpdateRequest;
+import com.fingerprint.model.Events;
+import com.fingerprint.model.UpdateEvents;
 import com.fingerprint.model.VisitorsGetResponse;
 import com.fingerprint.sdk.ApiClient;
 import com.fingerprint.sdk.ApiException;
@@ -149,8 +150,8 @@ public class FingerprintApiExample {
     private static final String FPJS_API_SECRET = "Fingerprint Secret API Key";
     // A mandatory visitorId of a specific visitor
     private static final String FPJS_VISITOR_ID = "visitorId";
-    // An optional requestId made by a specific visitor
-    private static final String FPJS_REQUEST_ID = "requestId";
+    // An optional eventId initiated by a specific visitor
+    private static final String FPJS_EVENT_ID = "eventId";
     // An optional linkedId of the visit
     private static final String FPJS_LINKED_ID = "linkedId";
     // An optional parameter limiting scanned results
@@ -173,7 +174,7 @@ public class FingerprintApiExample {
         // Get an event with a given requestId
         try {
             // Fetch the event with a given requestId
-            EventsGetResponse response = api.getEvent(FPJS_REQUEST_ID);
+            Event response = api.getEvent(FPJS_EVENT_ID);
             System.out.println(response.getProducts().toString());
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.getEvent:" + e.getMessage());
@@ -196,38 +197,11 @@ public class FingerprintApiExample {
 
         // Update an event with a given requestId
         try {
-            EventsUpdateRequest request = new EventsUpdateRequest();
+            EventUpdate request = new EventUpdate();
             request.setLinkedId("myNewLinkedId");
-            api.updateEvent(FPJS_REQUEST_ID, request);
+            api.updateEvent(FPJS_EVENT_ID, request);
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.updateEvent:" + e.getMessage());
-        }
-
-        // Get a specific visitor's all visits
-        try {
-            // Fetch all visits with a given visitorId, with a page limit
-            VisitorsGetResponse response = api.getVisits(FPJS_VISITOR_ID, null, null, LIMIT, null, null);
-            System.out.println(response.getVisits().toString());
-        } catch (ApiException e) {
-            System.err.println("Exception when calling FingerprintApi.getVisits:" + e.getMessage());
-        }
-
-        // Get a specific visitor's all visits with a linkedId
-        try {
-            // Fetch all visits with a given visitorId, with a page limit, skipping the first visit
-            VisitorsGetResponse response = api.getVisits(FPJS_VISITOR_ID, null, FPJS_LINKED_ID, LIMIT, PAGINATION_KEY, null);
-            System.out.println(response.getVisits().toString());
-        } catch (ApiException e) {
-            System.err.println("Exception when calling FingerprintApi.getVisits:" + e.getMessage());
-        }
-
-        // Use all the parameters on getVisits
-        try {
-            // Fetch the visitor's all visits with a given requestId and linkedId with a page limit while skipping the first visit
-            VisitorsGetResponse response = api.getVisits(FPJS_VISITOR_ID, FPJS_REQUEST_ID, FPJS_LINKED_ID, LIMIT, PAGINATION_KEY, null);
-            System.out.println(response.getVisits().toString());
-        } catch (ApiException e) {
-            System.err.println("Exception when calling FingerprintApi.getVisits:" + e.getMessage());
         }
 
         // Delete visitor data with a given visitorID
@@ -362,10 +336,10 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 
 ## Support
 
-To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/issues).
+To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/java-sdk/issues).
 If you need private support, you can email us at [oss-support@fingerprint.com](mailto:oss-support@fingerprint.com).
 
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/fingerprintjs/java-sdk/blob/main/LICENSE).

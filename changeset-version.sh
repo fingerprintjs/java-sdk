@@ -1,2 +1,10 @@
 #!/usr/bin/env bash
-pnpm exec changeset version && bash ./scripts/generate.sh
+
+# Change the package.json version
+pnpm exec changeset version && \
+
+# Change the gradle version
+bash ./scripts/update-gradle-version.sh && \
+
+# Re-generate the code with the updated version
+bash ./scripts/generate.sh

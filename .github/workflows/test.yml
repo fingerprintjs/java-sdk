@@ -19,4 +19,5 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '${{ matrix.java }}'
-      - run: ./gradlew test
+        # includes execution of unit tests
+      - run: ./gradlew build

@@ -16,11 +16,15 @@ public class WebhookSignatureSample {
             boolean isSignatureValid = WebhookValidation.isSignatureValid(header, data, secret);
             if (isSignatureValid) {
                 System.out.println("Webhook signature is valid");
+                System.exit(0);
             } else {
                 System.out.println("Webhook signature is not valid");
+                System.exit(1);
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            System.err.println("Failed to validate webhook signature");
+            e.printStackTrace(System.err);
+            System.exit(1);
         }
     }
 

@@ -1,4 +1,4 @@
-rootProject.name = "fingerprint-pro-server-api-sdk"
+rootProject.name = "java-sdk"
 include("sdk")
 include("examples")
 

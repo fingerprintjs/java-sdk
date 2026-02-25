@@ -1,6 +1,6 @@
 val projectVersion: String by project
 
-group = "com.fingerprint"
+group = "com.github.fingerprintjs"
 version = projectVersion
 
 plugins {
@@ -17,8 +17,8 @@ repositories {
 publishing {
     publications {
         register("localMavenJava", MavenPublication::class) {
-            groupId = "com.fingerprint"
-            artifactId = "fingerprint-pro-server-api-sdk"
+            groupId = "com.github.fingerprintjs"
+            artifactId = "java-sdk"
             version = projectVersion
             from(components["java"])
         }
@@ -38,6 +38,7 @@ dependencies {
     api(libs.jackson.jsr310)
     api(libs.jakarta.annotation.api)
     testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.platform.launcher)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.mockito)
 }
@@ -55,7 +56,7 @@ openApiGenerate {
     inputSpec.set("$rootDir/res/fingerprint-server-api.yaml")
     outputDir.set(layout.buildDirectory.dir("generated").get().asFile.path)
     groupId.set("com.fingerprint")
-    id.set("fingerprint-pro-server-api-sdk")
+    id.set("java-sdk")
     version.set(projectVersion)
     apiPackage.set("com.fingerprint.api")
     modelPackage.set("com.fingerprint.model")
@@ -64,10 +65,12 @@ openApiGenerate {
     templateDir.set("$rootDir/template")
 
     gitHost.set("github.com")
-    gitRepoId.set("fingerprint-pro-server-api-java-sdk")
+    gitRepoId.set("java-sdk")
     gitUserId.set("fingerprintjs")
     configOptions.put("hideGenerationTimestamp", "true")
     configOptions.put("openApiNullable", "false")
+    configOptions.put("disallowAdditionalPropertiesIfNotPresent", "false")
+    configOptions.put("useOneOfInterfaces", "true")
 }
 
 tasks.register("removeDocs") {
@@ -87,54 +90,37 @@ tasks.register("removeClasses") {
     }
 }
 
-tasks.register<Copy>("copyDocs") {
-    from(layout.buildDirectory.dir("generated/docs"))
-    into("$rootDir/docs")
+tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
+    from("$rootDir/.openapi-generator-ignore")
+    into(layout.buildDirectory.dir("generated"))
 }
 
-tasks.register<Copy>("copyClasses") {
-    from(layout.buildDirectory.dir("generated/src/main/java"))
-    into("src/main/java")
-}
-
-tasks.register<Copy>("copyReadme") {
-    from(file(layout.buildDirectory.file("generated/README.md")))
-    into(file("$rootDir/"))
-}
-
-tasks.register("removeWrongDocumentationLinks") {
+tasks.register("copyGeneratedArtifacts") {
     doLast {
-        fileTree("$rootDir/docs").files
-            .filter { it.isFile }
-            .forEach {
-                val content = it.readText()
-                    .replace("[**OffsetDateTime**](OffsetDateTime.md)", "**OffsetDateTime**")
-                    .replace("[**URI**](URI.md)", "**URI**")
-                it.writeText(content)
-            }
+        copy {
+            from(layout.buildDirectory.dir("generated/docs"))
+            into("$rootDir/docs")
+        }
+
+        copy {
+            from(layout.buildDirectory.dir("generated/src/main/java"))
+            into("$rootDir/sdk/src/main/java")
+        }
+
+        copy {
+            from(layout.buildDirectory.file("generated/README.md"))
+            into("$rootDir/")
+        }
     }
 }
 
-tasks.named("copyDocs") {
-    dependsOn(tasks.openApiGenerate)
-    dependsOn("removeDocs")
-}
-tasks.named("copyClasses") {
-    dependsOn(tasks.openApiGenerate)
-    dependsOn("removeClasses")
-}
-
-tasks.named("removeWrongDocumentationLinks") {
-    dependsOn("copyDocs")
-    finalizedBy("copyReadme")
-}
-
-tasks.named("build") {
-    finalizedBy("removeWrongDocumentationLinks")
+tasks.openApiGenerate {
+    dependsOn("removeDocs", "removeClasses", "copyOpenApiGeneratorIgnore")
+    finalizedBy("copyGeneratedArtifacts")
 }
 
 tasks.compileJava {
-    dependsOn("copyClasses")
+    dependsOn("openApiGenerate")
 }
 
 tasks.test {
@@ -142,5 +128,5 @@ tasks.test {
 }
 
 tasks.jar {
-    archiveBaseName = "fingerprint-pro-server-api-sdk"
+    archiveBaseName = "java-sdk"
 }
