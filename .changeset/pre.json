@@ -4,5 +4,7 @@
   "initialVersions": {
     "java-sdk": "7.10.0"
   },
-  "changesets": []
+  "changesets": [
+    "weak-eagles-deliver"
+  ]
 }

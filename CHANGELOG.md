@@ -1,5 +1,20 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.0.0-rc.0
+
+### Major Changes
+
+- Migrate to Server API v4
+
+  **BREAKING CHANGES**: This release contains multiple breaking changes:
+
+  - SDK version bumped to `8.0.0`
+  - Server API version upgraded from v3 to v4
+  - Removed `GetVisits` and `GetRelatedVisitors` operations.
+  - Improved models used by the `GetEvent` and `SearchEvents` operations to use a more concise shape and clearer names.
+
+  See [this page in the Fingerprint documentation](https://docs.fingerprint.com/reference/java-server-sdk#migration-guide-for-java-sdk-v8-0-0) for a migration guide. ([0be1870](https://github.com/fingerprintjs/java-sdk/commit/0be1870b7876370ac0d69d3eb263c7d8eb07e7fe))
+
 ## 7.10.0
 
 ### Minor Changes
