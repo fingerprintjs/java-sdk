@@ -191,7 +191,7 @@ public class FingerprintApiExample {
 
 This SDK provides utility methods for decoding [sealed results](https://dev.fingerprint.com/docs/sealed-client-results).
 ```java
-package com.fingerprint.v4.example;
+package com.fingerprint.example;
 
 import com.fingerprint.v4.Sealed;
 import com.fingerprint.v4.model.Event;
