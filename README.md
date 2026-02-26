@@ -109,14 +109,14 @@ Please follow the [installation](#installation) instruction and execute the foll
 ```java
 package main;
 
-import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.model.Events;
-import com.fingerprint.model.UpdateEvents;
-import com.fingerprint.model.VisitorsGetResponse;
-import com.fingerprint.sdk.ApiClient;
-import com.fingerprint.sdk.ApiException;
-import com.fingerprint.sdk.Configuration;
-import com.fingerprint.sdk.Region;
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.model.Events;
+import com.fingerprint.v4.model.UpdateEvents;
+import com.fingerprint.v4.model.VisitorsGetResponse;
+import com.fingerprint.v4.sdk.ApiClient;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Configuration;
+import com.fingerprint.v4.sdk.Region;
 
 public class FingerprintApiExample {
     // Fingerprint Secret API Key
@@ -191,10 +191,10 @@ public class FingerprintApiExample {
 
 This SDK provides utility methods for decoding [sealed results](https://dev.fingerprint.com/docs/sealed-client-results).
 ```java
-package com.fingerprint.example;
+package com.fingerprint.v4.example;
 
-import com.fingerprint.Sealed;
-import com.fingerprint.model.EventsGetResponse;
+import com.fingerprint.v4.Sealed;
+import com.fingerprint.v4.model.EventsGetResponse;
 
 import java.util.Base64;
 
@@ -229,7 +229,7 @@ This SDK provides utility method for verifying the HMAC signature of the incomin
 
 Here is an example implementation using Spring Boot:
 ```java
-import com.fingerprint.sdk.WebhookValidation;
+import com.fingerprint.v4.sdk.WebhookValidation;
 
 @RestController
 class WebhookController {

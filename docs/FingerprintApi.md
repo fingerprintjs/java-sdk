@@ -47,11 +47,11 @@ Please [contact our support team](https://fingerprint.com/support/) to enable it
 ```java
 package main;
 
-import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.sdk.model.*;
-import com.fingerprint.sdk.ApiClient;
-import com.fingerprint.sdk.ApiException;
-import com.fingerprint.sdk.Region;
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.sdk.ApiClient;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Region;
 
 public class FingerprintApiExample {
     // Fingerprint Secret API Key
@@ -124,11 +124,11 @@ Use `event_id` as the URL path parameter. This API method is scoped to a request
 ```java
 package main;
 
-import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.sdk.model.*;
-import com.fingerprint.sdk.ApiClient;
-import com.fingerprint.sdk.ApiException;
-import com.fingerprint.sdk.Region;
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.sdk.ApiClient;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Region;
 
 public class FingerprintApiExample {
     // Fingerprint Secret API Key
@@ -232,11 +232,11 @@ Smart Signals not activated for your workspace or are not included in the respon
 ```java
 package main;
 
-import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.sdk.model.*;
-import com.fingerprint.sdk.ApiClient;
-import com.fingerprint.sdk.ApiException;
-import com.fingerprint.sdk.Region;
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.sdk.ApiClient;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Region;
 
 public class FingerprintApiExample {
     // Fingerprint Secret API Key
@@ -438,11 +438,11 @@ error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully p
 ```java
 package main;
 
-import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.sdk.model.*;
-import com.fingerprint.sdk.ApiClient;
-import com.fingerprint.sdk.ApiException;
-import com.fingerprint.sdk.Region;
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.sdk.ApiClient;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Region;
 
 public class FingerprintApiExample {
     // Fingerprint Secret API Key
