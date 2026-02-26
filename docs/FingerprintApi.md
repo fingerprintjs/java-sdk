@@ -47,8 +47,10 @@ Please [contact our support team](https://fingerprint.com/support/) to enable it
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -124,8 +126,10 @@ Use `event_id` as the URL path parameter. This API method is scoped to a request
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -232,8 +236,10 @@ Smart Signals not activated for your workspace or are not included in the respon
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -438,8 +444,10 @@ error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully p
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
