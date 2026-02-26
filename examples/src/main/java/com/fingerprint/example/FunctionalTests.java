@@ -1,7 +1,12 @@
 package com.fingerprint.example;
 
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.model.*;
+import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.model.EventRuleActionAllow;
+import com.fingerprint.v4.model.EventRuleActionBlock;
+import com.fingerprint.v4.model.EventSearch;
+import com.fingerprint.v4.model.EventUpdate;
+import com.fingerprint.v4.model.RequestHeaderModifications;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Configuration;
 import java.sql.Timestamp;
