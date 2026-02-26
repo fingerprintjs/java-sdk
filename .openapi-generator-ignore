@@ -2,8 +2,8 @@
 build.sbt
 git_push.sh
 api/*
-src/test/java/com/fingerprint/model/*
-src/main/java/com/fingerprint/model/AbstractOpenApiSchema.java
+src/test/java/com/fingerprint/v4/model/*
+src/main/java/com/fingerprint/v4/model/AbstractOpenApiSchema.java
 src/main/AndroidManifest.xml
 .github/workflows/maven.yml
 pom.xml
