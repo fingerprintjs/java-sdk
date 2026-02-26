@@ -11,10 +11,6 @@ jobs:
     name: Check source code formatting
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: 17
       - run: ./gradlew :sdk:checkFormat :examples:checkFormat --continue
 
   test:
@@ -22,13 +18,10 @@ jobs:
     name: Java ${{ matrix.Java }}
     strategy:
       matrix:
-        java: [ '11', '17', '21' ]
+        java: [ '11', '17', '21', '25' ]
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '${{ matrix.java }}'
+        # Gradle will detect the JVM installation from the ubuntu-latest image and use it
         # includes execution of unit tests
-      - run: ./gradlew build
+      - run: ./gradlew build -PjavaVersion=${{ matrix.java }} --stacktrace

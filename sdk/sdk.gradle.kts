@@ -4,20 +4,18 @@ val projectVersion: String by project
 group = "com.github.fingerprintjs"
 version = projectVersion
 
-java {
-    // Target the earliest support Java version
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-tasks.withType<JavaCompile> {
-    options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
-}
-
 plugins {
     alias(libs.plugins.openapi.generator)
     `java-library`
     `maven-publish`
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(
+            findProperty("javaVersion")?.toString() ?: "11"
+        ))
+    }
 }
 
 repositories {

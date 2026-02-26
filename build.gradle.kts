@@ -92,4 +92,45 @@ fun Project.registerFormatTasks() {
 
 subprojects {
     registerFormatTasks()
+
+    plugins.withType<org.gradle.api.plugins.JavaPlugin> {
+        tasks.withType<JavaCompile> {
+            // Target java 11
+            options.release = 11
+
+            // Enable all warnings and fail the build for any warnings
+            options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
+        }
+
+        // Print Java toolchain for compilation
+        tasks.withType<JavaCompile>().configureEach {
+            doFirst {
+                println("Compiling with Java: ${javaCompiler.get().metadata.installationPath} (version: ${javaCompiler.get().metadata.languageVersion})")
+            }
+        }
+
+        // Print Java toolchain used for running tests
+        tasks.withType<Test>().configureEach {
+            doFirst {
+                val launcher = javaLauncher.orNull
+                if (launcher != null) {
+                    println("Testing with Java: ${launcher.metadata.installationPath} (version: ${launcher.metadata.languageVersion})")
+                } else {
+                    println("Testing with Java: launcher not set")
+                }
+            }
+        }
+
+        // Print Java toolchain used for running 
+        tasks.withType<JavaExec>().configureEach {
+            doFirst {
+                val launcher = javaLauncher.orNull
+                if (launcher != null) {
+                    println("Running JavaExec with Java: ${launcher.metadata.installationPath} (version: ${launcher.metadata.languageVersion})")
+                } else {
+                    println("Running JavaExec with Java: launcher not set")
+                }
+            }
+        }
+    }
 }

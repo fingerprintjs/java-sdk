@@ -9,9 +9,11 @@ plugins {
 }
 
 java {
-    // Target the earliest support Java version
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(
+            findProperty("javaVersion")?.toString() ?: "11"
+        ))
+    }
 }
 
 repositories {
@@ -54,6 +56,11 @@ tasks.register<JavaExec>("runFunctionalTests") {
     classpath = sourceSets["main"].runtimeClasspath
     environment(loadEnv())
     jvmArgs("-ea")
+    javaLauncher.set(
+        javaToolchains.launcherFor {
+            languageVersion.set(JavaLanguageVersion.of(findProperty("javaVersion")?.toString() ?: "11"))
+        }
+    )
 }
 
 tasks.named("runFunctionalTests") {
