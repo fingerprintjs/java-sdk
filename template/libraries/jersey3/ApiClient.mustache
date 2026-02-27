@@ -16,9 +16,9 @@ import {{javaxPackage}}.ws.rs.core.Response.Status;
 {{#hasOAuthMethods}}
 import com.github.scribejava.core.model.OAuth2AccessToken;
 {{/hasOAuthMethods}}
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
-import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -1410,7 +1410,8 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
     clientConfig.register(MultiPartFeature.class);
     clientConfig.register(json);
     clientConfig.register(JacksonFeature.class);
-    clientConfig.property(HttpUrlConnectorProvider.SET_METHOD_WORKAROUND, true);
+    // Use the ApacheConnectorProvider to enable PATCH method support
+    clientConfig.connectorProvider(new ApacheConnectorProvider());
     // turn off compliance validation to be able to send payloads with DELETE calls
     clientConfig.property(ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true);
     applyDebugSetting(clientConfig);
