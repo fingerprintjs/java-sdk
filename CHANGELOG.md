@@ -1,5 +1,11 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.0.0-rc.1
+
+### Patch Changes
+
+- Change root package from `com.fingerprint` to `com.fingerprint.v4` ([7ba8295](https://github.com/fingerprintjs/java-sdk/commit/7ba8295154ef5389958f8d94e3e7f8b7f60b7aa7))
+
 ## 8.0.0-rc.0
 
 ### Major Changes
