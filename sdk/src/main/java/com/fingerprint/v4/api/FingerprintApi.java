@@ -22,7 +22,7 @@ import java.util.Map;
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
     comments = "Generator version: 7.16.0")
 public class FingerprintApi {
-  public static final String INTEGRATION_INFO = "fingerprint-pro-server-java-sdk/8.0.0-rc.1";
+  public static final String INTEGRATION_INFO = "fingerprint-pro-server-java-sdk/8.0.0-rc.2";
   private ApiClient apiClient;
 
   public FingerprintApi() {

@@ -1,5 +1,11 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.0.0-rc.2
+
+### Patch Changes
+
+- Update build to support jitpack build environment ([c9f6c5c](https://github.com/fingerprintjs/java-sdk/commit/c9f6c5c0f590d9e2c49808af4f6337fa1773ffb1))
+
 ## 8.0.0-rc.1
 
 ### Patch Changes
