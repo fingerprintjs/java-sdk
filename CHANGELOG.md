@@ -1,5 +1,11 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.0.0-rc.3
+
+### Patch Changes
+
+- fix jitpack env var check to ignore case ([d1369c5](https://github.com/fingerprintjs/java-sdk/commit/d1369c5c4bf79b2fd9faf99e0a65ddd431a22238))
+
 ## 8.0.0-rc.2
 
 ### Patch Changes
