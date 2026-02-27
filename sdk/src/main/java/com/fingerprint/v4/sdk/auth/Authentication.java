@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,25 +10,31 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk.auth;
 
-import com.fingerprint.v4.sdk.Pair;
 import com.fingerprint.v4.sdk.ApiException;
-
+import com.fingerprint.v4.sdk.Pair;
 import java.net.URI;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public interface Authentication {
-    /**
-     * Apply authentication settings to header and query params.
-     *
-     * @param queryParams List of query parameters
-     * @param headerParams Map of header parameters
-     * @param cookieParams Map of cookie parameters
-     */
-    void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams, String payload, String method, URI uri) throws ApiException;
-
+  /**
+   * Apply authentication settings to header and query params.
+   *
+   * @param queryParams List of query parameters
+   * @param headerParams Map of header parameters
+   * @param cookieParams Map of cookie parameters
+   */
+  void applyToParams(
+      List<Pair> queryParams,
+      Map<String, String> headerParams,
+      Map<String, String> cookieParams,
+      String payload,
+      String method,
+      URI uri)
+      throws ApiException;
 }

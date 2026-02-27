@@ -25,6 +25,7 @@ Extended bot information.
 | SIGNED | "signed" |
 | SPOOFED | "spoofed" |
 | UNKNOWN | "unknown" |
+| UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED | "unsupported_value_sdk_upgrade_required" |
 
 
 
@@ -35,6 +36,7 @@ Extended bot information.
 | LOW | "low" |
 | MEDIUM | "medium" |
 | HIGH | "high" |
+| UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED | "unsupported_value_sdk_upgrade_required" |
 
 
 

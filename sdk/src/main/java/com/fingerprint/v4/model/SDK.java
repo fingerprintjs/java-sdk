@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,25 +10,16 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.Integration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Contains information about the SDK used to perform the request.
@@ -38,19 +29,23 @@ import com.fingerprint.v4.sdk.JSON;
   SDK.JSON_PROPERTY_VERSION,
   SDK.JSON_PROPERTY_INTEGRATIONS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class SDK {
   /**
    * Platform of the SDK used for the identification request.
    */
   public enum PlatformEnum {
     JS(String.valueOf("js")),
-    
+
     ANDROID(String.valueOf("android")),
-    
+
     IOS(String.valueOf("ios")),
-    
-    UNKNOWN(String.valueOf("unknown"));
+
+    UNKNOWN(String.valueOf("unknown")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -75,24 +70,20 @@ public class SDK {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 
   public static final String JSON_PROPERTY_PLATFORM = "platform";
-  @jakarta.annotation.Nonnull
-  private PlatformEnum platform;
+  @jakarta.annotation.Nonnull private PlatformEnum platform;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  @jakarta.annotation.Nonnull
-  private String version;
+  @jakarta.annotation.Nonnull private String version;
 
   public static final String JSON_PROPERTY_INTEGRATIONS = "integrations";
-  @jakarta.annotation.Nullable
-  private List<Integration> integrations = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<Integration> integrations = new ArrayList<>();
 
-  public SDK() { 
-  }
+  public SDK() {}
 
   public SDK platform(@jakarta.annotation.Nonnull PlatformEnum platform) {
     this.platform = platform;
@@ -106,11 +97,9 @@ public class SDK {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_PLATFORM, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public PlatformEnum getPlatform() {
     return platform;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PLATFORM, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -118,31 +107,27 @@ public class SDK {
     this.platform = platform;
   }
 
-
   public SDK version(@jakarta.annotation.Nonnull String version) {
     this.version = version;
     return this;
   }
 
   /**
-   * Version string of the SDK used for the identification request. For example: `\"3.12.1\"` 
+   * Version string of the SDK used for the identification request. For example: `\"3.12.1\"`
    * @return version
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getVersion() {
     return version;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVersion(@jakarta.annotation.Nonnull String version) {
     this.version = version;
   }
-
 
   public SDK integrations(@jakarta.annotation.Nullable List<Integration> integrations) {
     this.integrations = integrations;
@@ -164,18 +149,15 @@ public class SDK {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_INTEGRATIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<Integration> getIntegrations() {
     return integrations;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_INTEGRATIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIntegrations(@jakarta.annotation.Nullable List<Integration> integrations) {
     this.integrations = integrations;
   }
-
 
   /**
    * Return true if this SDK object is equal to o.
@@ -189,9 +171,9 @@ public class SDK {
       return false;
     }
     SDK SDK = (SDK) o;
-    return Objects.equals(this.platform, SDK.platform) &&
-        Objects.equals(this.version, SDK.version) &&
-        Objects.equals(this.integrations, SDK.integrations);
+    return Objects.equals(this.platform, SDK.platform)
+        && Objects.equals(this.version, SDK.version)
+        && Objects.equals(this.integrations, SDK.integrations);
   }
 
   @Override
@@ -220,6 +202,4 @@ public class SDK {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,100 +10,103 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")public class Configuration {
-    private static final AtomicReference<ApiClient> defaultApiClient = new AtomicReference<>();
-    private static volatile Supplier<ApiClient> apiClientFactory = ApiClient::new;
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
+public class Configuration {
+  private static final AtomicReference<ApiClient> defaultApiClient = new AtomicReference<>();
+  private static volatile Supplier<ApiClient> apiClientFactory = ApiClient::new;
 
-    /**
-     * Get the default API client, which would be used when creating API
-     * instances without providing an API client.
-     *
-     * @return Default API client
-     */
-    public static ApiClient getDefaultApiClient() {
-        ApiClient client = defaultApiClient.get();
-        if (client == null) {
-            client = defaultApiClient.updateAndGet(val -> {
+  /**
+   * Get the default API client, which would be used when creating API
+   * instances without providing an API client.
+   *
+   * @return Default API client
+   */
+  public static ApiClient getDefaultApiClient() {
+    ApiClient client = defaultApiClient.get();
+    if (client == null) {
+      client =
+          defaultApiClient.updateAndGet(
+              val -> {
                 if (val != null) { // changed by another thread
-                    return val;
+                  return val;
                 }
                 return apiClientFactory.get();
-            });
-        }
-        return client;
+              });
     }
+    return client;
+  }
 
-    public static ApiClient getDefaultApiClient(String apiKey, Region region) {
-        ApiClient client = getDefaultApiClient();
-        client.setBearerToken(apiKey);
-        client.setBasePath(region.toString());
-        return client;
-    }
+  public static ApiClient getDefaultApiClient(String apiKey, Region region) {
+    ApiClient client = getDefaultApiClient();
+    client.setBearerToken(apiKey);
+    client.setBasePath(region.toString());
+    return client;
+  }
 
-    public static ApiClient getDefaultApiClient(String apiKey, String regionStr) {
-        ApiClient client = getDefaultApiClient();
-        switch (regionStr) {
-            case "eu":
-            case "EU":
-            case "EUROPE":
-            case "europe":
-                client.setBasePath(Region.EUROPE.toString());
-                break;
-            case "global":
-            case "GLOBAL":
-            case "us":
-            case "US":
-            case "usa":
-            case "USA":
-            case "America":
-            case "america":
-            case "AMERICA":
-                client.setBasePath(Region.GLOBAL.toString());
-                break;
-            case "asia":
-            case "Asia":
-            case "as":
-            case "AS":
-                client.setBasePath(Region.ASIA.toString());
-                break;
-            default:
-                client.setBasePath(regionStr);
-        }
-        client.setBearerToken(apiKey);
-        return client;
-    }
-
-    public static ApiClient getDefaultApiClient(String apiKey) {
-        ApiClient client = getDefaultApiClient();
-        client.setBearerToken(apiKey);
+  public static ApiClient getDefaultApiClient(String apiKey, String regionStr) {
+    ApiClient client = getDefaultApiClient();
+    switch (regionStr) {
+      case "eu":
+      case "EU":
+      case "EUROPE":
+      case "europe":
+        client.setBasePath(Region.EUROPE.toString());
+        break;
+      case "global":
+      case "GLOBAL":
+      case "us":
+      case "US":
+      case "usa":
+      case "USA":
+      case "America":
+      case "america":
+      case "AMERICA":
         client.setBasePath(Region.GLOBAL.toString());
-        return client;
+        break;
+      case "asia":
+      case "Asia":
+      case "as":
+      case "AS":
+        client.setBasePath(Region.ASIA.toString());
+        break;
+      default:
+        client.setBasePath(regionStr);
     }
+    client.setBearerToken(apiKey);
+    return client;
+  }
 
-    /**
-     * Set the default API client, which would be used when creating API
-     * instances without providing an API client.
-     *
-     * @param apiClient API client
-     */
-    public static void setDefaultApiClient(ApiClient apiClient) {
-        defaultApiClient.set(apiClient);
-    }
+  public static ApiClient getDefaultApiClient(String apiKey) {
+    ApiClient client = getDefaultApiClient();
+    client.setBearerToken(apiKey);
+    client.setBasePath(Region.GLOBAL.toString());
+    return client;
+  }
 
-    /**
-     * set the callback used to create new ApiClient objects
-     */
-    public static void setApiClientFactory(Supplier<ApiClient> factory) {
-        apiClientFactory = Objects.requireNonNull(factory);
-    }
+  /**
+   * Set the default API client, which would be used when creating API
+   * instances without providing an API client.
+   *
+   * @param apiClient API client
+   */
+  public static void setDefaultApiClient(ApiClient apiClient) {
+    defaultApiClient.set(apiClient);
+  }
 
-    private Configuration() {
-    }
+  /**
+   * set the callback used to create new ApiClient objects
+   */
+  public static void setApiClientFactory(Supplier<ApiClient> factory) {
+    apiClientFactory = Objects.requireNonNull(factory);
+  }
+
+  private Configuration() {}
 }

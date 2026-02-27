@@ -17,7 +17,7 @@
 
 | Name | Value |
 |---- | -----|{{#allowableValues}}{{#enumVars}}
-| {{name}} | {{{value}}} |{{/enumVars}}{{/allowableValues}}
+{{^-last}}| {{name}} | {{{value}}} |{{/-last}}{{#-last}}| UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED | {{#isString}}"unsupported_value_sdk_upgrade_required"{{/isString}}{{#isInteger}}Integer.MAX_VALUE{{/isInteger}} |{{/-last}}{{/enumVars}}{{/allowableValues}}
 {{/isEnum}}{{/vars}}
 {{#vendorExtensions.x-implements.0}}
 

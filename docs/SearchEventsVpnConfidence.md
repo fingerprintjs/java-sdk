@@ -17,5 +17,7 @@ Filter events by VPN Detection result confidence level.
 
 * `LOW` (value: `"low"`)
 
+* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `"unsupported_value_sdk_upgrade_required"`)
+
 
 

@@ -16,5 +16,7 @@ Filter events by the SDK Platform associated with the identification event (`sdk
 
 * `IOS` (value: `"ios"`)
 
+* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `"unsupported_value_sdk_upgrade_required"`)
+
 
 

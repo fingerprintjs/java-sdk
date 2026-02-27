@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,44 +10,28 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.IPInfoV4;
-import com.fingerprint.v4.model.IPInfoV6;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * Details about the request IP address. Has separate fields for v4 and v6 IP address versions.
  */
-@JsonPropertyOrder({
-  IPInfo.JSON_PROPERTY_V4,
-  IPInfo.JSON_PROPERTY_V6
-})
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@JsonPropertyOrder({IPInfo.JSON_PROPERTY_V4, IPInfo.JSON_PROPERTY_V6})
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class IPInfo {
   public static final String JSON_PROPERTY_V4 = "v4";
-  @jakarta.annotation.Nullable
-  private IPInfoV4 v4;
+  @jakarta.annotation.Nullable private IPInfoV4 v4;
 
   public static final String JSON_PROPERTY_V6 = "v6";
-  @jakarta.annotation.Nullable
-  private IPInfoV6 v6;
+  @jakarta.annotation.Nullable private IPInfoV6 v6;
 
-  public IPInfo() { 
-  }
+  public IPInfo() {}
 
   public IPInfo v4(@jakarta.annotation.Nullable IPInfoV4 v4) {
     this.v4 = v4;
@@ -61,18 +45,15 @@ public class IPInfo {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_V4, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public IPInfoV4 getV4() {
     return v4;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_V4, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setV4(@jakarta.annotation.Nullable IPInfoV4 v4) {
     this.v4 = v4;
   }
-
 
   public IPInfo v6(@jakarta.annotation.Nullable IPInfoV6 v6) {
     this.v6 = v6;
@@ -86,18 +67,15 @@ public class IPInfo {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_V6, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public IPInfoV6 getV6() {
     return v6;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_V6, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setV6(@jakarta.annotation.Nullable IPInfoV6 v6) {
     this.v6 = v6;
   }
-
 
   /**
    * Return true if this IPInfo object is equal to o.
@@ -111,8 +89,7 @@ public class IPInfo {
       return false;
     }
     IPInfo ipInfo = (IPInfo) o;
-    return Objects.equals(this.v4, ipInfo.v4) &&
-        Objects.equals(this.v6, ipInfo.v6);
+    return Objects.equals(this.v4, ipInfo.v4) && Objects.equals(this.v6, ipInfo.v6);
   }
 
   @Override
@@ -140,6 +117,4 @@ public class IPInfo {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

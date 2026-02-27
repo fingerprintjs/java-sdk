@@ -1,3 +1,7 @@
+import java.net.URL
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
+
 val projectVersion: String by project
 
 allprojects {
@@ -5,3 +9,128 @@ allprojects {
     version = projectVersion
 }
 
+plugins {
+    alias(libs.plugins.google.osdetector)
+}
+
+// Register formatting tasks for each subproject
+
+val googleJavaFormatExeFile = layout.buildDirectory.file("google-java-format.exe")
+val googleJavaFormatOsSuffixMap = mapOf(
+    "osx" to "darwin",
+    "linux" to "linux",
+    "windows" to "windows",
+)
+val googleJavaFormatArchSuffixMap = mapOf(
+    "x86_64" to "x86-64",
+    "aarch_64" to "arm64"
+)
+val googleJavaFormatBinarySuffixMap = mapOf(
+    "osx" to "",
+    "linux" to "",
+    "windows" to ".exe"
+)
+
+tasks.register("downloadGoogleJavaFormat") {
+    val osSuffix = googleJavaFormatOsSuffixMap[osdetector.os]
+    val archSuffix = googleJavaFormatArchSuffixMap[osdetector.arch]
+    val binarySuffix = googleJavaFormatBinarySuffixMap[osdetector.os]
+    val googleJavaFormatVersion = libs.versions.google.java.format.get()
+    val downloadUrl = "https://github.com/google/google-java-format/releases/download/v$googleJavaFormatVersion/google-java-format_${osSuffix}-${archSuffix}${binarySuffix}"
+    outputs.file(googleJavaFormatExeFile)
+
+    doLast {
+        val file = googleJavaFormatExeFile.get().asFile
+        if (!file.exists()) {
+            println("Downloading google-java-format for $osSuffix-$archSuffix")
+            URL(downloadUrl).openStream().use { input ->
+                Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            }
+            file.setExecutable(true)
+        } else {
+            println("google-java-format already downloaded")
+        }
+    }
+}
+
+
+fun Project.registerFormatTasks() {
+    val inputFiles = fileTree("src") {
+        include("**/*.java")
+    }.files.map { it.absolutePath }
+
+    tasks.register("format") {
+        dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
+
+        doLast {
+            // First, fix the imports
+            exec {
+                executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
+                args = listOf("--replace", "--fix-imports-only") + inputFiles
+            }
+
+            // Second, format the code. This ensures that the removal of unused imports does not
+            // introduce the need to run another formatting pass to pass the formatting checks.
+            exec {
+                executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
+                args = listOf("--replace", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
+            }
+        }
+    }
+
+    tasks.register<Exec>("checkFormat") {
+        dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
+
+        doFirst {
+            println("The following source files need to be formatted:")
+        }
+
+        executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
+        args = listOf("--dry-run", "--set-exit-if-changed", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
+    }
+}
+
+subprojects {
+    registerFormatTasks()
+
+    plugins.withType<org.gradle.api.plugins.JavaPlugin> {
+        tasks.withType<JavaCompile> {
+            // Target java 11
+            options.release = 11
+
+            // Enable all warnings and fail the build for any warnings
+            options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
+        }
+
+        // Print Java toolchain for compilation
+        tasks.withType<JavaCompile>().configureEach {
+            doFirst {
+                println("Compiling with Java: ${javaCompiler.get().metadata.installationPath} (version: ${javaCompiler.get().metadata.languageVersion})")
+            }
+        }
+
+        // Print Java toolchain used for running tests
+        tasks.withType<Test>().configureEach {
+            doFirst {
+                val launcher = javaLauncher.orNull
+                if (launcher != null) {
+                    println("Testing with Java: ${launcher.metadata.installationPath} (version: ${launcher.metadata.languageVersion})")
+                } else {
+                    println("Testing with Java: launcher not set")
+                }
+            }
+        }
+
+        // Print Java toolchain used for running 
+        tasks.withType<JavaExec>().configureEach {
+            doFirst {
+                val launcher = javaLauncher.orNull
+                if (launcher != null) {
+                    println("Running JavaExec with Java: ${launcher.metadata.installationPath} (version: ${launcher.metadata.languageVersion})")
+                } else {
+                    println("Running JavaExec with Java: launcher not set")
+                }
+            }
+        }
+    }
+}

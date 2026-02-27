@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * Browser-reported touch capabilities.
@@ -35,22 +25,20 @@ import com.fingerprint.v4.sdk.JSON;
   TouchSupport.JSON_PROPERTY_TOUCH_START,
   TouchSupport.JSON_PROPERTY_MAX_TOUCH_POINTS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class TouchSupport {
   public static final String JSON_PROPERTY_TOUCH_EVENT = "touch_event";
-  @jakarta.annotation.Nullable
-  private Boolean touchEvent;
+  @jakarta.annotation.Nullable private Boolean touchEvent;
 
   public static final String JSON_PROPERTY_TOUCH_START = "touch_start";
-  @jakarta.annotation.Nullable
-  private Boolean touchStart;
+  @jakarta.annotation.Nullable private Boolean touchStart;
 
   public static final String JSON_PROPERTY_MAX_TOUCH_POINTS = "max_touch_points";
-  @jakarta.annotation.Nullable
-  private Long maxTouchPoints;
+  @jakarta.annotation.Nullable private Long maxTouchPoints;
 
-  public TouchSupport() { 
-  }
+  public TouchSupport() {}
 
   public TouchSupport touchEvent(@jakarta.annotation.Nullable Boolean touchEvent) {
     this.touchEvent = touchEvent;
@@ -64,18 +52,15 @@ public class TouchSupport {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TOUCH_EVENT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getTouchEvent() {
     return touchEvent;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TOUCH_EVENT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTouchEvent(@jakarta.annotation.Nullable Boolean touchEvent) {
     this.touchEvent = touchEvent;
   }
-
 
   public TouchSupport touchStart(@jakarta.annotation.Nullable Boolean touchStart) {
     this.touchStart = touchStart;
@@ -89,18 +74,15 @@ public class TouchSupport {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TOUCH_START, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getTouchStart() {
     return touchStart;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TOUCH_START, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTouchStart(@jakarta.annotation.Nullable Boolean touchStart) {
     this.touchStart = touchStart;
   }
-
 
   public TouchSupport maxTouchPoints(@jakarta.annotation.Nullable Long maxTouchPoints) {
     this.maxTouchPoints = maxTouchPoints;
@@ -114,18 +96,15 @@ public class TouchSupport {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_MAX_TOUCH_POINTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getMaxTouchPoints() {
     return maxTouchPoints;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_MAX_TOUCH_POINTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMaxTouchPoints(@jakarta.annotation.Nullable Long maxTouchPoints) {
     this.maxTouchPoints = maxTouchPoints;
   }
-
 
   /**
    * Return true if this TouchSupport object is equal to o.
@@ -139,9 +118,9 @@ public class TouchSupport {
       return false;
     }
     TouchSupport touchSupport = (TouchSupport) o;
-    return Objects.equals(this.touchEvent, touchSupport.touchEvent) &&
-        Objects.equals(this.touchStart, touchSupport.touchStart) &&
-        Objects.equals(this.maxTouchPoints, touchSupport.maxTouchPoints);
+    return Objects.equals(this.touchEvent, touchSupport.touchEvent)
+        && Objects.equals(this.touchStart, touchSupport.touchStart)
+        && Objects.equals(this.maxTouchPoints, touchSupport.maxTouchPoints);
   }
 
   @Override
@@ -170,6 +149,4 @@ public class TouchSupport {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

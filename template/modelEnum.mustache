@@ -34,8 +34,8 @@ import java.util.Locale;
   {{#withXml}}
   @XmlEnumValue({{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}}{{#isLong}}"{{/isLong}}{{#isFloat}}"{{/isFloat}}{{{value}}}{{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}}{{#isLong}}"{{/isLong}}{{#isFloat}}"{{/isFloat}})
   {{/withXml}}
-  {{{name}}}({{{value}}}){{^-last}},
-  {{/-last}}{{#-last}};{{/-last}}{{/enumVars}}{{/allowableValues}}
+  {{^-last}}{{{name}}}({{{value}}}),{{/-last}}
+  {{#-last}}UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED({{#isString}}"unsupported_value_sdk_upgrade_required"{{/isString}}{{#isInteger}}Integer.MAX_VALUE{{/isInteger}});{{/-last}}{{/enumVars}}{{/allowableValues}}
 
   private {{{dataType}}} value;
 
@@ -64,7 +64,7 @@ import java.util.Locale;
         return b;
       }
     }
-    {{#isNullable}}return null;{{/isNullable}}{{^isNullable}}{{#enumUnknownDefaultCase}}{{#allowableValues}}{{#enumVars}}{{#-last}}return {{{name}}};{{/-last}}{{/enumVars}}{{/allowableValues}}{{/enumUnknownDefaultCase}}{{^enumUnknownDefaultCase}}throw new IllegalArgumentException("Unexpected value '" + value + "'");{{/enumUnknownDefaultCase}}{{/isNullable}}
+    {{#isNullable}}return null;{{/isNullable}}{{^isNullable}}{{#enumUnknownDefaultCase}}return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;{{/enumUnknownDefaultCase}}{{^enumUnknownDefaultCase}}throw new IllegalArgumentException("Unexpected value '" + value + "'");{{/enumUnknownDefaultCase}}{{/isNullable}}
   }
 {{#gson}}
 

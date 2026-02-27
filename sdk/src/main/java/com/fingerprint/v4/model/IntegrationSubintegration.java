@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,13 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.Objects;
 
 /**
  * IntegrationSubintegration
@@ -35,18 +26,17 @@ import com.fingerprint.v4.sdk.JSON;
   IntegrationSubintegration.JSON_PROPERTY_VERSION
 })
 @JsonTypeName("Integration_subintegration")
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class IntegrationSubintegration {
   public static final String JSON_PROPERTY_NAME = "name";
-  @jakarta.annotation.Nullable
-  private String name;
+  @jakarta.annotation.Nullable private String name;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  @jakarta.annotation.Nullable
-  private String version;
+  @jakarta.annotation.Nullable private String version;
 
-  public IntegrationSubintegration() { 
-  }
+  public IntegrationSubintegration() {}
 
   public IntegrationSubintegration name(@jakarta.annotation.Nullable String name) {
     this.name = name;
@@ -60,18 +50,15 @@ public class IntegrationSubintegration {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getName() {
     return name;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(@jakarta.annotation.Nullable String name) {
     this.name = name;
   }
-
 
   public IntegrationSubintegration version(@jakarta.annotation.Nullable String version) {
     this.version = version;
@@ -85,18 +72,15 @@ public class IntegrationSubintegration {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVersion() {
     return version;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVersion(@jakarta.annotation.Nullable String version) {
     this.version = version;
   }
-
 
   /**
    * Return true if this Integration_subintegration object is equal to o.
@@ -110,8 +94,8 @@ public class IntegrationSubintegration {
       return false;
     }
     IntegrationSubintegration integrationSubintegration = (IntegrationSubintegration) o;
-    return Objects.equals(this.name, integrationSubintegration.name) &&
-        Objects.equals(this.version, integrationSubintegration.version);
+    return Objects.equals(this.name, integrationSubintegration.name)
+        && Objects.equals(this.version, integrationSubintegration.version);
   }
 
   @Override
@@ -139,6 +123,4 @@ public class IntegrationSubintegration {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

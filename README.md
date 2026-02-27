@@ -107,12 +107,12 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-package main;
+package com.fingerprint.example;
 
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.model.Events;
-import com.fingerprint.v4.model.UpdateEvents;
-import com.fingerprint.v4.model.VisitorsGetResponse;
+import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.model.EventSearch;
+import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Configuration;
@@ -146,9 +146,9 @@ public class FingerprintApiExample {
         FingerprintApi api = new FingerprintApi(client);
         // Get an event with a given requestId
         try {
-            // Fetch the event with a given requestId
-            Event response = api.getEvent(FPJS_EVENT_ID);
-            System.out.println(response.getProducts().toString());
+            // Fetch the event with a given eventId
+            Event event = api.getEvent(FPJS_EVENT_ID);
+            System.out.println(event.getIdentification().getVisitorId());
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.getEvent:" + e.getMessage());
         }
@@ -156,14 +156,14 @@ public class FingerprintApiExample {
         // Search events with custom filters
         try {
             // By visitorId
-            SearchEventsResponse response = api.searchEvents(LIMIT, new FingerprintApi.SearchEventsOptionalParams().setVisitorId(FPJS_VISITOR_ID));
+            EventSearch response = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams().setLimit(LIMIT).setVisitorId(FPJS_VISITOR_ID));
             // Next page
-            // SearchEventsResponse response = api.searchEvents(LIMIT, new FingerprintApi.SearchEventsOptionalParams().setPaginationKey(response.getPaginationKey()).setVisitorId(FPJS_VISITOR_ID));
+            // EventSearch response = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams().setLimit(LIMIT).setPaginationKey(PAGINATION_KEY).setVisitorId(FPJS_VISITOR_ID));
             // Bad bot
-            // SearchEventsResponse response = api.searchEvents(LIMIT, new FingerprintApi.SearchEventsOptionalParams().setBot("bad"));
+            // EventSearch response = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams().setLimit(LIMIT).setBot(SearchEventsBot.BAD));
             // Filtered by IP
-            // SearchEventsResponse response = api.searchEvents(LIMIT, new FingerprintApi.SearchEventsOptionalParams().setIpAddress("192.168.0.1/32"));
-            System.out.println(response.getEvents().toString());
+            // EventSearch response = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams().setLimit(LIMIT).setIpAddress("192.168.0.1/32"));
+            System.out.println(response.getEvents());
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.searchEvents:" + e.getMessage());
         }
@@ -171,7 +171,7 @@ public class FingerprintApiExample {
         // Update an event with a given requestId
         try {
             EventUpdate request = new EventUpdate();
-            request.setLinkedId("myNewLinkedId");
+            request.setLinkedId(FPJS_LINKED_ID);
             api.updateEvent(FPJS_EVENT_ID, request);
         } catch (ApiException e) {
             System.err.println("Exception when calling FingerprintApi.updateEvent:" + e.getMessage());
@@ -191,10 +191,10 @@ public class FingerprintApiExample {
 
 This SDK provides utility methods for decoding [sealed results](https://dev.fingerprint.com/docs/sealed-client-results).
 ```java
-package com.fingerprint.v4.example;
+package com.fingerprint.example;
 
 import com.fingerprint.v4.Sealed;
-import com.fingerprint.v4.model.EventsGetResponse;
+import com.fingerprint.v4.model.Event;
 
 import java.util.Base64;
 
@@ -206,7 +206,7 @@ public class SealedResults {
         // Base64 encoded key generated in the dashboard.
         String SEALED_KEY = System.getenv("BASE64_KEY");
 
-        final EventsGetResponse event = Sealed.unsealEventResponse(
+        final Event event = Sealed.unsealEventResponse(
                 Base64.getDecoder().decode(SEALED_RESULT),
                 // You can provide more than one key to support key rotation. The SDK will try to decrypt the result with each key.
                 new Sealed.DecryptionKey[]{
@@ -220,7 +220,6 @@ public class SealedResults {
         // Do something with unsealed response, e.g: send it back to the frontend.
     }
 }
-
 ```
 To learn more, see the [Sealed results example](/examples/src/main/java/com/fingerprint/example/SealedResults.java).
 
@@ -229,6 +228,8 @@ This SDK provides utility method for verifying the HMAC signature of the incomin
 
 Here is an example implementation using Spring Boot:
 ```java
+package com.fingerprint.example;
+
 import com.fingerprint.v4.sdk.WebhookValidation;
 
 @RestController
@@ -317,15 +318,6 @@ Class | Method | HTTP request | Description
  - [VpnMethods](docs/VpnMethods.md)
  - [WebGlBasics](docs/WebGlBasics.md)
  - [WebGlExtensions](docs/WebGlExtensions.md)
-
-
-## Documentation for Authorization
-
-Authentication schemes defined for the API:
-### bearerAuth
-
-
-- **Type**: HTTP basic authentication
 
 
 ## Documentation for sealed results

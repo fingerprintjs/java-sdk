@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
 
 /**
  * Extended bot information.
@@ -38,35 +30,35 @@ import com.fingerprint.v4.sdk.JSON;
   BotInfo.JSON_PROPERTY_IDENTITY,
   BotInfo.JSON_PROPERTY_CONFIDENCE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class BotInfo {
   public static final String JSON_PROPERTY_CATEGORY = "category";
-  @jakarta.annotation.Nonnull
-  private String category;
+  @jakarta.annotation.Nonnull private String category;
 
   public static final String JSON_PROPERTY_PROVIDER = "provider";
-  @jakarta.annotation.Nonnull
-  private String provider;
+  @jakarta.annotation.Nonnull private String provider;
 
   public static final String JSON_PROPERTY_PROVIDER_URL = "provider_url";
-  @jakarta.annotation.Nullable
-  private String providerUrl;
+  @jakarta.annotation.Nullable private String providerUrl;
 
   public static final String JSON_PROPERTY_NAME = "name";
-  @jakarta.annotation.Nonnull
-  private String name;
+  @jakarta.annotation.Nonnull private String name;
 
   /**
-   * The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
+   * The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity.
    */
   public enum IdentityEnum {
     VERIFIED(String.valueOf("verified")),
-    
+
     SIGNED(String.valueOf("signed")),
-    
+
     SPOOFED(String.valueOf("spoofed")),
-    
-    UNKNOWN(String.valueOf("unknown"));
+
+    UNKNOWN(String.valueOf("unknown")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -91,23 +83,24 @@ public class BotInfo {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 
   public static final String JSON_PROPERTY_IDENTITY = "identity";
-  @jakarta.annotation.Nonnull
-  private IdentityEnum identity;
+  @jakarta.annotation.Nonnull private IdentityEnum identity;
 
   /**
    * Confidence level of the bot identification.
    */
   public enum ConfidenceEnum {
     LOW(String.valueOf("low")),
-    
+
     MEDIUM(String.valueOf("medium")),
-    
-    HIGH(String.valueOf("high"));
+
+    HIGH(String.valueOf("high")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -132,16 +125,14 @@ public class BotInfo {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 
   public static final String JSON_PROPERTY_CONFIDENCE = "confidence";
-  @jakarta.annotation.Nonnull
-  private ConfidenceEnum confidence;
+  @jakarta.annotation.Nonnull private ConfidenceEnum confidence;
 
-  public BotInfo() { 
-  }
+  public BotInfo() {}
 
   public BotInfo category(@jakarta.annotation.Nonnull String category) {
     this.category = category;
@@ -155,18 +146,15 @@ public class BotInfo {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_CATEGORY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getCategory() {
     return category;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CATEGORY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCategory(@jakarta.annotation.Nonnull String category) {
     this.category = category;
   }
-
 
   public BotInfo provider(@jakarta.annotation.Nonnull String provider) {
     this.provider = provider;
@@ -180,18 +168,15 @@ public class BotInfo {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getProvider() {
     return provider;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setProvider(@jakarta.annotation.Nonnull String provider) {
     this.provider = provider;
   }
-
 
   public BotInfo providerUrl(@jakarta.annotation.Nullable String providerUrl) {
     this.providerUrl = providerUrl;
@@ -205,18 +190,15 @@ public class BotInfo {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PROVIDER_URL, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getProviderUrl() {
     return providerUrl;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PROVIDER_URL, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProviderUrl(@jakarta.annotation.Nullable String providerUrl) {
     this.providerUrl = providerUrl;
   }
-
 
   public BotInfo name(@jakarta.annotation.Nonnull String name) {
     this.name = name;
@@ -230,11 +212,9 @@ public class BotInfo {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public String getName() {
     return name;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -242,31 +222,27 @@ public class BotInfo {
     this.name = name;
   }
 
-
   public BotInfo identity(@jakarta.annotation.Nonnull IdentityEnum identity) {
     this.identity = identity;
     return this;
   }
 
   /**
-   * The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity. 
+   * The verification status of the bot's identity:  * `verified` - well-known bot with publicly verifiable identity, directed by the bot provider.  * `signed` - bot that signs its platform via Web Bot Auth, directed by the bot provider’s customers.  * `spoofed` - bot that claims a public identity but fails verification.  * `unknown` - bot that does not publish a verifiable identity.
    * @return identity
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_IDENTITY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public IdentityEnum getIdentity() {
     return identity;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_IDENTITY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setIdentity(@jakarta.annotation.Nonnull IdentityEnum identity) {
     this.identity = identity;
   }
-
 
   public BotInfo confidence(@jakarta.annotation.Nonnull ConfidenceEnum confidence) {
     this.confidence = confidence;
@@ -280,18 +256,15 @@ public class BotInfo {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_CONFIDENCE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public ConfidenceEnum getConfidence() {
     return confidence;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CONFIDENCE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setConfidence(@jakarta.annotation.Nonnull ConfidenceEnum confidence) {
     this.confidence = confidence;
   }
-
 
   /**
    * Return true if this BotInfo object is equal to o.
@@ -305,12 +278,12 @@ public class BotInfo {
       return false;
     }
     BotInfo botInfo = (BotInfo) o;
-    return Objects.equals(this.category, botInfo.category) &&
-        Objects.equals(this.provider, botInfo.provider) &&
-        Objects.equals(this.providerUrl, botInfo.providerUrl) &&
-        Objects.equals(this.name, botInfo.name) &&
-        Objects.equals(this.identity, botInfo.identity) &&
-        Objects.equals(this.confidence, botInfo.confidence);
+    return Objects.equals(this.category, botInfo.category)
+        && Objects.equals(this.provider, botInfo.provider)
+        && Objects.equals(this.providerUrl, botInfo.providerUrl)
+        && Objects.equals(this.name, botInfo.name)
+        && Objects.equals(this.identity, botInfo.identity)
+        && Objects.equals(this.confidence, botInfo.confidence);
   }
 
   @Override
@@ -342,6 +315,4 @@ public class BotInfo {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-
