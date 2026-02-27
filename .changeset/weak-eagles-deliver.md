@@ -8,6 +8,7 @@ Migrate to Server API v4
 
 - SDK version bumped to `8.0.0`
 - Server API version upgraded from v3 to v4
+- Changed root package for the SDK from `com.fingerprint` to `com.fingerprint.v4`
 - Removed `GetVisits` and `GetRelatedVisitors` operations.
 - Improved models used by the `GetEvent` and `SearchEvents` operations to use a more concise shape and clearer names.
 

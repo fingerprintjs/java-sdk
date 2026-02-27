@@ -55,12 +55,12 @@ openApiGenerate {
     generatorName.set("java")
     inputSpec.set("$rootDir/res/fingerprint-server-api.yaml")
     outputDir.set(layout.buildDirectory.dir("generated").get().asFile.path)
-    groupId.set("com.fingerprint")
+    groupId.set("com.github.fingerprintjs")
     id.set("java-sdk")
     version.set(projectVersion)
-    apiPackage.set("com.fingerprint.api")
-    modelPackage.set("com.fingerprint.model")
-    invokerPackage.set("com.fingerprint.sdk")
+    apiPackage.set("com.fingerprint.v4.api")
+    modelPackage.set("com.fingerprint.v4.model")
+    invokerPackage.set("com.fingerprint.v4.sdk")
     library.set("jersey3")
     templateDir.set("$rootDir/template")
 
@@ -85,8 +85,8 @@ tasks.register("removeDocs") {
 
 tasks.register("removeClasses") {
     doLast {
-        File("$rootDir/sdk/src/main/java/com/fingerprint/model").deleteRecursively()
-        File("$rootDir/sdk/src/main/java/com/fingerprint/api").deleteRecursively()
+        File("$rootDir/sdk/src/main/java/com/fingerprint/v4/model").deleteRecursively()
+        File("$rootDir/sdk/src/main/java/com/fingerprint/v4/api").deleteRecursively()
     }
 }
 

@@ -1,6 +1,6 @@
 package com.fingerprint.example;
 
-import com.fingerprint.sdk.WebhookValidation;
+import com.fingerprint.v4.sdk.WebhookValidation;
 
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;

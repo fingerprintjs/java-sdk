@@ -1,9 +1,9 @@
 package com.fingerprint.example;
 
-import com.fingerprint.api.FingerprintApi;
-import com.fingerprint.model.*;
-import com.fingerprint.sdk.ApiException;
-import com.fingerprint.sdk.Configuration;
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.model.*;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Configuration;
 
 import java.sql.Timestamp;
 import java.time.Instant;

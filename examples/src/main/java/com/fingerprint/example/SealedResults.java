@@ -1,7 +1,7 @@
 package com.fingerprint.example;
 
-import com.fingerprint.Sealed;
-import com.fingerprint.model.Event;
+import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.Sealed;
 
 import java.util.Base64;
 
