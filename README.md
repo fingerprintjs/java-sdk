@@ -257,6 +257,32 @@ class WebhookController {
 }
 ```
 
+## Configure an outbound HTTP proxy
+
+To add an outbound HTTP proxy for the API client, use `ClientConfig`:
+```java
+
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
+import com.fingerprint.v4.sdk.*;
+import com.fingerprint.v4.api.FingerprintApi;
+
+// ...
+
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+ClientConfig clientConfig = defaultClient.getClientConfig();
+
+// The following properties configure the ApacheConnectorProvider, which is the default.
+clientConfig.property(ClientProperties.PROXY_URI, "http://proxy_url_here");
+clientConfig.property(ClientProperties.PROXY_USERNAME, "proxy_username");
+clientConfig.property(ClientProperties.PROXY_PASSWORD, "proxy_password");
+
+defaultClient.setClientConfig(clientConfig);
+
+FingerprintApi apiInstance = new FingerprintApi(defaultClient);
+
+```
+
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://api.fpjs.io/v4*
