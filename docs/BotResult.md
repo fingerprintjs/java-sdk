@@ -16,5 +16,7 @@ Bot detection result:
 
 * `NOT_DETECTED` (value: `"not_detected"`)
 
+* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `"unsupported_value_sdk_upgrade_required"`)
+
 
 

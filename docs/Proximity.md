@@ -27,6 +27,7 @@ Proximity ID represents a fixed geographical zone in a discrete global grid with
 | NUMBER_3300 | 3300 |
 | NUMBER_8500 | 8500 |
 | NUMBER_22500 | 22500 |
+| UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED | Integer.MAX_VALUE |
 
 
 

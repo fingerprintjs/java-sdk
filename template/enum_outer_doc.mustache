@@ -6,5 +6,5 @@
 ## Enum
 
 {{#allowableValues}}{{#enumVars}}
-* `{{name}}` (value: `{{{value}}}`)
+{{^-last}}* `{{name}}` (value: `{{{value}}}`){{/-last}}{{#-last}}* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `{{#isString}}"unsupported_value_sdk_upgrade_required"{{/isString}}{{#isInteger}}Integer.MAX_VALUE{{/isInteger}}`){{/-last}}
 {{/enumVars}}{{/allowableValues}}

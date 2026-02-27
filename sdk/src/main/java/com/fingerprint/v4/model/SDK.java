@@ -43,7 +43,9 @@ public class SDK {
 
     IOS(String.valueOf("ios")),
 
-    UNKNOWN(String.valueOf("unknown"));
+    UNKNOWN(String.valueOf("unknown")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -68,7 +70,7 @@ public class SDK {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 
