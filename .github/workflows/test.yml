@@ -18,10 +18,22 @@ jobs:
     name: Java ${{ matrix.java }}
     strategy:
       matrix:
-        java: [ '11', '17', '21', '25' ]
+        java: ['11', '17', '21', '25']
 
     steps:
       - uses: actions/checkout@v4
         # Gradle will detect the JVM installation from the ubuntu-latest image and use it
         # includes execution of unit tests
       - run: ./gradlew build -PjavaVersion=${{ matrix.java }} --stacktrace
+
+  jitpack-build:
+    runs-on: ubuntu-latest
+    name: Jitpack build smoke test
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./gradlew clean build -PjavaVersion=11 --stacktrace
+        env:
+          JITPACK: 'TRUE'
+      - run: ./gradlew sdk:publishToMavenLocal --stacktrace
+        env:
+          JITPACK: 'TRUE'

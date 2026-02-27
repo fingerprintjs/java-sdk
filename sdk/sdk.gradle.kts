@@ -84,6 +84,10 @@ openApiGenerate {
 }
 
 tasks.register("removeDocs") {
+    onlyIf {
+        System.getenv("JITPACK") != "TRUE"
+    }
+
     doLast {
         fileTree("$rootDir/docs").files
             .filter { it.isFile && it.name != "DecryptionKey.md" && it.name != "Sealed.md" }
@@ -94,6 +98,10 @@ tasks.register("removeDocs") {
 }
 
 tasks.register("removeClasses") {
+    onlyIf {
+        System.getenv("JITPACK") != "TRUE"
+    }
+
     doLast {
         File("$rootDir/sdk/src/main/java/com/fingerprint/v4/model").deleteRecursively()
         File("$rootDir/sdk/src/main/java/com/fingerprint/v4/api").deleteRecursively()
@@ -101,11 +109,19 @@ tasks.register("removeClasses") {
 }
 
 tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
+    onlyIf {
+        System.getenv("JITPACK") != "TRUE"
+    }
+
     from("$rootDir/.openapi-generator-ignore")
     into(layout.buildDirectory.dir("generated"))
 }
 
 tasks.register("copyGeneratedArtifacts") {
+    onlyIf {
+        System.getenv("JITPACK") != "TRUE"
+    }
+
     finalizedBy("format")
     doLast {
         copy {
@@ -126,6 +142,10 @@ tasks.register("copyGeneratedArtifacts") {
 }
 
 tasks.openApiGenerate {
+    onlyIf {
+        System.getenv("JITPACK") != "TRUE"
+    }
+
     dependsOn("removeDocs", "removeClasses", "copyOpenApiGeneratorIgnore")
     finalizedBy("copyGeneratedArtifacts")
 }
