@@ -40,7 +40,7 @@ tasks.register("downloadGoogleJavaFormat") {
     outputs.file(googleJavaFormatExeFile)
 
     onlyIf {
-        System.getenv("JITPACK") != "TRUE"
+        System.getenv("JITPACK")?.lowercase() != "true"
     }
 
     doLast {
@@ -67,7 +67,7 @@ fun Project.registerFormatTasks() {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
         onlyIf {
-            System.getenv("JITPACK") != "TRUE"
+            System.getenv("JITPACK")?.lowercase() != "true"
         }
 
         doLast {

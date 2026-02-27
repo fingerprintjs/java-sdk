@@ -85,7 +85,7 @@ openApiGenerate {
 
 tasks.register("removeDocs") {
     onlyIf {
-        System.getenv("JITPACK") != "TRUE"
+        System.getenv("JITPACK")?.lowercase() != "true"
     }
 
     doLast {
@@ -99,7 +99,7 @@ tasks.register("removeDocs") {
 
 tasks.register("removeClasses") {
     onlyIf {
-        System.getenv("JITPACK") != "TRUE"
+        System.getenv("JITPACK")?.lowercase() != "true"
     }
 
     doLast {
@@ -110,7 +110,7 @@ tasks.register("removeClasses") {
 
 tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
     onlyIf {
-        System.getenv("JITPACK") != "TRUE"
+        System.getenv("JITPACK")?.lowercase() != "true"
     }
 
     from("$rootDir/.openapi-generator-ignore")
@@ -119,7 +119,7 @@ tasks.register<Copy>("copyOpenApiGeneratorIgnore") {
 
 tasks.register("copyGeneratedArtifacts") {
     onlyIf {
-        System.getenv("JITPACK") != "TRUE"
+        System.getenv("JITPACK")?.lowercase() != "true"
     }
 
     finalizedBy("format")
@@ -143,7 +143,7 @@ tasks.register("copyGeneratedArtifacts") {
 
 tasks.openApiGenerate {
     onlyIf {
-        System.getenv("JITPACK") != "TRUE"
+        System.getenv("JITPACK")?.lowercase() != "true"
     }
 
     dependsOn("removeDocs", "removeClasses", "copyOpenApiGeneratorIgnore")
