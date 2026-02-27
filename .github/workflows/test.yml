@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: ./gradlew clean build -PjavaVersion=11 --stacktrace
         env:
-          JITPACK: TRUE
+          JITPACK: 'TRUE'
       - run: ./gradlew sdk:publishToMavenLocal --stacktrace
         env:
-          JITPACK: TRUE
+          JITPACK: 'TRUE'
