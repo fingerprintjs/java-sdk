@@ -80,6 +80,7 @@ openApiGenerate {
     configOptions.put("openApiNullable", "false")
     configOptions.put("disallowAdditionalPropertiesIfNotPresent", "false")
     configOptions.put("useOneOfInterfaces", "true")
+    configOptions.put("enumUnknownDefaultCase", "true")
 }
 
 tasks.register("removeDocs") {

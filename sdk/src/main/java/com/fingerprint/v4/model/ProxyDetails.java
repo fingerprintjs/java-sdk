@@ -37,7 +37,9 @@ public class ProxyDetails {
   public enum ProxyTypeEnum {
     RESIDENTIAL(String.valueOf("residential")),
 
-    DATA_CENTER(String.valueOf("data_center"));
+    DATA_CENTER(String.valueOf("data_center")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -62,7 +64,7 @@ public class ProxyDetails {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 

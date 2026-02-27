@@ -56,7 +56,9 @@ public class BotInfo {
 
     SPOOFED(String.valueOf("spoofed")),
 
-    UNKNOWN(String.valueOf("unknown"));
+    UNKNOWN(String.valueOf("unknown")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -81,7 +83,7 @@ public class BotInfo {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 
@@ -96,7 +98,9 @@ public class BotInfo {
 
     MEDIUM(String.valueOf("medium")),
 
-    HIGH(String.valueOf("high"));
+    HIGH(String.valueOf("high")),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
     private String value;
 
@@ -121,7 +125,7 @@ public class BotInfo {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 

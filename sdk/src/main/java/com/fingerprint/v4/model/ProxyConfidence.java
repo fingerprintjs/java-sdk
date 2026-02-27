@@ -23,7 +23,9 @@ public enum ProxyConfidence {
 
   MEDIUM("medium"),
 
-  HIGH("high");
+  HIGH("high"),
+
+  UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
@@ -48,6 +50,6 @@ public enum ProxyConfidence {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
   }
 }

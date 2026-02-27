@@ -12,5 +12,7 @@ A confidence rating for the VPN detection result — "low", "medium", or "high".
 
 * `HIGH` (value: `"high"`)
 
+* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `"unsupported_value_sdk_upgrade_required"`)
+
 
 

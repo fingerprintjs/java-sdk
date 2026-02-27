@@ -20,5 +20,7 @@ Filter events by the Bot Detection result, specifically:
 
 * `NONE` (value: `"none"`)
 
+* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `"unsupported_value_sdk_upgrade_required"`)
+
 
 

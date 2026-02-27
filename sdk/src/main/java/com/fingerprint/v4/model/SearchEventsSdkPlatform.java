@@ -23,7 +23,9 @@ public enum SearchEventsSdkPlatform {
 
   ANDROID("android"),
 
-  IOS("ios");
+  IOS("ios"),
+
+  UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
@@ -48,6 +50,6 @@ public enum SearchEventsSdkPlatform {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
   }
 }

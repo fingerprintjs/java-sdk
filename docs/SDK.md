@@ -22,6 +22,7 @@ Contains information about the SDK used to perform the request.
 | ANDROID | "android" |
 | IOS | "ios" |
 | UNKNOWN | "unknown" |
+| UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED | "unsupported_value_sdk_upgrade_required" |
 
 
 
