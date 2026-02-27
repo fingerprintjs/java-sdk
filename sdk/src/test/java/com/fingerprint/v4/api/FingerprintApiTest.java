@@ -232,8 +232,8 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertEquals(LINKED_ID, body.getLinkedId());
-          assertNotNull(request.getTags());
-          assertTrue(request.getTags().isEmpty());
+          assertNotNull(body.getTags());
+          assertTrue(body.getTags().isEmpty());
           assertNull(body.getSuspect());
           return mockFileToResponse(200, invocation, null, Void.class);
         });
