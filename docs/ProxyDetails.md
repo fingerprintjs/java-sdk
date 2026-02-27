@@ -20,6 +20,7 @@ Proxy detection details (present if `proxy` is `true`)
 |---- | -----|
 | RESIDENTIAL | "residential" |
 | DATA_CENTER | "data_center" |
+| UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED | "unsupported_value_sdk_upgrade_required" |
 
 
 

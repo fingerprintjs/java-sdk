@@ -23,8 +23,8 @@
     {{#withXml}}
     @XmlEnumValue({{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}}{{#isLong}}"{{/isLong}}{{#isFloat}}"{{/isFloat}}{{{value}}}{{#isInteger}}"{{/isInteger}}{{#isDouble}}"{{/isDouble}}{{#isLong}}"{{/isLong}}{{#isFloat}}"{{/isFloat}})
     {{/withXml}}
-    {{{name}}}({{^isUri}}{{dataType}}.valueOf({{/isUri}}{{{value}}}{{^isUri}}){{/isUri}}){{^-last}},
-    {{/-last}}{{#-last}};{{/-last}}
+    {{^-last}}{{{name}}}({{^isUri}}{{dataType}}.valueOf({{/isUri}}{{{value}}}{{^isUri}}){{/isUri}}),{{/-last}}
+    {{#-last}}UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED({{#isString}}"unsupported_value_sdk_upgrade_required"{{/isString}}{{#isInteger}}Integer.MAX_VALUE{{/isInteger}});{{/-last}}
       {{/enumVars}}
     {{/allowableValues}}
 
@@ -55,7 +55,7 @@
           return b;
         }
       }
-      {{#isNullable}}return null;{{/isNullable}}{{^isNullable}}{{#enumUnknownDefaultCase}}{{#allowableValues}}{{#enumVars}}{{#-last}}return {{{name}}};{{/-last}}{{/enumVars}}{{/allowableValues}}{{/enumUnknownDefaultCase}}{{^enumUnknownDefaultCase}}throw new IllegalArgumentException("Unexpected value '" + value + "'");{{/enumUnknownDefaultCase}}{{/isNullable}}
+      {{#isNullable}}return null;{{/isNullable}}{{^isNullable}}{{#enumUnknownDefaultCase}}return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;{{/enumUnknownDefaultCase}}{{^enumUnknownDefaultCase}}throw new IllegalArgumentException("Unexpected value '" + value + "'");{{/enumUnknownDefaultCase}}{{/isNullable}}
     }
 {{#gson}}
 

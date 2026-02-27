@@ -40,24 +40,32 @@ public class Sealed {
   }
 
   public static class UnsealAggregateException extends Exception {
+    private static final long serialVersionUID = 2144464350313234299L;
+
     public UnsealAggregateException() {
       super("Failed to unseal with all decryption keys");
     }
   }
 
   public static class InvalidSealedDataException extends IllegalArgumentException {
+    private static final long serialVersionUID = 7664915119162688449L;
+
     public InvalidSealedDataException() {
       super("Invalid sealed data");
     }
   }
 
   public static class InvalidSealedDataHeaderException extends IllegalArgumentException {
+    private static final long serialVersionUID = 808199780881125013L;
+
     public InvalidSealedDataHeaderException() {
       super("Invalid sealed data header");
     }
   }
 
   public static class UnsealException extends Exception {
+    private static final long serialVersionUID = 9223372036854775807L;
+
     public final String decryptionKeyDescription;
 
     public UnsealException(String message, Throwable cause, DecryptionKey decryptionKey) {

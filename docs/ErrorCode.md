@@ -66,5 +66,7 @@ Error code:
 
 * `RULESET_NOT_FOUND` (value: `"ruleset_not_found"`)
 
+* `UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED` (value: `"unsupported_value_sdk_upgrade_required"`)
+
 
 

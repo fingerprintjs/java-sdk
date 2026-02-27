@@ -4,8 +4,8 @@
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "{{propertyName}}",
-    defaultImpl = {{classname}}.Unknown{{classname}}.class
-)
+    defaultImpl = {{classname}}.Unknown{{classname}}.class,
+    visible = true)
 @JsonSubTypes({
     {{#mappedModels}}
     @JsonSubTypes.Type(value = {{modelName}}.class, name = "{{mappingName}}"){{^-last}},{{/-last}}

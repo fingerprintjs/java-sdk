@@ -54,7 +54,9 @@ public class Proximity {
 
     NUMBER_8500(Integer.valueOf(8500)),
 
-    NUMBER_22500(Integer.valueOf(22500));
+    NUMBER_22500(Integer.valueOf(22500)),
+
+    UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED(Integer.MAX_VALUE);
 
     private Integer value;
 
@@ -79,7 +81,7 @@ public class Proximity {
           return b;
         }
       }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+      return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
     }
   }
 

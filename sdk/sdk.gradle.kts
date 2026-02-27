@@ -4,16 +4,18 @@ val projectVersion: String by project
 group = "com.github.fingerprintjs"
 version = projectVersion
 
-java {
-    // Target the earliest support Java version
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
 plugins {
     alias(libs.plugins.openapi.generator)
     `java-library`
     `maven-publish`
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(
+            findProperty("javaVersion")?.toString() ?: "11"
+        ))
+    }
 }
 
 repositories {
@@ -78,6 +80,7 @@ openApiGenerate {
     configOptions.put("openApiNullable", "false")
     configOptions.put("disallowAdditionalPropertiesIfNotPresent", "false")
     configOptions.put("useOneOfInterfaces", "true")
+    configOptions.put("enumUnknownDefaultCase", "true")
 }
 
 tasks.register("removeDocs") {

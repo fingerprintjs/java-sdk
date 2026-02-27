@@ -23,7 +23,9 @@ public enum BotResult {
 
   GOOD("good"),
 
-  NOT_DETECTED("not_detected");
+  NOT_DETECTED("not_detected"),
+
+  UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
@@ -48,6 +50,6 @@ public enum BotResult {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
   }
 }

@@ -53,7 +53,9 @@ public enum ErrorCode {
 
   SERVICE_UNAVAILABLE("service_unavailable"),
 
-  RULESET_NOT_FOUND("ruleset_not_found");
+  RULESET_NOT_FOUND("ruleset_not_found"),
+
+  UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
@@ -78,6 +80,6 @@ public enum ErrorCode {
         return b;
       }
     }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    return UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED;
   }
 }

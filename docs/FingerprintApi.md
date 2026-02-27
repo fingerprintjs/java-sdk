@@ -25,10 +25,10 @@ Request deleting all data associated with the specified visitor ID. This API is 
 
 #### Browser (or device) properties
 - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it.
-- Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://dev.fingerprint.com/docs/glossary#fingerprint-workspace).
+- Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).
 
 #### Identification requests made from this browser (or device)
-- Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://dev.fingerprint.com/docs/regions#data-retention).
+- Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention).
 - Upon request to delete, the identification requests that were made by this browser
   - Within the past 10 days are deleted within 24 hrs.
   - Outside of 10 days are allowed to purge as per your data retention period.
@@ -36,7 +36,7 @@ Request deleting all data associated with the specified visitor ID. This API is 
 ### Corollary
 After requesting to delete a visitor ID,
 - If the same browser (or device) requests to identify, it will receive a different visitor ID.
-- If you request [`/v4/events` API](https://dev.fingerprint.com/reference/getevent) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.
+- If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.
 
 ### Interested?
 Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403.
@@ -47,8 +47,10 @@ Please [contact our support team](https://fingerprint.com/support/) to enable it
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -67,7 +69,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        String visitorId = "visitorId_example"; // String | The [visitor ID](https://dev.fingerprint.com/reference/get-function#visitorid) you want to delete.
+        String visitorId = "visitorId_example"; // String | The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.
         try {
             api.deleteVisitorData(visitorId);
         } catch (ApiException e) {
@@ -83,7 +85,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **visitorId** | **String**| The [visitor ID](https://dev.fingerprint.com/reference/get-function#visitorid) you want to delete. | |
+| **visitorId** | **String**| The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. | |
 
 ### Return type
 
@@ -124,8 +126,10 @@ Use `event_id` as the URL path parameter. This API method is scoped to a request
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -144,7 +148,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        String eventId = "eventId_example"; // String | The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request (`requestId` can be used in its place).
+        String eventId = "eventId_example"; // String | The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place).
         String rulesetId = "rulesetId_example"; // String | The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response. 
         try {
             Event result = api.getEvent(eventId, new FingerprintApi.GetEventOptionalParams()
@@ -163,7 +167,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **eventId** | **String**| The unique [identifier](https://dev.fingerprint.com/reference/get-function#requestid) of each identification request (`requestId` can be used in its place). | |
+| **eventId** | **String**| The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). | |
 | **getEventOptionalParams** | [**FingerprintApi.GetEventOptionalParams**](#fingerprintapigeteventoptionalparams) | | [optional] |
 
 #### FingerprintApi.GetEventOptionalParams
@@ -232,8 +236,10 @@ Smart Signals not activated for your workspace or are not included in the respon
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -254,11 +260,11 @@ public class FingerprintApiExample {
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
         Integer limit = 10; // Integer | Limit the number of events returned. 
         String paginationKey = "paginationKey_example"; // String | Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
-        String visitorId = "visitorId_example"; // String | Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`. 
-        SearchEventsBot bot = SearchEventsBot.fromValue("all"); // SearchEventsBot | Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response. 
+        String visitorId = "visitorId_example"; // String | Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`. 
+        SearchEventsBot bot = SearchEventsBot.fromValue("all"); // SearchEventsBot | Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `bot` property set to a valid value are returned. Events without a `bot` Smart Signal result are left out of the response. 
         String ipAddress = "ipAddress_example"; // String | Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32 
         String asn = "asn_example"; // String | Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response. 
-        String linkedId = "linkedId_example"; // String | Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. 
+        String linkedId = "linkedId_example"; // String | Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. 
         String url = "url_example"; // String | Filter events by the URL (`url` property) associated with the event. 
         String bundleId = "bundleId_example"; // String | Filter events by the Bundle ID (iOS) associated with the event. 
         String packageName = "packageName_example"; // String | Filter events by the Package Name (Android) associated with the event. 
@@ -266,7 +272,7 @@ public class FingerprintApiExample {
         Long start = 56L; // Long | Filter events with a timestamp greater than the start time, in Unix time (milliseconds). 
         Long end = 56L; // Long | Filter events with a timestamp smaller than the end time, in Unix time (milliseconds). 
         Boolean reverse = true; // Boolean | Sort events in reverse timestamp order. 
-        Boolean suspect = true; // Boolean | Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response. 
+        Boolean suspect = true; // Boolean | Filter events previously tagged as suspicious via the [Update API](https://docs.fingerprint.com/reference/server-api-v4-update-event). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response. 
         Boolean vpn = true; // Boolean | Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response. 
         Boolean virtualMachine = true; // Boolean | Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response. 
         Boolean tampering = true; // Boolean | Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response. 
@@ -356,11 +362,11 @@ Object containing optional parameters for API method. Supports a fluent interfac
 |------------- | ------------- | ------------- | -------------|
 | **limit** | **Integer**| Limit the number of events returned.  | [optional] [default to 10] |
 | **paginationKey** | **String**| Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  | [optional] |
-| **visitorId** | **String**| Unique [visitor identifier](https://dev.fingerprint.com/reference/get-function#visitorid) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  | [optional] |
-| **bot** | **SearchEventsBot**| Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `botd.bot` property set to a valid value are returned. Events without a `botd` Smart Signal result are left out of the response.  | [optional] [enum: all, good, bad, none] |
+| **visitorId** | **String**| Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.  | [optional] |
+| **bot** | **SearchEventsBot**| Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `bot` property set to a valid value are returned. Events without a `bot` Smart Signal result are left out of the response.  | [optional] [enum: all, good, bad, none] |
 | **ipAddress** | **String**| Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  | [optional] |
 | **asn** | **String**| Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response.  | [optional] |
-| **linkedId** | **String**| Filter events by your custom identifier.  You can use [linked Ids](https://dev.fingerprint.com/reference/get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] |
+| **linkedId** | **String**| Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] |
 | **url** | **String**| Filter events by the URL (`url` property) associated with the event.  | [optional] |
 | **bundleId** | **String**| Filter events by the Bundle ID (iOS) associated with the event.  | [optional] |
 | **packageName** | **String**| Filter events by the Package Name (Android) associated with the event.  | [optional] |
@@ -368,7 +374,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **start** | **Long**| Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  | [optional] |
 | **end** | **Long**| Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  | [optional] |
 | **reverse** | **Boolean**| Sort events in reverse timestamp order.  | [optional] |
-| **suspect** | **Boolean**| Filter events previously tagged as suspicious via the [Update API](https://dev.fingerprint.com/reference/updateevent). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  | [optional] |
+| **suspect** | **Boolean**| Filter events previously tagged as suspicious via the [Update API](https://docs.fingerprint.com/reference/server-api-v4-update-event). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  | [optional] |
 | **vpn** | **Boolean**| Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response.  | [optional] |
 | **virtualMachine** | **Boolean**| Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response.  | [optional] |
 | **tampering** | **Boolean**| Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.  | [optional] |
@@ -438,8 +444,10 @@ error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully p
 ```java
 package main;
 
+import java.util.*;
+
 import com.fingerprint.v4.api.FingerprintApi;
-import com.fingerprint.v4.sdk.model.*;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Region;
@@ -458,7 +466,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        String eventId = "eventId_example"; // String | The unique event [identifier](https://dev.fingerprint.com/reference/get-function#event_id).
+        String eventId = "eventId_example"; // String | The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id).
         EventUpdate eventUpdate = new EventUpdate(); // EventUpdate | 
         try {
             api.updateEvent(eventId, eventUpdate);
@@ -475,7 +483,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **eventId** | **String**| The unique event [identifier](https://dev.fingerprint.com/reference/get-function#event_id). | |
+| **eventId** | **String**| The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). | |
 | **eventUpdate** | [**EventUpdate**](EventUpdate.md)|  | |
 
 ### Return type

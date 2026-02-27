@@ -1,24 +1,45 @@
 package com.fingerprint.v4.api;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fingerprint.v4.model.*;
+import com.fingerprint.v4.model.ErrorCode;
+import com.fingerprint.v4.model.ErrorResponse;
+import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.model.EventRuleActionBlock;
+import com.fingerprint.v4.model.EventSearch;
+import com.fingerprint.v4.model.EventUpdate;
+import com.fingerprint.v4.model.ProxyDetails;
+import com.fingerprint.v4.model.RuleActionType;
+import com.fingerprint.v4.model.SearchEventsBot;
+import com.fingerprint.v4.model.SearchEventsSdkPlatform;
+import com.fingerprint.v4.model.SearchEventsVpnConfidence;
+import com.fingerprint.v4.model.VelocityData;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.ApiResponse;
+import com.fingerprint.v4.sdk.JSON;
 import com.fingerprint.v4.sdk.Pair;
-import jakarta.ws.rs.core.GenericType;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -37,7 +58,7 @@ public class FingerprintApiTest {
   private static final String MOCK_WEBHOOK_VISITOR_ID = "Ibk1527CUFmcnjLwIs4A9";
   private static final String MOCK_WEBHOOK_EVENT_ID = "1708102555327.NLOjmg";
 
-  private static final ObjectMapper MAPPER = getMapper();
+  private static final ObjectMapper MAPPER = JSON.getDefault().getMapper();
 
   private InputStream getFileAsIOStream(final String fileName) {
     InputStream ioStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
@@ -62,15 +83,7 @@ public class FingerprintApiTest {
   public void before() {
     ApiClient realApiClient = new ApiClient();
     ApiClient apiClient = Mockito.spy(realApiClient);
-    // apiClient.setBearerToken("MOCK_API_KEY");
     api = new FingerprintApi(apiClient);
-  }
-
-  private static ObjectMapper getMapper() {
-    ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    return mapper;
   }
 
   @FunctionalInterface
@@ -106,17 +119,18 @@ public class FingerprintApiTest {
     Mockito.doAnswer(
             invocation -> {
               validateIntegrationInfo(invocation.getArgument(3));
-              ApiResponse result = answerFunction.apply(invocation);
+              ApiResponse<T> result = answerFunction.apply(invocation);
               if (result.getStatusCode() == 200) {
                 return result;
               } else {
-                throw new ApiException(
-                    result.getStatusCode(), result.getHeaders(), result.getData().toString());
+                String responseBody = MAPPER.writeValueAsString(result.getData());
+                throw new ApiException(result.getStatusCode(), result.getHeaders(), responseBody);
               }
             })
         .when(apiClient)
         .invokeAPI(
-            eq(operationName), // operation, for example "FingerprintApi.getEvent"
+            eq(operationName), // operation, for example
+            // "FingerprintApi.getEvent"
             eq(path), // path
             eq(httpMethod), // HTTP-method
             any(), // queryParams
@@ -139,20 +153,13 @@ public class FingerprintApiTest {
             );
   }
 
-  ApiResponse mockFileToResponse(int statusCode, InvocationOnMock invocation, String path)
+  <T> ApiResponse<T> mockFileToResponse(
+      int statusCode, InvocationOnMock invocation, String path, Class<T> responseType)
       throws IOException {
-    GenericType returnType = invocation.getArgument(11);
-    if (statusCode == 200) {
-      return new ApiResponse<>(
-          statusCode,
-          null,
-          path != null ? MAPPER.readValue(getFileAsIOStream(path), returnType.getRawType()) : null);
-    } else {
-      return new ApiResponse<>(
-          statusCode,
-          null,
-          new String(getFileAsIOStream(path).readAllBytes(), StandardCharsets.UTF_8));
-    }
+    return new ApiResponse<T>(
+        statusCode,
+        null,
+        path != null ? MAPPER.readValue(getFileAsIOStream(path), responseType) : null);
   }
 
   public static boolean listContainsPair(List<Pair> pairs, String key, Object value) {
@@ -182,7 +189,8 @@ public class FingerprintApiTest {
         "getEvent",
         MOCK_REQUEST_ID,
         invocation -> {
-          return mockFileToResponse(200, invocation, "mocks/events/get_event_200.json");
+          return mockFileToResponse(
+              200, invocation, "mocks/events/get_event_200.json", Event.class);
         });
 
     Event response = api.getEvent(MOCK_REQUEST_ID);
@@ -205,6 +213,8 @@ public class FingerprintApiTest {
     assertInstanceOf(VelocityData.class, response.getVelocity().getDistinctCountry());
     assertFalse(response.getLocationSpoofing());
     assertEquals(0L, response.getFactoryResetTimestamp());
+    assertNotNull(response.getTags());
+    assertTrue(response.getTags().isEmpty());
   }
 
   @Test
@@ -222,9 +232,10 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertEquals(LINKED_ID, body.getLinkedId());
-          assertNull(body.getTags());
+          assertNotNull(body.getTags());
+          assertTrue(body.getTags().isEmpty());
           assertNull(body.getSuspect());
-          return mockFileToResponse(200, invocation, null);
+          return mockFileToResponse(200, invocation, null, Void.class);
         });
     api.updateEvent(MOCK_REQUEST_ID, request);
   }
@@ -261,7 +272,7 @@ public class FingerprintApiTest {
           assertNull(body.getLinkedId());
           assertEquals(TAG, body.getTags());
           assertNull(body.getSuspect());
-          return mockFileToResponse(200, invocation, null);
+          return mockFileToResponse(200, invocation, null, Void.class);
         });
     api.updateEvent(MOCK_REQUEST_ID, request);
   }
@@ -280,9 +291,10 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertNull(body.getLinkedId());
-          assertNull(body.getTags());
+          assertNotNull(body.getTags());
+          assertTrue(body.getTags().isEmpty());
           assertTrue(body.getSuspect());
-          return mockFileToResponse(200, invocation, null);
+          return mockFileToResponse(200, invocation, null, Void.class);
         });
     api.updateEvent(MOCK_REQUEST_ID, request);
   }
@@ -301,9 +313,10 @@ public class FingerprintApiTest {
 
           EventUpdate body = invocation.getArgument(4);
           assertNull(body.getLinkedId());
-          assertNull(body.getTags());
+          assertNotNull(body.getTags());
+          assertTrue(body.getTags().isEmpty());
           assertFalse(body.getSuspect());
-          return mockFileToResponse(200, invocation, null);
+          return mockFileToResponse(200, invocation, null, Void.class);
         });
     api.updateEvent(MOCK_REQUEST_ID, request);
   }
@@ -332,7 +345,7 @@ public class FingerprintApiTest {
           assertEquals(LINKED_ID, body.getLinkedId());
           assertEquals(TAG, body.getTags());
           assertTrue(body.getSuspect());
-          return mockFileToResponse(200, invocation, null);
+          return mockFileToResponse(200, invocation, null, Void.class);
         });
     api.updateEvent(MOCK_REQUEST_ID, request);
   }
@@ -346,7 +359,7 @@ public class FingerprintApiTest {
           List<Pair> queryParams = invocation.getArgument(3);
           assertEquals(1, queryParams.size());
 
-          return mockFileToResponse(200, invocation, null);
+          return mockFileToResponse(200, invocation, null, Void.class);
         });
     api.deleteVisitorData(MOCK_VISITOR_ID);
   }
@@ -382,7 +395,7 @@ public class FingerprintApiTest {
           assertTrue(listContainsPair(queryParams, "limit", String.valueOf(LIMIT)));
 
           return mockFileToResponse(
-              200, invocation, "mocks/events/search/get_event_search_200.json");
+              200, invocation, "mocks/events/search/get_event_search_200.json", EventSearch.class);
         });
 
     EventSearch response =
@@ -417,7 +430,12 @@ public class FingerprintApiTest {
     final String PAGINATION_KEY = "1741187431959";
     final SearchEventsBot BOT = SearchEventsBot.GOOD;
     final String IP_ADDRESS = "192.168.0.1/32";
+    final String ASN = "testAsn";
     final String LINKED_ID = "some_id";
+    final String URL = "https://example.com/page";
+    final String BUNDLE_ID = "com.example.bundleId";
+    final String PACKAGE_NAME = "com.example";
+    final String ORIGIN = "https://example.com";
     final Long START = 1582299576511L;
     final Long END = 1582299576513L;
     final Boolean REVERSE = true;
@@ -436,8 +454,6 @@ public class FingerprintApiTest {
     final SearchEventsVpnConfidence VPN_CONFIDENCE = SearchEventsVpnConfidence.MEDIUM;
     final Boolean EMULATOR = true;
     final Boolean INCOGNITO = true;
-    final Boolean IP_BLOCKLIST = true;
-    final Boolean DATACENTER = true;
     final Boolean DEVELOPER_TOOLS = true;
     final Boolean LOCATION_SPOOFING = true;
     final Boolean MITM_ATTACK = true;
@@ -448,8 +464,8 @@ public class FingerprintApiTest {
     ENVIRONMENT.add("env1");
     ENVIRONMENT.add("env2");
     final String PROXIMITY_ID = "testProximityId";
-    final String ASN = "testAsn";
-    // final Integer PROXIMITY_PRECISION_RADIUS = 10;
+    final Long TOTAL_HITS = 10L;
+    final Boolean TOR_NODE = true;
 
     Map<String, String> expectedQueryParams = new HashMap<>();
     expectedQueryParams.put("limit", String.valueOf(LIMIT));
@@ -457,7 +473,12 @@ public class FingerprintApiTest {
     expectedQueryParams.put("visitor_id", MOCK_VISITOR_ID);
     expectedQueryParams.put("bot", String.valueOf(BOT));
     expectedQueryParams.put("ip_address", IP_ADDRESS);
+    expectedQueryParams.put("asn", ASN);
     expectedQueryParams.put("linked_id", LINKED_ID);
+    expectedQueryParams.put("url", URL);
+    expectedQueryParams.put("bundle_id", BUNDLE_ID);
+    expectedQueryParams.put("package_name", PACKAGE_NAME);
+    expectedQueryParams.put("origin", ORIGIN);
     expectedQueryParams.put("start", START.toString());
     expectedQueryParams.put("end", END.toString());
     expectedQueryParams.put("reverse", String.valueOf(REVERSE));
@@ -476,8 +497,6 @@ public class FingerprintApiTest {
     expectedQueryParams.put("vpn_confidence", String.valueOf(VPN_CONFIDENCE));
     expectedQueryParams.put("emulator", String.valueOf(EMULATOR));
     expectedQueryParams.put("incognito", String.valueOf(INCOGNITO));
-    // expectedQueryParams.put("ip_blocklist", String.valueOf(IP_BLOCKLIST));
-    // expectedQueryParams.put("datacenter", String.valueOf(DATACENTER));
     expectedQueryParams.put("developer_tools", String.valueOf(DEVELOPER_TOOLS));
     expectedQueryParams.put("location_spoofing", String.valueOf(LOCATION_SPOOFING));
     expectedQueryParams.put("mitm_attack", String.valueOf(MITM_ATTACK));
@@ -485,9 +504,8 @@ public class FingerprintApiTest {
     expectedQueryParams.put("sdk_version", SDK_VERSION);
     expectedQueryParams.put("sdk_platform", String.valueOf(SDK_PLATFORM));
     expectedQueryParams.put("proximity_id", PROXIMITY_ID);
-    expectedQueryParams.put("asn", ASN);
-    // expectedQueryParams.put("proximity_precision_radius",
-    // String.valueOf(PROXIMITY_PRECISION_RADIUS));
+    expectedQueryParams.put("total_hits", String.valueOf(TOTAL_HITS));
+    expectedQueryParams.put("tor_node", String.valueOf(TOR_NODE));
 
     addMock(
         "searchEvents",
@@ -512,7 +530,7 @@ public class FingerprintApiTest {
           assertEquals(ENVIRONMENT, actualEnv);
 
           return mockFileToResponse(
-              200, invocation, "mocks/events/search/get_event_search_200.json");
+              200, invocation, "mocks/events/search/get_event_search_200.json", EventSearch.class);
         });
 
     EventSearch response =
@@ -523,27 +541,30 @@ public class FingerprintApiTest {
                 .setVisitorId(MOCK_VISITOR_ID)
                 .setBot(BOT)
                 .setIpAddress(IP_ADDRESS)
+                .setAsn(ASN)
                 .setLinkedId(LINKED_ID)
+                .setUrl(URL)
+                .setBundleId(BUNDLE_ID)
+                .setPackageName(PACKAGE_NAME)
+                .setOrigin(ORIGIN)
                 .setStart(START)
                 .setEnd(END)
                 .setReverse(REVERSE)
                 .setSuspect(SUSPECT)
-                .setAntiDetectBrowser(ANTI_DETECT_BROWSER)
-                .setClonedApp(CLONED_APP)
-                .setFactoryReset(FACTORY_RESET)
-                .setFrida(FRIDA)
-                .setJailbroken(JAILBROKEN)
-                .setMinSuspectScore(MIN_SUSPECT_SCORE)
-                .setPrivacySettings(PRIVACY_SETTINGS)
-                .setRootApps(ROOT_APPS)
-                .setTampering(TAMPERING)
-                .setVirtualMachine(VIRTUAL_MACHINE)
                 .setVpn(VPN)
-                .setVpnConfidence(VPN_CONFIDENCE)
-                .setEmulator(EMULATOR)
+                .setVirtualMachine(VIRTUAL_MACHINE)
+                .setTampering(TAMPERING)
+                .setAntiDetectBrowser(ANTI_DETECT_BROWSER)
                 .setIncognito(INCOGNITO)
-                // .setIpBlocklist(IP_BLOCKLIST)
-                // .setDatacenter(DATACENTER)
+                .setPrivacySettings(PRIVACY_SETTINGS)
+                .setJailbroken(JAILBROKEN)
+                .setFrida(FRIDA)
+                .setFactoryReset(FACTORY_RESET)
+                .setClonedApp(CLONED_APP)
+                .setEmulator(EMULATOR)
+                .setRootApps(ROOT_APPS)
+                .setVpnConfidence(VPN_CONFIDENCE)
+                .setMinSuspectScore(MIN_SUSPECT_SCORE)
                 .setDeveloperTools(DEVELOPER_TOOLS)
                 .setLocationSpoofing(LOCATION_SPOOFING)
                 .setMitmAttack(MITM_ATTACK)
@@ -552,24 +573,24 @@ public class FingerprintApiTest {
                 .setSdkPlatform(SDK_PLATFORM)
                 .setEnvironment(ENVIRONMENT)
                 .setProximityId(PROXIMITY_ID)
-                .setAsn(ASN)
-            // .setProximityPrecisionRadius(PROXIMITY_PRECISION_RADIUS)
-            );
+                .setTotalHits(TOTAL_HITS)
+                .setTorNode(TOR_NODE));
     List<Event> events = response.getEvents();
     assertEquals(events.size(), 1);
   }
 
   @Test
   public void searchEvents400ErrorTest() throws ApiException, JsonProcessingException {
-    int LIMIT = 1;
     addMock(
         "searchEvents",
         null,
         invocation -> {
           List<Pair> queryParams = invocation.getArgument(3);
           assertEquals(1, queryParams.size());
+          assertEquals(FingerprintApi.INTEGRATION_INFO, queryParams.get(0).getValue());
 
-          return mockFileToResponse(400, invocation, "mocks/errors/400_ip_address_invalid.json");
+          return mockFileToResponse(
+              400, invocation, "mocks/errors/400_ip_address_invalid.json", ErrorResponse.class);
         });
 
     ApiException exception = assertThrows(ApiException.class, () -> api.searchEvents(null));
@@ -582,22 +603,72 @@ public class FingerprintApiTest {
 
   @Test
   public void searchEvents403ErrorTest() throws ApiException, JsonProcessingException {
-    int LIMIT = 1;
     addMock(
         "searchEvents",
         null,
         invocation -> {
           List<Pair> queryParams = invocation.getArgument(3);
           assertEquals(1, queryParams.size());
+          assertEquals(FingerprintApi.INTEGRATION_INFO, queryParams.get(0).getValue());
 
-          return mockFileToResponse(403, invocation, "mocks/errors/403_feature_not_enabled.json");
+          return mockFileToResponse(
+              403, invocation, "mocks/errors/403_feature_not_enabled.json", ErrorResponse.class);
         });
 
-    ApiException exception = assertThrows(ApiException.class, () -> api.searchEvents(null));
+    ApiException exception =
+        assertThrows(
+            ApiException.class,
+            () -> api.searchEvents(new FingerprintApi.SearchEventsOptionalParams()));
 
     assertEquals(403, exception.getCode());
     ErrorResponse response = MAPPER.readValue(exception.getResponseBody(), ErrorResponse.class);
     assertEquals(ErrorCode.FEATURE_NOT_ENABLED, response.getError().getCode());
     assertEquals("feature not enabled", response.getError().getMessage());
+  }
+
+  @Test
+  public void getEventEvaluateRulesetTest() throws ApiException {
+    addMock(
+        "getEvent",
+        MOCK_REQUEST_ID,
+        invocation -> {
+          return mockFileToResponse(
+              200, invocation, "mocks/events/get_event_ruleset_200.json", Event.class);
+        });
+
+    Event response = api.getEvent(MOCK_REQUEST_ID);
+    assertNotNull(response);
+    assertNotNull(response.getRuleAction());
+    assertInstanceOf(EventRuleActionBlock.class, response.getRuleAction());
+
+    EventRuleActionBlock ruleAction = (EventRuleActionBlock) response.getRuleAction();
+    assertEquals(RuleActionType.BLOCK, ruleAction.getType());
+    assertEquals(403, ruleAction.getStatusCode());
+    assertEquals("{\"title\":\"Forbidden\"}", ruleAction.getBody());
+    assertEquals("rs_b1k1blhqpOX3kU", ruleAction.getRulesetId());
+    assertEquals("r_uE0af8497PFAOD", ruleAction.getRuleId());
+    assertEquals("bot in [\"bad\"] || incognito", ruleAction.getRuleExpression());
+    assertNotNull(ruleAction.getHeaders());
+    assertEquals(1, ruleAction.getHeaders().size());
+    assertEquals("Content-Type", ruleAction.getHeaders().get(0).getName());
+    assertEquals("application/json", ruleAction.getHeaders().get(0).getValue());
+  }
+
+  @Test
+  public void getEventRulesetNotFoundErrorTest() throws ApiException, JsonProcessingException {
+    addMock(
+        "getEvent",
+        MOCK_REQUEST_ID,
+        invocation -> {
+          return mockFileToResponse(
+              400, invocation, "mocks/errors/400_ruleset_not_found.json", ErrorResponse.class);
+        });
+
+    ApiException exception = assertThrows(ApiException.class, () -> api.getEvent(MOCK_REQUEST_ID));
+
+    assertEquals(400, exception.getCode());
+    ErrorResponse response = MAPPER.readValue(exception.getResponseBody(), ErrorResponse.class);
+    assertEquals(ErrorCode.RULESET_NOT_FOUND, response.getError().getCode());
+    assertEquals("ruleset not found", response.getError().getMessage());
   }
 }

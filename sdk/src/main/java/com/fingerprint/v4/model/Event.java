@@ -15,6 +15,8 @@ package com.fingerprint.v4.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -105,7 +107,7 @@ public class Event {
   @jakarta.annotation.Nullable private SupplementaryIDHighRecall supplementaryIdHighRecall;
 
   public static final String JSON_PROPERTY_TAGS = "tags";
-  @jakarta.annotation.Nullable private Object tags;
+  @jakarta.annotation.Nullable private Map<String, Object> tags = new HashMap<>();
 
   public static final String JSON_PROPERTY_URL = "url";
   @jakarta.annotation.Nullable private String url;
@@ -323,7 +325,7 @@ public class Event {
   }
 
   /**
-   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://dev.fingerprint.com/reference/updateevent).
+   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).
    * @return suspect
    */
   @jakarta.annotation.Nullable
@@ -429,8 +431,16 @@ public class Event {
     this.supplementaryIdHighRecall = supplementaryIdHighRecall;
   }
 
-  public Event tags(@jakarta.annotation.Nullable Object tags) {
+  public Event tags(@jakarta.annotation.Nullable Map<String, Object> tags) {
     this.tags = tags;
+    return this;
+  }
+
+  public Event putTagsItem(String key, Object tagsItem) {
+    if (this.tags == null) {
+      this.tags = new HashMap<>();
+    }
+    this.tags.put(key, tagsItem);
     return this;
   }
 
@@ -440,14 +450,14 @@ public class Event {
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Object getTags() {
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  public Map<String, Object> getTags() {
     return tags;
   }
 
   @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTags(@jakarta.annotation.Nullable Object tags) {
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTags(@jakarta.annotation.Nullable Map<String, Object> tags) {
     this.tags = tags;
   }
 
@@ -765,7 +775,7 @@ public class Event {
   }
 
   /**
-   * The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://dev.fingerprint.com/docs/smart-signals-overview#factory-reset-detection) to learn more about this Smart Signal.
+   * The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal.
    * @return factoryResetTimestamp
    */
   @jakarta.annotation.Nullable
@@ -985,7 +995,7 @@ public class Event {
   }
 
   /**
-   * * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://dev.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal.
+   * * `true` - When requests made from your users' mobile devices to Fingerprint servers have been intercepted and potentially modified.  * `false` - Otherwise or when the request originated from a browser. See [MitM Attack Detection](https://docs.fingerprint.com/docs/smart-signals-reference#mitm-attack-detection) to learn more about this Smart Signal.
    * @return mitmAttack
    */
   @jakarta.annotation.Nullable
@@ -1073,7 +1083,7 @@ public class Event {
   }
 
   /**
-   * Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://dev.fingerprint.com/docs/suspect-score
+   * Suspect Score is an easy way to integrate Smart Signals into your fraud protection work flow.  It is a weighted representation of all Smart Signals present in the payload that helps identify suspicious activity. The value range is [0; S] where S is sum of all Smart Signals weights.  See more details here: https://docs.fingerprint.com/docs/suspect-score
    * @return suspectScore
    */
   @jakarta.annotation.Nullable
