@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,34 +10,17 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.Canvas;
-import com.fingerprint.v4.model.Emoji;
-import com.fingerprint.v4.model.FontPreferences;
-import com.fingerprint.v4.model.PluginsInner;
-import com.fingerprint.v4.model.TouchSupport;
-import com.fingerprint.v4.model.WebGlBasics;
-import com.fingerprint.v4.model.WebGlExtensions;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
- * A curated subset of raw browser/device attributes that the API surface exposes. Each property contains a value or object with the data for the collected signal. 
+ * A curated subset of raw browser/device attributes that the API surface exposes. Each property contains a value or object with the data for the collected signal.
  */
 @JsonPropertyOrder({
   RawDeviceAttributes.JSON_PROPERTY_FONT_PREFERENCES,
@@ -66,112 +49,89 @@ import com.fingerprint.v4.sdk.JSON;
   RawDeviceAttributes.JSON_PROPERTY_INDEXED_DB,
   RawDeviceAttributes.JSON_PROPERTY_MATH
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class RawDeviceAttributes {
   public static final String JSON_PROPERTY_FONT_PREFERENCES = "font_preferences";
-  @jakarta.annotation.Nullable
-  private FontPreferences fontPreferences;
+  @jakarta.annotation.Nullable private FontPreferences fontPreferences;
 
   public static final String JSON_PROPERTY_EMOJI = "emoji";
-  @jakarta.annotation.Nullable
-  private Emoji emoji;
+  @jakarta.annotation.Nullable private Emoji emoji;
 
   public static final String JSON_PROPERTY_FONTS = "fonts";
-  @jakarta.annotation.Nullable
-  private List<String> fonts = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<String> fonts = new ArrayList<>();
 
   public static final String JSON_PROPERTY_DEVICE_MEMORY = "device_memory";
-  @jakarta.annotation.Nullable
-  private Integer deviceMemory;
+  @jakarta.annotation.Nullable private Integer deviceMemory;
 
   public static final String JSON_PROPERTY_TIMEZONE = "timezone";
-  @jakarta.annotation.Nullable
-  private String timezone;
+  @jakarta.annotation.Nullable private String timezone;
 
   public static final String JSON_PROPERTY_CANVAS = "canvas";
-  @jakarta.annotation.Nullable
-  private Canvas canvas;
+  @jakarta.annotation.Nullable private Canvas canvas;
 
   public static final String JSON_PROPERTY_LANGUAGES = "languages";
-  @jakarta.annotation.Nullable
-  private List<List<String>> languages = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<List<String>> languages = new ArrayList<>();
 
   public static final String JSON_PROPERTY_WEBGL_EXTENSIONS = "webgl_extensions";
-  @jakarta.annotation.Nullable
-  private WebGlExtensions webglExtensions;
+  @jakarta.annotation.Nullable private WebGlExtensions webglExtensions;
 
   public static final String JSON_PROPERTY_WEBGL_BASICS = "webgl_basics";
-  @jakarta.annotation.Nullable
-  private WebGlBasics webglBasics;
+  @jakarta.annotation.Nullable private WebGlBasics webglBasics;
 
   public static final String JSON_PROPERTY_SCREEN_RESOLUTION = "screen_resolution";
-  @jakarta.annotation.Nullable
-  private List<Integer> screenResolution = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<Integer> screenResolution = new ArrayList<>();
 
   public static final String JSON_PROPERTY_TOUCH_SUPPORT = "touch_support";
-  @jakarta.annotation.Nullable
-  private TouchSupport touchSupport;
+  @jakarta.annotation.Nullable private TouchSupport touchSupport;
 
   public static final String JSON_PROPERTY_OSCPU = "oscpu";
-  @jakarta.annotation.Nullable
-  private String oscpu;
+  @jakarta.annotation.Nullable private String oscpu;
 
   public static final String JSON_PROPERTY_ARCHITECTURE = "architecture";
-  @jakarta.annotation.Nullable
-  private Integer architecture;
+  @jakarta.annotation.Nullable private Integer architecture;
 
   public static final String JSON_PROPERTY_COOKIES_ENABLED = "cookies_enabled";
-  @jakarta.annotation.Nullable
-  private Boolean cookiesEnabled;
+  @jakarta.annotation.Nullable private Boolean cookiesEnabled;
 
   public static final String JSON_PROPERTY_HARDWARE_CONCURRENCY = "hardware_concurrency";
-  @jakarta.annotation.Nullable
-  private Integer hardwareConcurrency;
+  @jakarta.annotation.Nullable private Integer hardwareConcurrency;
 
   public static final String JSON_PROPERTY_DATE_TIME_LOCALE = "date_time_locale";
-  @jakarta.annotation.Nullable
-  private String dateTimeLocale;
+  @jakarta.annotation.Nullable private String dateTimeLocale;
 
   public static final String JSON_PROPERTY_VENDOR = "vendor";
-  @jakarta.annotation.Nullable
-  private String vendor;
+  @jakarta.annotation.Nullable private String vendor;
 
   public static final String JSON_PROPERTY_COLOR_DEPTH = "color_depth";
-  @jakarta.annotation.Nullable
-  private Integer colorDepth;
+  @jakarta.annotation.Nullable private Integer colorDepth;
 
   public static final String JSON_PROPERTY_PLATFORM = "platform";
-  @jakarta.annotation.Nullable
-  private String platform;
+  @jakarta.annotation.Nullable private String platform;
 
   public static final String JSON_PROPERTY_SESSION_STORAGE = "session_storage";
-  @jakarta.annotation.Nullable
-  private Boolean sessionStorage;
+  @jakarta.annotation.Nullable private Boolean sessionStorage;
 
   public static final String JSON_PROPERTY_LOCAL_STORAGE = "local_storage";
-  @jakarta.annotation.Nullable
-  private Boolean localStorage;
+  @jakarta.annotation.Nullable private Boolean localStorage;
 
   public static final String JSON_PROPERTY_AUDIO = "audio";
-  @jakarta.annotation.Nullable
-  private Double audio;
+  @jakarta.annotation.Nullable private Double audio;
 
   public static final String JSON_PROPERTY_PLUGINS = "plugins";
-  @jakarta.annotation.Nullable
-  private List<PluginsInner> plugins = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<PluginsInner> plugins = new ArrayList<>();
 
   public static final String JSON_PROPERTY_INDEXED_DB = "indexed_db";
-  @jakarta.annotation.Nullable
-  private Boolean indexedDb;
+  @jakarta.annotation.Nullable private Boolean indexedDb;
 
   public static final String JSON_PROPERTY_MATH = "math";
-  @jakarta.annotation.Nullable
-  private String math;
+  @jakarta.annotation.Nullable private String math;
 
-  public RawDeviceAttributes() { 
-  }
+  public RawDeviceAttributes() {}
 
-  public RawDeviceAttributes fontPreferences(@jakarta.annotation.Nullable FontPreferences fontPreferences) {
+  public RawDeviceAttributes fontPreferences(
+      @jakarta.annotation.Nullable FontPreferences fontPreferences) {
     this.fontPreferences = fontPreferences;
     return this;
   }
@@ -183,18 +143,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_FONT_PREFERENCES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public FontPreferences getFontPreferences() {
     return fontPreferences;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_FONT_PREFERENCES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFontPreferences(@jakarta.annotation.Nullable FontPreferences fontPreferences) {
     this.fontPreferences = fontPreferences;
   }
-
 
   public RawDeviceAttributes emoji(@jakarta.annotation.Nullable Emoji emoji) {
     this.emoji = emoji;
@@ -208,18 +165,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_EMOJI, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Emoji getEmoji() {
     return emoji;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_EMOJI, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setEmoji(@jakarta.annotation.Nullable Emoji emoji) {
     this.emoji = emoji;
   }
-
 
   public RawDeviceAttributes fonts(@jakarta.annotation.Nullable List<String> fonts) {
     this.fonts = fonts;
@@ -241,18 +195,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_FONTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<String> getFonts() {
     return fonts;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_FONTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFonts(@jakarta.annotation.Nullable List<String> fonts) {
     this.fonts = fonts;
   }
-
 
   public RawDeviceAttributes deviceMemory(@jakarta.annotation.Nullable Integer deviceMemory) {
     this.deviceMemory = deviceMemory;
@@ -267,18 +218,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DEVICE_MEMORY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getDeviceMemory() {
     return deviceMemory;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DEVICE_MEMORY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDeviceMemory(@jakarta.annotation.Nullable Integer deviceMemory) {
     this.deviceMemory = deviceMemory;
   }
-
 
   public RawDeviceAttributes timezone(@jakarta.annotation.Nullable String timezone) {
     this.timezone = timezone;
@@ -292,18 +240,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TIMEZONE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getTimezone() {
     return timezone;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TIMEZONE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimezone(@jakarta.annotation.Nullable String timezone) {
     this.timezone = timezone;
   }
-
 
   public RawDeviceAttributes canvas(@jakarta.annotation.Nullable Canvas canvas) {
     this.canvas = canvas;
@@ -317,18 +262,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_CANVAS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Canvas getCanvas() {
     return canvas;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CANVAS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCanvas(@jakarta.annotation.Nullable Canvas canvas) {
     this.canvas = canvas;
   }
-
 
   public RawDeviceAttributes languages(@jakarta.annotation.Nullable List<List<String>> languages) {
     this.languages = languages;
@@ -344,17 +286,15 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. 
+   * Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs.
    * @return languages
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LANGUAGES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<List<String>> getLanguages() {
     return languages;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LANGUAGES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -362,8 +302,8 @@ public class RawDeviceAttributes {
     this.languages = languages;
   }
 
-
-  public RawDeviceAttributes webglExtensions(@jakarta.annotation.Nullable WebGlExtensions webglExtensions) {
+  public RawDeviceAttributes webglExtensions(
+      @jakarta.annotation.Nullable WebGlExtensions webglExtensions) {
     this.webglExtensions = webglExtensions;
     return this;
   }
@@ -375,18 +315,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_WEBGL_EXTENSIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public WebGlExtensions getWebglExtensions() {
     return webglExtensions;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_WEBGL_EXTENSIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setWebglExtensions(@jakarta.annotation.Nullable WebGlExtensions webglExtensions) {
     this.webglExtensions = webglExtensions;
   }
-
 
   public RawDeviceAttributes webglBasics(@jakarta.annotation.Nullable WebGlBasics webglBasics) {
     this.webglBasics = webglBasics;
@@ -400,11 +337,9 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_WEBGL_BASICS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public WebGlBasics getWebglBasics() {
     return webglBasics;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_WEBGL_BASICS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -412,8 +347,8 @@ public class RawDeviceAttributes {
     this.webglBasics = webglBasics;
   }
 
-
-  public RawDeviceAttributes screenResolution(@jakarta.annotation.Nullable List<Integer> screenResolution) {
+  public RawDeviceAttributes screenResolution(
+      @jakarta.annotation.Nullable List<Integer> screenResolution) {
     this.screenResolution = screenResolution;
     return this;
   }
@@ -433,18 +368,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SCREEN_RESOLUTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<Integer> getScreenResolution() {
     return screenResolution;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SCREEN_RESOLUTION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setScreenResolution(@jakarta.annotation.Nullable List<Integer> screenResolution) {
     this.screenResolution = screenResolution;
   }
-
 
   public RawDeviceAttributes touchSupport(@jakarta.annotation.Nullable TouchSupport touchSupport) {
     this.touchSupport = touchSupport;
@@ -458,18 +390,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TOUCH_SUPPORT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public TouchSupport getTouchSupport() {
     return touchSupport;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TOUCH_SUPPORT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTouchSupport(@jakarta.annotation.Nullable TouchSupport touchSupport) {
     this.touchSupport = touchSupport;
   }
-
 
   public RawDeviceAttributes oscpu(@jakarta.annotation.Nullable String oscpu) {
     this.oscpu = oscpu;
@@ -483,18 +412,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_OSCPU, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getOscpu() {
     return oscpu;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_OSCPU, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setOscpu(@jakarta.annotation.Nullable String oscpu) {
     this.oscpu = oscpu;
   }
-
 
   public RawDeviceAttributes architecture(@jakarta.annotation.Nullable Integer architecture) {
     this.architecture = architecture;
@@ -508,18 +434,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ARCHITECTURE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getArchitecture() {
     return architecture;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ARCHITECTURE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setArchitecture(@jakarta.annotation.Nullable Integer architecture) {
     this.architecture = architecture;
   }
-
 
   public RawDeviceAttributes cookiesEnabled(@jakarta.annotation.Nullable Boolean cookiesEnabled) {
     this.cookiesEnabled = cookiesEnabled;
@@ -533,11 +456,9 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_COOKIES_ENABLED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getCookiesEnabled() {
     return cookiesEnabled;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_COOKIES_ENABLED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -545,8 +466,8 @@ public class RawDeviceAttributes {
     this.cookiesEnabled = cookiesEnabled;
   }
 
-
-  public RawDeviceAttributes hardwareConcurrency(@jakarta.annotation.Nullable Integer hardwareConcurrency) {
+  public RawDeviceAttributes hardwareConcurrency(
+      @jakarta.annotation.Nullable Integer hardwareConcurrency) {
     this.hardwareConcurrency = hardwareConcurrency;
     return this;
   }
@@ -559,11 +480,9 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_HARDWARE_CONCURRENCY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getHardwareConcurrency() {
     return hardwareConcurrency;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_HARDWARE_CONCURRENCY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -571,31 +490,27 @@ public class RawDeviceAttributes {
     this.hardwareConcurrency = hardwareConcurrency;
   }
 
-
   public RawDeviceAttributes dateTimeLocale(@jakarta.annotation.Nullable String dateTimeLocale) {
     this.dateTimeLocale = dateTimeLocale;
     return this;
   }
 
   /**
-   * Locale derived from the Intl.DateTimeFormat API. Negative values indicate known error states. The negative statuses can be: - \"-1\": A permanent status for browsers that don't support Intl API. - \"-2\": A permanent status for browsers that don't supportDateTimeFormat constructor. - \"-3\": A permanent status for browsers in which DateTimeFormat locale is undefined or null. 
+   * Locale derived from the Intl.DateTimeFormat API. Negative values indicate known error states. The negative statuses can be: - \"-1\": A permanent status for browsers that don't support Intl API. - \"-2\": A permanent status for browsers that don't supportDateTimeFormat constructor. - \"-3\": A permanent status for browsers in which DateTimeFormat locale is undefined or null.
    * @return dateTimeLocale
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DATE_TIME_LOCALE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getDateTimeLocale() {
     return dateTimeLocale;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DATE_TIME_LOCALE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDateTimeLocale(@jakarta.annotation.Nullable String dateTimeLocale) {
     this.dateTimeLocale = dateTimeLocale;
   }
-
 
   public RawDeviceAttributes vendor(@jakarta.annotation.Nullable String vendor) {
     this.vendor = vendor;
@@ -609,18 +524,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VENDOR, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVendor() {
     return vendor;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VENDOR, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVendor(@jakarta.annotation.Nullable String vendor) {
     this.vendor = vendor;
   }
-
 
   public RawDeviceAttributes colorDepth(@jakarta.annotation.Nullable Integer colorDepth) {
     this.colorDepth = colorDepth;
@@ -634,18 +546,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_COLOR_DEPTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer getColorDepth() {
     return colorDepth;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_COLOR_DEPTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setColorDepth(@jakarta.annotation.Nullable Integer colorDepth) {
     this.colorDepth = colorDepth;
   }
-
 
   public RawDeviceAttributes platform(@jakarta.annotation.Nullable String platform) {
     this.platform = platform;
@@ -659,18 +568,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PLATFORM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getPlatform() {
     return platform;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PLATFORM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPlatform(@jakarta.annotation.Nullable String platform) {
     this.platform = platform;
   }
-
 
   public RawDeviceAttributes sessionStorage(@jakarta.annotation.Nullable Boolean sessionStorage) {
     this.sessionStorage = sessionStorage;
@@ -684,18 +590,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SESSION_STORAGE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getSessionStorage() {
     return sessionStorage;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SESSION_STORAGE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSessionStorage(@jakarta.annotation.Nullable Boolean sessionStorage) {
     this.sessionStorage = sessionStorage;
   }
-
 
   public RawDeviceAttributes localStorage(@jakarta.annotation.Nullable Boolean localStorage) {
     this.localStorage = localStorage;
@@ -709,11 +612,9 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LOCAL_STORAGE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getLocalStorage() {
     return localStorage;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LOCAL_STORAGE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -721,31 +622,27 @@ public class RawDeviceAttributes {
     this.localStorage = localStorage;
   }
 
-
   public RawDeviceAttributes audio(@jakarta.annotation.Nullable Double audio) {
     this.audio = audio;
     return this;
   }
 
   /**
-   * AudioContext fingerprint or negative status when unavailable. The negative statuses can be: - -1: A permanent status for those browsers which are known to always suspend audio context - -2: A permanent status for browsers that don't support the signal - -3: A temporary status that means that an unexpected timeout has happened 
+   * AudioContext fingerprint or negative status when unavailable. The negative statuses can be: - -1: A permanent status for those browsers which are known to always suspend audio context - -2: A permanent status for browsers that don't support the signal - -3: A temporary status that means that an unexpected timeout has happened
    * @return audio
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_AUDIO, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getAudio() {
     return audio;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_AUDIO, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAudio(@jakarta.annotation.Nullable Double audio) {
     this.audio = audio;
   }
-
 
   public RawDeviceAttributes plugins(@jakarta.annotation.Nullable List<PluginsInner> plugins) {
     this.plugins = plugins;
@@ -767,18 +664,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PLUGINS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<PluginsInner> getPlugins() {
     return plugins;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PLUGINS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPlugins(@jakarta.annotation.Nullable List<PluginsInner> plugins) {
     this.plugins = plugins;
   }
-
 
   public RawDeviceAttributes indexedDb(@jakarta.annotation.Nullable Boolean indexedDb) {
     this.indexedDb = indexedDb;
@@ -792,18 +686,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_INDEXED_DB, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getIndexedDb() {
     return indexedDb;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_INDEXED_DB, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIndexedDb(@jakarta.annotation.Nullable Boolean indexedDb) {
     this.indexedDb = indexedDb;
   }
-
 
   public RawDeviceAttributes math(@jakarta.annotation.Nullable String math) {
     this.math = math;
@@ -817,18 +708,15 @@ public class RawDeviceAttributes {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_MATH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getMath() {
     return math;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_MATH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMath(@jakarta.annotation.Nullable String math) {
     this.math = math;
   }
-
 
   /**
    * Return true if this RawDeviceAttributes object is equal to o.
@@ -842,36 +730,61 @@ public class RawDeviceAttributes {
       return false;
     }
     RawDeviceAttributes rawDeviceAttributes = (RawDeviceAttributes) o;
-    return Objects.equals(this.fontPreferences, rawDeviceAttributes.fontPreferences) &&
-        Objects.equals(this.emoji, rawDeviceAttributes.emoji) &&
-        Objects.equals(this.fonts, rawDeviceAttributes.fonts) &&
-        Objects.equals(this.deviceMemory, rawDeviceAttributes.deviceMemory) &&
-        Objects.equals(this.timezone, rawDeviceAttributes.timezone) &&
-        Objects.equals(this.canvas, rawDeviceAttributes.canvas) &&
-        Objects.equals(this.languages, rawDeviceAttributes.languages) &&
-        Objects.equals(this.webglExtensions, rawDeviceAttributes.webglExtensions) &&
-        Objects.equals(this.webglBasics, rawDeviceAttributes.webglBasics) &&
-        Objects.equals(this.screenResolution, rawDeviceAttributes.screenResolution) &&
-        Objects.equals(this.touchSupport, rawDeviceAttributes.touchSupport) &&
-        Objects.equals(this.oscpu, rawDeviceAttributes.oscpu) &&
-        Objects.equals(this.architecture, rawDeviceAttributes.architecture) &&
-        Objects.equals(this.cookiesEnabled, rawDeviceAttributes.cookiesEnabled) &&
-        Objects.equals(this.hardwareConcurrency, rawDeviceAttributes.hardwareConcurrency) &&
-        Objects.equals(this.dateTimeLocale, rawDeviceAttributes.dateTimeLocale) &&
-        Objects.equals(this.vendor, rawDeviceAttributes.vendor) &&
-        Objects.equals(this.colorDepth, rawDeviceAttributes.colorDepth) &&
-        Objects.equals(this.platform, rawDeviceAttributes.platform) &&
-        Objects.equals(this.sessionStorage, rawDeviceAttributes.sessionStorage) &&
-        Objects.equals(this.localStorage, rawDeviceAttributes.localStorage) &&
-        Objects.equals(this.audio, rawDeviceAttributes.audio) &&
-        Objects.equals(this.plugins, rawDeviceAttributes.plugins) &&
-        Objects.equals(this.indexedDb, rawDeviceAttributes.indexedDb) &&
-        Objects.equals(this.math, rawDeviceAttributes.math);
+    return Objects.equals(this.fontPreferences, rawDeviceAttributes.fontPreferences)
+        && Objects.equals(this.emoji, rawDeviceAttributes.emoji)
+        && Objects.equals(this.fonts, rawDeviceAttributes.fonts)
+        && Objects.equals(this.deviceMemory, rawDeviceAttributes.deviceMemory)
+        && Objects.equals(this.timezone, rawDeviceAttributes.timezone)
+        && Objects.equals(this.canvas, rawDeviceAttributes.canvas)
+        && Objects.equals(this.languages, rawDeviceAttributes.languages)
+        && Objects.equals(this.webglExtensions, rawDeviceAttributes.webglExtensions)
+        && Objects.equals(this.webglBasics, rawDeviceAttributes.webglBasics)
+        && Objects.equals(this.screenResolution, rawDeviceAttributes.screenResolution)
+        && Objects.equals(this.touchSupport, rawDeviceAttributes.touchSupport)
+        && Objects.equals(this.oscpu, rawDeviceAttributes.oscpu)
+        && Objects.equals(this.architecture, rawDeviceAttributes.architecture)
+        && Objects.equals(this.cookiesEnabled, rawDeviceAttributes.cookiesEnabled)
+        && Objects.equals(this.hardwareConcurrency, rawDeviceAttributes.hardwareConcurrency)
+        && Objects.equals(this.dateTimeLocale, rawDeviceAttributes.dateTimeLocale)
+        && Objects.equals(this.vendor, rawDeviceAttributes.vendor)
+        && Objects.equals(this.colorDepth, rawDeviceAttributes.colorDepth)
+        && Objects.equals(this.platform, rawDeviceAttributes.platform)
+        && Objects.equals(this.sessionStorage, rawDeviceAttributes.sessionStorage)
+        && Objects.equals(this.localStorage, rawDeviceAttributes.localStorage)
+        && Objects.equals(this.audio, rawDeviceAttributes.audio)
+        && Objects.equals(this.plugins, rawDeviceAttributes.plugins)
+        && Objects.equals(this.indexedDb, rawDeviceAttributes.indexedDb)
+        && Objects.equals(this.math, rawDeviceAttributes.math);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fontPreferences, emoji, fonts, deviceMemory, timezone, canvas, languages, webglExtensions, webglBasics, screenResolution, touchSupport, oscpu, architecture, cookiesEnabled, hardwareConcurrency, dateTimeLocale, vendor, colorDepth, platform, sessionStorage, localStorage, audio, plugins, indexedDb, math);
+    return Objects.hash(
+        fontPreferences,
+        emoji,
+        fonts,
+        deviceMemory,
+        timezone,
+        canvas,
+        languages,
+        webglExtensions,
+        webglBasics,
+        screenResolution,
+        touchSupport,
+        oscpu,
+        architecture,
+        cookiesEnabled,
+        hardwareConcurrency,
+        dateTimeLocale,
+        vendor,
+        colorDepth,
+        platform,
+        sessionStorage,
+        localStorage,
+        audio,
+        plugins,
+        indexedDb,
+        math);
   }
 
   @Override
@@ -892,7 +805,9 @@ public class RawDeviceAttributes {
     sb.append("    oscpu: ").append(toIndentedString(oscpu)).append("\n");
     sb.append("    architecture: ").append(toIndentedString(architecture)).append("\n");
     sb.append("    cookiesEnabled: ").append(toIndentedString(cookiesEnabled)).append("\n");
-    sb.append("    hardwareConcurrency: ").append(toIndentedString(hardwareConcurrency)).append("\n");
+    sb.append("    hardwareConcurrency: ")
+        .append(toIndentedString(hardwareConcurrency))
+        .append("\n");
     sb.append("    dateTimeLocale: ").append(toIndentedString(dateTimeLocale)).append("\n");
     sb.append("    vendor: ").append(toIndentedString(vendor)).append("\n");
     sb.append("    colorDepth: ").append(toIndentedString(colorDepth)).append("\n");
@@ -917,6 +832,4 @@ public class RawDeviceAttributes {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

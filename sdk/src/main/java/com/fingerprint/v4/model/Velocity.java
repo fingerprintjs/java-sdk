@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,26 +10,15 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.VelocityData;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
- * Sums key data points for a specific `visitor_id`, `ip_address` and `linked_id` at three distinct time intervals: 5 minutes, 1 hour, and 24 hours as follows:   - Number of distinct IP addresses associated to the visitor Id. - Number of distinct linked Ids associated with the visitor Id. - Number of distinct countries associated with the visitor Id. - Number of identification events associated with the visitor Id. - Number of identification events associated with the detected IP address. - Number of distinct IP addresses associated with the provided linked Id. - Number of distinct visitor Ids associated with the provided linked Id.  The `24h` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted  if the number of `events` for the visitor Id in the last 24 hours (`events.['24h']`) is higher than 20.000.  All will not necessarily be returned in a response, some may be omitted if the  associated event does not have the required data, such as a linked_id. 
+ * Sums key data points for a specific `visitor_id`, `ip_address` and `linked_id` at three distinct time intervals: 5 minutes, 1 hour, and 24 hours as follows:   - Number of distinct IP addresses associated to the visitor Id. - Number of distinct linked Ids associated with the visitor Id. - Number of distinct countries associated with the visitor Id. - Number of identification events associated with the visitor Id. - Number of identification events associated with the detected IP address. - Number of distinct IP addresses associated with the provided linked Id. - Number of distinct visitor Ids associated with the provided linked Id.  The `24h` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted  if the number of `events` for the visitor Id in the last 24 hours (`events.['24h']`) is higher than 20.000.  All will not necessarily be returned in a response, some may be omitted if the  associated event does not have the required data, such as a linked_id.
  */
 @JsonPropertyOrder({
   Velocity.JSON_PROPERTY_DISTINCT_IP,
@@ -40,38 +29,33 @@ import com.fingerprint.v4.sdk.JSON;
   Velocity.JSON_PROPERTY_DISTINCT_IP_BY_LINKED_ID,
   Velocity.JSON_PROPERTY_DISTINCT_VISITOR_ID_BY_LINKED_ID
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class Velocity {
   public static final String JSON_PROPERTY_DISTINCT_IP = "distinct_ip";
-  @jakarta.annotation.Nullable
-  private VelocityData distinctIp;
+  @jakarta.annotation.Nullable private VelocityData distinctIp;
 
   public static final String JSON_PROPERTY_DISTINCT_LINKED_ID = "distinct_linked_id";
-  @jakarta.annotation.Nullable
-  private VelocityData distinctLinkedId;
+  @jakarta.annotation.Nullable private VelocityData distinctLinkedId;
 
   public static final String JSON_PROPERTY_DISTINCT_COUNTRY = "distinct_country";
-  @jakarta.annotation.Nullable
-  private VelocityData distinctCountry;
+  @jakarta.annotation.Nullable private VelocityData distinctCountry;
 
   public static final String JSON_PROPERTY_EVENTS = "events";
-  @jakarta.annotation.Nullable
-  private VelocityData events;
+  @jakarta.annotation.Nullable private VelocityData events;
 
   public static final String JSON_PROPERTY_IP_EVENTS = "ip_events";
-  @jakarta.annotation.Nullable
-  private VelocityData ipEvents;
+  @jakarta.annotation.Nullable private VelocityData ipEvents;
 
   public static final String JSON_PROPERTY_DISTINCT_IP_BY_LINKED_ID = "distinct_ip_by_linked_id";
-  @jakarta.annotation.Nullable
-  private VelocityData distinctIpByLinkedId;
+  @jakarta.annotation.Nullable private VelocityData distinctIpByLinkedId;
 
-  public static final String JSON_PROPERTY_DISTINCT_VISITOR_ID_BY_LINKED_ID = "distinct_visitor_id_by_linked_id";
-  @jakarta.annotation.Nullable
-  private VelocityData distinctVisitorIdByLinkedId;
+  public static final String JSON_PROPERTY_DISTINCT_VISITOR_ID_BY_LINKED_ID =
+      "distinct_visitor_id_by_linked_id";
+  @jakarta.annotation.Nullable private VelocityData distinctVisitorIdByLinkedId;
 
-  public Velocity() { 
-  }
+  public Velocity() {}
 
   public Velocity distinctIp(@jakarta.annotation.Nullable VelocityData distinctIp) {
     this.distinctIp = distinctIp;
@@ -85,18 +69,15 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_IP, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getDistinctIp() {
     return distinctIp;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_IP, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDistinctIp(@jakarta.annotation.Nullable VelocityData distinctIp) {
     this.distinctIp = distinctIp;
   }
-
 
   public Velocity distinctLinkedId(@jakarta.annotation.Nullable VelocityData distinctLinkedId) {
     this.distinctLinkedId = distinctLinkedId;
@@ -110,18 +91,15 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getDistinctLinkedId() {
     return distinctLinkedId;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDistinctLinkedId(@jakarta.annotation.Nullable VelocityData distinctLinkedId) {
     this.distinctLinkedId = distinctLinkedId;
   }
-
 
   public Velocity distinctCountry(@jakarta.annotation.Nullable VelocityData distinctCountry) {
     this.distinctCountry = distinctCountry;
@@ -135,18 +113,15 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_COUNTRY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getDistinctCountry() {
     return distinctCountry;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_COUNTRY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDistinctCountry(@jakarta.annotation.Nullable VelocityData distinctCountry) {
     this.distinctCountry = distinctCountry;
   }
-
 
   public Velocity events(@jakarta.annotation.Nullable VelocityData events) {
     this.events = events;
@@ -160,18 +135,15 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getEvents() {
     return events;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setEvents(@jakarta.annotation.Nullable VelocityData events) {
     this.events = events;
   }
-
 
   public Velocity ipEvents(@jakarta.annotation.Nullable VelocityData ipEvents) {
     this.ipEvents = ipEvents;
@@ -185,11 +157,9 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_IP_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getIpEvents() {
     return ipEvents;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_IP_EVENTS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -197,8 +167,8 @@ public class Velocity {
     this.ipEvents = ipEvents;
   }
 
-
-  public Velocity distinctIpByLinkedId(@jakarta.annotation.Nullable VelocityData distinctIpByLinkedId) {
+  public Velocity distinctIpByLinkedId(
+      @jakarta.annotation.Nullable VelocityData distinctIpByLinkedId) {
     this.distinctIpByLinkedId = distinctIpByLinkedId;
     return this;
   }
@@ -210,20 +180,19 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_IP_BY_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getDistinctIpByLinkedId() {
     return distinctIpByLinkedId;
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_IP_BY_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDistinctIpByLinkedId(@jakarta.annotation.Nullable VelocityData distinctIpByLinkedId) {
+  public void setDistinctIpByLinkedId(
+      @jakarta.annotation.Nullable VelocityData distinctIpByLinkedId) {
     this.distinctIpByLinkedId = distinctIpByLinkedId;
   }
 
-
-  public Velocity distinctVisitorIdByLinkedId(@jakarta.annotation.Nullable VelocityData distinctVisitorIdByLinkedId) {
+  public Velocity distinctVisitorIdByLinkedId(
+      @jakarta.annotation.Nullable VelocityData distinctVisitorIdByLinkedId) {
     this.distinctVisitorIdByLinkedId = distinctVisitorIdByLinkedId;
     return this;
   }
@@ -235,18 +204,16 @@ public class Velocity {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_VISITOR_ID_BY_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public VelocityData getDistinctVisitorIdByLinkedId() {
     return distinctVisitorIdByLinkedId;
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_DISTINCT_VISITOR_ID_BY_LINKED_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDistinctVisitorIdByLinkedId(@jakarta.annotation.Nullable VelocityData distinctVisitorIdByLinkedId) {
+  public void setDistinctVisitorIdByLinkedId(
+      @jakarta.annotation.Nullable VelocityData distinctVisitorIdByLinkedId) {
     this.distinctVisitorIdByLinkedId = distinctVisitorIdByLinkedId;
   }
-
 
   /**
    * Return true if this Velocity object is equal to o.
@@ -260,18 +227,25 @@ public class Velocity {
       return false;
     }
     Velocity velocity = (Velocity) o;
-    return Objects.equals(this.distinctIp, velocity.distinctIp) &&
-        Objects.equals(this.distinctLinkedId, velocity.distinctLinkedId) &&
-        Objects.equals(this.distinctCountry, velocity.distinctCountry) &&
-        Objects.equals(this.events, velocity.events) &&
-        Objects.equals(this.ipEvents, velocity.ipEvents) &&
-        Objects.equals(this.distinctIpByLinkedId, velocity.distinctIpByLinkedId) &&
-        Objects.equals(this.distinctVisitorIdByLinkedId, velocity.distinctVisitorIdByLinkedId);
+    return Objects.equals(this.distinctIp, velocity.distinctIp)
+        && Objects.equals(this.distinctLinkedId, velocity.distinctLinkedId)
+        && Objects.equals(this.distinctCountry, velocity.distinctCountry)
+        && Objects.equals(this.events, velocity.events)
+        && Objects.equals(this.ipEvents, velocity.ipEvents)
+        && Objects.equals(this.distinctIpByLinkedId, velocity.distinctIpByLinkedId)
+        && Objects.equals(this.distinctVisitorIdByLinkedId, velocity.distinctVisitorIdByLinkedId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(distinctIp, distinctLinkedId, distinctCountry, events, ipEvents, distinctIpByLinkedId, distinctVisitorIdByLinkedId);
+    return Objects.hash(
+        distinctIp,
+        distinctLinkedId,
+        distinctCountry,
+        events,
+        ipEvents,
+        distinctIpByLinkedId,
+        distinctVisitorIdByLinkedId);
   }
 
   @Override
@@ -283,8 +257,12 @@ public class Velocity {
     sb.append("    distinctCountry: ").append(toIndentedString(distinctCountry)).append("\n");
     sb.append("    events: ").append(toIndentedString(events)).append("\n");
     sb.append("    ipEvents: ").append(toIndentedString(ipEvents)).append("\n");
-    sb.append("    distinctIpByLinkedId: ").append(toIndentedString(distinctIpByLinkedId)).append("\n");
-    sb.append("    distinctVisitorIdByLinkedId: ").append(toIndentedString(distinctVisitorIdByLinkedId)).append("\n");
+    sb.append("    distinctIpByLinkedId: ")
+        .append(toIndentedString(distinctIpByLinkedId))
+        .append("\n");
+    sb.append("    distinctVisitorIdByLinkedId: ")
+        .append(toIndentedString(distinctVisitorIdByLinkedId))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -299,6 +277,4 @@ public class Velocity {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

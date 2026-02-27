@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * TamperingDetails
@@ -34,18 +24,17 @@ import com.fingerprint.v4.sdk.JSON;
   TamperingDetails.JSON_PROPERTY_ANOMALY_SCORE,
   TamperingDetails.JSON_PROPERTY_ANTI_DETECT_BROWSER
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class TamperingDetails {
   public static final String JSON_PROPERTY_ANOMALY_SCORE = "anomaly_score";
-  @jakarta.annotation.Nullable
-  private Double anomalyScore;
+  @jakarta.annotation.Nullable private Double anomalyScore;
 
   public static final String JSON_PROPERTY_ANTI_DETECT_BROWSER = "anti_detect_browser";
-  @jakarta.annotation.Nullable
-  private Boolean antiDetectBrowser;
+  @jakarta.annotation.Nullable private Boolean antiDetectBrowser;
 
-  public TamperingDetails() { 
-  }
+  public TamperingDetails() {}
 
   public TamperingDetails anomalyScore(@jakarta.annotation.Nullable Double anomalyScore) {
     this.anomalyScore = anomalyScore;
@@ -53,7 +42,7 @@ public class TamperingDetails {
   }
 
   /**
-   * Confidence score (`0.0 - 1.0`) for tampering detection:   * Values above `0.5` indicate tampering.   * Values below `0.5` indicate genuine browsers. 
+   * Confidence score (`0.0 - 1.0`) for tampering detection:   * Values above `0.5` indicate tampering.   * Values below `0.5` indicate genuine browsers.
    * minimum: 0
    * maximum: 1
    * @return anomalyScore
@@ -61,11 +50,9 @@ public class TamperingDetails {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ANOMALY_SCORE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getAnomalyScore() {
     return anomalyScore;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ANOMALY_SCORE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -73,31 +60,28 @@ public class TamperingDetails {
     this.anomalyScore = anomalyScore;
   }
 
-
-  public TamperingDetails antiDetectBrowser(@jakarta.annotation.Nullable Boolean antiDetectBrowser) {
+  public TamperingDetails antiDetectBrowser(
+      @jakarta.annotation.Nullable Boolean antiDetectBrowser) {
     this.antiDetectBrowser = antiDetectBrowser;
     return this;
   }
 
   /**
-   * True if the identified browser resembles an \"anti-detect\" browser, such as Incognition, which attempts to evade identification by manipulating its fingerprint. 
+   * True if the identified browser resembles an \"anti-detect\" browser, such as Incognition, which attempts to evade identification by manipulating its fingerprint.
    * @return antiDetectBrowser
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_ANTI_DETECT_BROWSER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getAntiDetectBrowser() {
     return antiDetectBrowser;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_ANTI_DETECT_BROWSER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAntiDetectBrowser(@jakarta.annotation.Nullable Boolean antiDetectBrowser) {
     this.antiDetectBrowser = antiDetectBrowser;
   }
-
 
   /**
    * Return true if this TamperingDetails object is equal to o.
@@ -111,8 +95,8 @@ public class TamperingDetails {
       return false;
     }
     TamperingDetails tamperingDetails = (TamperingDetails) o;
-    return Objects.equals(this.anomalyScore, tamperingDetails.anomalyScore) &&
-        Objects.equals(this.antiDetectBrowser, tamperingDetails.antiDetectBrowser);
+    return Objects.equals(this.anomalyScore, tamperingDetails.anomalyScore)
+        && Objects.equals(this.antiDetectBrowser, tamperingDetails.antiDetectBrowser);
   }
 
   @Override
@@ -140,6 +124,4 @@ public class TamperingDetails {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

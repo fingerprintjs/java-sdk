@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,47 +10,35 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
- * Is absent if the velocity data could not be generated for the visitor Id. 
+ * Is absent if the velocity data could not be generated for the visitor Id.
  */
 @JsonPropertyOrder({
   VelocityData.JSON_PROPERTY_5MINUTES,
   VelocityData.JSON_PROPERTY_1HOUR,
   VelocityData.JSON_PROPERTY_24HOURS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class VelocityData {
   public static final String JSON_PROPERTY_5MINUTES = "5_minutes";
-  @jakarta.annotation.Nonnull
-  private Integer _5minutes;
+  @jakarta.annotation.Nonnull private Integer _5minutes;
 
   public static final String JSON_PROPERTY_1HOUR = "1_hour";
-  @jakarta.annotation.Nonnull
-  private Integer _1hour;
+  @jakarta.annotation.Nonnull private Integer _1hour;
 
   public static final String JSON_PROPERTY_24HOURS = "24_hours";
-  @jakarta.annotation.Nullable
-  private Integer _24hours;
+  @jakarta.annotation.Nullable private Integer _24hours;
 
-  public VelocityData() { 
-  }
+  public VelocityData() {}
 
   public VelocityData _5minutes(@jakarta.annotation.Nonnull Integer _5minutes) {
     this._5minutes = _5minutes;
@@ -58,17 +46,15 @@ public class VelocityData {
   }
 
   /**
-   * Count for the last 5 minutes of velocity data, from the time of the event. 
+   * Count for the last 5 minutes of velocity data, from the time of the event.
    * @return _5minutes
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_5MINUTES, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Integer get5minutes() {
     return _5minutes;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_5MINUTES, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -76,24 +62,21 @@ public class VelocityData {
     this._5minutes = _5minutes;
   }
 
-
   public VelocityData _1hour(@jakarta.annotation.Nonnull Integer _1hour) {
     this._1hour = _1hour;
     return this;
   }
 
   /**
-   * Count for the last 1 hour of velocity data, from the time of the event. 
+   * Count for the last 1 hour of velocity data, from the time of the event.
    * @return _1hour
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_1HOUR, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public Integer get1hour() {
     return _1hour;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_1HOUR, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -101,31 +84,27 @@ public class VelocityData {
     this._1hour = _1hour;
   }
 
-
   public VelocityData _24hours(@jakarta.annotation.Nullable Integer _24hours) {
     this._24hours = _24hours;
     return this;
   }
 
   /**
-   * The `24_hours` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted if the number of `events` for the visitor Id in the last 24 hours (`events.['24_hours']`) is higher than 20.000. 
+   * The `24_hours` interval of `distinct_ip`, `distinct_linked_id`, `distinct_country`, `distinct_ip_by_linked_id` and `distinct_visitor_id_by_linked_id` will be omitted if the number of `events` for the visitor Id in the last 24 hours (`events.['24_hours']`) is higher than 20.000.
    * @return _24hours
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_24HOURS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Integer get24hours() {
     return _24hours;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_24HOURS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void set24hours(@jakarta.annotation.Nullable Integer _24hours) {
     this._24hours = _24hours;
   }
-
 
   /**
    * Return true if this VelocityData object is equal to o.
@@ -139,9 +118,9 @@ public class VelocityData {
       return false;
     }
     VelocityData velocityData = (VelocityData) o;
-    return Objects.equals(this._5minutes, velocityData._5minutes) &&
-        Objects.equals(this._1hour, velocityData._1hour) &&
-        Objects.equals(this._24hours, velocityData._24hours);
+    return Objects.equals(this._5minutes, velocityData._5minutes)
+        && Objects.equals(this._1hour, velocityData._1hour)
+        && Objects.equals(this._24hours, velocityData._24hours);
   }
 
   @Override
@@ -170,6 +149,4 @@ public class VelocityData {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

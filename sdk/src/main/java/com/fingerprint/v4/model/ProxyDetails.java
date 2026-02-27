@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Objects;
 
 /**
  * Proxy detection details (present if `proxy` is `true`)
@@ -35,14 +27,16 @@ import com.fingerprint.v4.sdk.JSON;
   ProxyDetails.JSON_PROPERTY_LAST_SEEN_AT,
   ProxyDetails.JSON_PROPERTY_PROVIDER
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class ProxyDetails {
   /**
-   * Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers 
+   * Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers
    */
   public enum ProxyTypeEnum {
     RESIDENTIAL(String.valueOf("residential")),
-    
+
     DATA_CENTER(String.valueOf("data_center"));
 
     private String value;
@@ -73,19 +67,15 @@ public class ProxyDetails {
   }
 
   public static final String JSON_PROPERTY_PROXY_TYPE = "proxy_type";
-  @jakarta.annotation.Nonnull
-  private ProxyTypeEnum proxyType;
+  @jakarta.annotation.Nonnull private ProxyTypeEnum proxyType;
 
   public static final String JSON_PROPERTY_LAST_SEEN_AT = "last_seen_at";
-  @jakarta.annotation.Nullable
-  private Long lastSeenAt;
+  @jakarta.annotation.Nullable private Long lastSeenAt;
 
   public static final String JSON_PROPERTY_PROVIDER = "provider";
-  @jakarta.annotation.Nullable
-  private String provider;
+  @jakarta.annotation.Nullable private String provider;
 
-  public ProxyDetails() { 
-  }
+  public ProxyDetails() {}
 
   public ProxyDetails proxyType(@jakarta.annotation.Nonnull ProxyTypeEnum proxyType) {
     this.proxyType = proxyType;
@@ -93,17 +83,15 @@ public class ProxyDetails {
   }
 
   /**
-   * Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers 
+   * Residential proxies use real user IP addresses to appear as legitimate traffic,  while data center proxies are public proxies hosted in data centers
    * @return proxyType
    */
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_PROXY_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   public ProxyTypeEnum getProxyType() {
     return proxyType;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PROXY_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
@@ -111,24 +99,21 @@ public class ProxyDetails {
     this.proxyType = proxyType;
   }
 
-
   public ProxyDetails lastSeenAt(@jakarta.annotation.Nullable Long lastSeenAt) {
     this.lastSeenAt = lastSeenAt;
     return this;
   }
 
   /**
-   * Unix millisecond timestamp with hourly resolution of when this IP was last seen as a proxy 
+   * Unix millisecond timestamp with hourly resolution of when this IP was last seen as a proxy
    * @return lastSeenAt
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LAST_SEEN_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Long getLastSeenAt() {
     return lastSeenAt;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LAST_SEEN_AT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -136,31 +121,27 @@ public class ProxyDetails {
     this.lastSeenAt = lastSeenAt;
   }
 
-
   public ProxyDetails provider(@jakarta.annotation.Nullable String provider) {
     this.provider = provider;
     return this;
   }
 
   /**
-   * String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers. 
+   * String representing the last proxy service provider detected when this IP was synced. An IP can be shared by multiple service providers.
    * @return provider
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getProvider() {
     return provider;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PROVIDER, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProvider(@jakarta.annotation.Nullable String provider) {
     this.provider = provider;
   }
-
 
   /**
    * Return true if this ProxyDetails object is equal to o.
@@ -174,9 +155,9 @@ public class ProxyDetails {
       return false;
     }
     ProxyDetails proxyDetails = (ProxyDetails) o;
-    return Objects.equals(this.proxyType, proxyDetails.proxyType) &&
-        Objects.equals(this.lastSeenAt, proxyDetails.lastSeenAt) &&
-        Objects.equals(this.provider, proxyDetails.provider);
+    return Objects.equals(this.proxyType, proxyDetails.proxyType)
+        && Objects.equals(this.lastSeenAt, proxyDetails.lastSeenAt)
+        && Objects.equals(this.provider, proxyDetails.provider);
   }
 
   @Override
@@ -205,6 +186,4 @@ public class ProxyDetails {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,23 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.IntegrationSubintegration;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * Integration
@@ -36,22 +25,20 @@ import com.fingerprint.v4.sdk.JSON;
   Integration.JSON_PROPERTY_VERSION,
   Integration.JSON_PROPERTY_SUBINTEGRATION
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class Integration {
   public static final String JSON_PROPERTY_NAME = "name";
-  @jakarta.annotation.Nullable
-  private String name;
+  @jakarta.annotation.Nullable private String name;
 
   public static final String JSON_PROPERTY_VERSION = "version";
-  @jakarta.annotation.Nullable
-  private String version;
+  @jakarta.annotation.Nullable private String version;
 
   public static final String JSON_PROPERTY_SUBINTEGRATION = "subintegration";
-  @jakarta.annotation.Nullable
-  private IntegrationSubintegration subintegration;
+  @jakarta.annotation.Nullable private IntegrationSubintegration subintegration;
 
-  public Integration() { 
-  }
+  public Integration() {}
 
   public Integration name(@jakarta.annotation.Nullable String name) {
     this.name = name;
@@ -65,18 +52,15 @@ public class Integration {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getName() {
     return name;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(@jakarta.annotation.Nullable String name) {
     this.name = name;
   }
-
 
   public Integration version(@jakarta.annotation.Nullable String version) {
     this.version = version;
@@ -90,11 +74,9 @@ public class Integration {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getVersion() {
     return version;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_VERSION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -102,8 +84,8 @@ public class Integration {
     this.version = version;
   }
 
-
-  public Integration subintegration(@jakarta.annotation.Nullable IntegrationSubintegration subintegration) {
+  public Integration subintegration(
+      @jakarta.annotation.Nullable IntegrationSubintegration subintegration) {
     this.subintegration = subintegration;
     return this;
   }
@@ -115,18 +97,16 @@ public class Integration {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SUBINTEGRATION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public IntegrationSubintegration getSubintegration() {
     return subintegration;
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_SUBINTEGRATION, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSubintegration(@jakarta.annotation.Nullable IntegrationSubintegration subintegration) {
+  public void setSubintegration(
+      @jakarta.annotation.Nullable IntegrationSubintegration subintegration) {
     this.subintegration = subintegration;
   }
-
 
   /**
    * Return true if this Integration object is equal to o.
@@ -140,9 +120,9 @@ public class Integration {
       return false;
     }
     Integration integration = (Integration) o;
-    return Objects.equals(this.name, integration.name) &&
-        Objects.equals(this.version, integration.version) &&
-        Objects.equals(this.subintegration, integration.subintegration);
+    return Objects.equals(this.name, integration.name)
+        && Objects.equals(this.version, integration.version)
+        && Objects.equals(this.subintegration, integration.subintegration);
   }
 
   @Override
@@ -171,6 +151,4 @@ public class Integration {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

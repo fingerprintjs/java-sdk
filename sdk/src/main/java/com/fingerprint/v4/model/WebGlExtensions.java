@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,24 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Hashes of WebGL context attributes and extension support.
@@ -40,34 +30,29 @@ import com.fingerprint.v4.sdk.JSON;
   WebGlExtensions.JSON_PROPERTY_EXTENSION_PARAMETERS,
   WebGlExtensions.JSON_PROPERTY_UNSUPPORTED_EXTENSIONS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class WebGlExtensions {
   public static final String JSON_PROPERTY_CONTEXT_ATTRIBUTES = "context_attributes";
-  @jakarta.annotation.Nullable
-  private String contextAttributes;
+  @jakarta.annotation.Nullable private String contextAttributes;
 
   public static final String JSON_PROPERTY_PARAMETERS = "parameters";
-  @jakarta.annotation.Nullable
-  private String parameters;
+  @jakarta.annotation.Nullable private String parameters;
 
   public static final String JSON_PROPERTY_SHADER_PRECISIONS = "shader_precisions";
-  @jakarta.annotation.Nullable
-  private String shaderPrecisions;
+  @jakarta.annotation.Nullable private String shaderPrecisions;
 
   public static final String JSON_PROPERTY_EXTENSIONS = "extensions";
-  @jakarta.annotation.Nullable
-  private String extensions;
+  @jakarta.annotation.Nullable private String extensions;
 
   public static final String JSON_PROPERTY_EXTENSION_PARAMETERS = "extension_parameters";
-  @jakarta.annotation.Nullable
-  private String extensionParameters;
+  @jakarta.annotation.Nullable private String extensionParameters;
 
   public static final String JSON_PROPERTY_UNSUPPORTED_EXTENSIONS = "unsupported_extensions";
-  @jakarta.annotation.Nullable
-  private List<String> unsupportedExtensions = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<String> unsupportedExtensions = new ArrayList<>();
 
-  public WebGlExtensions() { 
-  }
+  public WebGlExtensions() {}
 
   public WebGlExtensions contextAttributes(@jakarta.annotation.Nullable String contextAttributes) {
     this.contextAttributes = contextAttributes;
@@ -81,18 +66,15 @@ public class WebGlExtensions {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_CONTEXT_ATTRIBUTES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getContextAttributes() {
     return contextAttributes;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_CONTEXT_ATTRIBUTES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setContextAttributes(@jakarta.annotation.Nullable String contextAttributes) {
     this.contextAttributes = contextAttributes;
   }
-
 
   public WebGlExtensions parameters(@jakarta.annotation.Nullable String parameters) {
     this.parameters = parameters;
@@ -106,18 +88,15 @@ public class WebGlExtensions {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PARAMETERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getParameters() {
     return parameters;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PARAMETERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setParameters(@jakarta.annotation.Nullable String parameters) {
     this.parameters = parameters;
   }
-
 
   public WebGlExtensions shaderPrecisions(@jakarta.annotation.Nullable String shaderPrecisions) {
     this.shaderPrecisions = shaderPrecisions;
@@ -131,18 +110,15 @@ public class WebGlExtensions {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SHADER_PRECISIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getShaderPrecisions() {
     return shaderPrecisions;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SHADER_PRECISIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setShaderPrecisions(@jakarta.annotation.Nullable String shaderPrecisions) {
     this.shaderPrecisions = shaderPrecisions;
   }
-
 
   public WebGlExtensions extensions(@jakarta.annotation.Nullable String extensions) {
     this.extensions = extensions;
@@ -156,11 +132,9 @@ public class WebGlExtensions {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_EXTENSIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getExtensions() {
     return extensions;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_EXTENSIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -168,8 +142,8 @@ public class WebGlExtensions {
     this.extensions = extensions;
   }
 
-
-  public WebGlExtensions extensionParameters(@jakarta.annotation.Nullable String extensionParameters) {
+  public WebGlExtensions extensionParameters(
+      @jakarta.annotation.Nullable String extensionParameters) {
     this.extensionParameters = extensionParameters;
     return this;
   }
@@ -181,11 +155,9 @@ public class WebGlExtensions {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_EXTENSION_PARAMETERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getExtensionParameters() {
     return extensionParameters;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_EXTENSION_PARAMETERS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -193,8 +165,8 @@ public class WebGlExtensions {
     this.extensionParameters = extensionParameters;
   }
 
-
-  public WebGlExtensions unsupportedExtensions(@jakarta.annotation.Nullable List<String> unsupportedExtensions) {
+  public WebGlExtensions unsupportedExtensions(
+      @jakarta.annotation.Nullable List<String> unsupportedExtensions) {
     this.unsupportedExtensions = unsupportedExtensions;
     return this;
   }
@@ -214,18 +186,16 @@ public class WebGlExtensions {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_UNSUPPORTED_EXTENSIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<String> getUnsupportedExtensions() {
     return unsupportedExtensions;
   }
 
-
   @JsonProperty(value = JSON_PROPERTY_UNSUPPORTED_EXTENSIONS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setUnsupportedExtensions(@jakarta.annotation.Nullable List<String> unsupportedExtensions) {
+  public void setUnsupportedExtensions(
+      @jakarta.annotation.Nullable List<String> unsupportedExtensions) {
     this.unsupportedExtensions = unsupportedExtensions;
   }
-
 
   /**
    * Return true if this WebGlExtensions object is equal to o.
@@ -239,17 +209,23 @@ public class WebGlExtensions {
       return false;
     }
     WebGlExtensions webGlExtensions = (WebGlExtensions) o;
-    return Objects.equals(this.contextAttributes, webGlExtensions.contextAttributes) &&
-        Objects.equals(this.parameters, webGlExtensions.parameters) &&
-        Objects.equals(this.shaderPrecisions, webGlExtensions.shaderPrecisions) &&
-        Objects.equals(this.extensions, webGlExtensions.extensions) &&
-        Objects.equals(this.extensionParameters, webGlExtensions.extensionParameters) &&
-        Objects.equals(this.unsupportedExtensions, webGlExtensions.unsupportedExtensions);
+    return Objects.equals(this.contextAttributes, webGlExtensions.contextAttributes)
+        && Objects.equals(this.parameters, webGlExtensions.parameters)
+        && Objects.equals(this.shaderPrecisions, webGlExtensions.shaderPrecisions)
+        && Objects.equals(this.extensions, webGlExtensions.extensions)
+        && Objects.equals(this.extensionParameters, webGlExtensions.extensionParameters)
+        && Objects.equals(this.unsupportedExtensions, webGlExtensions.unsupportedExtensions);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(contextAttributes, parameters, shaderPrecisions, extensions, extensionParameters, unsupportedExtensions);
+    return Objects.hash(
+        contextAttributes,
+        parameters,
+        shaderPrecisions,
+        extensions,
+        extensionParameters,
+        unsupportedExtensions);
   }
 
   @Override
@@ -260,8 +236,12 @@ public class WebGlExtensions {
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    shaderPrecisions: ").append(toIndentedString(shaderPrecisions)).append("\n");
     sb.append("    extensions: ").append(toIndentedString(extensions)).append("\n");
-    sb.append("    extensionParameters: ").append(toIndentedString(extensionParameters)).append("\n");
-    sb.append("    unsupportedExtensions: ").append(toIndentedString(unsupportedExtensions)).append("\n");
+    sb.append("    extensionParameters: ")
+        .append(toIndentedString(extensionParameters))
+        .append("\n");
+    sb.append("    unsupportedExtensions: ")
+        .append(toIndentedString(unsupportedExtensions))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -276,6 +256,4 @@ public class WebGlExtensions {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

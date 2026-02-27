@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,9 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.sdk;
 
+import com.fingerprint.v4.sdk.auth.ApiKeyAuth;
+import com.fingerprint.v4.sdk.auth.Authentication;
+import com.fingerprint.v4.sdk.auth.HttpBasicAuth;
+import com.fingerprint.v4.sdk.auth.HttpBearerAuth;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
@@ -23,70 +26,57 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
-
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.text.DateFormat;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.glassfish.jersey.client.HttpUrlConnectorProvider;
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.MultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import java.net.URI;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import java.security.cert.X509Certificate;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import org.glassfish.jersey.logging.LoggingFeature;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.time.OffsetDateTime;
-
-import java.net.URLEncoder;
-
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-
-import java.text.DateFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.fingerprint.v4.sdk.auth.Authentication;
-import com.fingerprint.v4.sdk.auth.HttpBasicAuth;
-import com.fingerprint.v4.sdk.auth.HttpBearerAuth;
-import com.fingerprint.v4.sdk.auth.ApiKeyAuth;
-
 /**
  * <p>ApiClient class.</p>
  */
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class ApiClient extends JavaTimeFormatter {
-  protected static final Pattern JSON_MIME_PATTERN = Pattern.compile("(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$");
+  protected static final Pattern JSON_MIME_PATTERN =
+      Pattern.compile("(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$");
 
   protected Map<String, String> defaultHeaderMap = new HashMap<>();
   protected Map<String, String> defaultCookieMap = new HashMap<>();
@@ -94,23 +84,13 @@ public class ApiClient extends JavaTimeFormatter {
   protected String userAgent;
   protected static final Logger log = Logger.getLogger(ApiClient.class.getName());
 
-  protected List<ServerConfiguration> servers = new ArrayList<>(Arrays.asList(
-          new ServerConfiguration(
-                  "https://api.fpjs.io/v4",
-                  "Global",
-                  new LinkedHashMap<>()
-          ),
-          new ServerConfiguration(
-                  "https://eu.api.fpjs.io/v4",
-                  "EU",
-                  new LinkedHashMap<>()
-          ),
-          new ServerConfiguration(
-                  "https://ap.api.fpjs.io/v4",
-                  "Asia (Mumbai)",
-                  new LinkedHashMap<>()
-          )
-  ));
+  protected List<ServerConfiguration> servers =
+      new ArrayList<>(
+          Arrays.asList(
+              new ServerConfiguration("https://api.fpjs.io/v4", "Global", new LinkedHashMap<>()),
+              new ServerConfiguration("https://eu.api.fpjs.io/v4", "EU", new LinkedHashMap<>()),
+              new ServerConfiguration(
+                  "https://ap.api.fpjs.io/v4", "Asia (Mumbai)", new LinkedHashMap<>())));
   protected Integer serverIndex = 0;
   protected Map<String, String> serverVariables = null;
   protected Map<String, List<ServerConfiguration>> operationServers = new HashMap<>();
@@ -283,7 +263,7 @@ public class ApiClient extends JavaTimeFormatter {
 
   protected void updateBasePath() {
     if (serverIndex != null) {
-        setBasePath(servers.get(serverIndex).URL(serverVariables));
+      setBasePath(servers.get(serverIndex).URL(serverVariables));
     }
   }
 
@@ -425,7 +405,7 @@ public class ApiClient extends JavaTimeFormatter {
    *
    * @return User-Agent string
    */
-  public String getUserAgent(){
+  public String getUserAgent() {
     return userAgent;
   }
 
@@ -627,8 +607,8 @@ public class ApiClient extends JavaTimeFormatter {
       return formatOffsetDateTime((OffsetDateTime) param);
     } else if (param instanceof Collection<?>) {
       StringBuilder b = new StringBuilder();
-      for(Object o : (Collection<?>)param) {
-        if(b.length() > 0) {
+      for (Object o : (Collection<?>) param) {
+        if (b.length() > 0) {
           b.append(',');
         }
         b.append(String.valueOf(o));
@@ -647,7 +627,7 @@ public class ApiClient extends JavaTimeFormatter {
    * @param value Value
    * @return List of pairs
    */
-  public List<Pair> parameterToPairs(String collectionFormat, String name, Object value){
+  public List<Pair> parameterToPairs(String collectionFormat, String name, Object value) {
     List<Pair> params = new ArrayList<>();
 
     // preconditions
@@ -661,12 +641,13 @@ public class ApiClient extends JavaTimeFormatter {
       return params;
     }
 
-    if (valueCollection.isEmpty()){
+    if (valueCollection.isEmpty()) {
       return params;
     }
 
     // get the collection format (default: csv)
-    String format = (collectionFormat == null || collectionFormat.isEmpty() ? "csv" : collectionFormat);
+    String format =
+        (collectionFormat == null || collectionFormat.isEmpty() ? "csv" : collectionFormat);
 
     // create the params based on the collection format
     if ("multi".equals(format)) {
@@ -689,7 +670,7 @@ public class ApiClient extends JavaTimeFormatter {
       delimiter = "|";
     }
 
-    StringBuilder sb = new StringBuilder() ;
+    StringBuilder sb = new StringBuilder();
     for (Object item : valueCollection) {
       sb.append(delimiter);
       sb.append(parameterToString(item));
@@ -782,13 +763,16 @@ public class ApiClient extends JavaTimeFormatter {
    * @return Entity
    * @throws ApiException API exception
    */
-  public Entity<?> serialize(Object obj, Map<String, Object> formParams, String contentType, boolean isBodyNullable) throws ApiException {
+  public Entity<?> serialize(
+      Object obj, Map<String, Object> formParams, String contentType, boolean isBodyNullable)
+      throws ApiException {
     Entity<?> entity;
     if (contentType.startsWith("multipart/form-data")) {
       MultiPart multiPart = new MultiPart();
-      for (Entry<String, Object> param: formParams.entrySet()) {
+      for (Entry<String, Object> param : formParams.entrySet()) {
         if (param.getValue() instanceof Iterable<?>) {
-          ((Iterable<?>)param.getValue()).forEach(v -> addParamToMultipart(v, param.getKey(), multiPart));
+          ((Iterable<?>) param.getValue())
+              .forEach(v -> addParamToMultipart(v, param.getKey(), multiPart));
         } else {
           addParamToMultipart(param.getValue(), param.getKey(), multiPart);
         }
@@ -796,7 +780,7 @@ public class ApiClient extends JavaTimeFormatter {
       entity = Entity.entity(multiPart, MediaType.MULTIPART_FORM_DATA_TYPE);
     } else if (contentType.startsWith("application/x-www-form-urlencoded")) {
       Form form = new Form();
-      for (Entry<String, Object> param: formParams.entrySet()) {
+      for (Entry<String, Object> param : formParams.entrySet()) {
         form.param(param.getKey(), parameterToString(param.getValue()));
       }
       entity = Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED_TYPE);
@@ -804,13 +788,27 @@ public class ApiClient extends JavaTimeFormatter {
       // We let jersey handle the serialization
       if (isBodyNullable) { // payload is nullable
         if (obj instanceof String) {
-          entity = Entity.entity(obj == null ? "null" : "\"" + ((String)obj).replaceAll("\"", Matcher.quoteReplacement("\\\"")) + "\"", contentType);
+          entity =
+              Entity.entity(
+                  obj == null
+                      ? "null"
+                      : "\""
+                          + ((String) obj).replaceAll("\"", Matcher.quoteReplacement("\\\""))
+                          + "\"",
+                  contentType);
         } else {
           entity = Entity.entity(obj == null ? "null" : obj, contentType);
         }
       } else {
         if (obj instanceof String) {
-          entity = Entity.entity(obj == null ? "" : "\"" + ((String)obj).replaceAll("\"", Matcher.quoteReplacement("\\\"")) + "\"", contentType);
+          entity =
+              Entity.entity(
+                  obj == null
+                      ? ""
+                      : "\""
+                          + ((String) obj).replaceAll("\"", Matcher.quoteReplacement("\\\""))
+                          + "\"",
+                  contentType);
         } else {
           entity = Entity.entity(obj == null ? "" : obj, contentType);
         }
@@ -830,8 +828,8 @@ public class ApiClient extends JavaTimeFormatter {
   protected void addParamToMultipart(Object value, String key, MultiPart multiPart) {
     if (value instanceof File) {
       File file = (File) value;
-      FormDataContentDisposition contentDisp = FormDataContentDisposition.name(key)
-          .fileName(file.getName()).size(file.length()).build();
+      FormDataContentDisposition contentDisp =
+          FormDataContentDisposition.name(key).fileName(file.getName()).size(file.length()).build();
 
       // Attempt to probe the content type for the file so that the form part is more correctly
       // and precisely identified, but fall back to application/octet-stream if that fails.
@@ -847,7 +845,7 @@ public class ApiClient extends JavaTimeFormatter {
       FormDataContentDisposition contentDisp = FormDataContentDisposition.name(key).build();
       multiPart.bodyPart(new FormDataBodyPart(contentDisp, parameterToString(value)));
     }
-  } 
+  }
 
   /**
    * Serialize the given Java object into string according the given
@@ -860,14 +858,21 @@ public class ApiClient extends JavaTimeFormatter {
    * @return String
    * @throws ApiException API exception
    */
-  public String serializeToString(Object obj, Map<String, Object> formParams, String contentType, boolean isBodyNullable) throws ApiException {
+  public String serializeToString(
+      Object obj, Map<String, Object> formParams, String contentType, boolean isBodyNullable)
+      throws ApiException {
     try {
       if (contentType.startsWith("multipart/form-data")) {
-        throw new ApiException("multipart/form-data not yet supported for serializeToString (http signature authentication)");
+        throw new ApiException(
+            "multipart/form-data not yet supported for serializeToString (http signature authentication)");
       } else if (contentType.startsWith("application/x-www-form-urlencoded")) {
         String formString = "";
         for (Entry<String, Object> param : formParams.entrySet()) {
-          formString = param.getKey() + "=" + URLEncoder.encode(parameterToString(param.getValue()), "UTF-8") + "&";
+          formString =
+              param.getKey()
+                  + "="
+                  + URLEncoder.encode(parameterToString(param.getValue()), "UTF-8")
+                  + "&";
         }
 
         if (formString.length() == 0) { // empty string
@@ -927,7 +932,10 @@ public class ApiClient extends JavaTimeFormatter {
   public File downloadFileFromResponse(Response response) throws ApiException {
     try {
       File file = prepareDownloadFile(response);
-      Files.copy(response.readEntity(InputStream.class), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+      Files.copy(
+          response.readEntity(InputStream.class),
+          file.toPath(),
+          StandardCopyOption.REPLACE_EXISTING);
       return file;
     } catch (IOException e) {
       throw new ApiException(e);
@@ -948,8 +956,7 @@ public class ApiClient extends JavaTimeFormatter {
       // Get filename from the Content-Disposition header.
       Pattern pattern = Pattern.compile("filename=['\"]?([^'\"\\s]+)['\"]?");
       Matcher matcher = pattern.matcher(contentDisposition);
-      if (matcher.find())
-        filename = matcher.group(1);
+      if (matcher.find()) filename = matcher.group(1);
     }
 
     String prefix;
@@ -966,14 +973,11 @@ public class ApiClient extends JavaTimeFormatter {
         suffix = filename.substring(pos);
       }
       // Files.createTempFile requires the prefix to be at least three characters long
-      if (prefix.length() < 3)
-        prefix = "download-";
+      if (prefix.length() < 3) prefix = "download-";
     }
 
-    if (tempFolderPath == null)
-      return Files.createTempFile(prefix, suffix).toFile();
-    else
-      return Files.createTempFile(Paths.get(tempFolderPath), prefix, suffix).toFile();
+    if (tempFolderPath == null) return Files.createTempFile(prefix, suffix).toFile();
+    else return Files.createTempFile(Paths.get(tempFolderPath), prefix, suffix).toFile();
   }
 
   /**
@@ -1016,13 +1020,15 @@ public class ApiClient extends JavaTimeFormatter {
     List<ServerConfiguration> serverConfigurations;
     if (serverIndex != null && (serverConfigurations = operationServers.get(operation)) != null) {
       int index = operationServerIndex.getOrDefault(operation, serverIndex).intValue();
-      Map<String, String> variables = operationServerVariables.getOrDefault(operation, serverVariables);
+      Map<String, String> variables =
+          operationServerVariables.getOrDefault(operation, serverVariables);
       if (index < 0 || index >= serverConfigurations.size()) {
         throw new ArrayIndexOutOfBoundsException(
             String.format(
                 Locale.ROOT,
                 "Invalid index %d when selecting the host settings. Must be less than %d",
-                index, serverConfigurations.size()));
+                index,
+                serverConfigurations.size()));
       }
       targetURL = serverConfigurations.get(index).URL(variables) + path;
     } else {
@@ -1039,13 +1045,7 @@ public class ApiClient extends JavaTimeFormatter {
     if (authNames != null) {
       // update different parameters (e.g. headers) for authentication
       updateParamsForAuth(
-          authNames,
-          queryParams,
-          allHeaderParams,
-          cookieParams,
-          null,
-          method,
-          target.getUri());
+          authNames, queryParams, allHeaderParams, cookieParams, null, method, target.getUri());
     }
 
     if (queryParams != null) {
@@ -1126,7 +1126,8 @@ public class ApiClient extends JavaTimeFormatter {
     }
   }
 
-  protected Response sendRequest(String method, Invocation.Builder invocationBuilder, Entity<?> entity) {
+  protected Response sendRequest(
+      String method, Invocation.Builder invocationBuilder, Entity<?> entity) {
     Response response;
     if ("POST".equals(method)) {
       response = invocationBuilder.post(entity);
@@ -1150,8 +1151,34 @@ public class ApiClient extends JavaTimeFormatter {
    * @deprecated Add qualified name of the operation as a first parameter.
    */
   @Deprecated
-  public <T> ApiResponse<T> invokeAPI(String path, String method, List<Pair> queryParams, Object body, Map<String, String> headerParams, Map<String, String> cookieParams, Map<String, Object> formParams, String accept, String contentType, String[] authNames, GenericType<T> returnType, boolean isBodyNullable) throws ApiException {
-    return invokeAPI(null, path, method, queryParams, body, headerParams, cookieParams, formParams, accept, contentType, authNames, returnType, isBodyNullable);
+  public <T> ApiResponse<T> invokeAPI(
+      String path,
+      String method,
+      List<Pair> queryParams,
+      Object body,
+      Map<String, String> headerParams,
+      Map<String, String> cookieParams,
+      Map<String, Object> formParams,
+      String accept,
+      String contentType,
+      String[] authNames,
+      GenericType<T> returnType,
+      boolean isBodyNullable)
+      throws ApiException {
+    return invokeAPI(
+        null,
+        path,
+        method,
+        queryParams,
+        body,
+        headerParams,
+        cookieParams,
+        formParams,
+        accept,
+        contentType,
+        authNames,
+        returnType,
+        isBodyNullable);
   }
 
   /**
@@ -1190,13 +1217,21 @@ public class ApiClient extends JavaTimeFormatter {
 
   protected void applyDebugSetting(ClientConfig clientConfig) {
     if (debugging) {
-      clientConfig.register(new LoggingFeature(java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME), java.util.logging.Level.INFO, LoggingFeature.Verbosity.PAYLOAD_ANY, 1024*50 /* Log payloads up to 50K */));
-      clientConfig.property(LoggingFeature.LOGGING_FEATURE_VERBOSITY, LoggingFeature.Verbosity.PAYLOAD_ANY);
+      clientConfig.register(
+          new LoggingFeature(
+              java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME),
+              java.util.logging.Level.INFO,
+              LoggingFeature.Verbosity.PAYLOAD_ANY,
+              1024 * 50 /* Log payloads up to 50K */));
+      clientConfig.property(
+          LoggingFeature.LOGGING_FEATURE_VERBOSITY, LoggingFeature.Verbosity.PAYLOAD_ANY);
       // Set logger to ALL
-      java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME).setLevel(java.util.logging.Level.ALL);
+      java.util.logging.Logger.getLogger(LoggingFeature.DEFAULT_LOGGER_NAME)
+          .setLevel(java.util.logging.Level.ALL);
     } else {
       // suppress warnings for payloads with DELETE calls:
-      java.util.logging.Logger.getLogger("org.glassfish.jersey.client").setLevel(java.util.logging.Level.SEVERE);
+      java.util.logging.Logger.getLogger("org.glassfish.jersey.client")
+          .setLevel(java.util.logging.Level.SEVERE);
     }
   }
 
@@ -1230,21 +1265,23 @@ public class ApiClient extends JavaTimeFormatter {
    * @throws java.security.KeyManagementException if any.
    * @throws java.security.NoSuchAlgorithmException if any.
    */
-  protected void disableCertificateValidation(ClientBuilder clientBuilder) throws KeyManagementException, NoSuchAlgorithmException {
-    TrustManager[] trustAllCerts = new X509TrustManager[] {
-      new X509TrustManager() {
-        @Override
-        public X509Certificate[] getAcceptedIssuers() {
-          return null;
-        }
-        @Override
-        public void checkClientTrusted(X509Certificate[] certs, String authType) {
-        }
-        @Override
-        public void checkServerTrusted(X509Certificate[] certs, String authType) {
-        }
-      }
-    };
+  protected void disableCertificateValidation(ClientBuilder clientBuilder)
+      throws KeyManagementException, NoSuchAlgorithmException {
+    TrustManager[] trustAllCerts =
+        new X509TrustManager[] {
+          new X509TrustManager() {
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+              return null;
+            }
+
+            @Override
+            public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+          }
+        };
     SSLContext sslContext = SSLContext.getInstance("TLS");
     sslContext.init(null, trustAllCerts, new SecureRandom());
     clientBuilder.sslContext(sslContext);
@@ -1258,7 +1295,7 @@ public class ApiClient extends JavaTimeFormatter {
    */
   protected Map<String, List<String>> buildResponseHeaders(Response response) {
     Map<String, List<String>> responseHeaders = new HashMap<>();
-    for (Entry<String, List<Object>> entry: response.getHeaders().entrySet()) {
+    for (Entry<String, List<Object>> entry : response.getHeaders().entrySet()) {
       List<Object> values = entry.getValue();
       List<String> headers = new ArrayList<>();
       for (Object o : values) {
@@ -1279,8 +1316,15 @@ public class ApiClient extends JavaTimeFormatter {
    * @param method HTTP method (e.g. POST)
    * @param uri HTTP URI
    */
-  protected void updateParamsForAuth(String[] authNames, List<Pair> queryParams, Map<String, String> headerParams,
-                                     Map<String, String> cookieParams, String payload, String method, URI uri) throws ApiException {
+  protected void updateParamsForAuth(
+      String[] authNames,
+      List<Pair> queryParams,
+      Map<String, String> headerParams,
+      Map<String, String> cookieParams,
+      String payload,
+      String method,
+      URI uri)
+      throws ApiException {
     for (String authName : authNames) {
       Authentication auth = authentications.get(authName);
       if (auth == null) {

@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,48 +10,24 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Map;
-import java.util.HashMap;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.EventRuleActionAllow;
-import com.fingerprint.v4.model.EventRuleActionBlock;
-import com.fingerprint.v4.model.RequestHeaderModifications;
-import com.fingerprint.v4.model.RuleActionHeaderField;
-import com.fingerprint.v4.model.RuleActionType;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "type",
-    defaultImpl = EventRuleAction.UnknownEventRuleAction.class
-)
+    defaultImpl = EventRuleAction.UnknownEventRuleAction.class)
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = EventRuleActionAllow.class, name = "allow"),
-    @JsonSubTypes.Type(value = EventRuleActionBlock.class, name = "block")
+  @JsonSubTypes.Type(value = EventRuleActionAllow.class, name = "allow"),
+  @JsonSubTypes.Type(value = EventRuleActionBlock.class, name = "block")
 })
 public interface EventRuleAction {
 
@@ -66,7 +42,6 @@ public interface EventRuleAction {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_RULESET_ID, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   String getRulesetId();
 
   @JsonProperty(value = JSON_PROPERTY_RULESET_ID, required = true)
@@ -75,7 +50,6 @@ public interface EventRuleAction {
 
   EventRuleAction rulesetId(@jakarta.annotation.Nonnull String rulesetId);
 
-
   /**
    * Get type
    * @return type
@@ -83,7 +57,6 @@ public interface EventRuleAction {
   @jakarta.annotation.Nonnull
   @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
   RuleActionType getType();
 
   @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
@@ -92,70 +65,62 @@ public interface EventRuleAction {
 
   EventRuleAction type(@jakarta.annotation.Nonnull RuleActionType type);
 
-
   public static final class UnknownEventRuleAction implements EventRuleAction {
 
     public static final String JSON_PROPERTY_RULESET_ID = "ruleset_id";
-    @jakarta.annotation.Nonnull
-    private String rulesetId;
+    @jakarta.annotation.Nonnull private String rulesetId;
 
     public static final String JSON_PROPERTY_TYPE = "type";
-    // The discriminator does not have Nullability-annotation since it is added during serialization by the @JsonTypeName annotation
+    // The discriminator does not have Nullability-annotation since it is added during serialization
+    // by the @JsonTypeName annotation
     private RuleActionType type;
 
-    public UnknownEventRuleAction() {
-    }
+    public UnknownEventRuleAction() {}
 
     public EventRuleAction rulesetId(@jakarta.annotation.Nonnull String rulesetId) {
-        
-        this.rulesetId = rulesetId;
-        return this;
+
+      this.rulesetId = rulesetId;
+      return this;
     }
 
     /**
-    * The ID of the evaluated ruleset.
-    * @return rulesetId
-    */
+     * The ID of the evaluated ruleset.
+     * @return rulesetId
+     */
     @jakarta.annotation.Nonnull
     @JsonProperty(value = JSON_PROPERTY_RULESET_ID, required = true)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getRulesetId() {
-        return rulesetId;
+      return rulesetId;
     }
 
-
     @JsonProperty(value = JSON_PROPERTY_RULESET_ID, required = true)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public void setRulesetId(@jakarta.annotation.Nonnull String rulesetId) {
-        this.rulesetId = rulesetId;
+      this.rulesetId = rulesetId;
     }
 
     public EventRuleAction type(@jakarta.annotation.Nonnull RuleActionType type) {
-        
-        this.type = type;
-        return this;
+
+      this.type = type;
+      return this;
     }
 
     /**
-    * Get type
-    * @return type
-    */
+     * Get type
+     * @return type
+     */
     @jakarta.annotation.Nonnull
     @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public RuleActionType getType() {
-        return type;
+      return type;
     }
-
 
     @JsonProperty(value = JSON_PROPERTY_TYPE, required = true)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+    @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public void setType(@jakarta.annotation.Nonnull RuleActionType type) {
-        this.type = type;
+      this.type = type;
     }
-
   }
 }
-

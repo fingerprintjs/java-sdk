@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * Bounding box metrics describing how the emoji glyph renders.
@@ -41,46 +31,38 @@ import com.fingerprint.v4.sdk.JSON;
   Emoji.JSON_PROPERTY_X,
   Emoji.JSON_PROPERTY_Y
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class Emoji {
   public static final String JSON_PROPERTY_FONT = "font";
-  @jakarta.annotation.Nullable
-  private String font;
+  @jakarta.annotation.Nullable private String font;
 
   public static final String JSON_PROPERTY_WIDTH = "width";
-  @jakarta.annotation.Nullable
-  private Double width;
+  @jakarta.annotation.Nullable private Double width;
 
   public static final String JSON_PROPERTY_HEIGHT = "height";
-  @jakarta.annotation.Nullable
-  private Double height;
+  @jakarta.annotation.Nullable private Double height;
 
   public static final String JSON_PROPERTY_TOP = "top";
-  @jakarta.annotation.Nullable
-  private Double top;
+  @jakarta.annotation.Nullable private Double top;
 
   public static final String JSON_PROPERTY_BOTTOM = "bottom";
-  @jakarta.annotation.Nullable
-  private Double bottom;
+  @jakarta.annotation.Nullable private Double bottom;
 
   public static final String JSON_PROPERTY_LEFT = "left";
-  @jakarta.annotation.Nullable
-  private Double left;
+  @jakarta.annotation.Nullable private Double left;
 
   public static final String JSON_PROPERTY_RIGHT = "right";
-  @jakarta.annotation.Nullable
-  private Double right;
+  @jakarta.annotation.Nullable private Double right;
 
   public static final String JSON_PROPERTY_X = "x";
-  @jakarta.annotation.Nullable
-  private Double x;
+  @jakarta.annotation.Nullable private Double x;
 
   public static final String JSON_PROPERTY_Y = "y";
-  @jakarta.annotation.Nullable
-  private Double y;
+  @jakarta.annotation.Nullable private Double y;
 
-  public Emoji() { 
-  }
+  public Emoji() {}
 
   public Emoji font(@jakarta.annotation.Nullable String font) {
     this.font = font;
@@ -94,18 +76,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_FONT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public String getFont() {
     return font;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_FONT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFont(@jakarta.annotation.Nullable String font) {
     this.font = font;
   }
-
 
   public Emoji width(@jakarta.annotation.Nullable Double width) {
     this.width = width;
@@ -119,18 +98,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_WIDTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getWidth() {
     return width;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_WIDTH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setWidth(@jakarta.annotation.Nullable Double width) {
     this.width = width;
   }
-
 
   public Emoji height(@jakarta.annotation.Nullable Double height) {
     this.height = height;
@@ -144,18 +120,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_HEIGHT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getHeight() {
     return height;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_HEIGHT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setHeight(@jakarta.annotation.Nullable Double height) {
     this.height = height;
   }
-
 
   public Emoji top(@jakarta.annotation.Nullable Double top) {
     this.top = top;
@@ -169,18 +142,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TOP, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getTop() {
     return top;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TOP, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTop(@jakarta.annotation.Nullable Double top) {
     this.top = top;
   }
-
 
   public Emoji bottom(@jakarta.annotation.Nullable Double bottom) {
     this.bottom = bottom;
@@ -194,18 +164,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_BOTTOM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getBottom() {
     return bottom;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_BOTTOM, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBottom(@jakarta.annotation.Nullable Double bottom) {
     this.bottom = bottom;
   }
-
 
   public Emoji left(@jakarta.annotation.Nullable Double left) {
     this.left = left;
@@ -219,18 +186,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_LEFT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getLeft() {
     return left;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_LEFT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLeft(@jakarta.annotation.Nullable Double left) {
     this.left = left;
   }
-
 
   public Emoji right(@jakarta.annotation.Nullable Double right) {
     this.right = right;
@@ -244,18 +208,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_RIGHT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getRight() {
     return right;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RIGHT, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRight(@jakarta.annotation.Nullable Double right) {
     this.right = right;
   }
-
 
   public Emoji x(@jakarta.annotation.Nullable Double x) {
     this.x = x;
@@ -269,18 +230,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_X, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getX() {
     return x;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_X, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setX(@jakarta.annotation.Nullable Double x) {
     this.x = x;
   }
-
 
   public Emoji y(@jakarta.annotation.Nullable Double y) {
     this.y = y;
@@ -294,18 +252,15 @@ public class Emoji {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_Y, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Double getY() {
     return y;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_Y, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setY(@jakarta.annotation.Nullable Double y) {
     this.y = y;
   }
-
 
   /**
    * Return true if this Emoji object is equal to o.
@@ -319,15 +274,15 @@ public class Emoji {
       return false;
     }
     Emoji emoji = (Emoji) o;
-    return Objects.equals(this.font, emoji.font) &&
-        Objects.equals(this.width, emoji.width) &&
-        Objects.equals(this.height, emoji.height) &&
-        Objects.equals(this.top, emoji.top) &&
-        Objects.equals(this.bottom, emoji.bottom) &&
-        Objects.equals(this.left, emoji.left) &&
-        Objects.equals(this.right, emoji.right) &&
-        Objects.equals(this.x, emoji.x) &&
-        Objects.equals(this.y, emoji.y);
+    return Objects.equals(this.font, emoji.font)
+        && Objects.equals(this.width, emoji.width)
+        && Objects.equals(this.height, emoji.height)
+        && Objects.equals(this.top, emoji.top)
+        && Objects.equals(this.bottom, emoji.bottom)
+        && Objects.equals(this.left, emoji.left)
+        && Objects.equals(this.right, emoji.right)
+        && Objects.equals(this.x, emoji.x)
+        && Objects.equals(this.y, emoji.y);
   }
 
   @Override
@@ -362,6 +317,4 @@ public class Emoji {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

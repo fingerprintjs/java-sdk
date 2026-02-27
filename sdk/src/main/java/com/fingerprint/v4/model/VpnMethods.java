@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,22 +10,12 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.Objects;
 
 /**
  * VpnMethods
@@ -37,30 +27,26 @@ import com.fingerprint.v4.sdk.JSON;
   VpnMethods.JSON_PROPERTY_OS_MISMATCH,
   VpnMethods.JSON_PROPERTY_RELAY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class VpnMethods {
   public static final String JSON_PROPERTY_TIMEZONE_MISMATCH = "timezone_mismatch";
-  @jakarta.annotation.Nullable
-  private Boolean timezoneMismatch;
+  @jakarta.annotation.Nullable private Boolean timezoneMismatch;
 
   public static final String JSON_PROPERTY_PUBLIC_VPN = "public_vpn";
-  @jakarta.annotation.Nullable
-  private Boolean publicVpn;
+  @jakarta.annotation.Nullable private Boolean publicVpn;
 
   public static final String JSON_PROPERTY_AUXILIARY_MOBILE = "auxiliary_mobile";
-  @jakarta.annotation.Nullable
-  private Boolean auxiliaryMobile;
+  @jakarta.annotation.Nullable private Boolean auxiliaryMobile;
 
   public static final String JSON_PROPERTY_OS_MISMATCH = "os_mismatch";
-  @jakarta.annotation.Nullable
-  private Boolean osMismatch;
+  @jakarta.annotation.Nullable private Boolean osMismatch;
 
   public static final String JSON_PROPERTY_RELAY = "relay";
-  @jakarta.annotation.Nullable
-  private Boolean relay;
+  @jakarta.annotation.Nullable private Boolean relay;
 
-  public VpnMethods() { 
-  }
+  public VpnMethods() {}
 
   public VpnMethods timezoneMismatch(@jakarta.annotation.Nullable Boolean timezoneMismatch) {
     this.timezoneMismatch = timezoneMismatch;
@@ -74,18 +60,15 @@ public class VpnMethods {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_TIMEZONE_MISMATCH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getTimezoneMismatch() {
     return timezoneMismatch;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_TIMEZONE_MISMATCH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimezoneMismatch(@jakarta.annotation.Nullable Boolean timezoneMismatch) {
     this.timezoneMismatch = timezoneMismatch;
   }
-
 
   public VpnMethods publicVpn(@jakarta.annotation.Nullable Boolean publicVpn) {
     this.publicVpn = publicVpn;
@@ -99,18 +82,15 @@ public class VpnMethods {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_PUBLIC_VPN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getPublicVpn() {
     return publicVpn;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_PUBLIC_VPN, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPublicVpn(@jakarta.annotation.Nullable Boolean publicVpn) {
     this.publicVpn = publicVpn;
   }
-
 
   public VpnMethods auxiliaryMobile(@jakarta.annotation.Nullable Boolean auxiliaryMobile) {
     this.auxiliaryMobile = auxiliaryMobile;
@@ -124,18 +104,15 @@ public class VpnMethods {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_AUXILIARY_MOBILE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getAuxiliaryMobile() {
     return auxiliaryMobile;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_AUXILIARY_MOBILE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAuxiliaryMobile(@jakarta.annotation.Nullable Boolean auxiliaryMobile) {
     this.auxiliaryMobile = auxiliaryMobile;
   }
-
 
   public VpnMethods osMismatch(@jakarta.annotation.Nullable Boolean osMismatch) {
     this.osMismatch = osMismatch;
@@ -149,11 +126,9 @@ public class VpnMethods {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_OS_MISMATCH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getOsMismatch() {
     return osMismatch;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_OS_MISMATCH, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -161,31 +136,27 @@ public class VpnMethods {
     this.osMismatch = osMismatch;
   }
 
-
   public VpnMethods relay(@jakarta.annotation.Nullable Boolean relay) {
     this.relay = relay;
     return this;
   }
 
   /**
-   * Request IP address belongs to a relay service provider, indicating the use of relay services like [Apple Private relay](https://support.apple.com/en-us/102602) or [Cloudflare Warp](https://developers.cloudflare.com/warp-client/).  * Like VPNs, relay services anonymize the visitor's true IP address. * Unlike traditional VPNs, relay services don't let visitors spoof their location by choosing an exit node in a different country.  This field allows you to differentiate VPN users and relay service users in your fraud prevention logic. 
+   * Request IP address belongs to a relay service provider, indicating the use of relay services like [Apple Private relay](https://support.apple.com/en-us/102602) or [Cloudflare Warp](https://developers.cloudflare.com/warp-client/).  * Like VPNs, relay services anonymize the visitor's true IP address. * Unlike traditional VPNs, relay services don't let visitors spoof their location by choosing an exit node in a different country.  This field allows you to differentiate VPN users and relay service users in your fraud prevention logic.
    * @return relay
    */
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_RELAY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public Boolean getRelay() {
     return relay;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_RELAY, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRelay(@jakarta.annotation.Nullable Boolean relay) {
     this.relay = relay;
   }
-
 
   /**
    * Return true if this VpnMethods object is equal to o.
@@ -199,11 +170,11 @@ public class VpnMethods {
       return false;
     }
     VpnMethods vpnMethods = (VpnMethods) o;
-    return Objects.equals(this.timezoneMismatch, vpnMethods.timezoneMismatch) &&
-        Objects.equals(this.publicVpn, vpnMethods.publicVpn) &&
-        Objects.equals(this.auxiliaryMobile, vpnMethods.auxiliaryMobile) &&
-        Objects.equals(this.osMismatch, vpnMethods.osMismatch) &&
-        Objects.equals(this.relay, vpnMethods.relay);
+    return Objects.equals(this.timezoneMismatch, vpnMethods.timezoneMismatch)
+        && Objects.equals(this.publicVpn, vpnMethods.publicVpn)
+        && Objects.equals(this.auxiliaryMobile, vpnMethods.auxiliaryMobile)
+        && Objects.equals(this.osMismatch, vpnMethods.osMismatch)
+        && Objects.equals(this.relay, vpnMethods.relay);
   }
 
   @Override
@@ -234,6 +205,4 @@ public class VpnMethods {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-

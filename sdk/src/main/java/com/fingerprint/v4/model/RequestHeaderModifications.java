@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. 
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -10,25 +10,14 @@
  * Do not edit the class manually.
  */
 
-
 package com.fingerprint.v4.model;
 
-import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.fingerprint.v4.model.RuleActionHeaderField;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fingerprint.v4.sdk.JSON;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The set of header modifications to apply, in the following order: remove, set, append.
@@ -38,22 +27,20 @@ import com.fingerprint.v4.sdk.JSON;
   RequestHeaderModifications.JSON_PROPERTY_SET,
   RequestHeaderModifications.JSON_PROPERTY_APPEND
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.16.0")
+@jakarta.annotation.Generated(
+    value = "org.openapitools.codegen.languages.JavaClientCodegen",
+    comments = "Generator version: 7.16.0")
 public class RequestHeaderModifications {
   public static final String JSON_PROPERTY_REMOVE = "remove";
-  @jakarta.annotation.Nullable
-  private List<String> remove = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<String> remove = new ArrayList<>();
 
   public static final String JSON_PROPERTY_SET = "set";
-  @jakarta.annotation.Nullable
-  private List<RuleActionHeaderField> set = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<RuleActionHeaderField> set = new ArrayList<>();
 
   public static final String JSON_PROPERTY_APPEND = "append";
-  @jakarta.annotation.Nullable
-  private List<RuleActionHeaderField> append = new ArrayList<>();
+  @jakarta.annotation.Nullable private List<RuleActionHeaderField> append = new ArrayList<>();
 
-  public RequestHeaderModifications() { 
-  }
+  public RequestHeaderModifications() {}
 
   public RequestHeaderModifications remove(@jakarta.annotation.Nullable List<String> remove) {
     this.remove = remove;
@@ -75,11 +62,9 @@ public class RequestHeaderModifications {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_REMOVE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<String> getRemove() {
     return remove;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_REMOVE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -87,8 +72,8 @@ public class RequestHeaderModifications {
     this.remove = remove;
   }
 
-
-  public RequestHeaderModifications set(@jakarta.annotation.Nullable List<RuleActionHeaderField> set) {
+  public RequestHeaderModifications set(
+      @jakarta.annotation.Nullable List<RuleActionHeaderField> set) {
     this.set = set;
     return this;
   }
@@ -108,11 +93,9 @@ public class RequestHeaderModifications {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_SET, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<RuleActionHeaderField> getSet() {
     return set;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_SET, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
@@ -120,8 +103,8 @@ public class RequestHeaderModifications {
     this.set = set;
   }
 
-
-  public RequestHeaderModifications append(@jakarta.annotation.Nullable List<RuleActionHeaderField> append) {
+  public RequestHeaderModifications append(
+      @jakarta.annotation.Nullable List<RuleActionHeaderField> append) {
     this.append = append;
     return this;
   }
@@ -141,18 +124,15 @@ public class RequestHeaderModifications {
   @jakarta.annotation.Nullable
   @JsonProperty(value = JSON_PROPERTY_APPEND, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
   public List<RuleActionHeaderField> getAppend() {
     return append;
   }
-
 
   @JsonProperty(value = JSON_PROPERTY_APPEND, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAppend(@jakarta.annotation.Nullable List<RuleActionHeaderField> append) {
     this.append = append;
   }
-
 
   /**
    * Return true if this RequestHeaderModifications object is equal to o.
@@ -166,9 +146,9 @@ public class RequestHeaderModifications {
       return false;
     }
     RequestHeaderModifications requestHeaderModifications = (RequestHeaderModifications) o;
-    return Objects.equals(this.remove, requestHeaderModifications.remove) &&
-        Objects.equals(this.set, requestHeaderModifications.set) &&
-        Objects.equals(this.append, requestHeaderModifications.append);
+    return Objects.equals(this.remove, requestHeaderModifications.remove)
+        && Objects.equals(this.set, requestHeaderModifications.set)
+        && Objects.equals(this.append, requestHeaderModifications.append);
   }
 
   @Override
@@ -197,6 +177,4 @@ public class RequestHeaderModifications {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
-
