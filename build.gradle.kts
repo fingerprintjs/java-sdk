@@ -39,6 +39,10 @@ tasks.register("downloadGoogleJavaFormat") {
     val downloadUrl = "https://github.com/google/google-java-format/releases/download/v$googleJavaFormatVersion/google-java-format_${osSuffix}-${archSuffix}${binarySuffix}"
     outputs.file(googleJavaFormatExeFile)
 
+    onlyIf {
+        System.getenv("JITPACK") != "TRUE"
+    }
+
     doLast {
         val file = googleJavaFormatExeFile.get().asFile
         if (!file.exists()) {
@@ -61,6 +65,10 @@ fun Project.registerFormatTasks() {
 
     tasks.register("format") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
+
+        onlyIf {
+            System.getenv("JITPACK") != "TRUE"
+        }
 
         doLast {
             // First, fix the imports
