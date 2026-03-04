@@ -2,15 +2,19 @@
 "java-sdk": major
 ---
 
-Migrate to Server API v4
+Migrate the Java SDK to Server API v4 and release `8.0.0`.
 
-**BREAKING CHANGES**: This release contains multiple breaking changes:
+### Breaking changes
 
-- SDK version bumped to `8.0.0`
-- Server API version upgraded from v3 to v4
-- Changed root package for the SDK from `com.fingerprint` to `com.fingerprint.v4`
-- Removed `GetVisits` and `GetRelatedVisitors` operations.
-- Improved models used by the `GetEvent` and `SearchEvents` operations to use a more concise shape and clearer names.
-- Use the Apache HTTP client connector by default to enable support for the PATCH HTTP method.
+- Upgraded from Server API v3 to [v4](https://docs.fingerprint.com/reference/server-api-v4).
+- Changed the root package from `com.fingerprint` to `com.fingerprint.v4`.
+- Removed the `GetVisits` and `GetRelatedVisitors` operations.
+- Updated the `GetEvent` and `SearchEvents` models to use a more concise shape and clearer names.
 
-See [this page in the Fingerprint documentation](https://docs.fingerprint.com/reference/java-server-sdk#migration-guide-for-java-sdk-v8-0-0) for a migration guide.
+### Improvements
+
+- Use the Apache HTTP client connector by default to support the PATCH HTTP method.
+- Improved JitPack compatibility by updating the build environment handling.
+- Made the JitPack environment variable check case-insensitive.
+
+For migration steps, see the [Java SDK v8 migration guide](https://docs.fingerprint.com/reference/java-server-sdk#migration-guide-for-java-sdk-v8-0-0).
