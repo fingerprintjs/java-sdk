@@ -25,6 +25,7 @@ import java.util.Objects;
 @JsonPropertyOrder({
   Event.JSON_PROPERTY_EVENT_ID,
   Event.JSON_PROPERTY_TIMESTAMP,
+  Event.JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS,
   Event.JSON_PROPERTY_LINKED_ID,
   Event.JSON_PROPERTY_ENVIRONMENT_ID,
   Event.JSON_PROPERTY_SUSPECT,
@@ -61,11 +62,15 @@ import java.util.Objects;
   Event.JSON_PROPERTY_PRIVACY_SETTINGS,
   Event.JSON_PROPERTY_ROOT_APPS,
   Event.JSON_PROPERTY_RULE_ACTION,
+  Event.JSON_PROPERTY_SIMULATOR,
   Event.JSON_PROPERTY_SUSPECT_SCORE,
   Event.JSON_PROPERTY_TAMPERING,
+  Event.JSON_PROPERTY_TAMPERING_CONFIDENCE,
+  Event.JSON_PROPERTY_TAMPERING_ML_SCORE,
   Event.JSON_PROPERTY_TAMPERING_DETAILS,
   Event.JSON_PROPERTY_VELOCITY,
   Event.JSON_PROPERTY_VIRTUAL_MACHINE,
+  Event.JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE,
   Event.JSON_PROPERTY_VPN,
   Event.JSON_PROPERTY_VPN_CONFIDENCE,
   Event.JSON_PROPERTY_VPN_ORIGIN_TIMEZONE,
@@ -83,6 +88,12 @@ public class Event {
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
   @jakarta.annotation.Nonnull private Long timestamp;
+
+  public static final String JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS =
+      "incremental_identification_status";
+
+  @jakarta.annotation.Nullable
+  private IncrementalIdentificationStatus incrementalIdentificationStatus;
 
   public static final String JSON_PROPERTY_LINKED_ID = "linked_id";
   @jakarta.annotation.Nullable private String linkedId;
@@ -193,11 +204,20 @@ public class Event {
   public static final String JSON_PROPERTY_RULE_ACTION = "rule_action";
   @jakarta.annotation.Nullable private EventRuleAction ruleAction;
 
+  public static final String JSON_PROPERTY_SIMULATOR = "simulator";
+  @jakarta.annotation.Nullable private Boolean simulator;
+
   public static final String JSON_PROPERTY_SUSPECT_SCORE = "suspect_score";
   @jakarta.annotation.Nullable private Integer suspectScore;
 
   public static final String JSON_PROPERTY_TAMPERING = "tampering";
   @jakarta.annotation.Nullable private Boolean tampering;
+
+  public static final String JSON_PROPERTY_TAMPERING_CONFIDENCE = "tampering_confidence";
+  @jakarta.annotation.Nullable private TamperingConfidence tamperingConfidence;
+
+  public static final String JSON_PROPERTY_TAMPERING_ML_SCORE = "tampering_ml_score";
+  @jakarta.annotation.Nullable private Double tamperingMlScore;
 
   public static final String JSON_PROPERTY_TAMPERING_DETAILS = "tampering_details";
   @jakarta.annotation.Nullable private TamperingDetails tamperingDetails;
@@ -207,6 +227,9 @@ public class Event {
 
   public static final String JSON_PROPERTY_VIRTUAL_MACHINE = "virtual_machine";
   @jakarta.annotation.Nullable private Boolean virtualMachine;
+
+  public static final String JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE = "virtual_machine_ml_score";
+  @jakarta.annotation.Nullable private Double virtualMachineMlScore;
 
   public static final String JSON_PROPERTY_VPN = "vpn";
   @jakarta.annotation.Nullable private Boolean vpn;
@@ -273,6 +296,32 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTimestamp(@jakarta.annotation.Nonnull Long timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public Event incrementalIdentificationStatus(
+      @jakarta.annotation.Nullable
+          IncrementalIdentificationStatus incrementalIdentificationStatus) {
+    this.incrementalIdentificationStatus = incrementalIdentificationStatus;
+    return this;
+  }
+
+  /**
+   * Get incrementalIdentificationStatus
+   * @return incrementalIdentificationStatus
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public IncrementalIdentificationStatus getIncrementalIdentificationStatus() {
+    return incrementalIdentificationStatus;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setIncrementalIdentificationStatus(
+      @jakarta.annotation.Nullable
+          IncrementalIdentificationStatus incrementalIdentificationStatus) {
+    this.incrementalIdentificationStatus = incrementalIdentificationStatus;
   }
 
   public Event linkedId(@jakarta.annotation.Nullable String linkedId) {
@@ -1077,6 +1126,28 @@ public class Event {
     this.ruleAction = ruleAction;
   }
 
+  public Event simulator(@jakarta.annotation.Nullable Boolean simulator) {
+    this.simulator = simulator;
+    return this;
+  }
+
+  /**
+   * iOS specific simulator detection. There are 2 values: * `true` - Simulator environment detected. * `false` - No signs of simulator or the client is not iOS.
+   * @return simulator
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_SIMULATOR, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getSimulator() {
+    return simulator;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_SIMULATOR, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSimulator(@jakarta.annotation.Nullable Boolean simulator) {
+    this.simulator = simulator;
+  }
+
   public Event suspectScore(@jakarta.annotation.Nullable Integer suspectScore) {
     this.suspectScore = suspectScore;
     return this;
@@ -1119,6 +1190,54 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTampering(@jakarta.annotation.Nullable Boolean tampering) {
     this.tampering = tampering;
+  }
+
+  public Event tamperingConfidence(
+      @jakarta.annotation.Nullable TamperingConfidence tamperingConfidence) {
+    this.tamperingConfidence = tamperingConfidence;
+    return this;
+  }
+
+  /**
+   * Get tamperingConfidence
+   * @return tamperingConfidence
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TAMPERING_CONFIDENCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public TamperingConfidence getTamperingConfidence() {
+    return tamperingConfidence;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_TAMPERING_CONFIDENCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTamperingConfidence(
+      @jakarta.annotation.Nullable TamperingConfidence tamperingConfidence) {
+    this.tamperingConfidence = tamperingConfidence;
+  }
+
+  public Event tamperingMlScore(@jakarta.annotation.Nullable Double tamperingMlScore) {
+    this.tamperingMlScore = tamperingMlScore;
+    return this;
+  }
+
+  /**
+   * A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model
+   * minimum: 0
+   * maximum: 1
+   * @return tamperingMlScore
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TAMPERING_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getTamperingMlScore() {
+    return tamperingMlScore;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_TAMPERING_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTamperingMlScore(@jakarta.annotation.Nullable Double tamperingMlScore) {
+    this.tamperingMlScore = tamperingMlScore;
   }
 
   public Event tamperingDetails(@jakarta.annotation.Nullable TamperingDetails tamperingDetails) {
@@ -1185,6 +1304,30 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVirtualMachine(@jakarta.annotation.Nullable Boolean virtualMachine) {
     this.virtualMachine = virtualMachine;
+  }
+
+  public Event virtualMachineMlScore(@jakarta.annotation.Nullable Double virtualMachineMlScore) {
+    this.virtualMachineMlScore = virtualMachineMlScore;
+    return this;
+  }
+
+  /**
+   * Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result
+   * minimum: 0
+   * maximum: 1
+   * @return virtualMachineMlScore
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getVirtualMachineMlScore() {
+    return virtualMachineMlScore;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVirtualMachineMlScore(@jakarta.annotation.Nullable Double virtualMachineMlScore) {
+    this.virtualMachineMlScore = virtualMachineMlScore;
   }
 
   public Event vpn(@jakarta.annotation.Nullable Boolean vpn) {
@@ -1357,6 +1500,8 @@ public class Event {
     Event event = (Event) o;
     return Objects.equals(this.eventId, event.eventId)
         && Objects.equals(this.timestamp, event.timestamp)
+        && Objects.equals(
+            this.incrementalIdentificationStatus, event.incrementalIdentificationStatus)
         && Objects.equals(this.linkedId, event.linkedId)
         && Objects.equals(this.environmentId, event.environmentId)
         && Objects.equals(this.suspect, event.suspect)
@@ -1393,11 +1538,15 @@ public class Event {
         && Objects.equals(this.privacySettings, event.privacySettings)
         && Objects.equals(this.rootApps, event.rootApps)
         && Objects.equals(this.ruleAction, event.ruleAction)
+        && Objects.equals(this.simulator, event.simulator)
         && Objects.equals(this.suspectScore, event.suspectScore)
         && Objects.equals(this.tampering, event.tampering)
+        && Objects.equals(this.tamperingConfidence, event.tamperingConfidence)
+        && Objects.equals(this.tamperingMlScore, event.tamperingMlScore)
         && Objects.equals(this.tamperingDetails, event.tamperingDetails)
         && Objects.equals(this.velocity, event.velocity)
         && Objects.equals(this.virtualMachine, event.virtualMachine)
+        && Objects.equals(this.virtualMachineMlScore, event.virtualMachineMlScore)
         && Objects.equals(this.vpn, event.vpn)
         && Objects.equals(this.vpnConfidence, event.vpnConfidence)
         && Objects.equals(this.vpnOriginTimezone, event.vpnOriginTimezone)
@@ -1412,6 +1561,7 @@ public class Event {
     return Objects.hash(
         eventId,
         timestamp,
+        incrementalIdentificationStatus,
         linkedId,
         environmentId,
         suspect,
@@ -1448,11 +1598,15 @@ public class Event {
         privacySettings,
         rootApps,
         ruleAction,
+        simulator,
         suspectScore,
         tampering,
+        tamperingConfidence,
+        tamperingMlScore,
         tamperingDetails,
         velocity,
         virtualMachine,
+        virtualMachineMlScore,
         vpn,
         vpnConfidence,
         vpnOriginTimezone,
@@ -1468,6 +1622,9 @@ public class Event {
     sb.append("class Event {\n");
     sb.append("    eventId: ").append(toIndentedString(eventId)).append("\n");
     sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    incrementalIdentificationStatus: ")
+        .append(toIndentedString(incrementalIdentificationStatus))
+        .append("\n");
     sb.append("    linkedId: ").append(toIndentedString(linkedId)).append("\n");
     sb.append("    environmentId: ").append(toIndentedString(environmentId)).append("\n");
     sb.append("    suspect: ").append(toIndentedString(suspect)).append("\n");
@@ -1508,11 +1665,19 @@ public class Event {
     sb.append("    privacySettings: ").append(toIndentedString(privacySettings)).append("\n");
     sb.append("    rootApps: ").append(toIndentedString(rootApps)).append("\n");
     sb.append("    ruleAction: ").append(toIndentedString(ruleAction)).append("\n");
+    sb.append("    simulator: ").append(toIndentedString(simulator)).append("\n");
     sb.append("    suspectScore: ").append(toIndentedString(suspectScore)).append("\n");
     sb.append("    tampering: ").append(toIndentedString(tampering)).append("\n");
+    sb.append("    tamperingConfidence: ")
+        .append(toIndentedString(tamperingConfidence))
+        .append("\n");
+    sb.append("    tamperingMlScore: ").append(toIndentedString(tamperingMlScore)).append("\n");
     sb.append("    tamperingDetails: ").append(toIndentedString(tamperingDetails)).append("\n");
     sb.append("    velocity: ").append(toIndentedString(velocity)).append("\n");
     sb.append("    virtualMachine: ").append(toIndentedString(virtualMachine)).append("\n");
+    sb.append("    virtualMachineMlScore: ")
+        .append(toIndentedString(virtualMachineMlScore))
+        .append("\n");
     sb.append("    vpn: ").append(toIndentedString(vpn)).append("\n");
     sb.append("    vpnConfidence: ").append(toIndentedString(vpnConfidence)).append("\n");
     sb.append("    vpnOriginTimezone: ").append(toIndentedString(vpnOriginTimezone)).append("\n");

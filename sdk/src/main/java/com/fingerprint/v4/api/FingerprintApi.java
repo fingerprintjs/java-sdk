@@ -4,6 +4,7 @@ import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
+import com.fingerprint.v4.model.SearchEventsIncrementalIdentificationStatus;
 import com.fingerprint.v4.model.SearchEventsSdkPlatform;
 import com.fingerprint.v4.model.SearchEventsVpnConfidence;
 import com.fingerprint.v4.sdk.ApiClient;
@@ -270,6 +271,7 @@ public class FingerprintApi {
     private Integer limit;
     private String paginationKey;
     private String visitorId;
+    private String highRecallId;
     private SearchEventsBot bot;
     private String ipAddress;
     private String asn;
@@ -306,6 +308,8 @@ public class FingerprintApi {
     private String proximityId;
     private Long totalHits;
     private Boolean torNode;
+    private SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus;
+    private Boolean simulator;
 
     /**
      * getter for limit - Limit the number of events returned.
@@ -338,17 +342,32 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.
+     * getter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).
      */
     public String getVisitorId() {
       return visitorId;
     }
 
     /**
-     * setter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals. Filter for events matching this `visitor_id`.
+     * setter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).
      */
     public SearchEventsOptionalParams setVisitorId(String visitorId) {
       this.visitorId = visitorId;
+      return this;
+    }
+
+    /**
+     * getter for highRecallId - The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.  Filter events by matching High Recall ID (`supplementary_id_high_recall.visitor_id` property).
+     */
+    public String getHighRecallId() {
+      return highRecallId;
+    }
+
+    /**
+     * setter for highRecallId - The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.  Filter events by matching High Recall ID (`supplementary_id_high_recall.visitor_id` property).
+     */
+    public SearchEventsOptionalParams setHighRecallId(String highRecallId) {
+      this.highRecallId = highRecallId;
       return this;
     }
 
@@ -833,14 +852,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for environment - Filter for events by providing one or more environment IDs (`environment_id` property).
+     * getter for environment - Filter for events by providing one or more environment IDs (`environment_id` property).  ### Array syntax To provide multiple environment IDs, use the repeated keys syntax (`environment=env1&environment=env2`). Other notations like comma-separated (`environment=env1,env2`) or bracket notation (`environment[]=env1&environment[]=env2`) are not supported.
      */
     public List<String> getEnvironment() {
       return environment;
     }
 
     /**
-     * setter for environment - Filter for events by providing one or more environment IDs (`environment_id` property).
+     * setter for environment - Filter for events by providing one or more environment IDs (`environment_id` property).  ### Array syntax To provide multiple environment IDs, use the repeated keys syntax (`environment=env1&environment=env2`). Other notations like comma-separated (`environment=env1,env2`) or bracket notation (`environment[]=env1&environment[]=env2`) are not supported.
      */
     public SearchEventsOptionalParams setEnvironment(List<String> environment) {
       this.environment = environment;
@@ -889,6 +908,37 @@ public class FingerprintApi {
      */
     public SearchEventsOptionalParams setTorNode(Boolean torNode) {
       this.torNode = torNode;
+      return this;
+    }
+
+    /**
+     * getter for incrementalIdentificationStatus - Filter events by their incremental identification status (`incremental_identification_status` property). Non incremental identification events are left out of the response.
+     */
+    public SearchEventsIncrementalIdentificationStatus getIncrementalIdentificationStatus() {
+      return incrementalIdentificationStatus;
+    }
+
+    /**
+     * setter for incrementalIdentificationStatus - Filter events by their incremental identification status (`incremental_identification_status` property). Non incremental identification events are left out of the response.
+     */
+    public SearchEventsOptionalParams setIncrementalIdentificationStatus(
+        SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus) {
+      this.incrementalIdentificationStatus = incrementalIdentificationStatus;
+      return this;
+    }
+
+    /**
+     * getter for simulator - Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.
+     */
+    public Boolean getSimulator() {
+      return simulator;
+    }
+
+    /**
+     * setter for simulator - Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.
+     */
+    public SearchEventsOptionalParams setSimulator(Boolean simulator) {
+      this.simulator = simulator;
       return this;
     }
   }
@@ -950,6 +1000,9 @@ public class FingerprintApi {
               "", "pagination_key", searchEventsOptionalParams.getPaginationKey()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "visitor_id", searchEventsOptionalParams.getVisitorId()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "", "high_recall_id", searchEventsOptionalParams.getHighRecallId()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "bot", searchEventsOptionalParams.getBot()));
       localVarQueryParams.addAll(
@@ -1036,6 +1089,13 @@ public class FingerprintApi {
           apiClient.parameterToPairs("", "total_hits", searchEventsOptionalParams.getTotalHits()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "tor_node", searchEventsOptionalParams.getTorNode()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "",
+              "incremental_identification_status",
+              searchEventsOptionalParams.getIncrementalIdentificationStatus()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs("", "simulator", searchEventsOptionalParams.getSimulator()));
     }
 
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
