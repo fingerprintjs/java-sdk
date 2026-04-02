@@ -15,18 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fingerprint.v4.model.ErrorCode;
-import com.fingerprint.v4.model.ErrorResponse;
-import com.fingerprint.v4.model.Event;
-import com.fingerprint.v4.model.EventRuleActionBlock;
-import com.fingerprint.v4.model.EventSearch;
-import com.fingerprint.v4.model.EventUpdate;
-import com.fingerprint.v4.model.ProxyDetails;
-import com.fingerprint.v4.model.RuleActionType;
-import com.fingerprint.v4.model.SearchEventsBot;
-import com.fingerprint.v4.model.SearchEventsSdkPlatform;
-import com.fingerprint.v4.model.SearchEventsVpnConfidence;
-import com.fingerprint.v4.model.VelocityData;
+import com.fingerprint.v4.model.*;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.ApiResponse;
@@ -466,6 +455,10 @@ public class FingerprintApiTest {
     final String PROXIMITY_ID = "testProximityId";
     final Long TOTAL_HITS = 10L;
     final Boolean TOR_NODE = true;
+    final String HIGH_RECALL_ID = "testHighRecallId";
+    final SearchEventsIncrementalIdentificationStatus INCREMENTAL_IDENTIFICATION_STATUS =
+        SearchEventsIncrementalIdentificationStatus.PARTIALLY_COMPLETED;
+    final Boolean SIMULATOR = true;
 
     Map<String, String> expectedQueryParams = new HashMap<>();
     expectedQueryParams.put("limit", String.valueOf(LIMIT));
@@ -506,6 +499,10 @@ public class FingerprintApiTest {
     expectedQueryParams.put("proximity_id", PROXIMITY_ID);
     expectedQueryParams.put("total_hits", String.valueOf(TOTAL_HITS));
     expectedQueryParams.put("tor_node", String.valueOf(TOR_NODE));
+    expectedQueryParams.put("high_recall_id", String.valueOf(HIGH_RECALL_ID));
+    expectedQueryParams.put(
+        "incremental_identification_status", String.valueOf(INCREMENTAL_IDENTIFICATION_STATUS));
+    expectedQueryParams.put("simulator", String.valueOf(SIMULATOR));
 
     addMock(
         "searchEvents",
@@ -574,7 +571,10 @@ public class FingerprintApiTest {
                 .setEnvironment(ENVIRONMENT)
                 .setProximityId(PROXIMITY_ID)
                 .setTotalHits(TOTAL_HITS)
-                .setTorNode(TOR_NODE));
+                .setTorNode(TOR_NODE)
+                .setHighRecallId(HIGH_RECALL_ID)
+                .setIncrementalIdentificationStatus(INCREMENTAL_IDENTIFICATION_STATUS)
+                .setSimulator(SIMULATOR));
     List<Event> events = response.getEvents();
     assertEquals(events.size(), 1);
   }

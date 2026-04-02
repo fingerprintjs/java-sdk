@@ -11,7 +11,6 @@ Error code:
 * `subscription_not_active` - Fingerprint workspace is not active.
 * `wrong_region` - Server and workspace region differ.
 * `feature_not_enabled` - This feature (for example, Delete API) is not enabled for your workspace.
-* `request_not_found` - The specified event ID was not found. It never existed, expired, or it has been deleted.
 * `visitor_not_found` - The specified visitor ID was not found. It never existed or it may have already been deleted.
 * `too_many_requests` - The limit on secret API key requests per second has been exceeded.
 * `state_not_ready` - The event specified with event ID is
@@ -45,8 +44,6 @@ Error code:
 * `WRONG_REGION` (value: `"wrong_region"`)
 
 * `FEATURE_NOT_ENABLED` (value: `"feature_not_enabled"`)
-
-* `REQUEST_NOT_FOUND` (value: `"request_not_found"`)
 
 * `VISITOR_NOT_FOUND` (value: `"visitor_not_found"`)
 
