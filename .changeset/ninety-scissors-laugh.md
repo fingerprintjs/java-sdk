@@ -2,4 +2,4 @@
 "java-sdk": minor
 ---
 
-Add `highRecallId` and `simulator` fileters for the `SearchEvents` method
+Add `highRecallId` and `simulator` filters for the `SearchEvents` method
