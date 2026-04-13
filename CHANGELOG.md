@@ -1,5 +1,18 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.1.0
+
+### Minor Changes
+
+- Add `Simulator` signal for iOS platform ([beaaea4](https://github.com/fingerprintjs/java-sdk/commit/beaaea410ed04f527b606d9b7074e1908b814ae4))
+- Add `VirtualMachineMlScore` field for `VirtualMachine` signal ([beaaea4](https://github.com/fingerprintjs/java-sdk/commit/beaaea410ed04f527b606d9b7074e1908b814ae4))
+- Add `highRecallId` and `simulator` filters for the `SearchEvents` method ([beaaea4](https://github.com/fingerprintjs/java-sdk/commit/beaaea410ed04f527b606d9b7074e1908b814ae4))
+- Add `TamperingConfidence` and `TamperingMlScore` fields for `Tampering` smart signal ([beaaea4](https://github.com/fingerprintjs/java-sdk/commit/beaaea410ed04f527b606d9b7074e1908b814ae4))
+
+### Patch Changes
+
+- Remove `REQUEST_NOT_FOUND` value from the `ErrorCode` enum ([beaaea4](https://github.com/fingerprintjs/java-sdk/commit/beaaea410ed04f527b606d9b7074e1908b814ae4))
+
 ## 8.0.0
 
 ### Major Changes
