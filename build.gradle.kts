@@ -59,7 +59,9 @@ tasks.register("downloadGoogleJavaFormat") {
 
 
 fun Project.registerFormatTasks() {
-    val inputFiles = fileTree("src") {
+    // Resolve lazily: files may be deleted/regenerated between configuration and execution
+    // (e.g., openApiGenerate removes and rewrites sources before format runs).
+    fun srcJavaFiles(): List<String> = fileTree("src") {
         include("**/*.java")
     }.files.map { it.absolutePath }
 
@@ -71,6 +73,8 @@ fun Project.registerFormatTasks() {
         }
 
         doLast {
+            val inputFiles = srcJavaFiles()
+
             // First, fix the imports
             exec {
                 executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
@@ -86,15 +90,16 @@ fun Project.registerFormatTasks() {
         }
     }
 
-    tasks.register<Exec>("checkFormat") {
+    tasks.register("checkFormat") {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
-        doFirst {
+        doLast {
             println("The following source files need to be formatted:")
+            exec {
+                executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
+                args = listOf("--dry-run", "--set-exit-if-changed", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + srcJavaFiles()
+            }
         }
-
-        executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
-        args = listOf("--dry-run", "--set-exit-if-changed", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
     }
 }
 
