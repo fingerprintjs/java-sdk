@@ -47,7 +47,11 @@ import java.util.Objects;
   RawDeviceAttributes.JSON_PROPERTY_AUDIO,
   RawDeviceAttributes.JSON_PROPERTY_PLUGINS,
   RawDeviceAttributes.JSON_PROPERTY_INDEXED_DB,
-  RawDeviceAttributes.JSON_PROPERTY_MATH
+  RawDeviceAttributes.JSON_PROPERTY_MATH,
+  RawDeviceAttributes.JSON_PROPERTY_DEVICE_MODEL,
+  RawDeviceAttributes.JSON_PROPERTY_DEVICE_MANUFACTURER,
+  RawDeviceAttributes.JSON_PROPERTY_FONT_HASH,
+  RawDeviceAttributes.JSON_PROPERTY_TIMEZONE_OFFSET
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -127,6 +131,18 @@ public class RawDeviceAttributes {
 
   public static final String JSON_PROPERTY_MATH = "math";
   @jakarta.annotation.Nullable private String math;
+
+  public static final String JSON_PROPERTY_DEVICE_MODEL = "device_model";
+  @jakarta.annotation.Nullable private String deviceModel;
+
+  public static final String JSON_PROPERTY_DEVICE_MANUFACTURER = "device_manufacturer";
+  @jakarta.annotation.Nullable private String deviceManufacturer;
+
+  public static final String JSON_PROPERTY_FONT_HASH = "font_hash";
+  @jakarta.annotation.Nullable private String fontHash;
+
+  public static final String JSON_PROPERTY_TIMEZONE_OFFSET = "timezone_offset";
+  @jakarta.annotation.Nullable private String timezoneOffset;
 
   public RawDeviceAttributes() {}
 
@@ -286,7 +302,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs.
+   * Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices
    * @return languages
    */
   @jakarta.annotation.Nullable
@@ -362,7 +378,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Current screen resolution.
+   * Current screen resolution. Available for both browsers and iOS devices
    * @return screenResolution
    */
   @jakarta.annotation.Nullable
@@ -474,7 +490,6 @@ public class RawDeviceAttributes {
 
   /**
    * Number of logical CPU cores reported by the browser.
-   * minimum: 1
    * @return hardwareConcurrency
    */
   @jakarta.annotation.Nullable
@@ -718,6 +733,95 @@ public class RawDeviceAttributes {
     this.math = math;
   }
 
+  public RawDeviceAttributes deviceModel(@jakarta.annotation.Nullable String deviceModel) {
+    this.deviceModel = deviceModel;
+    return this;
+  }
+
+  /**
+   * Device model string. Available only for Android and iOS devices.
+   * @return deviceModel
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_DEVICE_MODEL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getDeviceModel() {
+    return deviceModel;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_DEVICE_MODEL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDeviceModel(@jakarta.annotation.Nullable String deviceModel) {
+    this.deviceModel = deviceModel;
+  }
+
+  public RawDeviceAttributes deviceManufacturer(
+      @jakarta.annotation.Nullable String deviceManufacturer) {
+    this.deviceManufacturer = deviceManufacturer;
+    return this;
+  }
+
+  /**
+   * Device manufacturer string. Available only for Android and iOS devices.
+   * @return deviceManufacturer
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_DEVICE_MANUFACTURER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getDeviceManufacturer() {
+    return deviceManufacturer;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_DEVICE_MANUFACTURER, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDeviceManufacturer(@jakarta.annotation.Nullable String deviceManufacturer) {
+    this.deviceManufacturer = deviceManufacturer;
+  }
+
+  public RawDeviceAttributes fontHash(@jakarta.annotation.Nullable String fontHash) {
+    this.fontHash = fontHash;
+    return this;
+  }
+
+  /**
+   * Unique identifier for the user’s installed fonts.
+   * @return fontHash
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_FONT_HASH, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getFontHash() {
+    return fontHash;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_FONT_HASH, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFontHash(@jakarta.annotation.Nullable String fontHash) {
+    this.fontHash = fontHash;
+  }
+
+  public RawDeviceAttributes timezoneOffset(@jakarta.annotation.Nullable String timezoneOffset) {
+    this.timezoneOffset = timezoneOffset;
+    return this;
+  }
+
+  /**
+   * UTC offset in \"±HH:MM\" format derived from the detected IANA timezone.
+   * @return timezoneOffset
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TIMEZONE_OFFSET, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getTimezoneOffset() {
+    return timezoneOffset;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_TIMEZONE_OFFSET, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTimezoneOffset(@jakarta.annotation.Nullable String timezoneOffset) {
+    this.timezoneOffset = timezoneOffset;
+  }
+
   /**
    * Return true if this RawDeviceAttributes object is equal to o.
    */
@@ -754,7 +858,11 @@ public class RawDeviceAttributes {
         && Objects.equals(this.audio, rawDeviceAttributes.audio)
         && Objects.equals(this.plugins, rawDeviceAttributes.plugins)
         && Objects.equals(this.indexedDb, rawDeviceAttributes.indexedDb)
-        && Objects.equals(this.math, rawDeviceAttributes.math);
+        && Objects.equals(this.math, rawDeviceAttributes.math)
+        && Objects.equals(this.deviceModel, rawDeviceAttributes.deviceModel)
+        && Objects.equals(this.deviceManufacturer, rawDeviceAttributes.deviceManufacturer)
+        && Objects.equals(this.fontHash, rawDeviceAttributes.fontHash)
+        && Objects.equals(this.timezoneOffset, rawDeviceAttributes.timezoneOffset);
   }
 
   @Override
@@ -784,7 +892,11 @@ public class RawDeviceAttributes {
         audio,
         plugins,
         indexedDb,
-        math);
+        math,
+        deviceModel,
+        deviceManufacturer,
+        fontHash,
+        timezoneOffset);
   }
 
   @Override
@@ -818,6 +930,10 @@ public class RawDeviceAttributes {
     sb.append("    plugins: ").append(toIndentedString(plugins)).append("\n");
     sb.append("    indexedDb: ").append(toIndentedString(indexedDb)).append("\n");
     sb.append("    math: ").append(toIndentedString(math)).append("\n");
+    sb.append("    deviceModel: ").append(toIndentedString(deviceModel)).append("\n");
+    sb.append("    deviceManufacturer: ").append(toIndentedString(deviceManufacturer)).append("\n");
+    sb.append("    fontHash: ").append(toIndentedString(fontHash)).append("\n");
+    sb.append("    timezoneOffset: ").append(toIndentedString(timezoneOffset)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -55,6 +55,7 @@ import java.util.Objects;
   Event.JSON_PROPERTY_PROXY,
   Event.JSON_PROPERTY_PROXY_CONFIDENCE,
   Event.JSON_PROPERTY_PROXY_DETAILS,
+  Event.JSON_PROPERTY_PROXY_ML_SCORE,
   Event.JSON_PROPERTY_INCOGNITO,
   Event.JSON_PROPERTY_JAILBROKEN,
   Event.JSON_PROPERTY_LOCATION_SPOOFING,
@@ -77,6 +78,8 @@ import java.util.Objects;
   Event.JSON_PROPERTY_VPN_ORIGIN_COUNTRY,
   Event.JSON_PROPERTY_VPN_METHODS,
   Event.JSON_PROPERTY_HIGH_ACTIVITY_DEVICE,
+  Event.JSON_PROPERTY_RARE_DEVICE,
+  Event.JSON_PROPERTY_RARE_DEVICE_PERCENTILE_BUCKET,
   Event.JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES
 })
 @jakarta.annotation.Generated(
@@ -183,6 +186,9 @@ public class Event {
   public static final String JSON_PROPERTY_PROXY_DETAILS = "proxy_details";
   @jakarta.annotation.Nullable private ProxyDetails proxyDetails;
 
+  public static final String JSON_PROPERTY_PROXY_ML_SCORE = "proxy_ml_score";
+  @jakarta.annotation.Nullable private Double proxyMlScore;
+
   public static final String JSON_PROPERTY_INCOGNITO = "incognito";
   @jakarta.annotation.Nullable private Boolean incognito;
 
@@ -248,6 +254,13 @@ public class Event {
 
   public static final String JSON_PROPERTY_HIGH_ACTIVITY_DEVICE = "high_activity_device";
   @jakarta.annotation.Nullable private Boolean highActivityDevice;
+
+  public static final String JSON_PROPERTY_RARE_DEVICE = "rare_device";
+  @jakarta.annotation.Nullable private Boolean rareDevice;
+
+  public static final String JSON_PROPERTY_RARE_DEVICE_PERCENTILE_BUCKET =
+      "rare_device_percentile_bucket";
+  @jakarta.annotation.Nullable private RareDevicePercentileBucket rareDevicePercentileBucket;
 
   public static final String JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES = "raw_device_attributes";
   @jakarta.annotation.Nullable private RawDeviceAttributes rawDeviceAttributes;
@@ -972,6 +985,30 @@ public class Event {
     this.proxyDetails = proxyDetails;
   }
 
+  public Event proxyMlScore(@jakarta.annotation.Nullable Double proxyMlScore) {
+    this.proxyMlScore = proxyMlScore;
+    return this;
+  }
+
+  /**
+   * Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result
+   * minimum: 0
+   * maximum: 1
+   * @return proxyMlScore
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PROXY_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getProxyMlScore() {
+    return proxyMlScore;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_PROXY_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProxyMlScore(@jakarta.annotation.Nullable Double proxyMlScore) {
+    this.proxyMlScore = proxyMlScore;
+  }
+
   public Event incognito(@jakarta.annotation.Nullable Boolean incognito) {
     this.incognito = incognito;
     return this;
@@ -1176,7 +1213,7 @@ public class Event {
   }
 
   /**
-   * Flag indicating browser tampering was detected. This happens when either:   * There are inconsistencies in the browser configuration that cross internal tampering thresholds (see `tampering_details.anomaly_score`).   * The browser signature resembles an \"anti-detect\" browser specifically designed to evade fingerprinting (see `tampering_details.anti_detect_browser`).
+   * The field can be used as a standalone flag for tampering detection. Alternatively, the more granular fields documented below can be used for workflows that require more context. * `true` if tampering is detected through an anomalous browser signature, anti-detect browser detection, or other tampering-related methods * `false` if none of the tampering checks return a positive result
    * @return tampering
    */
   @jakarta.annotation.Nullable
@@ -1222,7 +1259,7 @@ public class Event {
   }
 
   /**
-   * A score that indicates the models calculated probability that an event is coming from an anti detect browser.   * Values above `0.8` indicate that the request is an anti detect browser based on the ml model   * Values below `0.8` indicate that the request is not an anti detect browser based on the ml model
+   * The output of this model is captured as tampering_ml_score, a number indicating how likely an event is coming from an anti detect browser. Values close to 1 signify higher confidence and we consider anything above the threshold of 0.8 to be actionable (the result and anti_detect_browser fields conveniently captures that fact)
    * minimum: 0
    * maximum: 1
    * @return tamperingMlScore
@@ -1462,6 +1499,52 @@ public class Event {
     this.highActivityDevice = highActivityDevice;
   }
 
+  public Event rareDevice(@jakarta.annotation.Nullable Boolean rareDevice) {
+    this.rareDevice = rareDevice;
+    return this;
+  }
+
+  /**
+   * `true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
+   * @return rareDevice
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_RARE_DEVICE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getRareDevice() {
+    return rareDevice;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_RARE_DEVICE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRareDevice(@jakarta.annotation.Nullable Boolean rareDevice) {
+    this.rareDevice = rareDevice;
+  }
+
+  public Event rareDevicePercentileBucket(
+      @jakarta.annotation.Nullable RareDevicePercentileBucket rareDevicePercentileBucket) {
+    this.rareDevicePercentileBucket = rareDevicePercentileBucket;
+    return this;
+  }
+
+  /**
+   * Get rareDevicePercentileBucket
+   * @return rareDevicePercentileBucket
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_RARE_DEVICE_PERCENTILE_BUCKET, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public RareDevicePercentileBucket getRareDevicePercentileBucket() {
+    return rareDevicePercentileBucket;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_RARE_DEVICE_PERCENTILE_BUCKET, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRareDevicePercentileBucket(
+      @jakarta.annotation.Nullable RareDevicePercentileBucket rareDevicePercentileBucket) {
+    this.rareDevicePercentileBucket = rareDevicePercentileBucket;
+  }
+
   public Event rawDeviceAttributes(
       @jakarta.annotation.Nullable RawDeviceAttributes rawDeviceAttributes) {
     this.rawDeviceAttributes = rawDeviceAttributes;
@@ -1531,6 +1614,7 @@ public class Event {
         && Objects.equals(this.proxy, event.proxy)
         && Objects.equals(this.proxyConfidence, event.proxyConfidence)
         && Objects.equals(this.proxyDetails, event.proxyDetails)
+        && Objects.equals(this.proxyMlScore, event.proxyMlScore)
         && Objects.equals(this.incognito, event.incognito)
         && Objects.equals(this.jailbroken, event.jailbroken)
         && Objects.equals(this.locationSpoofing, event.locationSpoofing)
@@ -1553,6 +1637,8 @@ public class Event {
         && Objects.equals(this.vpnOriginCountry, event.vpnOriginCountry)
         && Objects.equals(this.vpnMethods, event.vpnMethods)
         && Objects.equals(this.highActivityDevice, event.highActivityDevice)
+        && Objects.equals(this.rareDevice, event.rareDevice)
+        && Objects.equals(this.rareDevicePercentileBucket, event.rareDevicePercentileBucket)
         && Objects.equals(this.rawDeviceAttributes, event.rawDeviceAttributes);
   }
 
@@ -1591,6 +1677,7 @@ public class Event {
         proxy,
         proxyConfidence,
         proxyDetails,
+        proxyMlScore,
         incognito,
         jailbroken,
         locationSpoofing,
@@ -1613,6 +1700,8 @@ public class Event {
         vpnOriginCountry,
         vpnMethods,
         highActivityDevice,
+        rareDevice,
+        rareDevicePercentileBucket,
         rawDeviceAttributes);
   }
 
@@ -1658,6 +1747,7 @@ public class Event {
     sb.append("    proxy: ").append(toIndentedString(proxy)).append("\n");
     sb.append("    proxyConfidence: ").append(toIndentedString(proxyConfidence)).append("\n");
     sb.append("    proxyDetails: ").append(toIndentedString(proxyDetails)).append("\n");
+    sb.append("    proxyMlScore: ").append(toIndentedString(proxyMlScore)).append("\n");
     sb.append("    incognito: ").append(toIndentedString(incognito)).append("\n");
     sb.append("    jailbroken: ").append(toIndentedString(jailbroken)).append("\n");
     sb.append("    locationSpoofing: ").append(toIndentedString(locationSpoofing)).append("\n");
@@ -1684,6 +1774,10 @@ public class Event {
     sb.append("    vpnOriginCountry: ").append(toIndentedString(vpnOriginCountry)).append("\n");
     sb.append("    vpnMethods: ").append(toIndentedString(vpnMethods)).append("\n");
     sb.append("    highActivityDevice: ").append(toIndentedString(highActivityDevice)).append("\n");
+    sb.append("    rareDevice: ").append(toIndentedString(rareDevice)).append("\n");
+    sb.append("    rareDevicePercentileBucket: ")
+        .append(toIndentedString(rareDevicePercentileBucket))
+        .append("\n");
     sb.append("    rawDeviceAttributes: ")
         .append(toIndentedString(rawDeviceAttributes))
         .append("\n");

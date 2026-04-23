@@ -16,20 +16,26 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * The confidence level indicates how certain Fingerprint is that the current request involves browser tampering. This confidence level is determined by evaluating multiple factors, such as heuristic rules, probabilistic anomaly detection, an anti detect browser ml model, and other relevant methods. It is conveyed as a string with possible values such as high, medium, or low In case of tampering: `true` * **High confidence**: heuristic anti detect browser signals and the ml model are triggered, or all of the methods are triggered. * **Medium confidence**: either the ml model triggers alone, the anomaly score triggers alone with or without the heuristic anti detect browser methods trigger. * **Low confidence**: only the heuristic anti detect methods are triggered.  In case of tampering: `false` * **High confidence:** Strong signals suggest the user is not tampering with their request.
+ * Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.
  */
-public enum TamperingConfidence {
-  LOW("low"),
+public enum SearchEventsRareDevicePercentileBucket {
+  _P95("<p95"),
 
-  MEDIUM("medium"),
+  P95_P99("p95-p99"),
 
-  HIGH("high"),
+  P99_P99_5("p99-p99.5"),
+
+  P99_5_P99_9("p99.5-p99.9"),
+
+  P99_9_("p99.9+"),
+
+  NOT_SEEN("not_seen"),
 
   UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
-  TamperingConfidence(String value) {
+  SearchEventsRareDevicePercentileBucket(String value) {
     this.value = value;
   }
 
@@ -44,8 +50,9 @@ public enum TamperingConfidence {
   }
 
   @JsonCreator
-  public static TamperingConfidence fromValue(String value) {
-    for (TamperingConfidence b : TamperingConfidence.values()) {
+  public static SearchEventsRareDevicePercentileBucket fromValue(String value) {
+    for (SearchEventsRareDevicePercentileBucket b :
+        SearchEventsRareDevicePercentileBucket.values()) {
       if (b.value.equals(value)) {
         return b;
       }
