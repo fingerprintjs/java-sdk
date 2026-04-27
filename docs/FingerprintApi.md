@@ -216,7 +216,12 @@ The `/v4/events` endpoint provides a convenient way to search for past events ba
 - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier.
 - Excluding all bot traffic from the query (`good` and `bad` bots)
 
-If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.
+By default, the API searches events from the last 7 days, sorts them by newest first and returns the last 10 events.
+
+- Use `start` and `end` to specify the time range of the search.
+- Use `reverse=true` to sort the results oldest first.
+- Use `limit` to specify the number of events to return.
+- Use `pagination_key` to get the next page of results if there are more than `limit` events.
 
 ### Filtering events with the `suspect` flag
 
@@ -258,7 +263,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        Integer limit = 10; // Integer | Limit the number of events returned. 
+        Integer limit = 10; // Integer | Maximum number of events to return. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events. 
         String paginationKey = "paginationKey_example"; // String | Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085` 
         String visitorId = "visitorId_example"; // String | Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property). 
         String highRecallId = "highRecallId_example"; // String | The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.  Filter events by matching High Recall ID (`supplementary_id_high_recall.visitor_id` property). 
@@ -270,9 +275,9 @@ public class FingerprintApiExample {
         String bundleId = "bundleId_example"; // String | Filter events by the Bundle ID (iOS) associated with the event. 
         String packageName = "packageName_example"; // String | Filter events by the Package Name (Android) associated with the event. 
         String origin = "origin_example"; // String | Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com) 
-        Long start = 56L; // Long | Filter events with a timestamp greater than the start time, in Unix time (milliseconds). 
-        Long end = 56L; // Long | Filter events with a timestamp smaller than the end time, in Unix time (milliseconds). 
-        Boolean reverse = true; // Boolean | Sort events in reverse timestamp order. 
+        Long start = 1767225600000L; // Long | Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed. 
+        Long end = 1769903999000L; // Long | Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed. 
+        Boolean reverse = true; // Boolean | When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order). 
         Boolean suspect = true; // Boolean | Filter events previously tagged as suspicious via the [Update API](https://docs.fingerprint.com/reference/server-api-v4-update-event). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response. 
         Boolean vpn = true; // Boolean | Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response. 
         Boolean virtualMachine = true; // Boolean | Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response. 
@@ -291,6 +296,8 @@ public class FingerprintApiExample {
         Boolean developerTools = true; // Boolean | Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response. 
         Boolean locationSpoofing = true; // Boolean | Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response. 
         Boolean mitmAttack = true; // Boolean | Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response. 
+        Boolean rareDevice = true; // Boolean | Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response. 
+        SearchEventsRareDevicePercentileBucket rareDevicePercentileBucket = SearchEventsRareDevicePercentileBucket.fromValue("<p95"); // SearchEventsRareDevicePercentileBucket | Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before. 
         Boolean proxy = true; // Boolean | Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response. 
         String sdkVersion = "sdkVersion_example"; // String | Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14` 
         SearchEventsSdkPlatform sdkPlatform = SearchEventsSdkPlatform.fromValue("js"); // SearchEventsSdkPlatform | Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices. 
@@ -335,6 +342,8 @@ public class FingerprintApiExample {
                 .setDeveloperTools(developerTools)
                 .setLocationSpoofing(locationSpoofing)
                 .setMitmAttack(mitmAttack)
+                .setRareDevice(rareDevice)
+                .setRareDevicePercentileBucket(rareDevicePercentileBucket)
                 .setProxy(proxy)
                 .setSdkVersion(sdkVersion)
                 .setSdkPlatform(sdkPlatform)
@@ -366,7 +375,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **limit** | **Integer**| Limit the number of events returned.  | [optional] [default to 10] |
+| **limit** | **Integer**| Maximum number of events to return. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.  | [optional] [default to 10] |
 | **paginationKey** | **String**| Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`  | [optional] |
 | **visitorId** | **String**| Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).  | [optional] |
 | **highRecallId** | **String**| The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.  Filter events by matching High Recall ID (`supplementary_id_high_recall.visitor_id` property).  | [optional] |
@@ -378,9 +387,9 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **bundleId** | **String**| Filter events by the Bundle ID (iOS) associated with the event.  | [optional] |
 | **packageName** | **String**| Filter events by the Package Name (Android) associated with the event.  | [optional] |
 | **origin** | **String**| Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com)  | [optional] |
-| **start** | **Long**| Filter events with a timestamp greater than the start time, in Unix time (milliseconds).  | [optional] |
-| **end** | **Long**| Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).  | [optional] |
-| **reverse** | **Boolean**| Sort events in reverse timestamp order.  | [optional] |
+| **start** | **Long**| Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.  | [optional] |
+| **end** | **Long**| Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.  | [optional] |
+| **reverse** | **Boolean**| When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).  | [optional] |
 | **suspect** | **Boolean**| Filter events previously tagged as suspicious via the [Update API](https://docs.fingerprint.com/reference/server-api-v4-update-event). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response.  | [optional] |
 | **vpn** | **Boolean**| Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response.  | [optional] |
 | **virtualMachine** | **Boolean**| Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response.  | [optional] |
@@ -399,6 +408,8 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **developerTools** | **Boolean**| Filter events by Developer Tools detection result. > Note: When using this parameter, only events with the `developer_tools` property set to `true` or `false` are returned. Events without a `developer_tools` Smart Signal result are left out of the response.  | [optional] |
 | **locationSpoofing** | **Boolean**| Filter events by Location Spoofing detection result. > Note: When using this parameter, only events with the `location_spoofing` property set to `true` or `false` are returned. Events without a `location_spoofing` Smart Signal result are left out of the response.  | [optional] |
 | **mitmAttack** | **Boolean**| Filter events by MITM (Man-in-the-Middle) Attack detection result. > Note: When using this parameter, only events with the `mitm_attack` property set to `true` or `false` are returned. Events without a `mitm_attack` Smart Signal result are left out of the response.  | [optional] |
+| **rareDevice** | **Boolean**| Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.  | [optional] |
+| **rareDevicePercentileBucket** | **SearchEventsRareDevicePercentileBucket**| Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  | [optional] [enum: <p95, p95-p99, p99-p99.5, p99.5-p99.9, p99.9+, not_seen] |
 | **proxy** | **Boolean**| Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.  | [optional] |
 | **sdkVersion** | **String**| Filter events by a specific SDK version associated with the identification event (`sdk.version` property). Example: `3.11.14`  | [optional] |
 | **sdkPlatform** | **SearchEventsSdkPlatform**| Filter events by the SDK Platform associated with the identification event (`sdk.platform` property) . `js` - Javascript agent (Web). `ios` - Apple iOS based devices. `android` - Android based devices.  | [optional] [enum: js, android, ios] |

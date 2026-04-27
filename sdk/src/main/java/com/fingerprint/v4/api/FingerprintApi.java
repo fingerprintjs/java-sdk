@@ -5,6 +5,7 @@ import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
 import com.fingerprint.v4.model.SearchEventsIncrementalIdentificationStatus;
+import com.fingerprint.v4.model.SearchEventsRareDevicePercentileBucket;
 import com.fingerprint.v4.model.SearchEventsSdkPlatform;
 import com.fingerprint.v4.model.SearchEventsVpnConfidence;
 import com.fingerprint.v4.sdk.ApiClient;
@@ -301,6 +302,8 @@ public class FingerprintApi {
     private Boolean developerTools;
     private Boolean locationSpoofing;
     private Boolean mitmAttack;
+    private Boolean rareDevice;
+    private SearchEventsRareDevicePercentileBucket rareDevicePercentileBucket;
     private Boolean proxy;
     private String sdkVersion;
     private SearchEventsSdkPlatform sdkPlatform;
@@ -312,14 +315,14 @@ public class FingerprintApi {
     private Boolean simulator;
 
     /**
-     * getter for limit - Limit the number of events returned.
+     * getter for limit - Maximum number of events to return. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
      */
     public Integer getLimit() {
       return limit;
     }
 
     /**
-     * setter for limit - Limit the number of events returned.
+     * setter for limit - Maximum number of events to return. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
      */
     public SearchEventsOptionalParams setLimit(Integer limit) {
       this.limit = limit;
@@ -492,14 +495,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for start - Filter events with a timestamp greater than the start time, in Unix time (milliseconds).
+     * getter for start - Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.
      */
     public Long getStart() {
       return start;
     }
 
     /**
-     * setter for start - Filter events with a timestamp greater than the start time, in Unix time (milliseconds).
+     * setter for start - Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.
      */
     public SearchEventsOptionalParams setStart(Long start) {
       this.start = start;
@@ -507,14 +510,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for end - Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).
+     * getter for end - Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.
      */
     public Long getEnd() {
       return end;
     }
 
     /**
-     * setter for end - Filter events with a timestamp smaller than the end time, in Unix time (milliseconds).
+     * setter for end - Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.
      */
     public SearchEventsOptionalParams setEnd(Long end) {
       this.end = end;
@@ -522,14 +525,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for reverse - Sort events in reverse timestamp order.
+     * getter for reverse - When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).
      */
     public Boolean getReverse() {
       return reverse;
     }
 
     /**
-     * setter for reverse - Sort events in reverse timestamp order.
+     * setter for reverse - When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).
      */
     public SearchEventsOptionalParams setReverse(Boolean reverse) {
       this.reverse = reverse;
@@ -807,6 +810,37 @@ public class FingerprintApi {
     }
 
     /**
+     * getter for rareDevice - Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.
+     */
+    public Boolean getRareDevice() {
+      return rareDevice;
+    }
+
+    /**
+     * setter for rareDevice - Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.
+     */
+    public SearchEventsOptionalParams setRareDevice(Boolean rareDevice) {
+      this.rareDevice = rareDevice;
+      return this;
+    }
+
+    /**
+     * getter for rareDevicePercentileBucket - Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.
+     */
+    public SearchEventsRareDevicePercentileBucket getRareDevicePercentileBucket() {
+      return rareDevicePercentileBucket;
+    }
+
+    /**
+     * setter for rareDevicePercentileBucket - Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.
+     */
+    public SearchEventsOptionalParams setRareDevicePercentileBucket(
+        SearchEventsRareDevicePercentileBucket rareDevicePercentileBucket) {
+      this.rareDevicePercentileBucket = rareDevicePercentileBucket;
+      return this;
+    }
+
+    /**
      * getter for proxy - Filter events by Proxy detection result. > Note: When using this parameter, only events with the `proxy` property set to `true` or `false` are returned. Events without a `proxy` Smart Signal result are left out of the response.
      */
     public Boolean getProxy() {
@@ -945,7 +979,7 @@ public class FingerprintApi {
 
   /**
    * Search events
-   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response.
+   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  By default, the API searches events from the last 7 days, sorts them by newest first and returns the last 10 events.  - Use `start` and `end` to specify the time range of the search. - Use `reverse=true` to sort the results oldest first. - Use `limit` to specify the number of events to return. - Use `pagination_key` to get the next page of results if there are more than `limit` events.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response.
    * @param searchEventsOptionalParams Object containing optional parameters for API method.  (optional)
    * @return EventSearch
    * @throws ApiException if fails to make API call
@@ -965,7 +999,7 @@ public class FingerprintApi {
 
   /**
    * Search events
-   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  If you don't provide `start` or `end` parameters, the default search range is the **last 7 days**.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response.
+   * ## Search  The `/v4/events` endpoint provides a convenient way to search for past events based on specific parameters. Typical use cases and queries include:  - Searching for events associated with a single `visitor_id` within a time range to get historical behavior of a visitor. - Searching for events associated with a single `linked_id` within a time range to get all events associated with your internal account identifier. - Excluding all bot traffic from the query (`good` and `bad` bots)  By default, the API searches events from the last 7 days, sorts them by newest first and returns the last 10 events.  - Use `start` and `end` to specify the time range of the search. - Use `reverse=true` to sort the results oldest first. - Use `limit` to specify the number of events to return. - Use `pagination_key` to get the next page of results if there are more than `limit` events.  ### Filtering events with the `suspect` flag  The `/v4/events` endpoint unlocks a powerful method for fraud protection analytics. The `suspect` flag is exposed in all events where it was previously set by the update API.  You can also apply the `suspect` query parameter as a filter to find all potentially fraudulent activity that you previously marked as `suspect`. This helps identify patterns of fraudulent behavior.  ### Environment scoping  If you use a secret key that is scoped to an environment, you will only get events associated with the same environment. With a workspace-scoped environment, you will get events from all environments.  Smart Signals not activated for your workspace or are not included in the response.
    * @param searchEventsOptionalParams Object containing optional parameters for API method.  (optional)
    * @return ApiResponse<EventSearch>
    * @throws ApiException if fails to make API call
@@ -1071,6 +1105,14 @@ public class FingerprintApi {
       localVarQueryParams.addAll(
           apiClient.parameterToPairs(
               "", "mitm_attack", searchEventsOptionalParams.getMitmAttack()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "", "rare_device", searchEventsOptionalParams.getRareDevice()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "",
+              "rare_device_percentile_bucket",
+              searchEventsOptionalParams.getRareDevicePercentileBucket()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "proxy", searchEventsOptionalParams.getProxy()));
       localVarQueryParams.addAll(

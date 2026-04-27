@@ -16,20 +16,26 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * The confidence level indicates how certain Fingerprint is that the current request involves browser tampering. This confidence level is determined by evaluating multiple factors, such as heuristic rules, probabilistic anomaly detection, an anti detect browser ml model, and other relevant methods. It is conveyed as a string with possible values such as high, medium, or low In case of tampering: `true` * **High confidence**: heuristic anti detect browser signals and the ml model are triggered, or all of the methods are triggered. * **Medium confidence**: either the ml model triggers alone, the anomaly score triggers alone with or without the heuristic anti detect browser methods trigger. * **Low confidence**: only the heuristic anti detect methods are triggered.  In case of tampering: `false` * **High confidence:** Strong signals suggest the user is not tampering with their request.
+ * The rarity percentile bucket of the device, indicating how uncommon the device configuration is compared to all observed devices.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
  */
-public enum TamperingConfidence {
-  LOW("low"),
+public enum RareDevicePercentileBucket {
+  _P95("<p95"),
 
-  MEDIUM("medium"),
+  P95_P99("p95-p99"),
 
-  HIGH("high"),
+  P99_P99_5("p99-p99.5"),
+
+  P99_5_P99_9("p99.5-p99.9"),
+
+  P99_9_("p99.9+"),
+
+  NOT_SEEN("not_seen"),
 
   UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
-  TamperingConfidence(String value) {
+  RareDevicePercentileBucket(String value) {
     this.value = value;
   }
 
@@ -44,8 +50,8 @@ public enum TamperingConfidence {
   }
 
   @JsonCreator
-  public static TamperingConfidence fromValue(String value) {
-    for (TamperingConfidence b : TamperingConfidence.values()) {
+  public static RareDevicePercentileBucket fromValue(String value) {
+    for (RareDevicePercentileBucket b : RareDevicePercentileBucket.values()) {
       if (b.value.equals(value)) {
         return b;
       }

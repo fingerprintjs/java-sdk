@@ -14,10 +14,10 @@ A curated subset of raw browser/device attributes that the API surface exposes. 
 |**deviceMemory** | **Integer** | Rounded amount of RAM (in gigabytes) reported by the browser. |  [optional] |
 |**timezone** | **String** | Timezone identifier detected on the client. |  [optional] |
 |**canvas** | [**Canvas**](Canvas.md) |  |  [optional] |
-|**languages** | **List&lt;List&lt;String&gt;&gt;** | Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs.  |  [optional] |
+|**languages** | **List&lt;List&lt;String&gt;&gt;** | Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices  |  [optional] |
 |**webglExtensions** | [**WebGlExtensions**](WebGlExtensions.md) |  |  [optional] |
 |**webglBasics** | [**WebGlBasics**](WebGlBasics.md) |  |  [optional] |
-|**screenResolution** | **List&lt;Integer&gt;** | Current screen resolution. |  [optional] |
+|**screenResolution** | **List&lt;Integer&gt;** | Current screen resolution. Available for both browsers and iOS devices |  [optional] |
 |**touchSupport** | [**TouchSupport**](TouchSupport.md) |  |  [optional] |
 |**oscpu** | **String** | Navigator `oscpu` string. |  [optional] |
 |**architecture** | **Integer** | Integer representing the CPU architecture exposed by the browser. |  [optional] |
@@ -33,6 +33,10 @@ A curated subset of raw browser/device attributes that the API surface exposes. 
 |**plugins** | [**List&lt;PluginsInner&gt;**](PluginsInner.md) | Browser plugins reported by `navigator.plugins`. |  [optional] |
 |**indexedDb** | **Boolean** | Whether IndexedDB is available. |  [optional] |
 |**math** | **String** | Hash of Math APIs used for entropy collection. |  [optional] |
+|**deviceModel** | **String** | Device model string. Available only for Android and iOS devices. |  [optional] |
+|**deviceManufacturer** | **String** | Device manufacturer string. Available only for Android and iOS devices. |  [optional] |
+|**fontHash** | **String** | Unique identifier for the user’s installed fonts. |  [optional] |
+|**timezoneOffset** | **String** | UTC offset in \"±HH:MM\" format derived from the detected IANA timezone. |  [optional] |
 
 
 
