@@ -277,7 +277,7 @@ public class FingerprintApiExample {
         String origin = "origin_example"; // String | Filter events by the origin field of the event. This is applicable to web events only (e.g., https://example.com) 
         Long start = 1767225600000L; // Long | Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed. 
         Long end = 1769903999000L; // Long | Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed. 
-        Boolean reverse = true; // Boolean | When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).
+        Boolean reverse = true; // Boolean | When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order). 
         Boolean suspect = true; // Boolean | Filter events previously tagged as suspicious via the [Update API](https://docs.fingerprint.com/reference/server-api-v4-update-event). > Note: When using this parameter, only events with the `suspect` property explicitly set to `true` or `false` are returned. Events with undefined `suspect` property are left out of the response. 
         Boolean vpn = true; // Boolean | Filter events by VPN Detection result. > Note: When using this parameter, only events with the `vpn` property set to `true` or `false` are returned. Events without a `vpn` Smart Signal result are left out of the response. 
         Boolean virtualMachine = true; // Boolean | Filter events by Virtual Machine Detection result. > Note: When using this parameter, only events with the `virtual_machine` property set to `true` or `false` are returned. Events without a `virtual_machine` Smart Signal result are left out of the response. 
@@ -527,3 +527,4 @@ null (empty response body)
 | **403** | Forbidden. Access to this API is denied. |  -  |
 | **404** | Not found. The event Id cannot be found in this workspace's data. |  -  |
 | **409** | Conflict. The event is not mutable yet. |  -  |
+
