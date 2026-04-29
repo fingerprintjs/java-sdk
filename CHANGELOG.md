@@ -1,5 +1,16 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.2.0
+
+### Minor Changes
+
+- **events**: Add Device Rarity Smart Signal ([9f1b855](https://github.com/fingerprintjs/java-sdk/commit/9f1b8551f0e7c2fead793aabc60f821ff1070089))
+- **events**: Add `proxy_ml_score` to `Event` ([9f1b855](https://github.com/fingerprintjs/java-sdk/commit/9f1b8551f0e7c2fead793aabc60f821ff1070089))
+- **events**: Add `font_hash` and `timezone_offset` fields for the `RawDeviceAttributes` ([9f1b855](https://github.com/fingerprintjs/java-sdk/commit/9f1b8551f0e7c2fead793aabc60f821ff1070089))
+- **events**: Enable `raw_device_attributes` for Android devices. Only `device_manufacturer` and `device_model` are currently supported for Android devices. ([9f1b855](https://github.com/fingerprintjs/java-sdk/commit/9f1b8551f0e7c2fead793aabc60f821ff1070089))
+- **events**: Enable `raw_device_attributes` for iOS devices. Only `device_manufacturer`, `device_model`, `hardware_concurrency`, `languages`, and `screen_resolution` are currently supported for iOS devices. ([9f1b855](https://github.com/fingerprintjs/java-sdk/commit/9f1b8551f0e7c2fead793aabc60f821ff1070089))
+- **events**: Add `request_read_timeout` error code ([9f1b855](https://github.com/fingerprintjs/java-sdk/commit/9f1b8551f0e7c2fead793aabc60f821ff1070089))
+
 ## 8.1.0
 
 ### Minor Changes
