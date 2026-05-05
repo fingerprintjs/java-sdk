@@ -70,6 +70,14 @@ public class {{classname}} {
     {{^required}}
     /**
      * getter for {{paramName}} - {{{description}}}
+     {{#vendorExtensions.x-aliased-parameter-name}}
+     *
+     * @see {@link get{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
+     {{/vendorExtensions.x-aliased-parameter-name}}
+     {{#vendorExtensions.x-parameter-alias}}
+     *
+     * @see {@link get{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
+     {{/vendorExtensions.x-parameter-alias}}
      */
     public {{{dataType}}} get{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}() {
       return {{paramName}};
@@ -77,9 +85,27 @@ public class {{classname}} {
 
     /**
      * setter for {{paramName}} - {{{description}}}
+     {{#vendorExtensions.x-aliased-parameter-name}}
+     *
+     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also invoke `set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}(null)` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` parameter value.
+     *
+     * @see {@link set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
+     {{/vendorExtensions.x-aliased-parameter-name}}
+     {{#vendorExtensions.x-parameter-alias}}
+     *
+     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also invoke `set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}(null)` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` parameter value.
+     *
+     * @see {@link set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
+     {{/vendorExtensions.x-parameter-alias}}
      */
     public {{operationIdCamelCase}}OptionalParams set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{{dataType}}} {{paramName}}) {
       this.{{paramName}} = {{paramName}};
+      {{#vendorExtensions.x-aliased-parameter-name}}
+      set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}(null);
+      {{/vendorExtensions.x-aliased-parameter-name}}
+      {{#vendorExtensions.x-parameter-alias}}
+      set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}(null);
+      {{/vendorExtensions.x-parameter-alias}}
       return this;
     }
 
@@ -228,7 +254,7 @@ public class {{classname}} {
     if ({{operationId}}OptionalParams != null) {
     {{#queryParams}}
     {{^required}}
-      localVarQueryParams.addAll(apiClient.parameterToPairs("{{{collectionFormat}}}", "{{baseName}}", {{operationId}}OptionalParams.get{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}()));
+      localVarQueryParams.addAll(apiClient.parameterToPairs("{{{collectionFormat}}}", "{{#vendorExtensions.x-aliased-parameter-name}}{{vendorExtensions.x-aliased-parameter-name}}{{/vendorExtensions.x-aliased-parameter-name}}{{^vendorExtensions.x-aliased-parameter-name}}{{baseName}}{{/vendorExtensions.x-aliased-parameter-name}}", {{operationId}}OptionalParams.get{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}()));
     {{/required}}
     {{/queryParams}}
     }
