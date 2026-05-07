@@ -1,5 +1,5 @@
-{{>additionalModelTypeAnnotations}}{{>generatedAnnotation}}{{>xmlAnnotation}}
 {{#discriminator}}
+{{>additionalModelTypeAnnotations}}{{>generatedAnnotation}}{{>xmlAnnotation}}
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
@@ -297,5 +297,222 @@ public interface {{classname}}{{#vendorExtensions.x-implements}} extends {{{.}}}
 }
 {{/discriminator}}
 {{^discriminator}}
-// No model generated. The oneof_model template requires the schema to use the discriminator construct.
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import java.time.OffsetDateTime;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+{{>additionalModelTypeAnnotations}}{{>generatedAnnotation}}{{>xmlAnnotation}}
+@JsonDeserialize(using = {{classname}}.{{classname}}Deserializer.class)
+@JsonSerialize(using = {{classname}}.{{classname}}Serializer.class)
+public final class {{classname}} {
+    private static final Logger log = Logger.getLogger({{classname}}.class.getName());
+
+    {{#isNullable}}
+    @{{javaxPackage}}.annotation.Nullable
+    {{/isNullable}}
+    {{^isNullable}}
+    @{{javaxPackage}}.annotation.Nonnull
+    {{/isNullable}}
+    private final Object value;
+
+    private {{classname}}(Object o) {
+        {{#isNullable}}
+        this.value = o
+        {{/isNullable}}
+        {{^isNullable}}
+        this.value = Objects.requireNonNull(o);
+        {{/isNullable}}
+    }
+
+    {{#composedSchemas}}
+    {{#oneOf}}
+    public {{classname}}({{{baseType}}} o) {
+        {{#isNullable}}
+        this.value = o
+        {{/isNullable}}
+        {{^isNullable}}
+        this.value = Objects.requireNonNull(o);
+        {{/isNullable}}
+    }
+    {{/oneOf}}
+    {{/composedSchemas}}
+
+    {{#composedSchemas}}
+    {{#oneOf}}
+    /**
+     * Get the value of `{{{classname}}}` as an instance of `{{{dataType}}}`. If the value is not `{{{dataType}}}`, a ClassCastException will be thrown.
+     *
+     * @return The value of `{{{classname}}}`
+     * @throws ClassCastException if the instance is not `{{{dataType}}}`
+     */
+    public {{{dataType}}} get{{#sanitizeDataType}}{{{dataType}}}{{/sanitizeDataType}}() throws ClassCastException {
+        return ({{{dataType}}})value;
+    }
+
+    {{/oneOf}}
+    {{/composedSchemas}}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        {{classname}} {{classVarName}} = ({{classname}}) o;
+        return Objects.equals(this.value, {{classVarName}}.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.value);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    public static class {{classname}}Serializer extends StdSerializer<{{classname}}> {
+        public {{classname}}Serializer(Class<{{classname}}> t) {
+            super(t);
+        }
+
+        public {{classname}}Serializer() {
+            this(null);
+        }
+
+        @Override
+        public void serialize({{classname}} value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+            jgen.writeObject(value);
+        }
+    }
+
+    public static class {{classname}}Deserializer extends StdDeserializer<{{classname}}> {
+        public {{classname}}Deserializer() {
+            this({{classname}}.class);
+        }
+
+        public {{classname}}Deserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        public {{classname}} deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            JsonNode tree = jp.readValueAsTree();
+            Object deserialized = null;
+            boolean typeCoercion = ctxt.isEnabled(MapperFeature.ALLOW_COERCION_OF_SCALARS);
+            int match = 0;
+            JsonToken token = tree.traverse(jp.getCodec()).nextToken();
+            {{#composedSchemas}}
+            {{#oneOf}}
+            // deserialize {{{dataType}}}{{#isNullable}} (nullable){{/isNullable}}
+            try {
+                {{^isArray}}
+                boolean attemptParsing = true;
+                {{#isPrimitiveType}}
+                attemptParsing = typeCoercion; //respect type coercion setting
+                if (!attemptParsing) {
+                    {{#isString}}
+                    attemptParsing |= (token == JsonToken.VALUE_STRING);
+                    {{/isString}}
+                    {{#isInteger}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_INT);
+                    {{/isInteger}}
+                    {{#isLong}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_INT);
+                    {{/isLong}}
+                    {{#isShort}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_INT);
+                    {{/isShort}}
+                    {{#isFloat}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_FLOAT);
+                    {{/isFloat}}
+                    {{#isDouble}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_FLOAT);
+                    {{/isDouble}}
+                    {{#isNumber}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_FLOAT);
+                    {{/isNumber}}
+                    {{#isDecimal}}
+                    attemptParsing |= (token == JsonToken.VALUE_NUMBER_FLOAT);
+                    {{/isDecimal}}
+                    {{#isBoolean}}
+                    attemptParsing |= (token == JsonToken.VALUE_FALSE || token == JsonToken.VALUE_TRUE);
+                    {{/isBoolean}}
+                    {{#isNullable}}
+                    attemptParsing |= (token == JsonToken.VALUE_NULL);
+                    {{/isNullable}}
+                }
+                {{/isPrimitiveType}}
+                if (attemptParsing) {
+                    {{#isMap}}
+                    final TypeReference<{{{dataType}}}> ref = new TypeReference<{{{dataType}}}>(){};
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(ref);
+                    {{/isMap}}
+                    {{^isMap}}
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs({{{dataType}}}.class);
+                    {{/isMap}}
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema '{{{dataType}}}'");
+                }
+                {{/isArray}}
+                {{#isArray}}
+                if (token == JsonToken.START_ARRAY) {
+                    final TypeReference<{{{dataType}}}> ref = new TypeReference<{{{dataType}}}>(){};
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(ref);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema '{{{dataType}}}'");
+                }
+                {{/isArray}}
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema '{{{dataType}}}'", e);
+            }
+
+            {{/oneOf}}
+            {{/composedSchemas}}
+            if (match == 1) {
+                return new {{classname}}(deserialized);
+            }
+            throw new IOException(String.format(Locale.ROOT, "Failed deserialization for {{classname}}: %d classes match result, expected 1", match));
+        }
+
+        /**
+         * Handle deserialization of the 'null' value.
+         */
+        @Override
+        public {{classname}} getNullValue(DeserializationContext ctxt) throws JsonMappingException {
+        {{#isNullable}}
+            return null;
+        {{/isNullable}}
+        {{^isNullable}}
+            throw new JsonMappingException(ctxt.getParser(), "{{classname}} cannot be null");
+        {{/isNullable}}
+        }
+    }
+}
 {{/discriminator}}
