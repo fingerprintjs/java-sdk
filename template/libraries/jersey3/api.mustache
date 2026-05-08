@@ -87,13 +87,13 @@ public class {{classname}} {
      * setter for {{paramName}} - {{{description}}}
      {{#vendorExtensions.x-aliased-parameter-name}}
      *
-     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also invoke `set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}(null)` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` parameter value.
+     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also set `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` to `null` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` parameter value.
      *
      * @see {@link set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
      {{/vendorExtensions.x-aliased-parameter-name}}
      {{#vendorExtensions.x-parameter-alias}}
      *
-     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also invoke `set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}(null)` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` parameter value.
+     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also set `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` to `null` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` parameter value.
      *
      * @see {@link set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
      {{/vendorExtensions.x-parameter-alias}}
@@ -101,10 +101,10 @@ public class {{classname}} {
     public {{operationIdCamelCase}}OptionalParams set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{{dataType}}} {{paramName}}) {
       this.{{paramName}} = {{paramName}};
       {{#vendorExtensions.x-aliased-parameter-name}}
-      set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}(null);
+      this.{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}} = null;
       {{/vendorExtensions.x-aliased-parameter-name}}
       {{#vendorExtensions.x-parameter-alias}}
-      set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}(null);
+      this.{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}} =  null;
       {{/vendorExtensions.x-parameter-alias}}
       return this;
     }
