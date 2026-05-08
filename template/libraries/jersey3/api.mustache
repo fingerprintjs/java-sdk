@@ -72,11 +72,11 @@ public class {{classname}} {
      * getter for {{paramName}} - {{{description}}}
      {{#vendorExtensions.x-aliased-parameter-name}}
      *
-     * @see {@link get{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
+     * @see {@link #get{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
      {{/vendorExtensions.x-aliased-parameter-name}}
      {{#vendorExtensions.x-parameter-alias}}
      *
-     * @see {@link get{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
+     * @see {@link #get{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
      {{/vendorExtensions.x-parameter-alias}}
      */
     public {{{dataType}}} get{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}() {
@@ -87,15 +87,15 @@ public class {{classname}} {
      * setter for {{paramName}} - {{{description}}}
      {{#vendorExtensions.x-aliased-parameter-name}}
      *
-     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also set `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` to `null` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` parameter value.
+     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}. Invoking {@link #set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also set `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` to `null` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.camelcase}}` parameter value.
      *
-     * @see {@link set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
+     * @see {@link #set{{#lambda.pascalcase}}{{vendorExtensions.x-aliased-parameter-name}}{{/lambda.pascalcase}}}
      {{/vendorExtensions.x-aliased-parameter-name}}
      {{#vendorExtensions.x-parameter-alias}}
      *
-     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}. Invoking {@link set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also set `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` to `null` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` parameter value.
+     * {{paramName}} is an alias for {{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}. Invoking {@link #set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}} will also set `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` to `null` to clear an existing `{{#lambda.camelcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.camelcase}}` parameter value.
      *
-     * @see {@link set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
+     * @see {@link #set{{#lambda.pascalcase}}{{vendorExtensions.x-parameter-alias}}{{/lambda.pascalcase}}}
      {{/vendorExtensions.x-parameter-alias}}
      */
     public {{operationIdCamelCase}}OptionalParams set{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}}({{{dataType}}} {{paramName}}) {
