@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -164,11 +167,10 @@ public class FingerprintApiTest {
   }
 
   /**
-   * Get event by requestId
-   * This endpoint allows you to get events with all the information from each
-   * activated product (Fingerprint Pro or Bot Detection). Use the requestId as a
-   * URL path :request_id parameter. This API method is scoped to a request, i.e.
-   * all returned information is by requestId.
+   * Get event by requestId This endpoint allows you to get events with all the information from
+   * each activated product (Fingerprint Pro or Bot Detection). Use the requestId as a URL path
+   * :request_id parameter. This API method is scoped to a request, i.e. all returned information is
+   * by requestId.
    *
    * @throws ApiException if the Api call fails
    */
@@ -354,9 +356,7 @@ public class FingerprintApiTest {
   }
 
   /**
-   * Webhook
-   * Check that webhook correctly deserializes the JSON payload to the
-   * WebhookVisit object.
+   * Webhook Check that webhook correctly deserializes the JSON payload to the WebhookVisit object.
    *
    * @throws Exception if the file reading or deserialization fails.
    */
@@ -577,6 +577,40 @@ public class FingerprintApiTest {
                 .setSimulator(SIMULATOR));
     List<Event> events = response.getEvents();
     assertEquals(events.size(), 1);
+  }
+
+  @Test
+  public void searchEventsStartEndAliasTest() throws ApiException, JsonProcessingException {
+    final OffsetDateTime expectedStartValue = OffsetDateTime.now().minus(1, ChronoUnit.DAYS);
+    final OffsetDateTime expectedEndValue = OffsetDateTime.now().minus(1, ChronoUnit.HOURS);
+    addMock(
+        "searchEvents",
+        null,
+        invocation -> {
+          List<Pair> queryParams = invocation.getArgument(3);
+          assertEquals(1, queryParams.size());
+          assertEquals(FingerprintApi.INTEGRATION_INFO, queryParams.get(0).getValue());
+
+          // Validate that the last parameter set on the optionals object was the value sent in the
+          // request
+          assertTrue(
+              listContainsPair(
+                  queryParams,
+                  "start",
+                  expectedStartValue.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)));
+          assertTrue(
+              listContainsPair(queryParams, "end", expectedEndValue.toInstant().toEpochMilli()));
+
+          return mockFileToResponse(
+              200, invocation, "mocks/events/search/get_event_search_200.json", EventSearch.class);
+        });
+
+    FingerprintApi.SearchEventsOptionalParams searchParams =
+        new FingerprintApi.SearchEventsOptionalParams();
+    searchParams.setStart(expectedStartValue.toInstant().toEpochMilli());
+    searchParams.setStartDateTime(expectedStartValue);
+    searchParams.setEndDateTime(expectedEndValue);
+    searchParams.setEnd(expectedEndValue.toInstant().toEpochMilli());
   }
 
   @Test

@@ -11,6 +11,7 @@ import com.fingerprint.v4.sdk.ApiException;
 import com.fingerprint.v4.sdk.Configuration;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,8 +33,10 @@ public class FunctionalTests {
     final FingerprintApi api =
         new FingerprintApi(Configuration.getDefaultApiClient(apiSecret, region));
 
+    // The start and end timestamp for a search can be specified as UNIX epoch milliseconds
+    // value or an OffsetDateTime
     long end = Instant.now().toEpochMilli();
-    long start = Instant.now().minus(89L, ChronoUnit.DAYS).toEpochMilli();
+    OffsetDateTime start = OffsetDateTime.now().minus(89, ChronoUnit.DAYS);
 
     String eventId = "";
 
@@ -43,7 +46,7 @@ public class FunctionalTests {
           api.searchEvents(
               new FingerprintApi.SearchEventsOptionalParams()
                   .setLimit(2)
-                  .setStart(start)
+                  .setStartDateTime(start)
                   .setEnd(end));
       assert events.getEvents() != null;
       if (events.getEvents().isEmpty()) {
@@ -102,7 +105,7 @@ public class FunctionalTests {
           api.searchEvents(
               new FingerprintApi.SearchEventsOptionalParams()
                   .setLimit(2)
-                  .setStart(start)
+                  .setStartDateTime(start)
                   .setEnd(end)
                   .setReverse(true));
       assert oldEvents.getEvents() != null;
