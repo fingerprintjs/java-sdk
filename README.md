@@ -289,7 +289,7 @@ All URIs are relative to *https://api.fpjs.io/v4*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FingerprintApi* | [**deleteVisitorData**](docs/FingerprintApi.md#deleteVisitorData) | **DELETE** /visitors/{visitor_id} | Delete data by visitor ID
+*FingerprintApi* | [**deleteVisitorData**](docs/FingerprintApi.md#deleteVisitorData) | **DELETE** /visitors/{visitor_id} | Delete a visitor ID
 *FingerprintApi* | [**getEvent**](docs/FingerprintApi.md#getEvent) | **GET** /events/{event_id} | Get an event by event ID
 *FingerprintApi* | [**searchEvents**](docs/FingerprintApi.md#searchEvents) | **GET** /events | Search events
 *FingerprintApi* | [**updateEvent**](docs/FingerprintApi.md#updateEvent) | **PATCH** /events/{event_id} | Update an event
@@ -298,6 +298,9 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [BotInfo](docs/BotInfo.md)
+ - [BotInfoCategory](docs/BotInfoCategory.md)
+ - [BotInfoConfidence](docs/BotInfoConfidence.md)
+ - [BotInfoIdentity](docs/BotInfoIdentity.md)
  - [BotResult](docs/BotResult.md)
  - [BrowserDetails](docs/BrowserDetails.md)
  - [Canvas](docs/Canvas.md)
@@ -323,6 +326,7 @@ Class | Method | HTTP request | Description
  - [IncrementalIdentificationStatus](docs/IncrementalIdentificationStatus.md)
  - [Integration](docs/Integration.md)
  - [IntegrationSubintegration](docs/IntegrationSubintegration.md)
+ - [LabelsInner](docs/LabelsInner.md)
  - [PluginsInner](docs/PluginsInner.md)
  - [PluginsInnerMimeTypesInner](docs/PluginsInnerMimeTypesInner.md)
  - [Proximity](docs/Proximity.md)
@@ -335,6 +339,7 @@ Class | Method | HTTP request | Description
  - [RuleActionType](docs/RuleActionType.md)
  - [SDK](docs/SDK.md)
  - [SearchEventsBot](docs/SearchEventsBot.md)
+ - [SearchEventsBotInfo](docs/SearchEventsBotInfo.md)
  - [SearchEventsIncrementalIdentificationStatus](docs/SearchEventsIncrementalIdentificationStatus.md)
  - [SearchEventsRareDevicePercentileBucket](docs/SearchEventsRareDevicePercentileBucket.md)
  - [SearchEventsSdkPlatform](docs/SearchEventsSdkPlatform.md)

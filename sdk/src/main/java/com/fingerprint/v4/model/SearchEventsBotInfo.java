@@ -16,26 +16,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
+ * Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.
  */
-public enum SearchEventsRareDevicePercentileBucket {
-  _P95("<p95"),
+public enum SearchEventsBotInfo {
+  ALL("all"),
 
-  P95_P99("p95-p99"),
-
-  P99_P99_5("p99-p99.5"),
-
-  P99_5_P99_9("p99.5-p99.9"),
-
-  P99_9_("p99.9+"),
-
-  NOT_SEEN("not_seen"),
+  NONE("none"),
 
   UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
-  SearchEventsRareDevicePercentileBucket(String value) {
+  SearchEventsBotInfo(String value) {
     this.value = value;
   }
 
@@ -50,9 +42,8 @@ public enum SearchEventsRareDevicePercentileBucket {
   }
 
   @JsonCreator
-  public static SearchEventsRareDevicePercentileBucket fromValue(String value) {
-    for (SearchEventsRareDevicePercentileBucket b :
-        SearchEventsRareDevicePercentileBucket.values()) {
+  public static SearchEventsBotInfo fromValue(String value) {
+    for (SearchEventsBotInfo b : SearchEventsBotInfo.values()) {
       if (b.value.equals(value)) {
         return b;
       }
