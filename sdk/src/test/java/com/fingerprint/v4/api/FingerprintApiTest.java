@@ -23,12 +23,11 @@ import com.fingerprint.v4.sdk.JSON;
 import com.fingerprint.v4.sdk.Pair;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -164,6 +163,22 @@ public class FingerprintApiTest {
       }
     }
     return false;
+  }
+
+  public static void assertListContainsPairs(List<Pair> pairs, String key, List<?> values) {
+    if (pairs == null) {
+      return;
+    }
+
+    List<String> actualValues =
+        pairs.stream()
+            .filter(p -> key.equals(p.getName()))
+            .map(Pair::getValue)
+            .collect(Collectors.toList());
+    List<String> expectedValues =
+        values.stream().map(Object::toString).collect(Collectors.toList());
+
+    assertEquals(expectedValues, actualValues);
   }
 
   /**
@@ -418,6 +433,14 @@ public class FingerprintApiTest {
     final int LIMIT = 1;
     final String PAGINATION_KEY = "1741187431959";
     final SearchEventsBot BOT = SearchEventsBot.GOOD;
+    final SearchEventsBotInfo BOT_INFO = SearchEventsBotInfo.ALL;
+    final List<BotInfoCategory> BOT_INFO_CATEGORY =
+        Arrays.asList(BotInfoCategory.AI_AGENT, BotInfoCategory.AI_ASSISTANT);
+    final List<BotInfoIdentity> BOT_INFO_IDENTITY = Arrays.asList(BotInfoIdentity.SPOOFED);
+    final List<BotInfoConfidence> BOT_INFO_CONFIDENCE =
+        Arrays.asList(BotInfoConfidence.HIGH, BotInfoConfidence.MEDIUM, BotInfoConfidence.LOW);
+    final List<String> BOT_INFO_PROVIDER = Arrays.asList("Provider 1", "Provider 2");
+    final List<String> BOT_INFO_NAME = Arrays.asList("Bot 1");
     final String IP_ADDRESS = "192.168.0.1/32";
     final String ASN = "testAsn";
     final String LINKED_ID = "some_id";
@@ -465,6 +488,7 @@ public class FingerprintApiTest {
     expectedQueryParams.put("pagination_key", PAGINATION_KEY);
     expectedQueryParams.put("visitor_id", MOCK_VISITOR_ID);
     expectedQueryParams.put("bot", String.valueOf(BOT));
+    expectedQueryParams.put("bot_info", String.valueOf(BOT_INFO));
     expectedQueryParams.put("ip_address", IP_ADDRESS);
     expectedQueryParams.put("asn", ASN);
     expectedQueryParams.put("linked_id", LINKED_ID);
@@ -504,27 +528,31 @@ public class FingerprintApiTest {
         "incremental_identification_status", String.valueOf(INCREMENTAL_IDENTIFICATION_STATUS));
     expectedQueryParams.put("simulator", String.valueOf(SIMULATOR));
 
+    final int arrayQueryParamsCount =
+        ENVIRONMENT.size()
+            + BOT_INFO_CATEGORY.size()
+            + BOT_INFO_IDENTITY.size()
+            + BOT_INFO_CONFIDENCE.size()
+            + BOT_INFO_PROVIDER.size()
+            + BOT_INFO_NAME.size();
+
     addMock(
         "searchEvents",
         null,
         invocation -> {
           List<Pair> queryParams = invocation.getArgument(3);
-          // base expected + 1 for "ii" + N for each environment entry
-          assertEquals(expectedQueryParams.size() + 1 + ENVIRONMENT.size(), queryParams.size());
+          // base expected + 1 for "ii" + 1 for each array query parameter element
+          assertEquals(expectedQueryParams.size() + 1 + arrayQueryParamsCount, queryParams.size());
           for (Map.Entry<String, String> expected : expectedQueryParams.entrySet()) {
             assertTrue(listContainsPair(queryParams, expected.getKey(), expected.getValue()));
           }
 
-          List<String> actualEnv =
-              queryParams.stream()
-                  .filter(
-                      p -> "environment".equals(p.getName()) || "environment[]".equals(p.getName()))
-                  .map(Pair::getValue)
-                  // if your Pair values might be percent-encoded, decode them
-                  .map(v -> URLDecoder.decode(v, StandardCharsets.UTF_8))
-                  .collect(Collectors.toList());
-
-          assertEquals(ENVIRONMENT, actualEnv);
+          assertListContainsPairs(queryParams, "environment", ENVIRONMENT);
+          assertListContainsPairs(queryParams, "bot_info_category", BOT_INFO_CATEGORY);
+          assertListContainsPairs(queryParams, "bot_info_identity", BOT_INFO_IDENTITY);
+          assertListContainsPairs(queryParams, "bot_info_confidence", BOT_INFO_CONFIDENCE);
+          assertListContainsPairs(queryParams, "bot_info_provider", BOT_INFO_PROVIDER);
+          assertListContainsPairs(queryParams, "bot_info_name", BOT_INFO_NAME);
 
           return mockFileToResponse(
               200, invocation, "mocks/events/search/get_event_search_200.json", EventSearch.class);
@@ -537,6 +565,12 @@ public class FingerprintApiTest {
                 .setPaginationKey(PAGINATION_KEY)
                 .setVisitorId(MOCK_VISITOR_ID)
                 .setBot(BOT)
+                .setBotInfo(BOT_INFO)
+                .setBotInfoCategory(BOT_INFO_CATEGORY)
+                .setBotInfoIdentity(BOT_INFO_IDENTITY)
+                .setBotInfoConfidence(BOT_INFO_CONFIDENCE)
+                .setBotInfoProvider(BOT_INFO_PROVIDER)
+                .setBotInfoName(BOT_INFO_NAME)
                 .setIpAddress(IP_ADDRESS)
                 .setAsn(ASN)
                 .setLinkedId(LINKED_ID)
