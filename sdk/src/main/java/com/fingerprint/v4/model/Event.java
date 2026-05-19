@@ -15,7 +15,9 @@ package com.fingerprint.v4.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -80,7 +82,8 @@ import java.util.Objects;
   Event.JSON_PROPERTY_HIGH_ACTIVITY_DEVICE,
   Event.JSON_PROPERTY_RARE_DEVICE,
   Event.JSON_PROPERTY_RARE_DEVICE_PERCENTILE_BUCKET,
-  Event.JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES
+  Event.JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES,
+  Event.JSON_PROPERTY_LABELS
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -264,6 +267,9 @@ public class Event {
 
   public static final String JSON_PROPERTY_RAW_DEVICE_ATTRIBUTES = "raw_device_attributes";
   @jakarta.annotation.Nullable private RawDeviceAttributes rawDeviceAttributes;
+
+  public static final String JSON_PROPERTY_LABELS = "labels";
+  @jakarta.annotation.Nullable private List<LabelsInner> labels = new ArrayList<>();
 
   public Event() {}
 
@@ -793,7 +799,7 @@ public class Event {
   }
 
   /**
-   * `true` if the browser is Chrome with DevTools open or Firefox with Developer Tools open, `false` otherwise.
+   * `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.
    * @return developerTools
    */
   @jakarta.annotation.Nullable
@@ -991,7 +997,7 @@ public class Event {
   }
 
   /**
-   * Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result
+   * Machine learning–based proxy score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `proxy` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
    * minimum: 0
    * maximum: 1
    * @return proxyMlScore
@@ -1349,7 +1355,7 @@ public class Event {
   }
 
   /**
-   * Machine learning–based virtual machine score,  represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result
+   * Machine learning–based virtual machine score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `virtual_machine` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
    * minimum: 0
    * maximum: 1
    * @return virtualMachineMlScore
@@ -1569,6 +1575,36 @@ public class Event {
     this.rawDeviceAttributes = rawDeviceAttributes;
   }
 
+  public Event labels(@jakarta.annotation.Nullable List<LabelsInner> labels) {
+    this.labels = labels;
+    return this;
+  }
+
+  public Event addLabelsItem(LabelsInner labelsItem) {
+    if (this.labels == null) {
+      this.labels = new ArrayList<>();
+    }
+    this.labels.add(labelsItem);
+    return this;
+  }
+
+  /**
+   * Each label returns a prediction (true or false) for a specific use case (label field) based on a machine learning score. The machine learning score is determined by a model trained on customer data for that use case. This field is in the beta phase and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
+   * @return labels
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_LABELS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public List<LabelsInner> getLabels() {
+    return labels;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_LABELS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setLabels(@jakarta.annotation.Nullable List<LabelsInner> labels) {
+    this.labels = labels;
+  }
+
   /**
    * Return true if this Event object is equal to o.
    */
@@ -1639,7 +1675,8 @@ public class Event {
         && Objects.equals(this.highActivityDevice, event.highActivityDevice)
         && Objects.equals(this.rareDevice, event.rareDevice)
         && Objects.equals(this.rareDevicePercentileBucket, event.rareDevicePercentileBucket)
-        && Objects.equals(this.rawDeviceAttributes, event.rawDeviceAttributes);
+        && Objects.equals(this.rawDeviceAttributes, event.rawDeviceAttributes)
+        && Objects.equals(this.labels, event.labels);
   }
 
   @Override
@@ -1702,7 +1739,8 @@ public class Event {
         highActivityDevice,
         rareDevice,
         rareDevicePercentileBucket,
-        rawDeviceAttributes);
+        rawDeviceAttributes,
+        labels);
   }
 
   @Override
@@ -1781,6 +1819,7 @@ public class Event {
     sb.append("    rawDeviceAttributes: ")
         .append(toIndentedString(rawDeviceAttributes))
         .append("\n");
+    sb.append("    labels: ").append(toIndentedString(labels)).append("\n");
     sb.append("}");
     return sb.toString();
   }
