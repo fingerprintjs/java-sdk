@@ -1,5 +1,11 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.3.0-rc.1
+
+### Patch Changes
+
+- **events**: Require `label` on smart signal `Labels` items ([2ec212c](https://github.com/fingerprintjs/java-sdk/commit/2ec212cffc5b80576184ac303d41456ce95acccc))
+
 ## 8.3.0-rc.0
 
 ### Minor Changes
