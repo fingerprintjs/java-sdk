@@ -16,26 +16,46 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
+ * The type and purpose of the bot.
  */
-public enum SearchEventsRareDevicePercentileBucket {
-  _P95("<p95"),
+public enum BotInfoCategory {
+  ADVERTISING_AND_MARKETING("advertising_and_marketing"),
 
-  P95_P99("p95-p99"),
+  AGGREGATOR("aggregator"),
 
-  P99_P99_5("p99-p99.5"),
+  AI_AGENT("ai_agent"),
 
-  P99_5_P99_9("p99.5-p99.9"),
+  AI_ASSISTANT("ai_assistant"),
 
-  P99_9_("p99.9+"),
+  AI_BROWSER("ai_browser"),
 
-  NOT_SEEN("not_seen"),
+  AI_CRAWLER("ai_crawler"),
+
+  AI_SEARCH("ai_search"),
+
+  BROWSER_AUTOMATION("browser_automation"),
+
+  ECOMMERCE("ecommerce"),
+
+  MONITORING_AND_ANALYTICS("monitoring_and_analytics"),
+
+  OTHER("other"),
+
+  SCRAPING("scraping"),
+
+  SECURITY("security"),
+
+  SEARCH_ENGINE_CRAWLER("search_engine_crawler"),
+
+  SEARCH_ENGINE_OPTIMIZATION("search_engine_optimization"),
+
+  UNKNOWN("unknown"),
 
   UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
-  SearchEventsRareDevicePercentileBucket(String value) {
+  BotInfoCategory(String value) {
     this.value = value;
   }
 
@@ -50,9 +70,8 @@ public enum SearchEventsRareDevicePercentileBucket {
   }
 
   @JsonCreator
-  public static SearchEventsRareDevicePercentileBucket fromValue(String value) {
-    for (SearchEventsRareDevicePercentileBucket b :
-        SearchEventsRareDevicePercentileBucket.values()) {
+  public static BotInfoCategory fromValue(String value) {
+    for (BotInfoCategory b : BotInfoCategory.values()) {
       if (b.value.equals(value)) {
         return b;
       }

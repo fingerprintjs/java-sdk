@@ -1,9 +1,13 @@
 package com.fingerprint.v4.api;
 
+import com.fingerprint.v4.model.BotInfoCategory;
+import com.fingerprint.v4.model.BotInfoConfidence;
+import com.fingerprint.v4.model.BotInfoIdentity;
 import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
+import com.fingerprint.v4.model.SearchEventsBotInfo;
 import com.fingerprint.v4.model.SearchEventsIncrementalIdentificationStatus;
 import com.fingerprint.v4.model.SearchEventsRareDevicePercentileBucket;
 import com.fingerprint.v4.model.SearchEventsSdkPlatform;
@@ -15,6 +19,7 @@ import com.fingerprint.v4.sdk.Configuration;
 import com.fingerprint.v4.sdk.Pair;
 import com.fingerprint.v4.sdk.Region;
 import jakarta.ws.rs.core.GenericType;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,8 +67,8 @@ public class FingerprintApi {
   }
 
   /**
-   * Delete data by visitor ID
-   * Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403.
+   * Delete a visitor ID
+   * Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).
    * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required)
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -81,8 +86,8 @@ public class FingerprintApi {
   }
 
   /**
-   * Delete data by visitor ID
-   * Request deleting all data associated with the specified visitor ID. This API is useful for compliance with privacy regulations.  ### Which data is deleted? - Browser (or device) properties - Identification requests made from this browser (or device)  #### Browser (or device) properties - Represents the data that Fingerprint collected from this specific browser (or device) and everything inferred and derived from it. - Upon request to delete, this data is deleted asynchronously (typically within a few minutes) and it will no longer be used to identify this browser (or device) for your [Fingerprint Workspace](https://docs.fingerprint.com/docs/glossary#fingerprint-workspace).  #### Identification requests made from this browser (or device) - Fingerprint stores the identification requests made from a browser (or device) for up to 30 (or 90) days depending on your plan. To learn more, see [Data Retention](https://docs.fingerprint.com/docs/regions#data-retention). - Upon request to delete, the identification requests that were made by this browser   - Within the past 10 days are deleted within 24 hrs.   - Outside of 10 days are allowed to purge as per your data retention period.  ### Corollary After requesting to delete a visitor ID, - If the same browser (or device) requests to identify, it will receive a different visitor ID. - If you request [`/v4/events` API](https://docs.fingerprint.com/reference/server-api-v4-get-event) with an `event_id` that was made outside of the 10 days, you will still receive a valid response.  ### Interested? Please [contact our support team](https://fingerprint.com/support/) to enable it for you. Otherwise, you will receive a 403.
+   * Delete a visitor ID
+   * Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).
    * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required)
    * @return ApiResponse<Void>
    * @throws ApiException if fails to make API call
@@ -274,6 +279,12 @@ public class FingerprintApi {
     private String visitorId;
     private String highRecallId;
     private SearchEventsBot bot;
+    private SearchEventsBotInfo botInfo;
+    private List<BotInfoCategory> botInfoCategory;
+    private List<BotInfoIdentity> botInfoIdentity;
+    private List<BotInfoConfidence> botInfoConfidence;
+    private List<String> botInfoProvider;
+    private List<String> botInfoName;
     private String ipAddress;
     private String asn;
     private String linkedId;
@@ -282,7 +293,9 @@ public class FingerprintApi {
     private String packageName;
     private String origin;
     private Long start;
+    private OffsetDateTime startDateTime;
     private Long end;
+    private OffsetDateTime endDateTime;
     private Boolean reverse;
     private Boolean suspect;
     private Boolean vpn;
@@ -330,14 +343,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`
+     * getter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`
      */
     public String getPaginationKey() {
       return paginationKey;
     }
 
     /**
-     * setter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 200 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`
+     * setter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`
      */
     public SearchEventsOptionalParams setPaginationKey(String paginationKey) {
       this.paginationKey = paginationKey;
@@ -386,6 +399,97 @@ public class FingerprintApi {
      */
     public SearchEventsOptionalParams setBot(SearchEventsBot bot) {
       this.bot = bot;
+      return this;
+    }
+
+    /**
+     * getter for botInfo - Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.
+     */
+    public SearchEventsBotInfo getBotInfo() {
+      return botInfo;
+    }
+
+    /**
+     * setter for botInfo - Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.
+     */
+    public SearchEventsOptionalParams setBotInfo(SearchEventsBotInfo botInfo) {
+      this.botInfo = botInfo;
+      return this;
+    }
+
+    /**
+     * getter for botInfoCategory - Filter events by their Bot Info Category.  Multiple categories can be provided using the repeated keys syntax. For example, `bot_info_category=ai_agent&bot_info_category=ai_assistant`, will match events with a Bot Info Category of `ai_agent` or `ai_assistant`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public List<BotInfoCategory> getBotInfoCategory() {
+      return botInfoCategory;
+    }
+
+    /**
+     * setter for botInfoCategory - Filter events by their Bot Info Category.  Multiple categories can be provided using the repeated keys syntax. For example, `bot_info_category=ai_agent&bot_info_category=ai_assistant`, will match events with a Bot Info Category of `ai_agent` or `ai_assistant`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public SearchEventsOptionalParams setBotInfoCategory(List<BotInfoCategory> botInfoCategory) {
+      this.botInfoCategory = botInfoCategory;
+      return this;
+    }
+
+    /**
+     * getter for botInfoIdentity - Filter events by their Bot Info Identity type.  Multiple identity types can be provided using the repeated keys syntax. For example, `bot_info_identity=verified&bot_info_identity=signed`, will match events with a Bot Info Identity of `verified` or `signed`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public List<BotInfoIdentity> getBotInfoIdentity() {
+      return botInfoIdentity;
+    }
+
+    /**
+     * setter for botInfoIdentity - Filter events by their Bot Info Identity type.  Multiple identity types can be provided using the repeated keys syntax. For example, `bot_info_identity=verified&bot_info_identity=signed`, will match events with a Bot Info Identity of `verified` or `signed`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public SearchEventsOptionalParams setBotInfoIdentity(List<BotInfoIdentity> botInfoIdentity) {
+      this.botInfoIdentity = botInfoIdentity;
+      return this;
+    }
+
+    /**
+     * getter for botInfoConfidence - Filter events by their Bot Info Confidence.  Multiple confidences can be provided using the repeated keys syntax. For example, `bot_info_confidence=high&bot_info_confidence=medium`, will match events with a Bot Info Confidence of `high` or `medium`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public List<BotInfoConfidence> getBotInfoConfidence() {
+      return botInfoConfidence;
+    }
+
+    /**
+     * setter for botInfoConfidence - Filter events by their Bot Info Confidence.  Multiple confidences can be provided using the repeated keys syntax. For example, `bot_info_confidence=high&bot_info_confidence=medium`, will match events with a Bot Info Confidence of `high` or `medium`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public SearchEventsOptionalParams setBotInfoConfidence(
+        List<BotInfoConfidence> botInfoConfidence) {
+      this.botInfoConfidence = botInfoConfidence;
+      return this;
+    }
+
+    /**
+     * getter for botInfoProvider - Filter events by their Bot Info Provider. The provider must match exactly, partial or wildcard matching is not supported.  Multiple Providers can be provided using the repeated keys syntax. For example, `bot_info_provider=OpenAI&bot_info_provider=AWS`, will match events with a Bot Info Provider of `OpenAI` or `AWS`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public List<String> getBotInfoProvider() {
+      return botInfoProvider;
+    }
+
+    /**
+     * setter for botInfoProvider - Filter events by their Bot Info Provider. The provider must match exactly, partial or wildcard matching is not supported.  Multiple Providers can be provided using the repeated keys syntax. For example, `bot_info_provider=OpenAI&bot_info_provider=AWS`, will match events with a Bot Info Provider of `OpenAI` or `AWS`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public SearchEventsOptionalParams setBotInfoProvider(List<String> botInfoProvider) {
+      this.botInfoProvider = botInfoProvider;
+      return this;
+    }
+
+    /**
+     * getter for botInfoName - Filter events by their Bot Info Name. The name must match exactly, partial or wildcard matching is not supported.  Multiple Names can be provided using the repeated keys syntax. For example, `bot_info_name=ChatGPT%20Agent&bot_info_name=Bedrock%20AgentCore`, will match events with a Bot Info Name of `ChatGPT Agent` or `Bedrock AgentCore`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public List<String> getBotInfoName() {
+      return botInfoName;
+    }
+
+    /**
+     * setter for botInfoName - Filter events by their Bot Info Name. The name must match exactly, partial or wildcard matching is not supported.  Multiple Names can be provided using the repeated keys syntax. For example, `bot_info_name=ChatGPT%20Agent&bot_info_name=Bedrock%20AgentCore`, will match events with a Bot Info Name of `ChatGPT Agent` or `Bedrock AgentCore`. Other notations like comma-separated or bracket notation are not supported.
+     */
+    public SearchEventsOptionalParams setBotInfoName(List<String> botInfoName) {
+      this.botInfoName = botInfoName;
       return this;
     }
 
@@ -495,44 +599,102 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for start - Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.
+     * getter for start - Include events that happened after this point (with timestamp greater than or equal to the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change the default of `now` for `end`/`end_date_time` — adjust it separately if needed.
+     *
+     * @see {@link #getStartDateTime}
      */
     public Long getStart() {
       return start;
     }
 
     /**
-     * setter for start - Include events that happened after this point (with timestamp greater than or equal the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change `end`'s default of `now` — adjust it separately if needed.
+     * setter for start - Include events that happened after this point (with timestamp greater than or equal to the provided `start` Unix milliseconds value). Defaults to 7 days ago. Setting `start` does not change the default of `now` for `end`/`end_date_time` — adjust it separately if needed.
+     *
+     * start is an alias for startDateTime. Invoking {@link #setStart} will also set `startDateTime` to `null` to clear an existing `startDateTime` parameter value.
+     *
+     * @see {@link #setStartDateTime}
      */
     public SearchEventsOptionalParams setStart(Long start) {
       this.start = start;
+      this.startDateTime = null;
       return this;
     }
 
     /**
-     * getter for end - Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.
+     * getter for startDateTime - Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`.
+     *
+     * @see {@link #getStart}
+     */
+    public OffsetDateTime getStartDateTime() {
+      return startDateTime;
+    }
+
+    /**
+     * setter for startDateTime - Include events that happened after this point (with timestamp greater than or equal to the provided `start_date_time` RFC3339 timestamp). Defaults to 7 days ago. Setting `start_date_time` does not the default of `now` for `end`/`end_date_time` — adjust it separately if needed. This parameter is an alias for `start`.
+     *
+     * startDateTime is an alias for start. Invoking {@link #setStartDateTime} will also set `start` to `null` to clear an existing `start` parameter value.
+     *
+     * @see {@link #setStart}
+     */
+    public SearchEventsOptionalParams setStartDateTime(OffsetDateTime startDateTime) {
+      this.startDateTime = startDateTime;
+      this.start = null;
+      return this;
+    }
+
+    /**
+     * getter for end - Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed.
+     *
+     * @see {@link #getEndDateTime}
      */
     public Long getEnd() {
       return end;
     }
 
     /**
-     * setter for end - Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change `start`'s default of `7 days ago` — adjust it separately if needed.
+     * setter for end - Include events that happened before this point (with timestamp less than or equal the provided `end` Unix milliseconds value). Defaults to now. Setting `end` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed.
+     *
+     * end is an alias for endDateTime. Invoking {@link #setEnd} will also set `endDateTime` to `null` to clear an existing `endDateTime` parameter value.
+     *
+     * @see {@link #setEndDateTime}
      */
     public SearchEventsOptionalParams setEnd(Long end) {
       this.end = end;
+      this.endDateTime = null;
       return this;
     }
 
     /**
-     * getter for reverse - When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).
+     * getter for endDateTime - Include events that happened before this point (with timestamp less than or equal the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`.
+     *
+     * @see {@link #getEnd}
+     */
+    public OffsetDateTime getEndDateTime() {
+      return endDateTime;
+    }
+
+    /**
+     * setter for endDateTime - Include events that happened before this point (with timestamp less than or equal the provided `end_date_time` RFC3339 timestamp). Defaults to now. Setting `end_date_time` does not change the default of `7 days ago` for `start`/`start_date_time` — adjust it separately if needed. This parameter is an alias for `end`.
+     *
+     * endDateTime is an alias for end. Invoking {@link #setEndDateTime} will also set `end` to `null` to clear an existing `end` parameter value.
+     *
+     * @see {@link #setEnd}
+     */
+    public SearchEventsOptionalParams setEndDateTime(OffsetDateTime endDateTime) {
+      this.endDateTime = endDateTime;
+      this.end = null;
+      return this;
+    }
+
+    /**
+     * getter for reverse - When `true`, sort events oldest first (ascending timestamp order). Defaults to `false` (newest first, descending timestamp order).
      */
     public Boolean getReverse() {
       return reverse;
     }
 
     /**
-     * setter for reverse - When `true`, sort events oldest first (ascending timestamp order). Default is newest first (descending timestamp order).
+     * setter for reverse - When `true`, sort events oldest first (ascending timestamp order). Defaults to `false` (newest first, descending timestamp order).
      */
     public SearchEventsOptionalParams setReverse(Boolean reverse) {
       this.reverse = reverse;
@@ -810,14 +972,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for rareDevice - Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.
+     * getter for rareDevice - Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
      */
     public Boolean getRareDevice() {
       return rareDevice;
     }
 
     /**
-     * setter for rareDevice - Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.
+     * setter for rareDevice - Filter events by Device Rarity detection result. > Note: When using this parameter, only events with the `rare_device` property set to `true` or `false` are returned. Events without a Device Rarity Smart Signal result are left out of the response.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
      */
     public SearchEventsOptionalParams setRareDevice(Boolean rareDevice) {
       this.rareDevice = rareDevice;
@@ -825,14 +987,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for rareDevicePercentileBucket - Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.
+     * getter for rareDevicePercentileBucket - Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
      */
     public SearchEventsRareDevicePercentileBucket getRareDevicePercentileBucket() {
       return rareDevicePercentileBucket;
     }
 
     /**
-     * setter for rareDevicePercentileBucket - Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.
+     * setter for rareDevicePercentileBucket - Filter events by Device Rarity percentile bucket. `<p95` - device configuration is in the bottom 95% (most common). `p95-p99` - device is in the 95th to 99th percentile. `p99-p99.5` - device is in the 99th to 99.5th percentile. `p99.5-p99.9` - device is in the 99.5th to 99.9th percentile. `p99.9+` - device is in the top 0.1% (rarest). `not_seen` - device configuration has never been observed before.  > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
      */
     public SearchEventsOptionalParams setRareDevicePercentileBucket(
         SearchEventsRareDevicePercentileBucket rareDevicePercentileBucket) {
@@ -1040,6 +1202,23 @@ public class FingerprintApi {
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "bot", searchEventsOptionalParams.getBot()));
       localVarQueryParams.addAll(
+          apiClient.parameterToPairs("", "bot_info", searchEventsOptionalParams.getBotInfo()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "multi", "bot_info_category", searchEventsOptionalParams.getBotInfoCategory()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "multi", "bot_info_identity", searchEventsOptionalParams.getBotInfoIdentity()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "multi", "bot_info_confidence", searchEventsOptionalParams.getBotInfoConfidence()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "multi", "bot_info_provider", searchEventsOptionalParams.getBotInfoProvider()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "multi", "bot_info_name", searchEventsOptionalParams.getBotInfoName()));
+      localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "ip_address", searchEventsOptionalParams.getIpAddress()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "asn", searchEventsOptionalParams.getAsn()));
@@ -1057,7 +1236,11 @@ public class FingerprintApi {
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "start", searchEventsOptionalParams.getStart()));
       localVarQueryParams.addAll(
+          apiClient.parameterToPairs("", "start", searchEventsOptionalParams.getStartDateTime()));
+      localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "end", searchEventsOptionalParams.getEnd()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs("", "end", searchEventsOptionalParams.getEndDateTime()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "reverse", searchEventsOptionalParams.getReverse()));
       localVarQueryParams.addAll(
