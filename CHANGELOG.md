@@ -1,5 +1,24 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.3.0-rc.0
+
+### Minor Changes
+
+- **events-search**: Add `start_date_time` and `end_date_time` RFC3339 timestamp filters ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events**: Add Android platform support to `developer_tools` smart signal ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events**: Add `labels` to `Event` ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events**: Add iOS platform support to `developer_tools` ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events-search**: Add `bot_info` filter parameters ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events-search**: Add `unknown` value to `BotInfoCategory` ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+
+### Patch Changes
+
+- **events**: Clarify availability of proxy and VM ML score signals ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events**: Clarify semantics of `incremental_identification_status` ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **visitors**: Clarify rate limits for `deleteVisitorData` operation ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events-search**: Clarify availability of `rare_device` and `rare_device_percentile_bucket` query parameters ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+- **events-search**: Fix `pagination_key` example ([c8a8d0d](https://github.com/fingerprintjs/java-sdk/commit/c8a8d0d76a6d6f5578eef7ad913b4a58bb937eee))
+
 ## 8.2.0
 
 ### Minor Changes
