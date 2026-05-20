@@ -32,7 +32,7 @@ import java.util.Objects;
     comments = "Generator version: 7.16.0")
 public class LabelsInner {
   public static final String JSON_PROPERTY_LABEL = "label";
-  @jakarta.annotation.Nullable private String label;
+  @jakarta.annotation.Nonnull private String label;
 
   public static final String JSON_PROPERTY_PREDICTION = "prediction";
   @jakarta.annotation.Nullable private Boolean prediction;
@@ -42,7 +42,7 @@ public class LabelsInner {
 
   public LabelsInner() {}
 
-  public LabelsInner label(@jakarta.annotation.Nullable String label) {
+  public LabelsInner label(@jakarta.annotation.Nonnull String label) {
     this.label = label;
     return this;
   }
@@ -51,16 +51,16 @@ public class LabelsInner {
    * Get label
    * @return label
    */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_LABEL, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @jakarta.annotation.Nonnull
+  @JsonProperty(value = JSON_PROPERTY_LABEL, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLabel() {
     return label;
   }
 
-  @JsonProperty(value = JSON_PROPERTY_LABEL, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLabel(@jakarta.annotation.Nullable String label) {
+  @JsonProperty(value = JSON_PROPERTY_LABEL, required = true)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setLabel(@jakarta.annotation.Nonnull String label) {
     this.label = label;
   }
 
