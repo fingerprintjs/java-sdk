@@ -9,6 +9,7 @@ import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
 import com.fingerprint.v4.model.SearchEventsBotInfo;
 import com.fingerprint.v4.model.SearchEventsIncrementalIdentificationStatus;
+import com.fingerprint.v4.model.SearchEventsInline;
 import com.fingerprint.v4.model.SearchEventsRareDevicePercentileBucket;
 import com.fingerprint.v4.model.SearchEventsSdkPlatform;
 import com.fingerprint.v4.model.SearchEventsVpnConfidence;
@@ -326,16 +327,17 @@ public class FingerprintApi {
     private Boolean torNode;
     private SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus;
     private Boolean simulator;
+    private List<SearchEventsInline> source;
 
     /**
-     * getter for limit - Maximum number of events to return. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
+     * getter for limit - Maximum number of events to return. Defaults to 10 when omitted. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
      */
     public Integer getLimit() {
       return limit;
     }
 
     /**
-     * setter for limit - Maximum number of events to return. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
+     * setter for limit - Maximum number of events to return. Defaults to 10 when omitted. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
      */
     public SearchEventsOptionalParams setLimit(Integer limit) {
       this.limit = limit;
@@ -343,14 +345,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`
+     * getter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q`
      */
     public String getPaginationKey() {
       return paginationKey;
     }
 
     /**
-     * setter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=1740815825085`
+     * setter for paginationKey - Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q`
      */
     public SearchEventsOptionalParams setPaginationKey(String paginationKey) {
       this.paginationKey = paginationKey;
@@ -1137,6 +1139,21 @@ public class FingerprintApi {
       this.simulator = simulator;
       return this;
     }
+
+    /**
+     * getter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
+     */
+    public List<SearchEventsInline> getSource() {
+      return source;
+    }
+
+    /**
+     * setter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
+     */
+    public SearchEventsOptionalParams setSource(List<SearchEventsInline> source) {
+      this.source = source;
+      return this;
+    }
   }
 
   /**
@@ -1151,6 +1168,7 @@ public class FingerprintApi {
    * <tr><td> 200 </td><td> Events matching the filter(s). </td><td>  -  </td></tr>
    * <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
+   * <tr><td> 404 </td><td> Not found. The requested visitor does not exist in this workspace&#39;s data. </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
    * </table>
    */
@@ -1171,6 +1189,7 @@ public class FingerprintApi {
    * <tr><td> 200 </td><td> Events matching the filter(s). </td><td>  -  </td></tr>
    * <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
+   * <tr><td> 404 </td><td> Not found. The requested visitor does not exist in this workspace&#39;s data. </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
    * </table>
    */
@@ -1321,6 +1340,8 @@ public class FingerprintApi {
               searchEventsOptionalParams.getIncrementalIdentificationStatus()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "simulator", searchEventsOptionalParams.getSimulator()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs("multi", "source", searchEventsOptionalParams.getSource()));
     }
 
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");

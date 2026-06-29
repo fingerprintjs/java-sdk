@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. The API also supports collection of Automation Intelligence for requests to your server in edge, pre-origin, or middleware contexts.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -25,7 +25,8 @@ import java.util.Objects;
   VpnMethods.JSON_PROPERTY_PUBLIC_VPN,
   VpnMethods.JSON_PROPERTY_AUXILIARY_MOBILE,
   VpnMethods.JSON_PROPERTY_OS_MISMATCH,
-  VpnMethods.JSON_PROPERTY_RELAY
+  VpnMethods.JSON_PROPERTY_RELAY,
+  VpnMethods.JSON_PROPERTY_ML_PREDICTION
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -45,6 +46,9 @@ public class VpnMethods {
 
   public static final String JSON_PROPERTY_RELAY = "relay";
   @jakarta.annotation.Nullable private Boolean relay;
+
+  public static final String JSON_PROPERTY_ML_PREDICTION = "ml_prediction";
+  @jakarta.annotation.Nullable private Boolean mlPrediction;
 
   public VpnMethods() {}
 
@@ -158,6 +162,28 @@ public class VpnMethods {
     this.relay = relay;
   }
 
+  public VpnMethods mlPrediction(@jakarta.annotation.Nullable Boolean mlPrediction) {
+    this.mlPrediction = mlPrediction;
+    return this;
+  }
+
+  /**
+   * `true` if the request came from a device running a VPN, `false` otherwise.
+   * @return mlPrediction
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ML_PREDICTION, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getMlPrediction() {
+    return mlPrediction;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_ML_PREDICTION, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setMlPrediction(@jakarta.annotation.Nullable Boolean mlPrediction) {
+    this.mlPrediction = mlPrediction;
+  }
+
   /**
    * Return true if this VpnMethods object is equal to o.
    */
@@ -174,12 +200,14 @@ public class VpnMethods {
         && Objects.equals(this.publicVpn, vpnMethods.publicVpn)
         && Objects.equals(this.auxiliaryMobile, vpnMethods.auxiliaryMobile)
         && Objects.equals(this.osMismatch, vpnMethods.osMismatch)
-        && Objects.equals(this.relay, vpnMethods.relay);
+        && Objects.equals(this.relay, vpnMethods.relay)
+        && Objects.equals(this.mlPrediction, vpnMethods.mlPrediction);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(timezoneMismatch, publicVpn, auxiliaryMobile, osMismatch, relay);
+    return Objects.hash(
+        timezoneMismatch, publicVpn, auxiliaryMobile, osMismatch, relay, mlPrediction);
   }
 
   @Override
@@ -191,6 +219,7 @@ public class VpnMethods {
     sb.append("    auxiliaryMobile: ").append(toIndentedString(auxiliaryMobile)).append("\n");
     sb.append("    osMismatch: ").append(toIndentedString(osMismatch)).append("\n");
     sb.append("    relay: ").append(toIndentedString(relay)).append("\n");
+    sb.append("    mlPrediction: ").append(toIndentedString(mlPrediction)).append("\n");
     sb.append("}");
     return sb.toString();
   }
