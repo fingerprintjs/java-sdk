@@ -9,6 +9,7 @@ import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
 import com.fingerprint.v4.model.SearchEventsBotInfo;
 import com.fingerprint.v4.model.SearchEventsIncrementalIdentificationStatus;
+import com.fingerprint.v4.model.SearchEventsInline;
 import com.fingerprint.v4.model.SearchEventsRareDevicePercentileBucket;
 import com.fingerprint.v4.model.SearchEventsSdkPlatform;
 import com.fingerprint.v4.model.SearchEventsSource;
