@@ -13,7 +13,7 @@
 |**asnName** | **String** |  |  [optional] |
 |**asnNetwork** | **String** |  |  [optional] |
 |**asnType** | **String** |  |  [optional] |
-|**datacenterResult** | **Boolean** |  |  [optional] |
+|**datacenterResult** | **Boolean** | When true, the request originated from a datacenter. |  [optional] |
 |**datacenterName** | **String** |  |  [optional] |
 
 
