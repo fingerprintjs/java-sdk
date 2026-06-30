@@ -16,16 +16,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * Gets or Sets SearchEventsInline
+ * Gets or Sets SearchEventsSource
  */
-public enum SearchEventsInline {
+public enum SearchEventsSource {
   EDGE("edge"),
 
   UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED("unsupported_value_sdk_upgrade_required");
 
   private String value;
 
-  SearchEventsInline(String value) {
+  SearchEventsSource(String value) {
     this.value = value;
   }
 
@@ -40,8 +40,8 @@ public enum SearchEventsInline {
   }
 
   @JsonCreator
-  public static SearchEventsInline fromValue(String value) {
-    for (SearchEventsInline b : SearchEventsInline.values()) {
+  public static SearchEventsSource fromValue(String value) {
+    for (SearchEventsSource b : SearchEventsSource.values()) {
       if (b.value.equals(value)) {
         return b;
       }

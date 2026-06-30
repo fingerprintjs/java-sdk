@@ -9,9 +9,9 @@ import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
 import com.fingerprint.v4.model.SearchEventsBotInfo;
 import com.fingerprint.v4.model.SearchEventsIncrementalIdentificationStatus;
-import com.fingerprint.v4.model.SearchEventsInline;
 import com.fingerprint.v4.model.SearchEventsRareDevicePercentileBucket;
 import com.fingerprint.v4.model.SearchEventsSdkPlatform;
+import com.fingerprint.v4.model.SearchEventsSource;
 import com.fingerprint.v4.model.SearchEventsVpnConfidence;
 import com.fingerprint.v4.sdk.ApiClient;
 import com.fingerprint.v4.sdk.ApiException;
@@ -327,7 +327,7 @@ public class FingerprintApi {
     private Boolean torNode;
     private SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus;
     private Boolean simulator;
-    private List<SearchEventsInline> source;
+    private List<SearchEventsSource> source;
 
     /**
      * getter for limit - Maximum number of events to return. Defaults to 10 when omitted. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.
@@ -1143,14 +1143,14 @@ public class FingerprintApi {
     /**
      * getter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
      */
-    public List<SearchEventsInline> getSource() {
+    public List<SearchEventsSource> getSource() {
       return source;
     }
 
     /**
      * setter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
      */
-    public SearchEventsOptionalParams setSource(List<SearchEventsInline> source) {
+    public SearchEventsOptionalParams setSource(List<SearchEventsSource> source) {
       this.source = source;
       return this;
     }
