@@ -343,6 +343,7 @@ Class | Method | HTTP request | Description
  - [SearchEventsIncrementalIdentificationStatus](docs/SearchEventsIncrementalIdentificationStatus.md)
  - [SearchEventsRareDevicePercentileBucket](docs/SearchEventsRareDevicePercentileBucket.md)
  - [SearchEventsSdkPlatform](docs/SearchEventsSdkPlatform.md)
+ - [SearchEventsSource](docs/SearchEventsSource.md)
  - [SearchEventsVpnConfidence](docs/SearchEventsVpnConfidence.md)
  - [SupplementaryIDHighRecall](docs/SupplementaryIDHighRecall.md)
  - [TamperingConfidence](docs/TamperingConfidence.md)

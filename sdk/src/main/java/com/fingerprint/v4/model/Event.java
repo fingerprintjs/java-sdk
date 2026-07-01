@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. The API also supports collection of Automation Intelligence for requests to your server in edge, pre-origin, or middleware contexts.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -41,6 +41,9 @@ import java.util.Objects;
   Event.JSON_PROPERTY_PACKAGE_NAME,
   Event.JSON_PROPERTY_IP_ADDRESS,
   Event.JSON_PROPERTY_USER_AGENT,
+  Event.JSON_PROPERTY_DEVICE,
+  Event.JSON_PROPERTY_OS,
+  Event.JSON_PROPERTY_OS_VERSION,
   Event.JSON_PROPERTY_CLIENT_REFERRER,
   Event.JSON_PROPERTY_BROWSER_DETAILS,
   Event.JSON_PROPERTY_PROXIMITY,
@@ -76,6 +79,7 @@ import java.util.Objects;
   Event.JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE,
   Event.JSON_PROPERTY_VPN,
   Event.JSON_PROPERTY_VPN_CONFIDENCE,
+  Event.JSON_PROPERTY_VPN_ML_SCORE,
   Event.JSON_PROPERTY_VPN_ORIGIN_TIMEZONE,
   Event.JSON_PROPERTY_VPN_ORIGIN_COUNTRY,
   Event.JSON_PROPERTY_VPN_METHODS,
@@ -140,6 +144,15 @@ public class Event {
 
   public static final String JSON_PROPERTY_USER_AGENT = "user_agent";
   @jakarta.annotation.Nullable private String userAgent;
+
+  public static final String JSON_PROPERTY_DEVICE = "device";
+  @jakarta.annotation.Nullable private String device;
+
+  public static final String JSON_PROPERTY_OS = "os";
+  @jakarta.annotation.Nullable private String os;
+
+  public static final String JSON_PROPERTY_OS_VERSION = "os_version";
+  @jakarta.annotation.Nullable private String osVersion;
 
   public static final String JSON_PROPERTY_CLIENT_REFERRER = "client_referrer";
   @jakarta.annotation.Nullable private String clientReferrer;
@@ -246,6 +259,9 @@ public class Event {
   public static final String JSON_PROPERTY_VPN_CONFIDENCE = "vpn_confidence";
   @jakarta.annotation.Nullable private VpnConfidence vpnConfidence;
 
+  public static final String JSON_PROPERTY_VPN_ML_SCORE = "vpn_ml_score";
+  @jakarta.annotation.Nullable private Double vpnMlScore;
+
   public static final String JSON_PROPERTY_VPN_ORIGIN_TIMEZONE = "vpn_origin_timezone";
   @jakarta.annotation.Nullable private String vpnOriginTimezone;
 
@@ -279,7 +295,7 @@ public class Event {
   }
 
   /**
-   * Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp For example: `1758130560902.8tRtrH`
+   * Unique identifier of the user's request. The first portion of the event_id is a unix epoch milliseconds timestamp.
    * @return eventId
    */
   @jakarta.annotation.Nonnull
@@ -371,7 +387,7 @@ public class Event {
   }
 
   /**
-   * Environment Id of the event. For example: `ae_47abaca3db2c7c43`
+   * Environment Id of the event.
    * @return environmentId
    */
   @jakarta.annotation.Nullable
@@ -535,7 +551,7 @@ public class Event {
   }
 
   /**
-   * Page URL from which the request was sent. For example `https://example.com/`
+   * Page URL from which the request was sent.
    * @return url
    */
   @jakarta.annotation.Nullable
@@ -557,7 +573,7 @@ public class Event {
   }
 
   /**
-   * Bundle Id of the iOS application integrated with the Fingerprint SDK for the event. For example: `com.foo.app`
+   * Bundle Id of the iOS application integrated with the Fingerprint SDK for the event.
    * @return bundleId
    */
   @jakarta.annotation.Nullable
@@ -579,7 +595,7 @@ public class Event {
   }
 
   /**
-   * Package name of the Android application integrated with the Fingerprint SDK for the event. For example: `com.foo.app`
+   * Package name of the Android application integrated with the Fingerprint SDK for the event.
    * @return packageName
    */
   @jakarta.annotation.Nullable
@@ -623,7 +639,7 @@ public class Event {
   }
 
   /**
-   * User Agent of the client, for example: `Mozilla/5.0 (Windows NT 6.1; Win64; x64) ....`
+   * User Agent of the client.
    * @return userAgent
    */
   @jakarta.annotation.Nullable
@@ -639,13 +655,79 @@ public class Event {
     this.userAgent = userAgent;
   }
 
+  public Event device(@jakarta.annotation.Nullable String device) {
+    this.device = device;
+    return this;
+  }
+
+  /**
+   * Device model or family extracted from the user agent string. On web, this field is also present inside `browser_details`.
+   * @return device
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_DEVICE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getDevice() {
+    return device;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_DEVICE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDevice(@jakarta.annotation.Nullable String device) {
+    this.device = device;
+  }
+
+  public Event os(@jakarta.annotation.Nullable String os) {
+    this.os = os;
+    return this;
+  }
+
+  /**
+   * Operating system family extracted from the user agent string. On web, this field is also present inside `browser_details`.
+   * @return os
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_OS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getOs() {
+    return os;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_OS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setOs(@jakarta.annotation.Nullable String os) {
+    this.os = os;
+  }
+
+  public Event osVersion(@jakarta.annotation.Nullable String osVersion) {
+    this.osVersion = osVersion;
+    return this;
+  }
+
+  /**
+   * Operating system version string extracted from the user agent string. On web, this field is also present inside `browser_details`.
+   * @return osVersion
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_OS_VERSION, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getOsVersion() {
+    return osVersion;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_OS_VERSION, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setOsVersion(@jakarta.annotation.Nullable String osVersion) {
+    this.osVersion = osVersion;
+  }
+
   public Event clientReferrer(@jakarta.annotation.Nullable String clientReferrer) {
     this.clientReferrer = clientReferrer;
     return this;
   }
 
   /**
-   * Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark) For example: `https://example.com/blog/my-article`
+   * Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).
    * @return clientReferrer
    */
   @jakarta.annotation.Nullable
@@ -1417,6 +1499,30 @@ public class Event {
     this.vpnConfidence = vpnConfidence;
   }
 
+  public Event vpnMlScore(@jakarta.annotation.Nullable Double vpnMlScore) {
+    this.vpnMlScore = vpnMlScore;
+    return this;
+  }
+
+  /**
+   * Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).
+   * minimum: 0
+   * maximum: 1
+   * @return vpnMlScore
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_VPN_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Double getVpnMlScore() {
+    return vpnMlScore;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_VPN_ML_SCORE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVpnMlScore(@jakarta.annotation.Nullable Double vpnMlScore) {
+    this.vpnMlScore = vpnMlScore;
+  }
+
   public Event vpnOriginTimezone(@jakarta.annotation.Nullable String vpnOriginTimezone) {
     this.vpnOriginTimezone = vpnOriginTimezone;
     return this;
@@ -1634,6 +1740,9 @@ public class Event {
         && Objects.equals(this.packageName, event.packageName)
         && Objects.equals(this.ipAddress, event.ipAddress)
         && Objects.equals(this.userAgent, event.userAgent)
+        && Objects.equals(this.device, event.device)
+        && Objects.equals(this.os, event.os)
+        && Objects.equals(this.osVersion, event.osVersion)
         && Objects.equals(this.clientReferrer, event.clientReferrer)
         && Objects.equals(this.browserDetails, event.browserDetails)
         && Objects.equals(this.proximity, event.proximity)
@@ -1669,6 +1778,7 @@ public class Event {
         && Objects.equals(this.virtualMachineMlScore, event.virtualMachineMlScore)
         && Objects.equals(this.vpn, event.vpn)
         && Objects.equals(this.vpnConfidence, event.vpnConfidence)
+        && Objects.equals(this.vpnMlScore, event.vpnMlScore)
         && Objects.equals(this.vpnOriginTimezone, event.vpnOriginTimezone)
         && Objects.equals(this.vpnOriginCountry, event.vpnOriginCountry)
         && Objects.equals(this.vpnMethods, event.vpnMethods)
@@ -1698,6 +1808,9 @@ public class Event {
         packageName,
         ipAddress,
         userAgent,
+        device,
+        os,
+        osVersion,
         clientReferrer,
         browserDetails,
         proximity,
@@ -1733,6 +1846,7 @@ public class Event {
         virtualMachineMlScore,
         vpn,
         vpnConfidence,
+        vpnMlScore,
         vpnOriginTimezone,
         vpnOriginCountry,
         vpnMethods,
@@ -1767,6 +1881,9 @@ public class Event {
     sb.append("    packageName: ").append(toIndentedString(packageName)).append("\n");
     sb.append("    ipAddress: ").append(toIndentedString(ipAddress)).append("\n");
     sb.append("    userAgent: ").append(toIndentedString(userAgent)).append("\n");
+    sb.append("    device: ").append(toIndentedString(device)).append("\n");
+    sb.append("    os: ").append(toIndentedString(os)).append("\n");
+    sb.append("    osVersion: ").append(toIndentedString(osVersion)).append("\n");
     sb.append("    clientReferrer: ").append(toIndentedString(clientReferrer)).append("\n");
     sb.append("    browserDetails: ").append(toIndentedString(browserDetails)).append("\n");
     sb.append("    proximity: ").append(toIndentedString(proximity)).append("\n");
@@ -1808,6 +1925,7 @@ public class Event {
         .append("\n");
     sb.append("    vpn: ").append(toIndentedString(vpn)).append("\n");
     sb.append("    vpnConfidence: ").append(toIndentedString(vpnConfidence)).append("\n");
+    sb.append("    vpnMlScore: ").append(toIndentedString(vpnMlScore)).append("\n");
     sb.append("    vpnOriginTimezone: ").append(toIndentedString(vpnOriginTimezone)).append("\n");
     sb.append("    vpnOriginCountry: ").append(toIndentedString(vpnOriginCountry)).append("\n");
     sb.append("    vpnMethods: ").append(toIndentedString(vpnMethods)).append("\n");

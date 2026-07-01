@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. The API also supports collection of Automation Intelligence for requests to your server in edge, pre-origin, or middleware contexts.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -51,7 +51,9 @@ import java.util.Objects;
   RawDeviceAttributes.JSON_PROPERTY_DEVICE_MODEL,
   RawDeviceAttributes.JSON_PROPERTY_DEVICE_MANUFACTURER,
   RawDeviceAttributes.JSON_PROPERTY_FONT_HASH,
-  RawDeviceAttributes.JSON_PROPERTY_TIMEZONE_OFFSET
+  RawDeviceAttributes.JSON_PROPERTY_TIMEZONE_OFFSET,
+  RawDeviceAttributes.JSON_PROPERTY_BATTERY_LEVEL,
+  RawDeviceAttributes.JSON_PROPERTY_BATTERY_LOW_POWER_MODE
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -144,6 +146,12 @@ public class RawDeviceAttributes {
   public static final String JSON_PROPERTY_TIMEZONE_OFFSET = "timezone_offset";
   @jakarta.annotation.Nullable private String timezoneOffset;
 
+  public static final String JSON_PROPERTY_BATTERY_LEVEL = "battery_level";
+  @jakarta.annotation.Nullable private Integer batteryLevel;
+
+  public static final String JSON_PROPERTY_BATTERY_LOW_POWER_MODE = "battery_low_power_mode";
+  @jakarta.annotation.Nullable private Boolean batteryLowPowerMode;
+
   public RawDeviceAttributes() {}
 
   public RawDeviceAttributes fontPreferences(
@@ -227,7 +235,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Rounded amount of RAM (in gigabytes) reported by the browser.
+   * Rounded amount of RAM in gigabytes.
    * minimum: 0
    * @return deviceMemory
    */
@@ -302,7 +310,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for both browsers and iOS devices
+   * Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for browsers, iOS, and Android devices.
    * @return languages
    */
   @jakarta.annotation.Nullable
@@ -822,6 +830,53 @@ public class RawDeviceAttributes {
     this.timezoneOffset = timezoneOffset;
   }
 
+  public RawDeviceAttributes batteryLevel(@jakarta.annotation.Nullable Integer batteryLevel) {
+    this.batteryLevel = batteryLevel;
+    return this;
+  }
+
+  /**
+   * Battery charge level as a percentage (0-100). Available only for Android and iOS devices.
+   * minimum: 0
+   * maximum: 100
+   * @return batteryLevel
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_BATTERY_LEVEL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Integer getBatteryLevel() {
+    return batteryLevel;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_BATTERY_LEVEL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setBatteryLevel(@jakarta.annotation.Nullable Integer batteryLevel) {
+    this.batteryLevel = batteryLevel;
+  }
+
+  public RawDeviceAttributes batteryLowPowerMode(
+      @jakarta.annotation.Nullable Boolean batteryLowPowerMode) {
+    this.batteryLowPowerMode = batteryLowPowerMode;
+    return this;
+  }
+
+  /**
+   * Whether the device's low power mode is enabled. Available only for Android and iOS devices.
+   * @return batteryLowPowerMode
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_BATTERY_LOW_POWER_MODE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getBatteryLowPowerMode() {
+    return batteryLowPowerMode;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_BATTERY_LOW_POWER_MODE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setBatteryLowPowerMode(@jakarta.annotation.Nullable Boolean batteryLowPowerMode) {
+    this.batteryLowPowerMode = batteryLowPowerMode;
+  }
+
   /**
    * Return true if this RawDeviceAttributes object is equal to o.
    */
@@ -862,7 +917,9 @@ public class RawDeviceAttributes {
         && Objects.equals(this.deviceModel, rawDeviceAttributes.deviceModel)
         && Objects.equals(this.deviceManufacturer, rawDeviceAttributes.deviceManufacturer)
         && Objects.equals(this.fontHash, rawDeviceAttributes.fontHash)
-        && Objects.equals(this.timezoneOffset, rawDeviceAttributes.timezoneOffset);
+        && Objects.equals(this.timezoneOffset, rawDeviceAttributes.timezoneOffset)
+        && Objects.equals(this.batteryLevel, rawDeviceAttributes.batteryLevel)
+        && Objects.equals(this.batteryLowPowerMode, rawDeviceAttributes.batteryLowPowerMode);
   }
 
   @Override
@@ -896,7 +953,9 @@ public class RawDeviceAttributes {
         deviceModel,
         deviceManufacturer,
         fontHash,
-        timezoneOffset);
+        timezoneOffset,
+        batteryLevel,
+        batteryLowPowerMode);
   }
 
   @Override
@@ -934,6 +993,10 @@ public class RawDeviceAttributes {
     sb.append("    deviceManufacturer: ").append(toIndentedString(deviceManufacturer)).append("\n");
     sb.append("    fontHash: ").append(toIndentedString(fontHash)).append("\n");
     sb.append("    timezoneOffset: ").append(toIndentedString(timezoneOffset)).append("\n");
+    sb.append("    batteryLevel: ").append(toIndentedString(batteryLevel)).append("\n");
+    sb.append("    batteryLowPowerMode: ")
+        .append(toIndentedString(batteryLowPowerMode))
+        .append("\n");
     sb.append("}");
     return sb.toString();
   }
