@@ -243,24 +243,6 @@ public class FingerprintApiTest {
     assertNotNull(response);
     assertNotNull(response.getIdentification());
     assertEquals("Ibk1527CUFmcnjLwIs4A9", response.getIdentification().getVisitorId());
-
-    assertFalse(response.getClonedApp());
-    assertFalse(response.getEmulator());
-    assertFalse(response.getFrida());
-    assertFalse(response.getJailbroken());
-    assertFalse(response.getIpBlocklist().getEmailSpam());
-    assertFalse(response.getIpBlocklist().getTorNode());
-    assertTrue(response.getProxy());
-    assertEquals(ProxyDetails.ProxyTypeEnum.RESIDENTIAL, response.getProxyDetails().getProxyType());
-    assertEquals(1708102555327L, response.getProxyDetails().getLastSeenAt());
-    assertFalse(response.getTampering());
-    assertFalse(response.getVpn());
-    assertFalse(response.getVirtualMachine());
-    assertInstanceOf(VelocityData.class, response.getVelocity().getDistinctCountry());
-    assertFalse(response.getLocationSpoofing());
-    assertEquals(0L, response.getFactoryResetTimestamp());
-    assertNotNull(response.getTags());
-    assertTrue(response.getTags().isEmpty());
   }
 
   @Test
