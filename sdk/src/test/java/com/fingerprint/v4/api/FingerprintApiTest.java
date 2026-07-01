@@ -223,6 +223,46 @@ public class FingerprintApiTest {
     assertTrue(response.getTags().isEmpty());
   }
 
+  /**
+   * Validates that the SDK can deserialize an event response that contains unknown fields, ignoring
+   * them without failing.
+   *
+   * @throws ApiException if the Api call fails
+   */
+  @Test
+  public void getEventWithUnknownFieldTest() throws ApiException {
+    addMock(
+        "getEvent",
+        MOCK_REQUEST_ID,
+        invocation -> {
+          return mockFileToResponse(
+              200, invocation, "mocks/events/get_event_200_with_unknown_field.json", Event.class);
+        });
+
+    Event response = api.getEvent(MOCK_REQUEST_ID);
+    assertNotNull(response);
+    assertNotNull(response.getIdentification());
+    assertEquals("Ibk1527CUFmcnjLwIs4A9", response.getIdentification().getVisitorId());
+
+    assertFalse(response.getClonedApp());
+    assertFalse(response.getEmulator());
+    assertFalse(response.getFrida());
+    assertFalse(response.getJailbroken());
+    assertFalse(response.getIpBlocklist().getEmailSpam());
+    assertFalse(response.getIpBlocklist().getTorNode());
+    assertTrue(response.getProxy());
+    assertEquals(ProxyDetails.ProxyTypeEnum.RESIDENTIAL, response.getProxyDetails().getProxyType());
+    assertEquals(1708102555327L, response.getProxyDetails().getLastSeenAt());
+    assertFalse(response.getTampering());
+    assertFalse(response.getVpn());
+    assertFalse(response.getVirtualMachine());
+    assertInstanceOf(VelocityData.class, response.getVelocity().getDistinctCountry());
+    assertFalse(response.getLocationSpoofing());
+    assertEquals(0L, response.getFactoryResetTimestamp());
+    assertNotNull(response.getTags());
+    assertTrue(response.getTags().isEmpty());
+  }
+
   @Test
   public void updateEventLinkedIdRequest() throws ApiException {
     final String LINKED_ID = "myLinkedId";
@@ -482,6 +522,7 @@ public class FingerprintApiTest {
     final SearchEventsIncrementalIdentificationStatus INCREMENTAL_IDENTIFICATION_STATUS =
         SearchEventsIncrementalIdentificationStatus.PARTIALLY_COMPLETED;
     final Boolean SIMULATOR = true;
+    final List<SearchEventsSource> SOURCE = Arrays.asList(SearchEventsSource.EDGE);
 
     Map<String, String> expectedQueryParams = new HashMap<>();
     expectedQueryParams.put("limit", String.valueOf(LIMIT));
@@ -534,7 +575,8 @@ public class FingerprintApiTest {
             + BOT_INFO_IDENTITY.size()
             + BOT_INFO_CONFIDENCE.size()
             + BOT_INFO_PROVIDER.size()
-            + BOT_INFO_NAME.size();
+            + BOT_INFO_NAME.size()
+            + SOURCE.size();
 
     addMock(
         "searchEvents",
@@ -553,6 +595,7 @@ public class FingerprintApiTest {
           assertListContainsPairs(queryParams, "bot_info_confidence", BOT_INFO_CONFIDENCE);
           assertListContainsPairs(queryParams, "bot_info_provider", BOT_INFO_PROVIDER);
           assertListContainsPairs(queryParams, "bot_info_name", BOT_INFO_NAME);
+          assertListContainsPairs(queryParams, "source", SOURCE);
 
           return mockFileToResponse(
               200, invocation, "mocks/events/search/get_event_search_200.json", EventSearch.class);
@@ -608,7 +651,8 @@ public class FingerprintApiTest {
                 .setTorNode(TOR_NODE)
                 .setHighRecallId(HIGH_RECALL_ID)
                 .setIncrementalIdentificationStatus(INCREMENTAL_IDENTIFICATION_STATUS)
-                .setSimulator(SIMULATOR));
+                .setSimulator(SIMULATOR)
+                .setSource(SOURCE));
     List<Event> events = response.getEvents();
     assertEquals(events.size(), 1);
   }
