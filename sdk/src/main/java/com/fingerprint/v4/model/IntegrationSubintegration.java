@@ -1,6 +1,6 @@
 /*
  * Server API
- * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device.
+ * Fingerprint Server API allows you to get, search, and update Events in a server environment. It can be used for data exports, decision-making, and data analysis scenarios. Server API is intended for server-side usage, it's not intended to be used from the client side, whether it's a browser or a mobile device. The API also supports collection of Automation Intelligence for requests to your server in edge, pre-origin, or middleware contexts.
  *
  * The version of the OpenAPI document: 4
  * Contact: support@fingerprint.com
@@ -44,7 +44,7 @@ public class IntegrationSubintegration {
   }
 
   /**
-   * The name of the specific subintegration, e.g. \"preact\".
+   * The name of the specific subintegration.
    * @return name
    */
   @jakarta.annotation.Nullable
@@ -66,7 +66,7 @@ public class IntegrationSubintegration {
   }
 
   /**
-   * The version of the specific subintegration, e.g. \"10.21.0\".
+   * The version of the specific subintegration.
    * @return version
    */
   @jakarta.annotation.Nullable
