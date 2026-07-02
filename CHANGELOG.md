@@ -1,5 +1,16 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.4.0
+
+### Minor Changes
+
+- **events**: Add `device`, `os`, and `os_version` to `Event` ([ef17f19](https://github.com/fingerprintjs/java-sdk/commit/ef17f19e7badc984004d82857935c0daf42b28a3))
+- **events-search**: Add `source` query parameter to filter events by `edge` (Automation Intelligence) source ([ef17f19](https://github.com/fingerprintjs/java-sdk/commit/ef17f19e7badc984004d82857935c0daf42b28a3))
+- **events**: Add `battery_level` and `battery_low_power_mode` to `RawDeviceAttributes` ([ef17f19](https://github.com/fingerprintjs/java-sdk/commit/ef17f19e7badc984004d82857935c0daf42b28a3))
+- **events**: Add `ml_prediction` to `vpn_methods` ([ef17f19](https://github.com/fingerprintjs/java-sdk/commit/ef17f19e7badc984004d82857935c0daf42b28a3))
+- **events**: Add `vpn_ml_score` to `Event` ([ef17f19](https://github.com/fingerprintjs/java-sdk/commit/ef17f19e7badc984004d82857935c0daf42b28a3))
+- **events-search**: Document 404 response for `searchEvents` operation ([ef17f19](https://github.com/fingerprintjs/java-sdk/commit/ef17f19e7badc984004d82857935c0daf42b28a3))
+
 ## 8.3.0
 
 ### Minor Changes
