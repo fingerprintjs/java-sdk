@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Contains results from Fingerprint Identification and all active Smart Signals.
+ * Contains results from Fingerprint Identification and all active Smart Signals. Some Smart Signals are only supported for certain device types, these fields will be omitted for events not generated from the supported devices. Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
  */
 @JsonPropertyOrder({
   Event.JSON_PROPERTY_EVENT_ID,
@@ -47,6 +47,7 @@ import java.util.Objects;
   Event.JSON_PROPERTY_CLIENT_REFERRER,
   Event.JSON_PROPERTY_BROWSER_DETAILS,
   Event.JSON_PROPERTY_PROXIMITY,
+  Event.JSON_PROPERTY_ACTIVE_CALL,
   Event.JSON_PROPERTY_BOT,
   Event.JSON_PROPERTY_BOT_TYPE,
   Event.JSON_PROPERTY_BOT_INFO,
@@ -162,6 +163,9 @@ public class Event {
 
   public static final String JSON_PROPERTY_PROXIMITY = "proximity";
   @jakarta.annotation.Nullable private Proximity proximity;
+
+  public static final String JSON_PROPERTY_ACTIVE_CALL = "active_call";
+  @jakarta.annotation.Nullable private Boolean activeCall;
 
   public static final String JSON_PROPERTY_BOT = "bot";
   @jakarta.annotation.Nullable private BotResult bot;
@@ -785,6 +789,28 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setProximity(@jakarta.annotation.Nullable Proximity proximity) {
     this.proximity = proximity;
+  }
+
+  public Event activeCall(@jakarta.annotation.Nullable Boolean activeCall) {
+    this.activeCall = activeCall;
+    return this;
+  }
+
+  /**
+   * Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android.
+   * @return activeCall
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_ACTIVE_CALL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getActiveCall() {
+    return activeCall;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_ACTIVE_CALL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setActiveCall(@jakarta.annotation.Nullable Boolean activeCall) {
+    this.activeCall = activeCall;
   }
 
   public Event bot(@jakarta.annotation.Nullable BotResult bot) {
@@ -1551,7 +1577,7 @@ public class Event {
   }
 
   /**
-   * Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).
+   * Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown.
    * @return vpnOriginCountry
    */
   @jakarta.annotation.Nullable
@@ -1746,6 +1772,7 @@ public class Event {
         && Objects.equals(this.clientReferrer, event.clientReferrer)
         && Objects.equals(this.browserDetails, event.browserDetails)
         && Objects.equals(this.proximity, event.proximity)
+        && Objects.equals(this.activeCall, event.activeCall)
         && Objects.equals(this.bot, event.bot)
         && Objects.equals(this.botType, event.botType)
         && Objects.equals(this.botInfo, event.botInfo)
@@ -1814,6 +1841,7 @@ public class Event {
         clientReferrer,
         browserDetails,
         proximity,
+        activeCall,
         bot,
         botType,
         botInfo,
@@ -1887,6 +1915,7 @@ public class Event {
     sb.append("    clientReferrer: ").append(toIndentedString(clientReferrer)).append("\n");
     sb.append("    browserDetails: ").append(toIndentedString(browserDetails)).append("\n");
     sb.append("    proximity: ").append(toIndentedString(proximity)).append("\n");
+    sb.append("    activeCall: ").append(toIndentedString(activeCall)).append("\n");
     sb.append("    bot: ").append(toIndentedString(bot)).append("\n");
     sb.append("    botType: ").append(toIndentedString(botType)).append("\n");
     sb.append("    botInfo: ").append(toIndentedString(botInfo)).append("\n");

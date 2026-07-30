@@ -2,7 +2,7 @@
 
 # Event
 
-Contains results from Fingerprint Identification and all active Smart Signals.
+Contains results from Fingerprint Identification and all active Smart Signals. Some Smart Signals are only supported for certain device types, these fields will be omitted for events not generated from the supported devices. Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
 
 ## Properties
 
@@ -30,6 +30,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**clientReferrer** | **String** | Client Referrer field corresponds to the `document.referrer` field gathered during an identification request. The value is an empty string if the user navigated to the page directly (not through a link, but, for example, by using a bookmark).  |  [optional] |
 |**browserDetails** | [**BrowserDetails**](BrowserDetails.md) |  |  [optional] |
 |**proximity** | [**Proximity**](Proximity.md) |  |  [optional] |
+|**activeCall** | **Boolean** | Indicates whether the mobile device had an active call (cellular or VoIP) at the time of the request. Available from SDK 2.16.0+ on iOS and Android.  |  [optional] |
 |**bot** | [**BotResult**](BotResult.md) |  |  [optional] |
 |**botType** | **String** | Additional classification of the bot type if detected.  |  [optional] |
 |**botInfo** | [**BotInfo**](BotInfo.md) |  |  [optional] |
@@ -64,7 +65,7 @@ Contains results from Fingerprint Identification and all active Smart Signals.
 |**vpnConfidence** | [**VpnConfidence**](VpnConfidence.md) |  |  [optional] |
 |**vpnMlScore** | **Double** | Machine learning–based VPN score, represented as a floating-point value between 0 and 1 (inclusive), with up to three decimal places of precision. A higher score means a higher confidence in the positive `vpn` detection result. This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  |  [optional] |
 |**vpnOriginTimezone** | **String** | Local timezone which is used in timezone_mismatch method.  |  [optional] |
-|**vpnOriginCountry** | **String** | Country of the request (only for Android SDK version >= 2.4.0, ISO 3166 format or unknown).  |  [optional] |
+|**vpnOriginCountry** | **String** | Country of the request (Android SDK version >= 2.4.0, iOS SDK version >= 2.9.0, JS agent >= 3.12.9 / 4.0.2), ISO 3166 format or unknown.  |  [optional] |
 |**vpnMethods** | [**VpnMethods**](VpnMethods.md) |  |  [optional] |
 |**highActivityDevice** | **Boolean** | Flag indicating if the request came from a high-activity visitor. |  [optional] |
 |**rareDevice** | **Boolean** | `true` if the device is considered rare based on its combination of hardware and software attributes.  A device is classified as rare if it falls within the top 99.9 percentile (lowest-frequency segment) of observed traffic,  or if its configuration has not been previously seen (`not_seen`). > This Smart Signal is currently in beta and only available to select customers. If you are interested, please [contact our support team](https://fingerprint.com/support/).  |  [optional] |

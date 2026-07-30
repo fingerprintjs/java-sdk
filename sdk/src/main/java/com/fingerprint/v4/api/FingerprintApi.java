@@ -177,8 +177,9 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
    * </table>
    */
   public Event getEvent(String eventId) throws ApiException {
@@ -199,8 +200,9 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
    * </table>
    */
   public Event getEvent(String eventId, GetEventOptionalParams getEventOptionalParams)
@@ -222,8 +224,9 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. The event Id provided is not valid. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The event Id cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
    * </table>
    */
   public ApiResponse<Event> getEventWithHttpInfo(
@@ -293,10 +296,10 @@ public class FingerprintApi {
     private String bundleId;
     private String packageName;
     private String origin;
-    private Long start;
-    private OffsetDateTime startDateTime;
-    private Long end;
-    private OffsetDateTime endDateTime;
+    private OffsetDateTime start;
+    private Long startDateTime;
+    private OffsetDateTime end;
+    private Long endDateTime;
     private Boolean reverse;
     private Boolean suspect;
     private Boolean vpn;
@@ -405,14 +408,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for botInfo - Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.
+     * getter for botInfo - Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected, and no `bot_info` was present.
      */
     public SearchEventsBotInfo getBotInfo() {
       return botInfo;
     }
 
     /**
-     * setter for botInfo - Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected.
+     * setter for botInfo - Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected, and no `bot_info` was present.
      */
     public SearchEventsOptionalParams setBotInfo(SearchEventsBotInfo botInfo) {
       this.botInfo = botInfo;
@@ -605,7 +608,7 @@ public class FingerprintApi {
      *
      * @see {@link #getStartDateTime}
      */
-    public Long getStart() {
+    public OffsetDateTime getStart() {
       return start;
     }
 
@@ -616,7 +619,7 @@ public class FingerprintApi {
      *
      * @see {@link #setStartDateTime}
      */
-    public SearchEventsOptionalParams setStart(Long start) {
+    public SearchEventsOptionalParams setStart(OffsetDateTime start) {
       this.start = start;
       this.startDateTime = null;
       return this;
@@ -627,7 +630,7 @@ public class FingerprintApi {
      *
      * @see {@link #getStart}
      */
-    public OffsetDateTime getStartDateTime() {
+    public Long getStartDateTime() {
       return startDateTime;
     }
 
@@ -638,7 +641,7 @@ public class FingerprintApi {
      *
      * @see {@link #setStart}
      */
-    public SearchEventsOptionalParams setStartDateTime(OffsetDateTime startDateTime) {
+    public SearchEventsOptionalParams setStartDateTime(Long startDateTime) {
       this.startDateTime = startDateTime;
       this.start = null;
       return this;
@@ -649,7 +652,7 @@ public class FingerprintApi {
      *
      * @see {@link #getEndDateTime}
      */
-    public Long getEnd() {
+    public OffsetDateTime getEnd() {
       return end;
     }
 
@@ -660,7 +663,7 @@ public class FingerprintApi {
      *
      * @see {@link #setEndDateTime}
      */
-    public SearchEventsOptionalParams setEnd(Long end) {
+    public SearchEventsOptionalParams setEnd(OffsetDateTime end) {
       this.end = end;
       this.endDateTime = null;
       return this;
@@ -671,7 +674,7 @@ public class FingerprintApi {
      *
      * @see {@link #getEnd}
      */
-    public OffsetDateTime getEndDateTime() {
+    public Long getEndDateTime() {
       return endDateTime;
     }
 
@@ -682,7 +685,7 @@ public class FingerprintApi {
      *
      * @see {@link #setEnd}
      */
-    public SearchEventsOptionalParams setEndDateTime(OffsetDateTime endDateTime) {
+    public SearchEventsOptionalParams setEndDateTime(Long endDateTime) {
       this.endDateTime = endDateTime;
       this.end = null;
       return this;
@@ -749,14 +752,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for tampering - Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
+     * getter for tampering - Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
      */
     public Boolean getTampering() {
       return tampering;
     }
 
     /**
-     * setter for tampering - Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering.result` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
+     * setter for tampering - Filter events by Browser Tampering Detection result. > Note: When using this parameter, only events with the `tampering` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
      */
     public SearchEventsOptionalParams setTampering(Boolean tampering) {
       this.tampering = tampering;
@@ -764,14 +767,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for antiDetectBrowser - Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
+     * getter for antiDetectBrowser - Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering_details.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
      */
     public Boolean getAntiDetectBrowser() {
       return antiDetectBrowser;
     }
 
     /**
-     * setter for antiDetectBrowser - Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
+     * setter for antiDetectBrowser - Filter events by Anti-detect Browser Detection result. > Note: When using this parameter, only events with the `tampering_details.anti_detect_browser` property set to `true` or `false` are returned. Events without a `tampering` Smart Signal result are left out of the response.
      */
     public SearchEventsOptionalParams setAntiDetectBrowser(Boolean antiDetectBrowser) {
       this.antiDetectBrowser = antiDetectBrowser;
@@ -839,14 +842,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for factoryReset - Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.
+     * getter for factoryReset - Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset_timestamp` property populated are included. Events without a `factory_reset_timestamp` Smart Signal result are left out of the response.
      */
     public Boolean getFactoryReset() {
       return factoryReset;
     }
 
     /**
-     * setter for factoryReset - Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset` time. Events without a `factory_reset` Smart Signal result are left out of the response.
+     * setter for factoryReset - Filter events by Factory Reset Detection result. > Note: When using this parameter, only events with a `factory_reset_timestamp` property populated are included. Events without a `factory_reset_timestamp` Smart Signal result are left out of the response.
      */
     public SearchEventsOptionalParams setFactoryReset(Boolean factoryReset) {
       this.factoryReset = factoryReset;
@@ -1141,14 +1144,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
+     * getter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
      */
     public List<SearchEventsSource> getSource() {
       return source;
     }
 
     /**
-     * setter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
+     * setter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
      */
     public SearchEventsOptionalParams setSource(List<SearchEventsSource> source) {
       this.source = source;
@@ -1169,7 +1172,9 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The requested visitor does not exist in this workspace&#39;s data. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
    * </table>
    */
   public EventSearch searchEvents(SearchEventsOptionalParams searchEventsOptionalParams)
@@ -1190,7 +1195,9 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The requested visitor does not exist in this workspace&#39;s data. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
    * </table>
    */
   public ApiResponse<EventSearch> searchEventsWithHttpInfo(
