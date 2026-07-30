@@ -35,7 +35,6 @@ publishing {
 }
 
 dependencies {
-    implementation(libs.swagger.annotations)
     api(libs.jersey.client)
     api(libs.jersey.hk2)
     api(libs.jersey.media.json)
