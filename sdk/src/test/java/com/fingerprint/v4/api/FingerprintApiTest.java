@@ -140,7 +140,8 @@ public class FingerprintApiTest {
             any(), // contentType
             any(), // authNames
             any(), // returnType
-            eq(false) // isBodyNullable
+            eq(false), // isBodyNullable
+            any() // errorTypes
             );
   }
 

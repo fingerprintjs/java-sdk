@@ -3,6 +3,7 @@ package com.fingerprint.v4.api;
 import com.fingerprint.v4.model.BotInfoCategory;
 import com.fingerprint.v4.model.BotInfoConfidence;
 import com.fingerprint.v4.model.BotInfoIdentity;
+import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.model.EventUpdate;
@@ -127,6 +128,11 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
     String[] localVarAuthNames = new String[] {"bearerAuth"};
+    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
+    localVarErrorTypes.put("400", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("403", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("404", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("429", new GenericType<ErrorResponse>() {});
 
     return apiClient.invokeAPI(
         "FingerprintApi.deleteVisitorData",
@@ -141,7 +147,8 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         null,
-        false);
+        false,
+        localVarErrorTypes);
   }
 
   public static class GetEventOptionalParams {
@@ -255,6 +262,13 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
     String[] localVarAuthNames = new String[] {"bearerAuth"};
+    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
+    localVarErrorTypes.put("200", new GenericType<Event>() {});
+    localVarErrorTypes.put("400", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("403", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("404", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("429", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("500", new GenericType<ErrorResponse>() {});
 
     GenericType<Event> localVarReturnType = new GenericType<Event>() {};
 
@@ -271,7 +285,8 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         localVarReturnType,
-        false);
+        false,
+        localVarErrorTypes);
   }
 
   public static class SearchEventsOptionalParams {
@@ -1347,6 +1362,12 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
     String[] localVarAuthNames = new String[] {"bearerAuth"};
+    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
+    localVarErrorTypes.put("200", new GenericType<EventSearch>() {});
+    localVarErrorTypes.put("400", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("403", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("404", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("500", new GenericType<ErrorResponse>() {});
 
     GenericType<EventSearch> localVarReturnType = new GenericType<EventSearch>() {};
 
@@ -1363,7 +1384,8 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         localVarReturnType,
-        false);
+        false,
+        localVarErrorTypes);
   }
 
   /**
@@ -1435,6 +1457,11 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType("application/json");
     String[] localVarAuthNames = new String[] {"bearerAuth"};
+    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
+    localVarErrorTypes.put("400", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("403", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("404", new GenericType<ErrorResponse>() {});
+    localVarErrorTypes.put("409", new GenericType<ErrorResponse>() {});
 
     return apiClient.invokeAPI(
         "FingerprintApi.updateEvent",
@@ -1449,6 +1476,7 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         null,
-        false);
+        false,
+        localVarErrorTypes);
   }
 }
