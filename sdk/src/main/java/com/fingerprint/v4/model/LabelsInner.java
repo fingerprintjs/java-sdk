@@ -29,7 +29,7 @@ import java.util.Objects;
 @JsonTypeName("Labels_inner")
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class LabelsInner {
   public static final String JSON_PROPERTY_LABEL = "label";
   @jakarta.annotation.Nonnull private String label;

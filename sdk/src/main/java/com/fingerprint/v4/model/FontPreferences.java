@@ -31,7 +31,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class FontPreferences {
   public static final String JSON_PROPERTY_DEFAULT = "default";
   @jakarta.annotation.Nullable private Double _default;

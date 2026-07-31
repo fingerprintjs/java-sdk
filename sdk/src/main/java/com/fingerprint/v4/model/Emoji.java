@@ -33,7 +33,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class Emoji {
   public static final String JSON_PROPERTY_FONT = "font";
   @jakarta.annotation.Nullable private String font;

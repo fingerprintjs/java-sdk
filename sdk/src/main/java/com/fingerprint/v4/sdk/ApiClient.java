@@ -73,7 +73,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
  */
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class ApiClient extends JavaTimeFormatter {
   protected static final Pattern JSON_MIME_PATTERN =
       Pattern.compile("(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$");

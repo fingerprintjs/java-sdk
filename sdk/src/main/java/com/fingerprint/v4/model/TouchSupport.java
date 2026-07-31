@@ -27,7 +27,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class TouchSupport {
   public static final String JSON_PROPERTY_TOUCH_EVENT = "touch_event";
   @jakarta.annotation.Nullable private Boolean touchEvent;

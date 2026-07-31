@@ -29,7 +29,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class EventSearch {
   public static final String JSON_PROPERTY_EVENTS = "events";
   @jakarta.annotation.Nonnull private List<Event> events = new ArrayList<>();

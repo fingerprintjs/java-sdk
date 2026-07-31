@@ -7,7 +7,7 @@ jersey = "3.1.7"
 junit = "5.10.2"
 junit-platform-launcher = "1.14.3"
 mockito = "3.12.4"
-openapi = "7.16.0"
+openapi = "7.24.0"
 swagger-annotations = "2.2.22"
 
 [libraries]

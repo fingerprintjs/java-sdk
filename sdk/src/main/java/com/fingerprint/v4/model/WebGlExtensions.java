@@ -32,7 +32,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class WebGlExtensions {
   public static final String JSON_PROPERTY_CONTEXT_ATTRIBUTES = "context_attributes";
   @jakarta.annotation.Nullable private String contextAttributes;

@@ -29,7 +29,7 @@ import java.util.Objects;
 @JsonTypeName("Plugins_inner_mimeTypes_inner")
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class PluginsInnerMimeTypesInner {
   public static final String JSON_PROPERTY_TYPE = "type";
   @jakarta.annotation.Nullable private String type;

@@ -28,7 +28,7 @@ import java.util.Objects;
 @JsonTypeName("Geolocation_subdivisions_inner")
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class GeolocationSubdivisionsInner {
   public static final String JSON_PROPERTY_ISO_CODE = "iso_code";
   @jakarta.annotation.Nonnull private String isoCode;

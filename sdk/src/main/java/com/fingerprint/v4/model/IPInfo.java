@@ -23,7 +23,7 @@ import java.util.Objects;
 @JsonPropertyOrder({IPInfo.JSON_PROPERTY_V4, IPInfo.JSON_PROPERTY_V6})
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class IPInfo {
   public static final String JSON_PROPERTY_V4 = "v4";
   @jakarta.annotation.Nullable private IPInfoV4 v4;

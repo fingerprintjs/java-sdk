@@ -31,7 +31,7 @@ import java.util.Objects;
 @JsonTypeName("Plugins_inner")
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class PluginsInner {
   public static final String JSON_PROPERTY_NAME = "name";
   @jakarta.annotation.Nonnull private String name;

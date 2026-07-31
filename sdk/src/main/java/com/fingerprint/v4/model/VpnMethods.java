@@ -30,7 +30,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class VpnMethods {
   public static final String JSON_PROPERTY_TIMEZONE_MISMATCH = "timezone_mismatch";
   @jakarta.annotation.Nullable private Boolean timezoneMismatch;
