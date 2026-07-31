@@ -53,7 +53,9 @@ import java.util.Objects;
   RawDeviceAttributes.JSON_PROPERTY_FONT_HASH,
   RawDeviceAttributes.JSON_PROPERTY_TIMEZONE_OFFSET,
   RawDeviceAttributes.JSON_PROPERTY_BATTERY_LEVEL,
-  RawDeviceAttributes.JSON_PROPERTY_BATTERY_LOW_POWER_MODE
+  RawDeviceAttributes.JSON_PROPERTY_BATTERY_CHARGING,
+  RawDeviceAttributes.JSON_PROPERTY_BATTERY_LOW_POWER_MODE,
+  RawDeviceAttributes.JSON_PROPERTY_KEYBOARD_LAYOUT_HASH
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -149,8 +151,14 @@ public class RawDeviceAttributes {
   public static final String JSON_PROPERTY_BATTERY_LEVEL = "battery_level";
   @jakarta.annotation.Nullable private Integer batteryLevel;
 
+  public static final String JSON_PROPERTY_BATTERY_CHARGING = "battery_charging";
+  @jakarta.annotation.Nullable private Boolean batteryCharging;
+
   public static final String JSON_PROPERTY_BATTERY_LOW_POWER_MODE = "battery_low_power_mode";
   @jakarta.annotation.Nullable private Boolean batteryLowPowerMode;
+
+  public static final String JSON_PROPERTY_KEYBOARD_LAYOUT_HASH = "keyboard_layout_hash";
+  @jakarta.annotation.Nullable private String keyboardLayoutHash;
 
   public RawDeviceAttributes() {}
 
@@ -235,7 +243,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Rounded amount of RAM in gigabytes.
+   * Rounded amount of RAM in gigabytes. Available for browsers, Android, and iOS devices.
    * minimum: 0
    * @return deviceMemory
    */
@@ -836,7 +844,7 @@ public class RawDeviceAttributes {
   }
 
   /**
-   * Battery charge level as a percentage (0-100). Available only for Android and iOS devices.
+   * Battery charge level as a percentage (0-100). Available for Android, iOS, and web devices. On web, only available in Chromium-based browsers.
    * minimum: 0
    * maximum: 100
    * @return batteryLevel
@@ -852,6 +860,28 @@ public class RawDeviceAttributes {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBatteryLevel(@jakarta.annotation.Nullable Integer batteryLevel) {
     this.batteryLevel = batteryLevel;
+  }
+
+  public RawDeviceAttributes batteryCharging(@jakarta.annotation.Nullable Boolean batteryCharging) {
+    this.batteryCharging = batteryCharging;
+    return this;
+  }
+
+  /**
+   * When `true`, the device is currently charging. Available only for web devices on Chromium-based browsers.
+   * @return batteryCharging
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_BATTERY_CHARGING, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getBatteryCharging() {
+    return batteryCharging;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_BATTERY_CHARGING, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setBatteryCharging(@jakarta.annotation.Nullable Boolean batteryCharging) {
+    this.batteryCharging = batteryCharging;
   }
 
   public RawDeviceAttributes batteryLowPowerMode(
@@ -875,6 +905,29 @@ public class RawDeviceAttributes {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBatteryLowPowerMode(@jakarta.annotation.Nullable Boolean batteryLowPowerMode) {
     this.batteryLowPowerMode = batteryLowPowerMode;
+  }
+
+  public RawDeviceAttributes keyboardLayoutHash(
+      @jakarta.annotation.Nullable String keyboardLayoutHash) {
+    this.keyboardLayoutHash = keyboardLayoutHash;
+    return this;
+  }
+
+  /**
+   * Unique identifier for the user's keyboard layout.
+   * @return keyboardLayoutHash
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_KEYBOARD_LAYOUT_HASH, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getKeyboardLayoutHash() {
+    return keyboardLayoutHash;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_KEYBOARD_LAYOUT_HASH, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setKeyboardLayoutHash(@jakarta.annotation.Nullable String keyboardLayoutHash) {
+    this.keyboardLayoutHash = keyboardLayoutHash;
   }
 
   /**
@@ -919,7 +972,9 @@ public class RawDeviceAttributes {
         && Objects.equals(this.fontHash, rawDeviceAttributes.fontHash)
         && Objects.equals(this.timezoneOffset, rawDeviceAttributes.timezoneOffset)
         && Objects.equals(this.batteryLevel, rawDeviceAttributes.batteryLevel)
-        && Objects.equals(this.batteryLowPowerMode, rawDeviceAttributes.batteryLowPowerMode);
+        && Objects.equals(this.batteryCharging, rawDeviceAttributes.batteryCharging)
+        && Objects.equals(this.batteryLowPowerMode, rawDeviceAttributes.batteryLowPowerMode)
+        && Objects.equals(this.keyboardLayoutHash, rawDeviceAttributes.keyboardLayoutHash);
   }
 
   @Override
@@ -955,7 +1010,9 @@ public class RawDeviceAttributes {
         fontHash,
         timezoneOffset,
         batteryLevel,
-        batteryLowPowerMode);
+        batteryCharging,
+        batteryLowPowerMode,
+        keyboardLayoutHash);
   }
 
   @Override
@@ -994,9 +1051,11 @@ public class RawDeviceAttributes {
     sb.append("    fontHash: ").append(toIndentedString(fontHash)).append("\n");
     sb.append("    timezoneOffset: ").append(toIndentedString(timezoneOffset)).append("\n");
     sb.append("    batteryLevel: ").append(toIndentedString(batteryLevel)).append("\n");
+    sb.append("    batteryCharging: ").append(toIndentedString(batteryCharging)).append("\n");
     sb.append("    batteryLowPowerMode: ")
         .append(toIndentedString(batteryLowPowerMode))
         .append("\n");
+    sb.append("    keyboardLayoutHash: ").append(toIndentedString(keyboardLayoutHash)).append("\n");
     sb.append("}");
     return sb.toString();
   }
