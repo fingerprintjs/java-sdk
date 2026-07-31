@@ -193,7 +193,7 @@ public class FingerprintApiExample {
 
 ```java
 } catch (ApiException e) {
-    ErrorResponse errorResponse = (ErrorResponse) e.getErrorEntity();
+    ErrorResponse errorResponse = e.getErrorEntity();
     if (errorResponse != null) {
         System.err.println(errorResponse.getError().getMessage());
     }

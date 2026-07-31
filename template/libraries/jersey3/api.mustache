@@ -276,11 +276,7 @@ public class {{classname}} {
     final String localVarContentType = apiClient.selectHeaderContentType({{#consumes}}"{{{mediaType}}}"{{^-last}}, {{/-last}}{{/consumes}});
     String[] localVarAuthNames = new String[] { {{#authMethods}}"{{name}}"{{^-last}}, {{/-last}}{{/authMethods}} };
     final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
-    {{#responses}}
-    {{#dataType}}
-    localVarErrorTypes.put("{{code}}", new GenericType<{{{dataType}}}>() {});
-    {{/dataType}}
-    {{/responses}}
+    localVarErrorTypes.put("0", new GenericType<ErrorResponse>() {});
 
     {{#returnType}}
     GenericType<{{{returnType}}}> localVarReturnType = new GenericType<{{{returnType}}}>() {};

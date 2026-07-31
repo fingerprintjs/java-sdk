@@ -12,6 +12,7 @@
 
 package com.fingerprint.v4.sdk;
 
+import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.sdk.auth.ApiKeyAuth;
 import com.fingerprint.v4.sdk.auth.Authentication;
 import com.fingerprint.v4.sdk.auth.HttpBasicAuth;
@@ -1146,7 +1147,8 @@ public class ApiClient extends JavaTimeFormatter {
    * @param response The HTTP response
    * @return The deserialized error entity, or null if not found or deserialization fails
    */
-  private Object deserializeErrorEntity(Map<String, GenericType<?>> errorTypes, Response response) {
+  private ErrorResponse deserializeErrorEntity(
+      Map<String, GenericType<?>> errorTypes, Response response) {
     if (errorTypes == null) {
       return null;
     }
@@ -1155,7 +1157,7 @@ public class ApiClient extends JavaTimeFormatter {
       errorType = errorTypes.get("0"); // "0" is the "default" response
     }
     try {
-      return deserialize(response, errorType);
+      return (ErrorResponse) deserialize(response, errorType);
     } catch (Exception e) {
       return null;
     }

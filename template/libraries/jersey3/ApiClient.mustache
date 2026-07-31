@@ -70,6 +70,8 @@ import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import {{modelPackage}}.ErrorResponse;
+
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.HttpBasicAuth;
 import {{invokerPackage}}.auth.HttpBearerAuth;
@@ -1368,7 +1370,7 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
    * @param response The HTTP response
    * @return The deserialized error entity, or null if not found or deserialization fails
    */
-  private Object deserializeErrorEntity(Map<String, GenericType<?>> errorTypes, Response response) {
+  private ErrorResponse deserializeErrorEntity(Map<String, GenericType<?>> errorTypes, Response response) {
     if (errorTypes == null) {
       return null;
     }
@@ -1377,7 +1379,7 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
         errorType = errorTypes.get("0"); // "0" is the "default" response
     }
     try {
-      return deserialize(response, errorType);
+      return (ErrorResponse) deserialize(response, errorType);
     } catch (Exception e) {
       return null;
     }
