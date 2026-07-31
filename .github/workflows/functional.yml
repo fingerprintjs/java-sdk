@@ -23,7 +23,7 @@ jobs:
         java: [ '11', '17', '21', '25' ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       # Gradle will detect the JVM installation from the ubuntu-latest image and use it
