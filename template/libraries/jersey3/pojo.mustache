@@ -84,6 +84,7 @@ public class {{classname}} {{#parent}}extends {{{.}}} {{/parent}}{{#vendorExtens
   @Deprecated
   {{/deprecated}}
   {{>nullable_var_annotations}}{{! prevent indent}}
+  {{! 7.24.0 stopped computing a defaultValue for optional container properties defined via $ref to a named schema, silently turning them into null instead of an empty collection; this fallback restores the old eager-init behavior. }}
   private {{{datatypeWithEnum}}} {{name}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{^defaultValue}}{{#isArray}} = new {{#uniqueItems}}LinkedHashSet{{/uniqueItems}}{{^uniqueItems}}ArrayList{{/uniqueItems}}<>(){{/isArray}}{{#isMap}} = new HashMap<>(){{/isMap}}{{/defaultValue}};
   {{/vendorExtensions.x-is-jackson-optional-nullable}}
 
