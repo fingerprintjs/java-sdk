@@ -32,7 +32,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class IPInfoV4 {
   public static final String JSON_PROPERTY_ADDRESS = "address";
   @jakarta.annotation.Nonnull private String address;

@@ -30,7 +30,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class WebGlBasics {
   public static final String JSON_PROPERTY_VERSION = "version";
   @jakarta.annotation.Nullable private String version;

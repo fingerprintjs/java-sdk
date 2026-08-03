@@ -12,6 +12,7 @@
 
 package com.fingerprint.v4.sdk;
 
+import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.sdk.auth.ApiKeyAuth;
 import com.fingerprint.v4.sdk.auth.Authentication;
 import com.fingerprint.v4.sdk.auth.HttpBasicAuth;
@@ -73,7 +74,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
  */
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class ApiClient extends JavaTimeFormatter {
   protected static final Pattern JSON_MIME_PATTERN =
       Pattern.compile("(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$");
@@ -1109,6 +1110,9 @@ public class ApiClient extends JavaTimeFormatter {
         String respBody = null;
         if (response.hasEntity()) {
           try {
+            // call bufferEntity, so that a subsequent call to `readEntity` in `deserialize` doesn't
+            // fail
+            response.bufferEntity();
             respBody = String.valueOf(response.readEntity(String.class));
             message = respBody;
           } catch (RuntimeException e) {
@@ -1116,7 +1120,11 @@ public class ApiClient extends JavaTimeFormatter {
           }
         }
         throw new ApiException(
-            response.getStatus(), message, buildResponseHeaders(response), respBody);
+            response.getStatus(),
+            message,
+            buildResponseHeaders(response),
+            respBody,
+            deserializeErrorEntity(response));
       }
     } finally {
       try {
@@ -1125,6 +1133,23 @@ public class ApiClient extends JavaTimeFormatter {
         // it's not critical, since the response object is local in method invokeAPI; that's fine,
         // just continue
       }
+    }
+  }
+
+  private static final GenericType<ErrorResponse> ERROR_GENERIC_TYPE =
+      new GenericType<>(ErrorResponse.class);
+
+  /**
+   * Deserialize the response body into an error entity.
+   *
+   * @param response The HTTP response
+   * @return The deserialized error entity, or null if deserialization fails
+   */
+  private ErrorResponse deserializeErrorEntity(Response response) {
+    try {
+      return deserialize(response, ERROR_GENERIC_TYPE);
+    } catch (Exception e) {
+      return null;
     }
   }
 

@@ -26,7 +26,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class TamperingDetails {
   public static final String JSON_PROPERTY_ANOMALY_SCORE = "anomaly_score";
   @jakarta.annotation.Nullable private Double anomalyScore;

@@ -31,7 +31,7 @@ import java.util.Objects;
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class Velocity {
   public static final String JSON_PROPERTY_DISTINCT_IP = "distinct_ip";
   @jakarta.annotation.Nullable private VelocityData distinctIp;

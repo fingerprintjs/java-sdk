@@ -20,7 +20,7 @@ import java.util.Map;
 
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class ApiKeyAuth implements Authentication {
   private final String location;
   private final String paramName;

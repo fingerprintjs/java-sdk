@@ -23,7 +23,7 @@ import java.util.Objects;
 @JsonPropertyOrder({ErrorResponse.JSON_PROPERTY_ERROR})
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class ErrorResponse {
   public static final String JSON_PROPERTY_ERROR = "error";
   @jakarta.annotation.Nonnull private Error error;

@@ -70,6 +70,8 @@ import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import {{modelPackage}}.ErrorResponse;
+
 import {{invokerPackage}}.auth.Authentication;
 import {{invokerPackage}}.auth.HttpBasicAuth;
 import {{invokerPackage}}.auth.HttpBearerAuth;
@@ -1301,11 +1303,9 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
     try {
       response = sendRequest(method, invocationBuilder, entity);
 
-      final int statusCode = response.getStatusInfo().getStatusCode();
-
       {{#hasOAuthMethods}}
       // If OAuth is used and a status 401 is received, renew the access token and retry the request
-      if (authNames != null && statusCode == Status.UNAUTHORIZED.getStatusCode()) {
+      if (authNames != null && response.getStatusInfo().getStatusCode() == Status.UNAUTHORIZED.getStatusCode()) {
         for (String authName : authNames) {
           Authentication authentication = authentications.get(authName);
           if (authentication instanceof OAuth) {
@@ -1321,6 +1321,8 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
       }
 
       {{/hasOAuthMethods}}
+      final int statusCode = response.getStatusInfo().getStatusCode();
+
       Map<String, List<String>> responseHeaders = buildResponseHeaders(response);
 
       if (statusCode == Status.NO_CONTENT.getStatusCode()) {
@@ -1336,6 +1338,8 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
         String respBody = null;
         if (response.hasEntity()) {
           try {
+            // call bufferEntity, so that a subsequent call to `readEntity` in `deserialize` doesn't fail
+            response.bufferEntity();
             respBody = String.valueOf(response.readEntity(String.class));
             message = respBody;
           } catch (RuntimeException e) {
@@ -1343,7 +1347,7 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
           }
         }
         throw new ApiException(
-            response.getStatus(), message, buildResponseHeaders(response), respBody);
+            response.getStatus(), message, buildResponseHeaders(response), respBody, deserializeErrorEntity(response));
       }
     } finally {
       try {
@@ -1352,6 +1356,23 @@ public class ApiClient{{#jsr310}} extends JavaTimeFormatter{{/jsr310}} {
         // it's not critical, since the response object is local in method invokeAPI; that's fine,
         // just continue
       }
+    }
+  }
+
+  private static final GenericType<ErrorResponse> ERROR_GENERIC_TYPE =
+      new GenericType<>(ErrorResponse.class);
+
+  /**
+   * Deserialize the response body into an error entity.
+   *
+   * @param response The HTTP response
+   * @return The deserialized error entity, or null if deserialization fails
+   */
+  private ErrorResponse deserializeErrorEntity(Response response) {
+    try {
+      return deserialize(response, ERROR_GENERIC_TYPE);
+    } catch (Exception e) {
+      return null;
     }
   }
 

@@ -29,7 +29,7 @@ import java.util.function.Function;
 
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class RFC3339InstantDeserializer<T extends Temporal> extends InstantDeserializer<T> {
   private static final long serialVersionUID = 1L;
   private static final boolean DEFAULT_NORMALIZE_ZONE_ID =

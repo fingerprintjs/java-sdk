@@ -192,6 +192,19 @@ public class FingerprintApiExample {
 }
 ```
 
+## Handling errors
+
+`ApiException` exposes the raw response body via `getResponseBody()`. When it matches a known model, it's also available pre-deserialized via `getErrorEntity()`:
+
+```java
+} catch (ApiException e) {
+    ErrorResponse errorResponse = e.getErrorEntity();
+    if (errorResponse != null) {
+        System.err.println(errorResponse.getError().getMessage());
+    }
+}
+```
+
 ## Sealed results
 
 This SDK provides utility methods for decoding [sealed results](https://docs.fingerprint.com/docs/sealed-client-results).

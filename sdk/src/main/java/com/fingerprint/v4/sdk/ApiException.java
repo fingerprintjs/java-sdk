@@ -12,6 +12,7 @@
 
 package com.fingerprint.v4.sdk;
 
+import com.fingerprint.v4.model.ErrorResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -20,13 +21,14 @@ import java.util.Map;
  */
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
-    comments = "Generator version: 7.16.0")
+    comments = "Generator version: 7.24.0")
 public class ApiException extends Exception {
   private static final long serialVersionUID = 5994704121876855946L;
 
   private int code = 0;
   private transient Map<String, List<String>> responseHeaders = null;
   private String responseBody = null;
+  private transient ErrorResponse errorEntity = null;
 
   public ApiException() {}
 
@@ -76,6 +78,16 @@ public class ApiException extends Exception {
     this.responseBody = responseBody;
   }
 
+  public ApiException(
+      int code,
+      String message,
+      Map<String, List<String>> responseHeaders,
+      String responseBody,
+      ErrorResponse errorEntity) {
+    this(code, message, responseHeaders, responseBody);
+    this.errorEntity = errorEntity;
+  }
+
   /**
    * Get the HTTP status code.
    *
@@ -101,5 +113,14 @@ public class ApiException extends Exception {
    */
   public String getResponseBody() {
     return responseBody;
+  }
+
+  /**
+   * Get the deserialized error entity (or null if this error doesn't have a model associated).
+   *
+   * @return Deserialized error entity
+   */
+  public ErrorResponse getErrorEntity() {
+    return errorEntity;
   }
 }
