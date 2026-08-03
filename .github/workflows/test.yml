@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Check source code formatting
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: ./gradlew :sdk:checkFormat :examples:checkFormat --continue
 
   test:
@@ -21,7 +21,7 @@ jobs:
         java: ['11', '17', '21', '25']
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         # Gradle will detect the JVM installation from the ubuntu-latest image and use it
         # includes execution of unit tests
       - run: ./gradlew build -PjavaVersion=${{ matrix.java }} --stacktrace
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Jitpack build smoke test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: ./gradlew clean build -PjavaVersion=11 --stacktrace
         env:
           JITPACK: true

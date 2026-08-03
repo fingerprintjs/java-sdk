@@ -1,17 +1,17 @@
 [versions]
-google-java-format = "1.34.1"
+google-java-format = "1.36.1"
 google-osdetector = "1.7.3"
-jackson = "2.17.2"
-jakarta-annotation-api = "2.0.0"
-jersey = "3.1.7"
-junit = "5.10.2"
-junit-platform-launcher = "1.14.3"
-mockito = "3.12.4"
+jackson = "2.22.1"
+jackson-annotations = "2.22"
+jakarta-annotation-api = "2.1.1"
+jersey = "3.1.12"
+junit = "5.14.4"
+junit-platform-launcher = "1.14.4"
+mockito = "5.23.0"
 openapi = "7.24.0"
-swagger-annotations = "2.2.22"
 
 [libraries]
-jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson" }
+jackson-annotations = { module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jackson-annotations" }
 jackson-core = { module = "com.fasterxml.jackson.core:jackson-core", version.ref = "jackson" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 jackson-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version.ref = "jackson" }
@@ -25,7 +25,6 @@ junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.re
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform-launcher" }
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-swagger-annotations = { module = "io.swagger.core.v3:swagger-annotations", version.ref = "swagger-annotations" }
 
 [plugins]
 openapi-generator = { id = "org.openapi.generator", version.ref = "openapi" }

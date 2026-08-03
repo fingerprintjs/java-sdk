@@ -11,7 +11,7 @@ A curated subset of raw browser/device attributes that the API surface exposes. 
 |**fontPreferences** | [**FontPreferences**](FontPreferences.md) |  |  [optional] |
 |**emoji** | [**Emoji**](Emoji.md) |  |  [optional] |
 |**fonts** | **List&lt;String&gt;** | List of fonts detected on the device. |  [optional] |
-|**deviceMemory** | **Integer** | Rounded amount of RAM in gigabytes. |  [optional] |
+|**deviceMemory** | **Integer** | Rounded amount of RAM in gigabytes. Available for browsers, Android, and iOS devices. |  [optional] |
 |**timezone** | **String** | Timezone identifier detected on the client. |  [optional] |
 |**canvas** | [**Canvas**](Canvas.md) |  |  [optional] |
 |**languages** | **List&lt;List&lt;String&gt;&gt;** | Navigator languages reported by the agent including fallbacks. Each inner array represents ordered language preferences reported by different APIs. Available for browsers, iOS, and Android devices.  |  [optional] |
@@ -37,8 +37,10 @@ A curated subset of raw browser/device attributes that the API surface exposes. 
 |**deviceManufacturer** | **String** | Device manufacturer string. Available only for Android and iOS devices. |  [optional] |
 |**fontHash** | **String** | Unique identifier for the user’s installed fonts. |  [optional] |
 |**timezoneOffset** | **String** | UTC offset in \"±HH:MM\" format derived from the detected IANA timezone. |  [optional] |
-|**batteryLevel** | **Integer** | Battery charge level as a percentage (0-100). Available only for Android and iOS devices. |  [optional] |
+|**batteryLevel** | **Integer** | Battery charge level as a percentage (0-100). Available for Android, iOS, and web devices. On web, only available in Chromium-based browsers. |  [optional] |
+|**batteryCharging** | **Boolean** | When `true`, the device is currently charging. Available only for web devices on Chromium-based browsers. |  [optional] |
 |**batteryLowPowerMode** | **Boolean** | Whether the device's low power mode is enabled. Available only for Android and iOS devices. |  [optional] |
+|**keyboardLayoutHash** | **String** | Unique identifier for the user's keyboard layout. |  [optional] |
 
 
 
