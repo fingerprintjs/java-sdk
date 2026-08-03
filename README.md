@@ -37,6 +37,11 @@ The following versions of Java are supported
 - Java 21
 - Java 25
 
+We aim to support all Java LTS versions that are still maintained upstream.
+
+> [!NOTE]
+> This package assumes you have a Fingerprint subscription or trial, it is not compatible with the [open-source FingerprintJS](https://github.com/fingerprintjs/fingerprintjs). See our documentation to learn more about the [differences between Fingerprint and the open-source FingerprintJS](https://fingerprint.com/github/).
+
 ## Installation
 
 ### Maven users
@@ -223,7 +228,21 @@ public class SealedResults {
 ```
 To learn more, see the [Sealed results example](/examples/src/main/java/com/fingerprint/example/SealedResults.java).
 
-## Webhook signature validation
+## Webhooks
+
+### Webhook types
+
+A [webhook](https://dev.fingerprint.com/reference/posteventwebhook) sent by Fingerprint has the same shape as an `Event`. You can deserialize the payload directly into that type using the SDK's own JSON mapper:
+
+```java
+import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.sdk.JSON;
+
+Event event = JSON.getDefault().getMapper().readValue(webhook, Event.class);
+System.out.println(event.getIdentification().getVisitorId());
+```
+
+### Webhook signature validation
 This SDK provides utility method for verifying the HMAC signature of the incoming webhook request.
 
 Here is an example implementation using Spring Boot:
