@@ -1000,7 +1000,6 @@ public class ApiClient extends JavaTimeFormatter {
    * @param authNames The authentications to apply
    * @param returnType The return type into which to deserialize the response
    * @param isBodyNullable True if the body is nullable
-   * @param errorTypes Mapping of error codes to types into which to deserialize the response
    * @return The response body in type of string
    * @throws ApiException API exception
    */
@@ -1017,8 +1016,7 @@ public class ApiClient extends JavaTimeFormatter {
       String contentType,
       String[] authNames,
       GenericType<T> returnType,
-      boolean isBodyNullable,
-      Map<String, GenericType<?>> errorTypes)
+      boolean isBodyNullable)
       throws ApiException {
 
     String targetURL;
@@ -1126,7 +1124,7 @@ public class ApiClient extends JavaTimeFormatter {
             message,
             buildResponseHeaders(response),
             respBody,
-            deserializeErrorEntity(errorTypes, response));
+            deserializeErrorEntity(response));
       }
     } finally {
       try {
@@ -1138,26 +1136,18 @@ public class ApiClient extends JavaTimeFormatter {
     }
   }
 
+  private static final GenericType<ErrorResponse> ERROR_GENERIC_TYPE =
+      new GenericType<>(ErrorResponse.class);
+
   /**
-   * Deserialize the response body into an error entity based on HTTP status code.
-   * Looks up the error type from the errorTypes map using the response status code,
-   * or falls back to the "default" error type if no match is found.
+   * Deserialize the response body into an error entity.
    *
-   * @param errorTypes Map of status code strings to GenericType for deserialization
    * @param response The HTTP response
-   * @return The deserialized error entity, or null if not found or deserialization fails
+   * @return The deserialized error entity, or null if deserialization fails
    */
-  private ErrorResponse deserializeErrorEntity(
-      Map<String, GenericType<?>> errorTypes, Response response) {
-    if (errorTypes == null) {
-      return null;
-    }
-    GenericType<?> errorType = errorTypes.get(String.valueOf(response.getStatus()));
-    if (errorType == null) {
-      errorType = errorTypes.get("0"); // "0" is the "default" response
-    }
+  private ErrorResponse deserializeErrorEntity(Response response) {
     try {
-      return (ErrorResponse) deserialize(response, errorType);
+      return deserialize(response, ERROR_GENERIC_TYPE);
     } catch (Exception e) {
       return null;
     }
@@ -1215,8 +1205,7 @@ public class ApiClient extends JavaTimeFormatter {
         contentType,
         authNames,
         returnType,
-        isBodyNullable,
-        null);
+        isBodyNullable);
   }
 
   /**

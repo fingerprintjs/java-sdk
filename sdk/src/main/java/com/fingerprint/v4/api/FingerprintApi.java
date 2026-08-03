@@ -3,7 +3,6 @@ package com.fingerprint.v4.api;
 import com.fingerprint.v4.model.BotInfoCategory;
 import com.fingerprint.v4.model.BotInfoConfidence;
 import com.fingerprint.v4.model.BotInfoIdentity;
-import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.model.EventUpdate;
@@ -128,8 +127,6 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
     String[] localVarAuthNames = new String[] {"bearerAuth"};
-    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
-    localVarErrorTypes.put("0", new GenericType<ErrorResponse>() {});
 
     return apiClient.invokeAPI(
         "FingerprintApi.deleteVisitorData",
@@ -144,8 +141,7 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         null,
-        false,
-        localVarErrorTypes);
+        false);
   }
 
   public static class GetEventOptionalParams {
@@ -259,8 +255,6 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
     String[] localVarAuthNames = new String[] {"bearerAuth"};
-    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
-    localVarErrorTypes.put("0", new GenericType<ErrorResponse>() {});
 
     GenericType<Event> localVarReturnType = new GenericType<Event>() {};
 
@@ -277,8 +271,7 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         localVarReturnType,
-        false,
-        localVarErrorTypes);
+        false);
   }
 
   public static class SearchEventsOptionalParams {
@@ -1354,8 +1347,6 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType();
     String[] localVarAuthNames = new String[] {"bearerAuth"};
-    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
-    localVarErrorTypes.put("0", new GenericType<ErrorResponse>() {});
 
     GenericType<EventSearch> localVarReturnType = new GenericType<EventSearch>() {};
 
@@ -1372,8 +1363,7 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         localVarReturnType,
-        false,
-        localVarErrorTypes);
+        false);
   }
 
   /**
@@ -1445,8 +1435,6 @@ public class FingerprintApi {
     final String localVarAccept = apiClient.selectHeaderAccept("application/json");
     final String localVarContentType = apiClient.selectHeaderContentType("application/json");
     String[] localVarAuthNames = new String[] {"bearerAuth"};
-    final Map<String, GenericType<?>> localVarErrorTypes = new HashMap<String, GenericType<?>>();
-    localVarErrorTypes.put("0", new GenericType<ErrorResponse>() {});
 
     return apiClient.invokeAPI(
         "FingerprintApi.updateEvent",
@@ -1461,7 +1449,6 @@ public class FingerprintApi {
         localVarContentType,
         localVarAuthNames,
         null,
-        false,
-        localVarErrorTypes);
+        false);
   }
 }
