@@ -1,5 +1,18 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.5.0
+
+### Minor Changes
+
+- **events**: Add `active_call` smart signal to `Event` ([7db9079](https://github.com/fingerprintjs/java-sdk/commit/7db9079cff3fb825ecd06f70fecbfd2c491f4421))
+- **sdk**: Add `ApiException.getErrorEntity()`, which automatically deserializes error response bodies into their typed model (e.g. `ErrorResponse`) when available. ([1eea89d](https://github.com/fingerprintjs/java-sdk/commit/1eea89dc8f2ce20a0e9249de0d138bf715c5807b))
+- **events**: Add `keyboard_layout_hash` to `RawDeviceAttributes` ([7db9079](https://github.com/fingerprintjs/java-sdk/commit/7db9079cff3fb825ecd06f70fecbfd2c491f4421))
+- **events**: Add `battery_charging` field to `RawDeviceAttributes` ([7db9079](https://github.com/fingerprintjs/java-sdk/commit/7db9079cff3fb825ecd06f70fecbfd2c491f4421))
+
+### Patch Changes
+
+- **dependencies**: Bump Jersey, Jackson, and jakarta-annotation-api to their latest compatible versions ([40f7ee3](https://github.com/fingerprintjs/java-sdk/commit/40f7ee38c3780f58dbcc849e1a043dcf10c877cb))
+
 ## 8.4.0
 
 ### Minor Changes
