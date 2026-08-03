@@ -400,7 +400,7 @@ public class FingerprintApiTest {
   @Test
   public void webhookTest() throws Exception {
     ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule());
-    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
 
     Event event =
         mapper.readValue(getFileAsIOStream("mocks/webhook/webhook_event.json"), Event.class);
