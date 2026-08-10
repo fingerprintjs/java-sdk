@@ -27,6 +27,7 @@ import java.util.Objects;
 @JsonPropertyOrder({
   Event.JSON_PROPERTY_EVENT_ID,
   Event.JSON_PROPERTY_TIMESTAMP,
+  Event.JSON_PROPERTY_SOURCE,
   Event.JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS,
   Event.JSON_PROPERTY_LINKED_ID,
   Event.JSON_PROPERTY_ENVIRONMENT_ID,
@@ -99,6 +100,9 @@ public class Event {
 
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
   @jakarta.annotation.Nonnull private Long timestamp;
+
+  public static final String JSON_PROPERTY_SOURCE = "source";
+  @jakarta.annotation.Nullable private EventSource source;
 
   public static final String JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS =
       "incremental_identification_status";
@@ -335,6 +339,28 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTimestamp(@jakarta.annotation.Nonnull Long timestamp) {
     this.timestamp = timestamp;
+  }
+
+  public Event source(@jakarta.annotation.Nullable EventSource source) {
+    this.source = source;
+    return this;
+  }
+
+  /**
+   * Get source
+   * @return source
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_SOURCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public EventSource getSource() {
+    return source;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_SOURCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSource(@jakarta.annotation.Nullable EventSource source) {
+    this.source = source;
   }
 
   public Event incrementalIdentificationStatus(
@@ -1751,6 +1777,7 @@ public class Event {
     Event event = (Event) o;
     return Objects.equals(this.eventId, event.eventId)
         && Objects.equals(this.timestamp, event.timestamp)
+        && Objects.equals(this.source, event.source)
         && Objects.equals(
             this.incrementalIdentificationStatus, event.incrementalIdentificationStatus)
         && Objects.equals(this.linkedId, event.linkedId)
@@ -1821,6 +1848,7 @@ public class Event {
     return Objects.hash(
         eventId,
         timestamp,
+        source,
         incrementalIdentificationStatus,
         linkedId,
         environmentId,
@@ -1891,6 +1919,7 @@ public class Event {
     sb.append("class Event {\n");
     sb.append("    eventId: ").append(toIndentedString(eventId)).append("\n");
     sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    incrementalIdentificationStatus: ")
         .append(toIndentedString(incrementalIdentificationStatus))
         .append("\n");
