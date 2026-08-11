@@ -125,7 +125,11 @@ public class FunctionalTests {
       try {
         api.getEvent(oldRequestId);
       } catch (ApiException e) {
-        System.err.println("Exception when trying to request old event \"" + oldRequestId + "\":" + e.getMessage());
+        System.err.println(
+            "Exception when trying to request old event \""
+                + oldRequestId
+                + "\":"
+                + e.getMessage());
         System.exit(1);
       }
       System.out.println("Old events are good");
