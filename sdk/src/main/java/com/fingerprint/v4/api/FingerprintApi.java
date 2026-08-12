@@ -30,7 +30,7 @@ import java.util.Map;
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
     comments = "Generator version: 7.24.0")
 public class FingerprintApi {
-  public static final String INTEGRATION_INFO = "fingerprint-pro-server-java-sdk/8.5.0";
+  public static final String INTEGRATION_INFO = "fingerprint-pro-server-java-sdk/8.6.0";
   private ApiClient apiClient;
 
   public FingerprintApi() {
