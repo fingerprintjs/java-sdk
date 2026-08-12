@@ -1,5 +1,11 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.6.0
+
+### Minor Changes
+
+- Add `source` field to `Event` to identify how the event was generated (`device` or `edge`) ([519a3bb](https://github.com/fingerprintjs/java-sdk/commit/519a3bb836d80b24a7bf1b8d455d31c3a49c9a54))
+
 ## 8.5.0
 
 ### Minor Changes
