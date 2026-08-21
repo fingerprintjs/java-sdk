@@ -1,5 +1,12 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.7.0
+
+### Minor Changes
+
+- **events-search**: Add `active_call` filter parameter ([6db3a98](https://github.com/fingerprintjs/java-sdk/commit/6db3a9849f3a491a6bf6863c33255cc9c77ba0f8))
+- Add `keyboard_layout_name` to `RawDeviceAttributes` ([6db3a98](https://github.com/fingerprintjs/java-sdk/commit/6db3a9849f3a491a6bf6863c33255cc9c77ba0f8))
+
 ## 8.6.0
 
 ### Minor Changes
