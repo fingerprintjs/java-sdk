@@ -41,6 +41,7 @@ A curated subset of raw browser/device attributes that the API surface exposes. 
 |**batteryCharging** | **Boolean** | When `true`, the device is currently charging. Available only for web devices on Chromium-based browsers. |  [optional] |
 |**batteryLowPowerMode** | **Boolean** | Whether the device's low power mode is enabled. Available only for Android and iOS devices. |  [optional] |
 |**keyboardLayoutHash** | **String** | Unique identifier for the user's keyboard layout. |  [optional] |
+|**keyboardLayoutName** | **String** | Name of the user's configured keyboard layout as a BCP 47-style identifier. Only available in Chromium-based browsers, omitted otherwise. |  [optional] |
 
 
 
