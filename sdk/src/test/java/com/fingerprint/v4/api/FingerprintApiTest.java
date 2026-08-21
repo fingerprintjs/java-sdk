@@ -505,6 +505,7 @@ public class FingerprintApiTest {
         SearchEventsIncrementalIdentificationStatus.PARTIALLY_COMPLETED;
     final Boolean SIMULATOR = true;
     final List<SearchEventsSource> SOURCE = Arrays.asList(SearchEventsSource.EDGE);
+    final Boolean ACTIVE_CALL = true;
 
     Map<String, String> expectedQueryParams = new HashMap<>();
     expectedQueryParams.put("limit", String.valueOf(LIMIT));
@@ -550,6 +551,7 @@ public class FingerprintApiTest {
     expectedQueryParams.put(
         "incremental_identification_status", String.valueOf(INCREMENTAL_IDENTIFICATION_STATUS));
     expectedQueryParams.put("simulator", String.valueOf(SIMULATOR));
+    expectedQueryParams.put("active_call", String.valueOf(ACTIVE_CALL));
 
     final int arrayQueryParamsCount =
         ENVIRONMENT.size()
@@ -634,7 +636,8 @@ public class FingerprintApiTest {
                 .setHighRecallId(HIGH_RECALL_ID)
                 .setIncrementalIdentificationStatus(INCREMENTAL_IDENTIFICATION_STATUS)
                 .setSimulator(SIMULATOR)
-                .setSource(SOURCE));
+                .setSource(SOURCE)
+                .setActiveCall(ACTIVE_CALL));
     List<Event> events = response.getEvents();
     assertEquals(events.size(), 1);
   }
