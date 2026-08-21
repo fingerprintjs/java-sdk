@@ -55,7 +55,8 @@ import java.util.Objects;
   RawDeviceAttributes.JSON_PROPERTY_BATTERY_LEVEL,
   RawDeviceAttributes.JSON_PROPERTY_BATTERY_CHARGING,
   RawDeviceAttributes.JSON_PROPERTY_BATTERY_LOW_POWER_MODE,
-  RawDeviceAttributes.JSON_PROPERTY_KEYBOARD_LAYOUT_HASH
+  RawDeviceAttributes.JSON_PROPERTY_KEYBOARD_LAYOUT_HASH,
+  RawDeviceAttributes.JSON_PROPERTY_KEYBOARD_LAYOUT_NAME
 })
 @jakarta.annotation.Generated(
     value = "org.openapitools.codegen.languages.JavaClientCodegen",
@@ -159,6 +160,9 @@ public class RawDeviceAttributes {
 
   public static final String JSON_PROPERTY_KEYBOARD_LAYOUT_HASH = "keyboard_layout_hash";
   @jakarta.annotation.Nullable private String keyboardLayoutHash;
+
+  public static final String JSON_PROPERTY_KEYBOARD_LAYOUT_NAME = "keyboard_layout_name";
+  @jakarta.annotation.Nullable private String keyboardLayoutName;
 
   public RawDeviceAttributes() {}
 
@@ -930,6 +934,29 @@ public class RawDeviceAttributes {
     this.keyboardLayoutHash = keyboardLayoutHash;
   }
 
+  public RawDeviceAttributes keyboardLayoutName(
+      @jakarta.annotation.Nullable String keyboardLayoutName) {
+    this.keyboardLayoutName = keyboardLayoutName;
+    return this;
+  }
+
+  /**
+   * Name of the user's configured keyboard layout as a BCP 47-style identifier. Only available in Chromium-based browsers, omitted otherwise.
+   * @return keyboardLayoutName
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_KEYBOARD_LAYOUT_NAME, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getKeyboardLayoutName() {
+    return keyboardLayoutName;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_KEYBOARD_LAYOUT_NAME, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setKeyboardLayoutName(@jakarta.annotation.Nullable String keyboardLayoutName) {
+    this.keyboardLayoutName = keyboardLayoutName;
+  }
+
   /**
    * Return true if this RawDeviceAttributes object is equal to o.
    */
@@ -974,7 +1001,8 @@ public class RawDeviceAttributes {
         && Objects.equals(this.batteryLevel, rawDeviceAttributes.batteryLevel)
         && Objects.equals(this.batteryCharging, rawDeviceAttributes.batteryCharging)
         && Objects.equals(this.batteryLowPowerMode, rawDeviceAttributes.batteryLowPowerMode)
-        && Objects.equals(this.keyboardLayoutHash, rawDeviceAttributes.keyboardLayoutHash);
+        && Objects.equals(this.keyboardLayoutHash, rawDeviceAttributes.keyboardLayoutHash)
+        && Objects.equals(this.keyboardLayoutName, rawDeviceAttributes.keyboardLayoutName);
   }
 
   @Override
@@ -1012,7 +1040,8 @@ public class RawDeviceAttributes {
         batteryLevel,
         batteryCharging,
         batteryLowPowerMode,
-        keyboardLayoutHash);
+        keyboardLayoutHash,
+        keyboardLayoutName);
   }
 
   @Override
@@ -1056,6 +1085,7 @@ public class RawDeviceAttributes {
         .append(toIndentedString(batteryLowPowerMode))
         .append("\n");
     sb.append("    keyboardLayoutHash: ").append(toIndentedString(keyboardLayoutHash)).append("\n");
+    sb.append("    keyboardLayoutName: ").append(toIndentedString(keyboardLayoutName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

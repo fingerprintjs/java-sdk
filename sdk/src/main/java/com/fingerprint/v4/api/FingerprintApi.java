@@ -330,6 +330,7 @@ public class FingerprintApi {
     private Boolean torNode;
     private SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus;
     private Boolean simulator;
+    private Boolean activeCall;
     private List<SearchEventsSource> source;
 
     /**
@@ -1144,6 +1145,21 @@ public class FingerprintApi {
     }
 
     /**
+     * getter for activeCall - Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.
+     */
+    public Boolean getActiveCall() {
+      return activeCall;
+    }
+
+    /**
+     * setter for activeCall - Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.
+     */
+    public SearchEventsOptionalParams setActiveCall(Boolean activeCall) {
+      this.activeCall = activeCall;
+      return this;
+    }
+
+    /**
      * getter for source - Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.
      */
     public List<SearchEventsSource> getSource() {
@@ -1347,6 +1363,9 @@ public class FingerprintApi {
               searchEventsOptionalParams.getIncrementalIdentificationStatus()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "simulator", searchEventsOptionalParams.getSimulator()));
+      localVarQueryParams.addAll(
+          apiClient.parameterToPairs(
+              "", "active_call", searchEventsOptionalParams.getActiveCall()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("multi", "source", searchEventsOptionalParams.getSource()));
     }

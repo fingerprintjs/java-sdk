@@ -320,6 +320,7 @@ public class FingerprintApiExample {
         Boolean torNode = true; // Boolean | Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response. 
         SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus = SearchEventsIncrementalIdentificationStatus.fromValue("partially_completed"); // SearchEventsIncrementalIdentificationStatus | Filter events by their incremental identification status (`incremental_identification_status` property). Non incremental identification events are left out of the response. 
         Boolean simulator = true; // Boolean | Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response. 
+        Boolean activeCall = true; // Boolean | Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response. 
         List<SearchEventsSource> source = Arrays.asList(); // List<SearchEventsSource> | Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team. 
         try {
             EventSearch result = api.searchEvents(new FingerprintApi.SearchEventsOptionalParams()
@@ -375,6 +376,7 @@ public class FingerprintApiExample {
                 .setTorNode(torNode)
                 .setIncrementalIdentificationStatus(incrementalIdentificationStatus)
                 .setSimulator(simulator)
+                .setActiveCall(activeCall)
                 .setSource(source));
             System.out.println(result);
         } catch (ApiException e) {
@@ -450,6 +452,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **torNode** | **Boolean**| Filter events by Tor Node detection result. > Note: When using this parameter, only events with the `tor_node` property set to `true` or `false` are returned. Events without a `tor_node` detection result are left out of the response.  | [optional] |
 | **incrementalIdentificationStatus** | **SearchEventsIncrementalIdentificationStatus**| Filter events by their incremental identification status (`incremental_identification_status` property). Non incremental identification events are left out of the response.  | [optional] [enum: partially_completed, completed] |
 | **simulator** | **Boolean**| Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.  | [optional] |
+| **activeCall** | **Boolean**| Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.  | [optional] |
 | **source** | **List&lt;SearchEventsSource&gt;**| Selects the source of events to search. When omitted, only traditional identification events generated from devices are returned (the default behavior). When set to `edge`, only Automation Intelligence (Edge) events are returned.  To retrieve all events regardless of source, you must make two requests. One with the `source` parameter set to `edge`, and another with the `source` parameter omitted.  > Note: The Automation Intelligence API is in public preview testing phase.  If you encounter any issues, please [contact](https://fingerprint.com/support/) our support team.  | [optional] |
 
 ### Return type
