@@ -340,6 +340,13 @@ Class | Method | HTTP request | Description
 
 It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
+## Version support
+
+| SDK major version | Server API version | Status | End of support | Notes |
+|---|---|---|---|---|
+| v8.x (current) | [v4](https://docs.fingerprint.com/reference/server-api) | Supported | - | - |
+| v1.x-v7.x | [v3](https://docs.fingerprint.com/reference/v3/server-api) | Deprecated (security fixes only). See the [migration guide](https://docs.fingerprint.com/reference/java-server-sdk#migration-guide-for-java-sdk-v8). | To be decided | Maintained in the [old repository](https://github.com/fingerprintjs/fingerprint-pro-server-api-java-sdk) |
+
 ## Support
 
 To report problems, ask questions or provide feedback, please use [Issues](https://github.com/fingerprintjs/java-sdk/issues).
