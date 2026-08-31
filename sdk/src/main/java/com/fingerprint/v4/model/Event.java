@@ -22,22 +22,30 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Contains results from Fingerprint Identification and all active Smart Signals. Some Smart Signals are only supported for certain device types, these fields will be omitted for events not generated from the supported devices. Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
+ * An identification event (`source: device`) or an Automation Intelligence event (`source: edge`).  Use `source` to tell them apart. Device events include Identification and device-derived Smart Signals. Edge events do not.  Consult the [Smart Signals reference](https://docs.fingerprint.com/docs/smart-signals-reference) for more details.
  */
 @JsonPropertyOrder({
   Event.JSON_PROPERTY_EVENT_ID,
   Event.JSON_PROPERTY_TIMESTAMP,
+  Event.JSON_PROPERTY_LINKED_ID,
+  Event.JSON_PROPERTY_TAGS,
+  Event.JSON_PROPERTY_URL,
+  Event.JSON_PROPERTY_BOT_INFO,
+  Event.JSON_PROPERTY_IP_INFO,
+  Event.JSON_PROPERTY_PROXY,
+  Event.JSON_PROPERTY_PROXY_CONFIDENCE,
+  Event.JSON_PROPERTY_PROXY_DETAILS,
+  Event.JSON_PROPERTY_VPN,
+  Event.JSON_PROPERTY_VPN_CONFIDENCE,
+  Event.JSON_PROPERTY_VPN_METHODS,
   Event.JSON_PROPERTY_SOURCE,
   Event.JSON_PROPERTY_INCREMENTAL_IDENTIFICATION_STATUS,
-  Event.JSON_PROPERTY_LINKED_ID,
   Event.JSON_PROPERTY_ENVIRONMENT_ID,
   Event.JSON_PROPERTY_SUSPECT,
   Event.JSON_PROPERTY_SDK,
   Event.JSON_PROPERTY_REPLAYED,
   Event.JSON_PROPERTY_IDENTIFICATION,
   Event.JSON_PROPERTY_SUPPLEMENTARY_ID_HIGH_RECALL,
-  Event.JSON_PROPERTY_TAGS,
-  Event.JSON_PROPERTY_URL,
   Event.JSON_PROPERTY_BUNDLE_ID,
   Event.JSON_PROPERTY_PACKAGE_NAME,
   Event.JSON_PROPERTY_IP_ADDRESS,
@@ -51,17 +59,12 @@ import java.util.Objects;
   Event.JSON_PROPERTY_ACTIVE_CALL,
   Event.JSON_PROPERTY_BOT,
   Event.JSON_PROPERTY_BOT_TYPE,
-  Event.JSON_PROPERTY_BOT_INFO,
   Event.JSON_PROPERTY_CLONED_APP,
   Event.JSON_PROPERTY_DEVELOPER_TOOLS,
   Event.JSON_PROPERTY_EMULATOR,
   Event.JSON_PROPERTY_FACTORY_RESET_TIMESTAMP,
   Event.JSON_PROPERTY_FRIDA,
   Event.JSON_PROPERTY_IP_BLOCKLIST,
-  Event.JSON_PROPERTY_IP_INFO,
-  Event.JSON_PROPERTY_PROXY,
-  Event.JSON_PROPERTY_PROXY_CONFIDENCE,
-  Event.JSON_PROPERTY_PROXY_DETAILS,
   Event.JSON_PROPERTY_PROXY_ML_SCORE,
   Event.JSON_PROPERTY_INCOGNITO,
   Event.JSON_PROPERTY_JAILBROKEN,
@@ -79,12 +82,9 @@ import java.util.Objects;
   Event.JSON_PROPERTY_VELOCITY,
   Event.JSON_PROPERTY_VIRTUAL_MACHINE,
   Event.JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE,
-  Event.JSON_PROPERTY_VPN,
-  Event.JSON_PROPERTY_VPN_CONFIDENCE,
   Event.JSON_PROPERTY_VPN_ML_SCORE,
   Event.JSON_PROPERTY_VPN_ORIGIN_TIMEZONE,
   Event.JSON_PROPERTY_VPN_ORIGIN_COUNTRY,
-  Event.JSON_PROPERTY_VPN_METHODS,
   Event.JSON_PROPERTY_HIGH_ACTIVITY_DEVICE,
   Event.JSON_PROPERTY_RARE_DEVICE,
   Event.JSON_PROPERTY_RARE_DEVICE_PERCENTILE_BUCKET,
@@ -101,6 +101,39 @@ public class Event {
   public static final String JSON_PROPERTY_TIMESTAMP = "timestamp";
   @jakarta.annotation.Nonnull private Long timestamp;
 
+  public static final String JSON_PROPERTY_LINKED_ID = "linked_id";
+  @jakarta.annotation.Nullable private String linkedId;
+
+  public static final String JSON_PROPERTY_TAGS = "tags";
+  @jakarta.annotation.Nullable private Map<String, Object> tags = new HashMap<>();
+
+  public static final String JSON_PROPERTY_URL = "url";
+  @jakarta.annotation.Nullable private String url;
+
+  public static final String JSON_PROPERTY_BOT_INFO = "bot_info";
+  @jakarta.annotation.Nullable private BotInfo botInfo;
+
+  public static final String JSON_PROPERTY_IP_INFO = "ip_info";
+  @jakarta.annotation.Nullable private IPInfo ipInfo;
+
+  public static final String JSON_PROPERTY_PROXY = "proxy";
+  @jakarta.annotation.Nullable private Boolean proxy;
+
+  public static final String JSON_PROPERTY_PROXY_CONFIDENCE = "proxy_confidence";
+  @jakarta.annotation.Nullable private ProxyConfidence proxyConfidence;
+
+  public static final String JSON_PROPERTY_PROXY_DETAILS = "proxy_details";
+  @jakarta.annotation.Nullable private ProxyDetails proxyDetails;
+
+  public static final String JSON_PROPERTY_VPN = "vpn";
+  @jakarta.annotation.Nullable private Boolean vpn;
+
+  public static final String JSON_PROPERTY_VPN_CONFIDENCE = "vpn_confidence";
+  @jakarta.annotation.Nullable private VpnConfidence vpnConfidence;
+
+  public static final String JSON_PROPERTY_VPN_METHODS = "vpn_methods";
+  @jakarta.annotation.Nullable private VpnMethods vpnMethods;
+
   public static final String JSON_PROPERTY_SOURCE = "source";
   @jakarta.annotation.Nullable private EventSource source;
 
@@ -109,9 +142,6 @@ public class Event {
 
   @jakarta.annotation.Nullable
   private IncrementalIdentificationStatus incrementalIdentificationStatus;
-
-  public static final String JSON_PROPERTY_LINKED_ID = "linked_id";
-  @jakarta.annotation.Nullable private String linkedId;
 
   public static final String JSON_PROPERTY_ENVIRONMENT_ID = "environment_id";
   @jakarta.annotation.Nullable private String environmentId;
@@ -131,12 +161,6 @@ public class Event {
   public static final String JSON_PROPERTY_SUPPLEMENTARY_ID_HIGH_RECALL =
       "supplementary_id_high_recall";
   @jakarta.annotation.Nullable private SupplementaryIDHighRecall supplementaryIdHighRecall;
-
-  public static final String JSON_PROPERTY_TAGS = "tags";
-  @jakarta.annotation.Nullable private Map<String, Object> tags = new HashMap<>();
-
-  public static final String JSON_PROPERTY_URL = "url";
-  @jakarta.annotation.Nullable private String url;
 
   public static final String JSON_PROPERTY_BUNDLE_ID = "bundle_id";
   @jakarta.annotation.Nullable private String bundleId;
@@ -177,9 +201,6 @@ public class Event {
   public static final String JSON_PROPERTY_BOT_TYPE = "bot_type";
   @jakarta.annotation.Nullable private String botType;
 
-  public static final String JSON_PROPERTY_BOT_INFO = "bot_info";
-  @jakarta.annotation.Nullable private BotInfo botInfo;
-
   public static final String JSON_PROPERTY_CLONED_APP = "cloned_app";
   @jakarta.annotation.Nullable private Boolean clonedApp;
 
@@ -197,18 +218,6 @@ public class Event {
 
   public static final String JSON_PROPERTY_IP_BLOCKLIST = "ip_blocklist";
   @jakarta.annotation.Nullable private IPBlockList ipBlocklist;
-
-  public static final String JSON_PROPERTY_IP_INFO = "ip_info";
-  @jakarta.annotation.Nullable private IPInfo ipInfo;
-
-  public static final String JSON_PROPERTY_PROXY = "proxy";
-  @jakarta.annotation.Nullable private Boolean proxy;
-
-  public static final String JSON_PROPERTY_PROXY_CONFIDENCE = "proxy_confidence";
-  @jakarta.annotation.Nullable private ProxyConfidence proxyConfidence;
-
-  public static final String JSON_PROPERTY_PROXY_DETAILS = "proxy_details";
-  @jakarta.annotation.Nullable private ProxyDetails proxyDetails;
 
   public static final String JSON_PROPERTY_PROXY_ML_SCORE = "proxy_ml_score";
   @jakarta.annotation.Nullable private Double proxyMlScore;
@@ -261,12 +270,6 @@ public class Event {
   public static final String JSON_PROPERTY_VIRTUAL_MACHINE_ML_SCORE = "virtual_machine_ml_score";
   @jakarta.annotation.Nullable private Double virtualMachineMlScore;
 
-  public static final String JSON_PROPERTY_VPN = "vpn";
-  @jakarta.annotation.Nullable private Boolean vpn;
-
-  public static final String JSON_PROPERTY_VPN_CONFIDENCE = "vpn_confidence";
-  @jakarta.annotation.Nullable private VpnConfidence vpnConfidence;
-
   public static final String JSON_PROPERTY_VPN_ML_SCORE = "vpn_ml_score";
   @jakarta.annotation.Nullable private Double vpnMlScore;
 
@@ -275,9 +278,6 @@ public class Event {
 
   public static final String JSON_PROPERTY_VPN_ORIGIN_COUNTRY = "vpn_origin_country";
   @jakarta.annotation.Nullable private String vpnOriginCountry;
-
-  public static final String JSON_PROPERTY_VPN_METHODS = "vpn_methods";
-  @jakarta.annotation.Nullable private VpnMethods vpnMethods;
 
   public static final String JSON_PROPERTY_HIGH_ACTIVITY_DEVICE = "high_activity_device";
   @jakarta.annotation.Nullable private Boolean highActivityDevice;
@@ -341,6 +341,256 @@ public class Event {
     this.timestamp = timestamp;
   }
 
+  public Event linkedId(@jakarta.annotation.Nullable String linkedId) {
+    this.linkedId = linkedId;
+    return this;
+  }
+
+  /**
+   * A customer-provided id that was sent with the request.
+   * @return linkedId
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_LINKED_ID, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getLinkedId() {
+    return linkedId;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_LINKED_ID, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setLinkedId(@jakarta.annotation.Nullable String linkedId) {
+    this.linkedId = linkedId;
+  }
+
+  public Event tags(@jakarta.annotation.Nullable Map<String, Object> tags) {
+    this.tags = tags;
+    return this;
+  }
+
+  public Event putTagsItem(String key, Object tagsItem) {
+    if (this.tags == null) {
+      this.tags = new HashMap<>();
+    }
+    this.tags.put(key, tagsItem);
+    return this;
+  }
+
+  /**
+   * A customer-provided value or an object that was sent with the identification request or updated later.
+   * @return tags
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  public Map<String, Object> getTags() {
+    return tags;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
+  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTags(@jakarta.annotation.Nullable Map<String, Object> tags) {
+    this.tags = tags;
+  }
+
+  public Event url(@jakarta.annotation.Nullable String url) {
+    this.url = url;
+    return this;
+  }
+
+  /**
+   * Page URL from which the request was sent.
+   * @return url
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_URL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public String getUrl() {
+    return url;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_URL, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setUrl(@jakarta.annotation.Nullable String url) {
+    this.url = url;
+  }
+
+  public Event botInfo(@jakarta.annotation.Nullable BotInfo botInfo) {
+    this.botInfo = botInfo;
+    return this;
+  }
+
+  /**
+   * Get botInfo
+   * @return botInfo
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_BOT_INFO, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public BotInfo getBotInfo() {
+    return botInfo;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_BOT_INFO, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setBotInfo(@jakarta.annotation.Nullable BotInfo botInfo) {
+    this.botInfo = botInfo;
+  }
+
+  public Event ipInfo(@jakarta.annotation.Nullable IPInfo ipInfo) {
+    this.ipInfo = ipInfo;
+    return this;
+  }
+
+  /**
+   * Get ipInfo
+   * @return ipInfo
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_IP_INFO, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public IPInfo getIpInfo() {
+    return ipInfo;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_IP_INFO, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setIpInfo(@jakarta.annotation.Nullable IPInfo ipInfo) {
+    this.ipInfo = ipInfo;
+  }
+
+  public Event proxy(@jakarta.annotation.Nullable Boolean proxy) {
+    this.proxy = proxy;
+    return this;
+  }
+
+  /**
+   * IP address was used by a public proxy provider or belonged to a known recent residential proxy
+   * @return proxy
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PROXY, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getProxy() {
+    return proxy;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_PROXY, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProxy(@jakarta.annotation.Nullable Boolean proxy) {
+    this.proxy = proxy;
+  }
+
+  public Event proxyConfidence(@jakarta.annotation.Nullable ProxyConfidence proxyConfidence) {
+    this.proxyConfidence = proxyConfidence;
+    return this;
+  }
+
+  /**
+   * Get proxyConfidence
+   * @return proxyConfidence
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PROXY_CONFIDENCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public ProxyConfidence getProxyConfidence() {
+    return proxyConfidence;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_PROXY_CONFIDENCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProxyConfidence(@jakarta.annotation.Nullable ProxyConfidence proxyConfidence) {
+    this.proxyConfidence = proxyConfidence;
+  }
+
+  public Event proxyDetails(@jakarta.annotation.Nullable ProxyDetails proxyDetails) {
+    this.proxyDetails = proxyDetails;
+    return this;
+  }
+
+  /**
+   * Get proxyDetails
+   * @return proxyDetails
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_PROXY_DETAILS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public ProxyDetails getProxyDetails() {
+    return proxyDetails;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_PROXY_DETAILS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProxyDetails(@jakarta.annotation.Nullable ProxyDetails proxyDetails) {
+    this.proxyDetails = proxyDetails;
+  }
+
+  public Event vpn(@jakarta.annotation.Nullable Boolean vpn) {
+    this.vpn = vpn;
+    return this;
+  }
+
+  /**
+   * VPN or other anonymizing service has been used when sending the request.
+   * @return vpn
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_VPN, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getVpn() {
+    return vpn;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_VPN, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVpn(@jakarta.annotation.Nullable Boolean vpn) {
+    this.vpn = vpn;
+  }
+
+  public Event vpnConfidence(@jakarta.annotation.Nullable VpnConfidence vpnConfidence) {
+    this.vpnConfidence = vpnConfidence;
+    return this;
+  }
+
+  /**
+   * Get vpnConfidence
+   * @return vpnConfidence
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_VPN_CONFIDENCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public VpnConfidence getVpnConfidence() {
+    return vpnConfidence;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_VPN_CONFIDENCE, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVpnConfidence(@jakarta.annotation.Nullable VpnConfidence vpnConfidence) {
+    this.vpnConfidence = vpnConfidence;
+  }
+
+  public Event vpnMethods(@jakarta.annotation.Nullable VpnMethods vpnMethods) {
+    this.vpnMethods = vpnMethods;
+    return this;
+  }
+
+  /**
+   * Get vpnMethods
+   * @return vpnMethods
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_VPN_METHODS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public VpnMethods getVpnMethods() {
+    return vpnMethods;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_VPN_METHODS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setVpnMethods(@jakarta.annotation.Nullable VpnMethods vpnMethods) {
+    this.vpnMethods = vpnMethods;
+  }
+
   public Event source(@jakarta.annotation.Nullable EventSource source) {
     this.source = source;
     return this;
@@ -389,28 +639,6 @@ public class Event {
     this.incrementalIdentificationStatus = incrementalIdentificationStatus;
   }
 
-  public Event linkedId(@jakarta.annotation.Nullable String linkedId) {
-    this.linkedId = linkedId;
-    return this;
-  }
-
-  /**
-   * A customer-provided id that was sent with the request.
-   * @return linkedId
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_LINKED_ID, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getLinkedId() {
-    return linkedId;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_LINKED_ID, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLinkedId(@jakarta.annotation.Nullable String linkedId) {
-    this.linkedId = linkedId;
-  }
-
   public Event environmentId(@jakarta.annotation.Nullable String environmentId) {
     this.environmentId = environmentId;
     return this;
@@ -439,7 +667,7 @@ public class Event {
   }
 
   /**
-   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).
+   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event).
    * @return suspect
    */
   @jakarta.annotation.Nullable
@@ -543,58 +771,6 @@ public class Event {
   public void setSupplementaryIdHighRecall(
       @jakarta.annotation.Nullable SupplementaryIDHighRecall supplementaryIdHighRecall) {
     this.supplementaryIdHighRecall = supplementaryIdHighRecall;
-  }
-
-  public Event tags(@jakarta.annotation.Nullable Map<String, Object> tags) {
-    this.tags = tags;
-    return this;
-  }
-
-  public Event putTagsItem(String key, Object tagsItem) {
-    if (this.tags == null) {
-      this.tags = new HashMap<>();
-    }
-    this.tags.put(key, tagsItem);
-    return this;
-  }
-
-  /**
-   * A customer-provided value or an object that was sent with the identification request or updated later.
-   * @return tags
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public Map<String, Object> getTags() {
-    return tags;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_TAGS, required = false)
-  @JsonInclude(content = JsonInclude.Include.ALWAYS, value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTags(@jakarta.annotation.Nullable Map<String, Object> tags) {
-    this.tags = tags;
-  }
-
-  public Event url(@jakarta.annotation.Nullable String url) {
-    this.url = url;
-    return this;
-  }
-
-  /**
-   * Page URL from which the request was sent.
-   * @return url
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_URL, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public String getUrl() {
-    return url;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_URL, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setUrl(@jakarta.annotation.Nullable String url) {
-    this.url = url;
   }
 
   public Event bundleId(@jakarta.annotation.Nullable String bundleId) {
@@ -883,28 +1059,6 @@ public class Event {
     this.botType = botType;
   }
 
-  public Event botInfo(@jakarta.annotation.Nullable BotInfo botInfo) {
-    this.botInfo = botInfo;
-    return this;
-  }
-
-  /**
-   * Get botInfo
-   * @return botInfo
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_BOT_INFO, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public BotInfo getBotInfo() {
-    return botInfo;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_BOT_INFO, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBotInfo(@jakarta.annotation.Nullable BotInfo botInfo) {
-    this.botInfo = botInfo;
-  }
-
   public Event clonedApp(@jakarta.annotation.Nullable Boolean clonedApp) {
     this.clonedApp = clonedApp;
     return this;
@@ -1035,94 +1189,6 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIpBlocklist(@jakarta.annotation.Nullable IPBlockList ipBlocklist) {
     this.ipBlocklist = ipBlocklist;
-  }
-
-  public Event ipInfo(@jakarta.annotation.Nullable IPInfo ipInfo) {
-    this.ipInfo = ipInfo;
-    return this;
-  }
-
-  /**
-   * Get ipInfo
-   * @return ipInfo
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_IP_INFO, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public IPInfo getIpInfo() {
-    return ipInfo;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_IP_INFO, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setIpInfo(@jakarta.annotation.Nullable IPInfo ipInfo) {
-    this.ipInfo = ipInfo;
-  }
-
-  public Event proxy(@jakarta.annotation.Nullable Boolean proxy) {
-    this.proxy = proxy;
-    return this;
-  }
-
-  /**
-   * IP address was used by a public proxy provider or belonged to a known recent residential proxy
-   * @return proxy
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PROXY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getProxy() {
-    return proxy;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_PROXY, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setProxy(@jakarta.annotation.Nullable Boolean proxy) {
-    this.proxy = proxy;
-  }
-
-  public Event proxyConfidence(@jakarta.annotation.Nullable ProxyConfidence proxyConfidence) {
-    this.proxyConfidence = proxyConfidence;
-    return this;
-  }
-
-  /**
-   * Get proxyConfidence
-   * @return proxyConfidence
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PROXY_CONFIDENCE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public ProxyConfidence getProxyConfidence() {
-    return proxyConfidence;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_PROXY_CONFIDENCE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setProxyConfidence(@jakarta.annotation.Nullable ProxyConfidence proxyConfidence) {
-    this.proxyConfidence = proxyConfidence;
-  }
-
-  public Event proxyDetails(@jakarta.annotation.Nullable ProxyDetails proxyDetails) {
-    this.proxyDetails = proxyDetails;
-    return this;
-  }
-
-  /**
-   * Get proxyDetails
-   * @return proxyDetails
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_PROXY_DETAILS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public ProxyDetails getProxyDetails() {
-    return proxyDetails;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_PROXY_DETAILS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setProxyDetails(@jakarta.annotation.Nullable ProxyDetails proxyDetails) {
-    this.proxyDetails = proxyDetails;
   }
 
   public Event proxyMlScore(@jakarta.annotation.Nullable Double proxyMlScore) {
@@ -1507,50 +1573,6 @@ public class Event {
     this.virtualMachineMlScore = virtualMachineMlScore;
   }
 
-  public Event vpn(@jakarta.annotation.Nullable Boolean vpn) {
-    this.vpn = vpn;
-    return this;
-  }
-
-  /**
-   * VPN or other anonymizing service has been used when sending the request.
-   * @return vpn
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_VPN, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public Boolean getVpn() {
-    return vpn;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_VPN, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setVpn(@jakarta.annotation.Nullable Boolean vpn) {
-    this.vpn = vpn;
-  }
-
-  public Event vpnConfidence(@jakarta.annotation.Nullable VpnConfidence vpnConfidence) {
-    this.vpnConfidence = vpnConfidence;
-    return this;
-  }
-
-  /**
-   * Get vpnConfidence
-   * @return vpnConfidence
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_VPN_CONFIDENCE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public VpnConfidence getVpnConfidence() {
-    return vpnConfidence;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_VPN_CONFIDENCE, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setVpnConfidence(@jakarta.annotation.Nullable VpnConfidence vpnConfidence) {
-    this.vpnConfidence = vpnConfidence;
-  }
-
   public Event vpnMlScore(@jakarta.annotation.Nullable Double vpnMlScore) {
     this.vpnMlScore = vpnMlScore;
     return this;
@@ -1617,28 +1639,6 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVpnOriginCountry(@jakarta.annotation.Nullable String vpnOriginCountry) {
     this.vpnOriginCountry = vpnOriginCountry;
-  }
-
-  public Event vpnMethods(@jakarta.annotation.Nullable VpnMethods vpnMethods) {
-    this.vpnMethods = vpnMethods;
-    return this;
-  }
-
-  /**
-   * Get vpnMethods
-   * @return vpnMethods
-   */
-  @jakarta.annotation.Nullable
-  @JsonProperty(value = JSON_PROPERTY_VPN_METHODS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public VpnMethods getVpnMethods() {
-    return vpnMethods;
-  }
-
-  @JsonProperty(value = JSON_PROPERTY_VPN_METHODS, required = false)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setVpnMethods(@jakarta.annotation.Nullable VpnMethods vpnMethods) {
-    this.vpnMethods = vpnMethods;
   }
 
   public Event highActivityDevice(@jakarta.annotation.Nullable Boolean highActivityDevice) {
@@ -1777,18 +1777,26 @@ public class Event {
     Event event = (Event) o;
     return Objects.equals(this.eventId, event.eventId)
         && Objects.equals(this.timestamp, event.timestamp)
+        && Objects.equals(this.linkedId, event.linkedId)
+        && Objects.equals(this.tags, event.tags)
+        && Objects.equals(this.url, event.url)
+        && Objects.equals(this.botInfo, event.botInfo)
+        && Objects.equals(this.ipInfo, event.ipInfo)
+        && Objects.equals(this.proxy, event.proxy)
+        && Objects.equals(this.proxyConfidence, event.proxyConfidence)
+        && Objects.equals(this.proxyDetails, event.proxyDetails)
+        && Objects.equals(this.vpn, event.vpn)
+        && Objects.equals(this.vpnConfidence, event.vpnConfidence)
+        && Objects.equals(this.vpnMethods, event.vpnMethods)
         && Objects.equals(this.source, event.source)
         && Objects.equals(
             this.incrementalIdentificationStatus, event.incrementalIdentificationStatus)
-        && Objects.equals(this.linkedId, event.linkedId)
         && Objects.equals(this.environmentId, event.environmentId)
         && Objects.equals(this.suspect, event.suspect)
         && Objects.equals(this.sdk, event.sdk)
         && Objects.equals(this.replayed, event.replayed)
         && Objects.equals(this.identification, event.identification)
         && Objects.equals(this.supplementaryIdHighRecall, event.supplementaryIdHighRecall)
-        && Objects.equals(this.tags, event.tags)
-        && Objects.equals(this.url, event.url)
         && Objects.equals(this.bundleId, event.bundleId)
         && Objects.equals(this.packageName, event.packageName)
         && Objects.equals(this.ipAddress, event.ipAddress)
@@ -1802,17 +1810,12 @@ public class Event {
         && Objects.equals(this.activeCall, event.activeCall)
         && Objects.equals(this.bot, event.bot)
         && Objects.equals(this.botType, event.botType)
-        && Objects.equals(this.botInfo, event.botInfo)
         && Objects.equals(this.clonedApp, event.clonedApp)
         && Objects.equals(this.developerTools, event.developerTools)
         && Objects.equals(this.emulator, event.emulator)
         && Objects.equals(this.factoryResetTimestamp, event.factoryResetTimestamp)
         && Objects.equals(this.frida, event.frida)
         && Objects.equals(this.ipBlocklist, event.ipBlocklist)
-        && Objects.equals(this.ipInfo, event.ipInfo)
-        && Objects.equals(this.proxy, event.proxy)
-        && Objects.equals(this.proxyConfidence, event.proxyConfidence)
-        && Objects.equals(this.proxyDetails, event.proxyDetails)
         && Objects.equals(this.proxyMlScore, event.proxyMlScore)
         && Objects.equals(this.incognito, event.incognito)
         && Objects.equals(this.jailbroken, event.jailbroken)
@@ -1830,12 +1833,9 @@ public class Event {
         && Objects.equals(this.velocity, event.velocity)
         && Objects.equals(this.virtualMachine, event.virtualMachine)
         && Objects.equals(this.virtualMachineMlScore, event.virtualMachineMlScore)
-        && Objects.equals(this.vpn, event.vpn)
-        && Objects.equals(this.vpnConfidence, event.vpnConfidence)
         && Objects.equals(this.vpnMlScore, event.vpnMlScore)
         && Objects.equals(this.vpnOriginTimezone, event.vpnOriginTimezone)
         && Objects.equals(this.vpnOriginCountry, event.vpnOriginCountry)
-        && Objects.equals(this.vpnMethods, event.vpnMethods)
         && Objects.equals(this.highActivityDevice, event.highActivityDevice)
         && Objects.equals(this.rareDevice, event.rareDevice)
         && Objects.equals(this.rareDevicePercentileBucket, event.rareDevicePercentileBucket)
@@ -1848,17 +1848,25 @@ public class Event {
     return Objects.hash(
         eventId,
         timestamp,
+        linkedId,
+        tags,
+        url,
+        botInfo,
+        ipInfo,
+        proxy,
+        proxyConfidence,
+        proxyDetails,
+        vpn,
+        vpnConfidence,
+        vpnMethods,
         source,
         incrementalIdentificationStatus,
-        linkedId,
         environmentId,
         suspect,
         sdk,
         replayed,
         identification,
         supplementaryIdHighRecall,
-        tags,
-        url,
         bundleId,
         packageName,
         ipAddress,
@@ -1872,17 +1880,12 @@ public class Event {
         activeCall,
         bot,
         botType,
-        botInfo,
         clonedApp,
         developerTools,
         emulator,
         factoryResetTimestamp,
         frida,
         ipBlocklist,
-        ipInfo,
-        proxy,
-        proxyConfidence,
-        proxyDetails,
         proxyMlScore,
         incognito,
         jailbroken,
@@ -1900,12 +1903,9 @@ public class Event {
         velocity,
         virtualMachine,
         virtualMachineMlScore,
-        vpn,
-        vpnConfidence,
         vpnMlScore,
         vpnOriginTimezone,
         vpnOriginCountry,
-        vpnMethods,
         highActivityDevice,
         rareDevice,
         rareDevicePercentileBucket,
@@ -1919,11 +1919,21 @@ public class Event {
     sb.append("class Event {\n");
     sb.append("    eventId: ").append(toIndentedString(eventId)).append("\n");
     sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
+    sb.append("    linkedId: ").append(toIndentedString(linkedId)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+    sb.append("    url: ").append(toIndentedString(url)).append("\n");
+    sb.append("    botInfo: ").append(toIndentedString(botInfo)).append("\n");
+    sb.append("    ipInfo: ").append(toIndentedString(ipInfo)).append("\n");
+    sb.append("    proxy: ").append(toIndentedString(proxy)).append("\n");
+    sb.append("    proxyConfidence: ").append(toIndentedString(proxyConfidence)).append("\n");
+    sb.append("    proxyDetails: ").append(toIndentedString(proxyDetails)).append("\n");
+    sb.append("    vpn: ").append(toIndentedString(vpn)).append("\n");
+    sb.append("    vpnConfidence: ").append(toIndentedString(vpnConfidence)).append("\n");
+    sb.append("    vpnMethods: ").append(toIndentedString(vpnMethods)).append("\n");
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    incrementalIdentificationStatus: ")
         .append(toIndentedString(incrementalIdentificationStatus))
         .append("\n");
-    sb.append("    linkedId: ").append(toIndentedString(linkedId)).append("\n");
     sb.append("    environmentId: ").append(toIndentedString(environmentId)).append("\n");
     sb.append("    suspect: ").append(toIndentedString(suspect)).append("\n");
     sb.append("    sdk: ").append(toIndentedString(sdk)).append("\n");
@@ -1932,8 +1942,6 @@ public class Event {
     sb.append("    supplementaryIdHighRecall: ")
         .append(toIndentedString(supplementaryIdHighRecall))
         .append("\n");
-    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
-    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    bundleId: ").append(toIndentedString(bundleId)).append("\n");
     sb.append("    packageName: ").append(toIndentedString(packageName)).append("\n");
     sb.append("    ipAddress: ").append(toIndentedString(ipAddress)).append("\n");
@@ -1947,7 +1955,6 @@ public class Event {
     sb.append("    activeCall: ").append(toIndentedString(activeCall)).append("\n");
     sb.append("    bot: ").append(toIndentedString(bot)).append("\n");
     sb.append("    botType: ").append(toIndentedString(botType)).append("\n");
-    sb.append("    botInfo: ").append(toIndentedString(botInfo)).append("\n");
     sb.append("    clonedApp: ").append(toIndentedString(clonedApp)).append("\n");
     sb.append("    developerTools: ").append(toIndentedString(developerTools)).append("\n");
     sb.append("    emulator: ").append(toIndentedString(emulator)).append("\n");
@@ -1956,10 +1963,6 @@ public class Event {
         .append("\n");
     sb.append("    frida: ").append(toIndentedString(frida)).append("\n");
     sb.append("    ipBlocklist: ").append(toIndentedString(ipBlocklist)).append("\n");
-    sb.append("    ipInfo: ").append(toIndentedString(ipInfo)).append("\n");
-    sb.append("    proxy: ").append(toIndentedString(proxy)).append("\n");
-    sb.append("    proxyConfidence: ").append(toIndentedString(proxyConfidence)).append("\n");
-    sb.append("    proxyDetails: ").append(toIndentedString(proxyDetails)).append("\n");
     sb.append("    proxyMlScore: ").append(toIndentedString(proxyMlScore)).append("\n");
     sb.append("    incognito: ").append(toIndentedString(incognito)).append("\n");
     sb.append("    jailbroken: ").append(toIndentedString(jailbroken)).append("\n");
@@ -1981,12 +1984,9 @@ public class Event {
     sb.append("    virtualMachineMlScore: ")
         .append(toIndentedString(virtualMachineMlScore))
         .append("\n");
-    sb.append("    vpn: ").append(toIndentedString(vpn)).append("\n");
-    sb.append("    vpnConfidence: ").append(toIndentedString(vpnConfidence)).append("\n");
     sb.append("    vpnMlScore: ").append(toIndentedString(vpnMlScore)).append("\n");
     sb.append("    vpnOriginTimezone: ").append(toIndentedString(vpnOriginTimezone)).append("\n");
     sb.append("    vpnOriginCountry: ").append(toIndentedString(vpnOriginCountry)).append("\n");
-    sb.append("    vpnMethods: ").append(toIndentedString(vpnMethods)).append("\n");
     sb.append("    highActivityDevice: ").append(toIndentedString(highActivityDevice)).append("\n");
     sb.append("    rareDevice: ").append(toIndentedString(rareDevice)).append("\n");
     sb.append("    rareDevicePercentileBucket: ")

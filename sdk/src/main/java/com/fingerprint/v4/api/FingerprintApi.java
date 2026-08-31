@@ -3,7 +3,9 @@ package com.fingerprint.v4.api;
 import com.fingerprint.v4.model.BotInfoCategory;
 import com.fingerprint.v4.model.BotInfoConfidence;
 import com.fingerprint.v4.model.BotInfoIdentity;
+import com.fingerprint.v4.model.EdgeRequest;
 import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.model.EventEdge;
 import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.model.EventUpdate;
 import com.fingerprint.v4.model.SearchEventsBot;
@@ -68,9 +70,92 @@ public class FingerprintApi {
   }
 
   /**
+   * Collect Automation Intelligence.
+   * The Automation Intelligence API gives you the tools to determine whether traffic is legitimate and should be accepted by your application.  This feature is currently in a Public Preview testing phase. All feedback is welcome! If you encounter any issues, please [contact our support team](https://fingerprint.com/support/).  The API detects automation tools like AI Agents, AI Assistants, AI Browsers, and other bots. Additionally, it provides IP intelligence like geolocation, residential proxy, VPN and data center detection.  Automation Intelligence is derived from HTTP request metadata that reaches your server. It does not require the use of a JavaScript client-side agent or mobile SDKs to collect device context.  The API is fast, with average response times of less than 30ms, making it a great fit for edge, pre-origin or middleware contexts. The API is platform-agnostic and can be used with different CDN providers, cloud platforms, or any server backend.  Because this API doesn’t require the use of a client-side device collection agent, it doesn’t support device identification via `visitor_id` and a few Smart Signals derived from deep device telemetry.  ### Event Retrieval  Events created by the Automation Intelligence API can be fetched via the [`/v4/events/{event_id}`](https://docs.fingerprint.com/reference/server-api-get-event) API using the `event_id` present in the API response.  Fetch all Automation Intelligence API events via the [`/v4/events?source=edge`](https://docs.fingerprint.com/reference/server-api-search-events#parameter-source) API.
+   * @param edgeRequest  (required)
+   * @return EventEdge
+   * @throws ApiException if fails to make API call
+   * @http.response.details
+   * <table summary="Response Details" border="1">
+   * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+   * <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
+   * <tr><td> 400 </td><td> Bad request. The request payload is not valid. </td><td>  -  </td></tr>
+   * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
+   * <tr><td> 413 </td><td> Bad request. The request payload is too large. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
+   * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * </table>
+   */
+  public EventEdge analyzeRequestForAutomationIntelligence(EdgeRequest edgeRequest)
+      throws ApiException {
+    return analyzeRequestForAutomationIntelligenceWithHttpInfo(edgeRequest).getData();
+  }
+
+  /**
+   * Collect Automation Intelligence.
+   * The Automation Intelligence API gives you the tools to determine whether traffic is legitimate and should be accepted by your application.  This feature is currently in a Public Preview testing phase. All feedback is welcome! If you encounter any issues, please [contact our support team](https://fingerprint.com/support/).  The API detects automation tools like AI Agents, AI Assistants, AI Browsers, and other bots. Additionally, it provides IP intelligence like geolocation, residential proxy, VPN and data center detection.  Automation Intelligence is derived from HTTP request metadata that reaches your server. It does not require the use of a JavaScript client-side agent or mobile SDKs to collect device context.  The API is fast, with average response times of less than 30ms, making it a great fit for edge, pre-origin or middleware contexts. The API is platform-agnostic and can be used with different CDN providers, cloud platforms, or any server backend.  Because this API doesn’t require the use of a client-side device collection agent, it doesn’t support device identification via `visitor_id` and a few Smart Signals derived from deep device telemetry.  ### Event Retrieval  Events created by the Automation Intelligence API can be fetched via the [`/v4/events/{event_id}`](https://docs.fingerprint.com/reference/server-api-get-event) API using the `event_id` present in the API response.  Fetch all Automation Intelligence API events via the [`/v4/events?source=edge`](https://docs.fingerprint.com/reference/server-api-search-events#parameter-source) API.
+   * @param edgeRequest  (required)
+   * @return ApiResponse<EventEdge>
+   * @throws ApiException if fails to make API call
+   * @http.response.details
+   * <table summary="Response Details" border="1">
+   * <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+   * <tr><td> 200 </td><td> OK. </td><td>  -  </td></tr>
+   * <tr><td> 400 </td><td> Bad request. The request payload is not valid. </td><td>  -  </td></tr>
+   * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
+   * <tr><td> 413 </td><td> Bad request. The request payload is too large. </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. </td><td>  -  </td></tr>
+   * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
+   * </table>
+   */
+  public ApiResponse<EventEdge> analyzeRequestForAutomationIntelligenceWithHttpInfo(
+      EdgeRequest edgeRequest) throws ApiException {
+    Object localVarPostBody = edgeRequest;
+
+    // verify the required parameter 'edgeRequest' is set
+    if (edgeRequest == null) {
+      throw new ApiException(
+          400,
+          "Missing the required parameter 'edgeRequest' when calling analyzeRequestForAutomationIntelligence");
+    }
+
+    // create path and map variables
+    String localVarPath = "/edge";
+
+    // query params
+    List<Pair> localVarQueryParams = new ArrayList<Pair>();
+    Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+    Map<String, String> localVarCookieParams = new HashMap<String, String>();
+    Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+    localVarQueryParams.add(new Pair("ii", INTEGRATION_INFO));
+
+    final String localVarAccept = apiClient.selectHeaderAccept("application/json");
+    final String localVarContentType = apiClient.selectHeaderContentType("application/json");
+    String[] localVarAuthNames = new String[] {"bearerAuth"};
+
+    GenericType<EventEdge> localVarReturnType = new GenericType<EventEdge>() {};
+
+    return apiClient.invokeAPI(
+        "FingerprintApi.analyzeRequestForAutomationIntelligence",
+        localVarPath,
+        "POST",
+        localVarQueryParams,
+        localVarPostBody,
+        localVarHeaderParams,
+        localVarCookieParams,
+        localVarFormParams,
+        localVarAccept,
+        localVarContentType,
+        localVarAuthNames,
+        localVarReturnType,
+        false);
+  }
+
+  /**
    * Delete a visitor ID
    * Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).
-   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required)
+   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete. (required)
    * @throws ApiException if fails to make API call
    * @http.response.details
    * <table summary="Response Details" border="1">
@@ -89,7 +174,7 @@ public class FingerprintApi {
   /**
    * Delete a visitor ID
    * Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).
-   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required)
+   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete. (required)
    * @return ApiResponse<Void>
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -166,8 +251,8 @@ public class FingerprintApi {
 
   /**
    * Get an event by event ID
-   * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
-   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
+   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
+   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
    * @return Event
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -188,8 +273,8 @@ public class FingerprintApi {
 
   /**
    * Get an event by event ID
-   * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
-   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
+   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
+   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
    * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return Event
    * @throws ApiException if fails to make API call
@@ -212,8 +297,8 @@ public class FingerprintApi {
 
   /**
    * Get an event by event ID
-   * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
-   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
+   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
+   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
    * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return ApiResponse<Event>
    * @throws ApiException if fails to make API call
@@ -364,14 +449,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).
+     * getter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).
      */
     public String getVisitorId() {
       return visitorId;
     }
 
     /**
-     * setter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).
+     * setter for visitorId - Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).
      */
     public SearchEventsOptionalParams setVisitorId(String visitorId) {
       this.visitorId = visitorId;
@@ -530,14 +615,14 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for linkedId - Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.
+     * getter for linkedId - Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.
      */
     public String getLinkedId() {
       return linkedId;
     }
 
     /**
-     * setter for linkedId - Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.
+     * setter for linkedId - Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.
      */
     public SearchEventsOptionalParams setLinkedId(String linkedId) {
       this.linkedId = linkedId;
@@ -1395,7 +1480,7 @@ public class FingerprintApi {
   /**
    * Update an event
    * Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request.
-   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). (required)
+   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id). (required)
    * @param eventUpdate  (required)
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -1415,7 +1500,7 @@ public class FingerprintApi {
   /**
    * Update an event
    * Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request.
-   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). (required)
+   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id). (required)
    * @param eventUpdate  (required)
    * @return ApiResponse<Void>
    * @throws ApiException if fails to make API call
