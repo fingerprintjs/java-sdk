@@ -201,6 +201,8 @@ public class FingerprintApiTest {
 
     Event response = api.getEvent(MOCK_REQUEST_ID);
     assertNotNull(response);
+    // SPIKE INTER-2457 — COMPILE BREAK. Event is an interface with no getIdentification().
+    // Identification is on EventDevice. This test does not compile.
     assertNotNull(response.getIdentification());
     assertEquals("Ibk1527CUFmcnjLwIs4A9", response.getIdentification().getVisitorId());
 
@@ -405,6 +407,8 @@ public class FingerprintApiTest {
     Event event =
         mapper.readValue(getFileAsIOStream("mocks/webhook/webhook_event.json"), Event.class);
 
+    // SPIKE INTER-2457 — COMPILE BREAK (and deserialize). Event has no getIdentification();
+    // webhook JSON without `source` also fails Jackson discriminator lookup.
     assertEquals(MOCK_WEBHOOK_VISITOR_ID, event.getIdentification().getVisitorId());
     assertEquals(MOCK_WEBHOOK_EVENT_ID, event.getEventId());
   }
@@ -432,6 +436,7 @@ public class FingerprintApiTest {
     Event event = events.get(0);
 
     assertNotNull(event);
+    // SPIKE INTER-2457 — COMPILE BREAK. Event is an interface with no getIdentification().
     assertNotNull(event.getIdentification());
     assertEquals("Ibk1527CUFmcnjLwIs4A9", event.getIdentification().getVisitorId());
 
