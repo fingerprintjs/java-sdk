@@ -251,7 +251,7 @@ public class FingerprintApi {
 
   /**
    * Get an event by event ID
-   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
+   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Use `source` to tell identification events (`device`) from Automation Intelligence events (`edge`).
    * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
    * @return Event
    * @throws ApiException if fails to make API call
@@ -273,7 +273,7 @@ public class FingerprintApi {
 
   /**
    * Get an event by event ID
-   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
+   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Use `source` to tell identification events (`device`) from Automation Intelligence events (`edge`).
    * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
    * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return Event
@@ -297,7 +297,7 @@ public class FingerprintApi {
 
   /**
    * Get an event by event ID
-   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
+   * Get a detailed analysis of an individual event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.  Use `source` to tell identification events (`device`) from Automation Intelligence events (`edge`).
    * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
    * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return ApiResponse<Event>
