@@ -2,7 +2,8 @@
 
 set -ex
 
-curl -s -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-v4.yaml
+# Flattened Event (single object, source optional). start/end split into start + start_date_time.
+curl -s -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-v4-normalized.yaml
 
 examplesList=(
   'webhook/webhook_event.json'
