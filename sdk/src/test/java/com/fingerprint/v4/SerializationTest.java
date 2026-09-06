@@ -13,6 +13,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fingerprint.v4.model.ErrorCode;
 import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.model.Event;
+import com.fingerprint.v4.model.EventDevice;
+import com.fingerprint.v4.model.EventEdge;
 import com.fingerprint.v4.model.EventRuleAction;
 import com.fingerprint.v4.sdk.JSON;
 import java.io.File;
@@ -101,7 +103,25 @@ public class SerializationTest {
     // Convert the modified ObjectNode back to an Event object to test deserialization
     Event event = sdkObjectMapper.treeToValue(eventNode, Event.class);
 
-    assertInstanceOf(EventRuleAction.UnknownEventRuleAction.class, event.getRuleAction());
+    assertInstanceOf(
+        EventRuleAction.UnknownEventRuleAction.class, ((EventDevice) event).getRuleAction());
+  }
+
+  @Test
+  public void missingSourceHydratesToEventDeviceAndSourceEdgeStaysEventEdge() throws IOException {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+
+    ObjectNode deviceNode =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream("mocks/events/get_event_200.json"), ObjectNode.class);
+    deviceNode.remove("source");
+    Event omittedSource = sdkObjectMapper.treeToValue(deviceNode, Event.class);
+    assertInstanceOf(EventDevice.class, omittedSource);
+
+    Event edge =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream("mocks/events/get_event_with_edge_200.json"), Event.class);
+    assertInstanceOf(EventEdge.class, edge);
   }
 
   @TestFactory

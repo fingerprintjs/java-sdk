@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "source",
-    defaultImpl = Event.UnknownEvent.class,
+    // SPIKE INTER-2457 option B: missing source hydrates to EventDevice. Never rewrite source:edge.
+    defaultImpl = EventDevice.class,
     visible = true)
 @JsonSubTypes({
   @JsonSubTypes.Type(value = EventDevice.class, name = "device"),
