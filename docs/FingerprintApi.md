@@ -4,11 +4,107 @@ All URIs are relative to *https://api.fpjs.io/v4*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**analyzeRequestForAutomationIntelligence**](FingerprintApi.md#analyzeRequestForAutomationIntelligence) | **POST** /edge | Collect Automation Intelligence. |
 | [**deleteVisitorData**](FingerprintApi.md#deleteVisitorData) | **DELETE** /visitors/{visitor_id} | Delete a visitor ID |
 | [**getEvent**](FingerprintApi.md#getEvent) | **GET** /events/{event_id} | Get an event by event ID |
 | [**searchEvents**](FingerprintApi.md#searchEvents) | **GET** /events | Search events |
 | [**updateEvent**](FingerprintApi.md#updateEvent) | **PATCH** /events/{event_id} | Update an event |
 
+
+
+## analyzeRequestForAutomationIntelligence
+
+> EventEdge analyzeRequestForAutomationIntelligence(edgeRequest)
+
+Collect Automation Intelligence.
+
+The Automation Intelligence API gives you the tools to determine whether traffic is legitimate and should be accepted by your application.
+
+This feature is currently in a Public Preview testing phase. All feedback is welcome! If you encounter any issues, please [contact our support team](https://fingerprint.com/support/).
+
+The API detects automation tools like AI Agents, AI Assistants, AI Browsers, and other bots. Additionally, it provides IP intelligence like geolocation, residential proxy, VPN and data center detection.
+
+Automation Intelligence is derived from HTTP request metadata that reaches your server. It does not require the use of a JavaScript client-side agent or mobile SDKs to collect device context.
+
+The API is fast, with average response times of less than 30ms, making it a great fit for edge, pre-origin or middleware contexts. The API is platform-agnostic and can be used with different CDN providers, cloud platforms, or any server backend.
+
+Because this API doesn’t require the use of a client-side device collection agent, it doesn’t support device identification via `visitor_id` and a few Smart Signals derived from deep device telemetry.
+
+### Event Retrieval
+
+Events created by the Automation Intelligence API can be fetched via the [`/v4/events/{event_id}`](https://docs.fingerprint.com/reference/server-api-get-event) API using the `event_id` present in the API response.
+
+Fetch all Automation Intelligence API events via the [`/v4/events?source=edge`](https://docs.fingerprint.com/reference/server-api-search-events#parameter-source) API.
+
+
+### Example
+
+```java
+package main;
+
+import java.util.*;
+
+import com.fingerprint.v4.api.FingerprintApi;
+import com.fingerprint.v4.model.*;
+import com.fingerprint.v4.sdk.ApiClient;
+import com.fingerprint.v4.sdk.ApiException;
+import com.fingerprint.v4.sdk.Region;
+
+public class FingerprintApiExample {
+    // Fingerprint Secret API Key
+    private static final String FPJS_API_SECRET = "Fingerprint Secret API Key";
+    public static void main(String... args) {
+        // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
+        /*
+        You can specify a region on getDefaultApiClient function's second parameter
+        If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
+        Options for regions are:
+        Region.GLOBAL
+        Region.EUROPE
+        Region.ASIA
+        */
+        FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
+        EdgeRequest edgeRequest = new EdgeRequest(); // EdgeRequest | 
+        try {
+            EventEdge result = api.analyzeRequestForAutomationIntelligence(edgeRequest);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling FingerprintApi.analyzeRequestForAutomationIntelligence:" + e.getMessage());
+        }
+    }
+}
+```
+
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **edgeRequest** | [**EdgeRequest**](EdgeRequest.md)|  | |
+
+### Return type
+
+[**EventEdge**](EventEdge.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK. |  -  |
+| **400** | Bad request. The request payload is not valid. |  -  |
+| **403** | Forbidden. Access to this API is denied. |  -  |
+| **413** | Bad request. The request payload is too large. |  -  |
+| **429** | Too Many Requests. The request is throttled. |  -  |
+| **500** | Workspace error. |  -  |
 
 
 ## deleteVisitorData
@@ -73,7 +169,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        String visitorId = "Ibk1527CUFmcnjLwIs4A9"; // String | The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete.
+        String visitorId = "Ibk1527CUFmcnjLwIs4A9"; // String | The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete.
         try {
             api.deleteVisitorData(visitorId);
         } catch (ApiException e) {
@@ -89,7 +185,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **visitorId** | **String**| The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. | |
+| **visitorId** | **String**| The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete. | |
 
 ### Return type
 
@@ -120,9 +216,11 @@ null (empty response body)
 
 Get an event by event ID
 
-Get a detailed analysis of an individual identification event, including Smart Signals.
+Get a detailed analysis of an individual event, including Smart Signals.
 
 Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
+
+Returns `EventDevice` when `source` is `device`, and `EventEdge` when `source` is `edge`.
 
 
 ### Example
@@ -152,7 +250,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        String eventId = "1708102555327.NLOjmg"; // String | The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place).
+        String eventId = "1708102555327.NLOjmg"; // String | The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place).
         String rulesetId = "D6N9Kbk9HRWrIWGz"; // String | The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response. 
         try {
             Event result = api.getEvent(eventId, new FingerprintApi.GetEventOptionalParams()
@@ -171,7 +269,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **eventId** | **String**| The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). | |
+| **eventId** | **String**| The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place). | |
 | **getEventOptionalParams** | [**FingerprintApi.GetEventOptionalParams**](#fingerprintapigeteventoptionalparams) | | [optional] |
 
 #### FingerprintApi.GetEventOptionalParams
@@ -270,7 +368,7 @@ public class FingerprintApiExample {
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
         Integer limit = 10; // Integer | Maximum number of events to return. Defaults to 10 when omitted. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events. 
         String paginationKey = "S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q"; // String | Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q` 
-        String visitorId = "Ibk1527CUFmcnjLwIs4A9"; // String | Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property). 
+        String visitorId = "Ibk1527CUFmcnjLwIs4A9"; // String | Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property). 
         String highRecallId = "Ibk1527CUFmcnjLwIs4A9"; // String | The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.  Filter events by matching High Recall ID (`supplementary_id_high_recall.visitor_id` property). 
         SearchEventsBot bot = SearchEventsBot.fromValue("all"); // SearchEventsBot | Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `bot` property set to a valid value are returned. Events without a `bot` Smart Signal result are left out of the response. 
         SearchEventsBotInfo botInfo = SearchEventsBotInfo.fromValue("all"); // SearchEventsBotInfo | Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected, and no `bot_info` was present. 
@@ -281,7 +379,7 @@ public class FingerprintApiExample {
         List<String> botInfoName = Arrays.asList(); // List<String> | Filter events by their Bot Info Name. The name must match exactly, partial or wildcard matching is not supported.  Multiple Names can be provided using the repeated keys syntax. For example, `bot_info_name=ChatGPT%20Agent&bot_info_name=Bedrock%20AgentCore`, will match events with a Bot Info Name of `ChatGPT Agent` or `Bedrock AgentCore`. Other notations like comma-separated or bracket notation are not supported. 
         String ipAddress = "61.127.217.15"; // String | Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32 
         String asn = "12876"; // String | Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response. 
-        String linkedId = "somelinkedId"; // String | Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. 
+        String linkedId = "somelinkedId"; // String | Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier. 
         String url = "https://example.com/login"; // String | Filter events by the URL (`url` property) associated with the event. 
         String bundleId = "com.example.app"; // String | Filter events by the Bundle ID (iOS) associated with the event. 
         String packageName = "com.example.app"; // String | Filter events by the Package Name (Android) associated with the event. 
@@ -402,7 +500,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 |------------- | ------------- | ------------- | -------------|
 | **limit** | **Integer**| Maximum number of events to return. Defaults to 10 when omitted. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events.  | [optional] |
 | **paginationKey** | **String**| Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q`  | [optional] |
-| **visitorId** | **String**| Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).  | [optional] |
+| **visitorId** | **String**| Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property).  | [optional] |
 | **highRecallId** | **String**| The High Recall ID is a supplementary browser identifier designed for use cases that require wider coverage over precision. Compared to the standard visitor ID, the High Recall ID strives to match incoming browsers more generously (rather than precisely) with existing browsers and thus identifies fewer browsers as new. The High Recall ID is best suited for use cases that are sensitive to browsers being identified as new and where mismatched browsers are not detrimental.  Filter events by matching High Recall ID (`supplementary_id_high_recall.visitor_id` property).  | [optional] |
 | **bot** | **SearchEventsBot**| Filter events by the Bot Detection result, specifically:   `all` - events where any kind of bot was detected.   `good` - events where a good bot was detected.   `bad` - events where a bad bot was detected.   `none` - events where no bot was detected. > Note: When using this parameter, only events with the `bot` property set to a valid value are returned. Events without a `bot` Smart Signal result are left out of the response.  | [optional] [enum: all, good, bad, none] |
 | **botInfo** | **SearchEventsBotInfo**| Filter events by their Bot Info result, specifically:   - `all` - events where any kind of bot was detected.   - `none` - events where no bot was detected, and no `bot_info` was present.  | [optional] [enum: all, none] |
@@ -413,7 +511,7 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **botInfoName** | **List&lt;String&gt;**| Filter events by their Bot Info Name. The name must match exactly, partial or wildcard matching is not supported.  Multiple Names can be provided using the repeated keys syntax. For example, `bot_info_name=ChatGPT%20Agent&bot_info_name=Bedrock%20AgentCore`, will match events with a Bot Info Name of `ChatGPT Agent` or `Bedrock AgentCore`. Other notations like comma-separated or bracket notation are not supported.  | [optional] |
 | **ipAddress** | **String**| Filter events by IP address or IP range (if CIDR notation is used). If CIDR notation is not used, a /32 for IPv4 or /128 for IPv6 is assumed. Examples of range based queries: 10.0.0.0/24, 192.168.0.1/32  | [optional] |
 | **asn** | **String**| Filter events by the ASN associated with the event's IP address. This corresponds to the `ip_info.(v4|v6).asn` property in the response.  | [optional] |
-| **linkedId** | **String**| Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-v4-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] |
+| **linkedId** | **String**| Filter events by your custom identifier.  You can use [linked Ids](https://docs.fingerprint.com/reference/js-agent-get-function#linkedid) to associate identification requests with your own identifier, for example, session Id, purchase Id, or transaction Id. You can then use this `linked_id` parameter to retrieve all events associated with your custom identifier.  | [optional] |
 | **url** | **String**| Filter events by the URL (`url` property) associated with the event.  | [optional] |
 | **bundleId** | **String**| Filter events by the Bundle ID (iOS) associated with the event.  | [optional] |
 | **packageName** | **String**| Filter events by the Package Name (Android) associated with the event.  | [optional] |
@@ -524,7 +622,7 @@ public class FingerprintApiExample {
         Region.ASIA
         */
         FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
-        String eventId = "1708102555327.NLOjmg"; // String | The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id).
+        String eventId = "1708102555327.NLOjmg"; // String | The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id).
         EventUpdate eventUpdate = new EventUpdate(); // EventUpdate | 
         try {
             api.updateEvent(eventId, eventUpdate);
@@ -541,7 +639,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **eventId** | **String**| The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). | |
+| **eventId** | **String**| The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id). | |
 | **eventUpdate** | [**EventUpdate**](EventUpdate.md)|  | |
 
 ### Return type

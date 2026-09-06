@@ -4,6 +4,8 @@ git_push.sh
 api/*
 src/test/java/com/fingerprint/v4/model/*
 src/main/java/com/fingerprint/v4/model/AbstractOpenApiSchema.java
+src/main/java/com/fingerprint/v4/sdk/EventDeserializer.java
+src/main/java/com/fingerprint/v4/sdk/EventMixin.java
 src/main/AndroidManifest.xml
 .github/workflows/maven.yml
 pom.xml
