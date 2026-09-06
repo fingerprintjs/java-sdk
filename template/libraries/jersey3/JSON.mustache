@@ -5,6 +5,8 @@ package {{invokerPackage}};
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fingerprint.v4.model.Event;
 {{#openApiNullable}}
 import org.openapitools.jackson.nullable.JsonNullableModule;
 {{/openApiNullable}}
@@ -44,6 +46,10 @@ public class JSON implements ContextResolver<ObjectMapper> {
             .addModule(new JsonNullableModule())
             {{/openApiNullable}}
             .addModule(new RFC3339JavaTimeModule())
+            .addModule(
+                new SimpleModule()
+                    .setMixInAnnotation(Event.class, EventMixin.class)
+                    .addDeserializer(Event.class, new EventDeserializer()))
             .build();
   }
 

@@ -15,7 +15,9 @@ package com.fingerprint.v4.sdk;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fingerprint.v4.model.Event;
 import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.ext.ContextResolver;
 import java.text.DateFormat;
@@ -45,6 +47,10 @@ public class JSON implements ContextResolver<ObjectMapper> {
             .defaultDateFormat(new RFC3339DateFormat())
             .addModule(new JavaTimeModule())
             .addModule(new RFC3339JavaTimeModule())
+            .addModule(
+                new SimpleModule()
+                    .setMixInAnnotation(Event.class, EventMixin.class)
+                    .addDeserializer(Event.class, new EventDeserializer()))
             .build();
   }
 

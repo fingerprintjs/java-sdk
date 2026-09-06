@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -122,6 +123,29 @@ public class SerializationTest {
         sdkObjectMapper.readValue(
             getFileAsIOStream("mocks/events/get_event_with_edge_200.json"), Event.class);
     assertInstanceOf(EventEdge.class, edge);
+  }
+
+  @Test
+  public void emptySourceHydratesToEventDevice() throws IOException {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+    ObjectNode deviceNode =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream("mocks/events/get_event_200.json"), ObjectNode.class);
+    deviceNode.put("source", "");
+    Event event = sdkObjectMapper.treeToValue(deviceNode, Event.class);
+    assertInstanceOf(EventDevice.class, event);
+  }
+
+  @Test
+  public void unknownSourceFails() throws IOException {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+    ObjectNode deviceNode =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream("mocks/events/get_event_200.json"), ObjectNode.class);
+    deviceNode.put("source", "webhook");
+    assertThrows(
+        com.fasterxml.jackson.databind.JsonMappingException.class,
+        () -> sdkObjectMapper.treeToValue(deviceNode, Event.class));
   }
 
   @TestFactory
