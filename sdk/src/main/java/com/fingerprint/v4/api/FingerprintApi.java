@@ -70,7 +70,7 @@ public class FingerprintApi {
   /**
    * Delete a visitor ID
    * Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).
-   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required)
+   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @throws ApiException if fails to make API call
    * @http.response.details
    * <table summary="Response Details" border="1">
@@ -89,7 +89,7 @@ public class FingerprintApi {
   /**
    * Delete a visitor ID
    * Use this API to request the deletion of all data associated with a specific visitor ID.  Upon a request to delete data for a visitor ID, - The data collected from the corresponding browser (or device) will be deleted asynchronously, typically within a few minutes. This data will no longer be available to identify this browser (or device). When the same browser (or device) revisits, it will receive a new visitor ID. - The identification events made from this browser (or device) in the past 10 days are typically deleted within 24 hrs.  - The identification events made from this browser (or device) outside of the 10 days will be purged as per your [data retention period](https://docs.fingerprint.com/docs/regions#data-retention).  The following timeline illustrates which events are deleted and which remain after a DELETE API request: ``` Day 1:  First visit from browser A. (Assigned visitor ID: VID1000) Day 2:  Browser A revisits. (Assigned the same visitor ID: VID1000) Day 13: Browser A revisits. (Assigned the same visitor ID: VID1000) Day 14: Delete VID1000 Day 15: Browser A re-visits. (Assigned a different visitor ID: VID9999) Day 15: GET /events/day-13 (Returns 404. The event is within the 10 days of deleting VID1000 and will have been deleted) Day 16: GET /events/day-2 (Returns 200. The event is outside of the 10 days of deleting VID1000 and is still available) ```  ### Availability This API is available only for Enterprise plans **upon request**. If you are interested, please [contact our support team](https://fingerprint.com/support/).  ### Rate limits and daily quota The rate limits and daily quota for this API **differ** from those for our other API.  The maximum number of DELETE requests that can be made in an hour cannot exceed 30 RPH, and the maximum number that can be made in a day cannot exceed 500 RPD.  You can request an increase to these limits by contacting [our support team](https://fingerprint.com/support/).
-   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required)
+   * @param visitorId The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @return ApiResponse<Void>
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -111,10 +111,15 @@ public class FingerprintApi {
           400, "Missing the required parameter 'visitorId' when calling deleteVisitorData");
     }
 
+    // verify the path parameter 'visitorId' is a valid identifier
+    String escapedVisitorId = apiClient.escapeString(visitorId.toString());
+    if (escapedVisitorId.equals(".") || escapedVisitorId.equals("..")) {
+      throw new ApiException(400, "invalid value for path parameter visitorId");
+    }
+
     // create path and map variables
     String localVarPath =
-        "/visitors/{visitor_id}"
-            .replaceAll("\\{" + "visitor_id" + "\\}", apiClient.escapeString(visitorId.toString()));
+        "/visitors/{visitor_id}".replaceAll("\\{" + "visitor_id" + "\\}", escapedVisitorId);
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -167,7 +172,7 @@ public class FingerprintApi {
   /**
    * Get an event by event ID
    * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
-   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
+   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @return Event
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -189,7 +194,7 @@ public class FingerprintApi {
   /**
    * Get an event by event ID
    * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
-   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
+   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return Event
    * @throws ApiException if fails to make API call
@@ -213,7 +218,7 @@ public class FingerprintApi {
   /**
    * Get an event by event ID
    * Get a detailed analysis of an individual identification event, including Smart Signals.  Use `event_id` as the URL path parameter. This API method is scoped to a request, i.e. all returned information is by `event_id`.
-   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required)
+   * @param eventId The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @param getEventOptionalParams Object containing optional parameters for API method.  (optional)
    * @return ApiResponse<Event>
    * @throws ApiException if fails to make API call
@@ -238,10 +243,15 @@ public class FingerprintApi {
       throw new ApiException(400, "Missing the required parameter 'eventId' when calling getEvent");
     }
 
+    // verify the path parameter 'eventId' is a valid identifier
+    String escapedEventId = apiClient.escapeString(eventId.toString());
+    if (escapedEventId.equals(".") || escapedEventId.equals("..")) {
+      throw new ApiException(400, "invalid value for path parameter eventId");
+    }
+
     // create path and map variables
     String localVarPath =
-        "/events/{event_id}"
-            .replaceAll("\\{" + "event_id" + "\\}", apiClient.escapeString(eventId.toString()));
+        "/events/{event_id}".replaceAll("\\{" + "event_id" + "\\}", escapedEventId);
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
@@ -1395,7 +1405,7 @@ public class FingerprintApi {
   /**
    * Update an event
    * Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request.
-   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). (required)
+   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @param eventUpdate  (required)
    * @throws ApiException if fails to make API call
    * @http.response.details
@@ -1415,7 +1425,7 @@ public class FingerprintApi {
   /**
    * Update an event
    * Change information in existing events specified by `event_id` or *flag suspicious events*.  When an event is created, it can be assigned `linked_id` and `tags` submitted through the JS agent parameters.  This information might not have been available on the client initially, so the Server API permits updating these attributes after the fact.  **Warning** It's not possible to update events older than one month.   **Warning** Trying to update an event immediately after creation may temporarily result in an  error (HTTP 409 Conflict. The event is not mutable yet.) as the event is fully propagated across our systems. In such a case, simply retry the request.
-   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). (required)
+   * @param eventId The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). (required) A value that is not a valid identifier is rejected with an {@link ApiException} before a request is sent.
    * @param eventUpdate  (required)
    * @return ApiResponse<Void>
    * @throws ApiException if fails to make API call
@@ -1445,10 +1455,15 @@ public class FingerprintApi {
           400, "Missing the required parameter 'eventUpdate' when calling updateEvent");
     }
 
+    // verify the path parameter 'eventId' is a valid identifier
+    String escapedEventId = apiClient.escapeString(eventId.toString());
+    if (escapedEventId.equals(".") || escapedEventId.equals("..")) {
+      throw new ApiException(400, "invalid value for path parameter eventId");
+    }
+
     // create path and map variables
     String localVarPath =
-        "/events/{event_id}"
-            .replaceAll("\\{" + "event_id" + "\\}", apiClient.escapeString(eventId.toString()));
+        "/events/{event_id}".replaceAll("\\{" + "event_id" + "\\}", escapedEventId);
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
