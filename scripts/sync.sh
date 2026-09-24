@@ -1,10 +1,28 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -ex
+# Resolve paths relative to the repository root, so the script can be run from
+# any working directory.
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-curl -fsSL -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-v4.yaml
+defaultBaseUrl="https://fingerprintjs.github.io/openapi"
+schemaUrl="${1:-$defaultBaseUrl/schemas/fingerprint-server-api-v4.yaml}"
+examplesBaseUrl="${2:-$defaultBaseUrl/examples}"
 
-examplesList=(
+CURL_OPTS=(-fSL --retry 3 --proto-redir '=https' --connect-timeout 10 --max-time 300)
+if [[ "${TRACE:-}" != "true" && "${ACTIONS_STEP_DEBUG:-}" != "true" ]]; then
+  CURL_OPTS+=(-s)
+fi
+
+schemaDestination="./res/fingerprint-server-api.yaml"
+baseDestination="./sdk/src/test/resources/mocks"
+
+mkdir -p "$(dirname "$schemaDestination")"
+
+echo "Downloading $schemaUrl to $schemaDestination"
+curl "${CURL_OPTS[@]}" -o "$schemaDestination" "$schemaUrl"
+
+examples=(
   'webhook/webhook_event.json'
   'events/get_event_200.json'
   'events/get_event_ruleset_200.json'
@@ -36,6 +54,13 @@ examplesList=(
   'errors/500_internal_server_error.json'
 )
 
-for example in "${examplesList[@]}"; do
-  curl --create-dirs -fsSL -o ./sdk/src/test/resources/mocks/"$example" https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/"$example"
+for example in "${examples[@]}"; do
+  destinationPath="$baseDestination/$example"
+  mkdir -p "$(dirname "$destinationPath")"
+
+  exampleUrl="$examplesBaseUrl/$example"
+  echo "Downloading $exampleUrl to $destinationPath"
+  curl "${CURL_OPTS[@]}" -o "$destinationPath" "$exampleUrl"
 done
+
+echo "All OpenAPI schema downloads complete."
