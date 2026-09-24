@@ -12,16 +12,16 @@ Contains results from Fingerprint Identification and all active Smart Signals. S
 |**timestamp** | **Long** | Timestamp of the event with millisecond precision in Unix time. |  |
 |**source** | [**EventSource**](EventSource.md) |  |  [optional] |
 |**incrementalIdentificationStatus** | [**IncrementalIdentificationStatus**](IncrementalIdentificationStatus.md) |  |  [optional] |
-|**linkedId** | **String** | A customer-provided id that was sent with the request. |  [optional] |
-|**environmentId** | **String** | Environment Id of the event. |  [optional] |
-|**suspect** | **Boolean** | Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event). |  [optional] |
+|**linkedId** | **String** | A customer-provided ID that was sent with the request. |  [optional] |
+|**environmentId** | **String** | Environment ID of the event. |  [optional] |
+|**suspect** | **Boolean** | Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event). |  [optional] |
 |**sdk** | [**SDK**](SDK.md) |  |  [optional] |
 |**replayed** | **Boolean** | `true` if we determined that this payload was replayed, `false` otherwise.  |  [optional] |
 |**identification** | [**Identification**](Identification.md) |  |  [optional] |
 |**supplementaryIdHighRecall** | [**SupplementaryIDHighRecall**](SupplementaryIDHighRecall.md) |  |  [optional] |
 |**tags** | **Map&lt;String, Object&gt;** | A customer-provided value or an object that was sent with the identification request or updated later. |  [optional] |
 |**url** | **String** | Page URL from which the request was sent. |  [optional] |
-|**bundleId** | **String** | Bundle Id of the iOS application integrated with the Fingerprint SDK for the event.  |  [optional] |
+|**bundleId** | **String** | Bundle ID of the iOS application integrated with the Fingerprint SDK for the event.  |  [optional] |
 |**packageName** | **String** | Package name of the Android application integrated with the Fingerprint SDK for the event.  |  [optional] |
 |**ipAddress** | **String** | IP address of the requesting browser or bot. |  [optional] |
 |**userAgent** | **String** | User Agent of the client. |  [optional] |
@@ -37,6 +37,7 @@ Contains results from Fingerprint Identification and all active Smart Signals. S
 |**botInfo** | [**BotInfo**](BotInfo.md) |  |  [optional] |
 |**clonedApp** | **Boolean** | Android specific cloned application detection. There are 2 values:  * `true` - Presence of app cloners work detected (e.g. fully cloned application found or launch of it inside of a not main working profile detected). * `false` - No signs of cloned application detected or the client is not Android.  |  [optional] |
 |**developerTools** | **Boolean** | `true` if the browser has DevTools open (Chrome, Firefox) or the Android/iOS device has Developer Tools enabled, `false` otherwise.  |  [optional] |
+|**deviceDetails** | [**DeviceDetails**](DeviceDetails.md) |  |  [optional] |
 |**emulator** | **Boolean** | Android specific emulator detection. There are 2 values:  * `true` - Emulated environment detected (e.g. launch inside of AVD).  * `false` - No signs of emulated environment detected or the client is not Android.  |  [optional] |
 |**factoryResetTimestamp** | **Long** | The time of the most recent factory reset that happened on the **mobile device** is expressed as Unix epoch time. When a factory reset cannot be detected on the mobile device or when the request is initiated from a browser,  this field will correspond to the *epoch* time (i.e 1 Jan 1970 UTC) as a value of 0. See [Factory Reset Detection](https://docs.fingerprint.com/docs/smart-signals-reference#factory-reset-detection) to learn more about this Smart Signal.  |  [optional] |
 |**frida** | **Boolean** | [Frida](https://frida.re/docs/) detection for Android and iOS devices. There are 2 values: * `true` - Frida detected * `false` - No signs of Frida or the client is not a mobile device.  |  [optional] |
