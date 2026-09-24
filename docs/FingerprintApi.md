@@ -89,7 +89,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **visitorId** | **String**| The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. | |
+| **visitorId** | **String**| The [visitor ID](https://docs.fingerprint.com/reference/js-agent-v4-get-function#visitor_id) you want to delete. A value that is not a valid identifier is rejected before a request is sent. | |
 
 ### Return type
 
@@ -171,7 +171,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **eventId** | **String**| The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). | |
+| **eventId** | **String**| The unique [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id) of each identification request (`requestId` can be used in its place). A value that is not a valid identifier is rejected before a request is sent. | |
 | **getEventOptionalParams** | [**FingerprintApi.GetEventOptionalParams**](#fingerprintapigeteventoptionalparams) | | [optional] |
 
 #### FingerprintApi.GetEventOptionalParams
@@ -541,7 +541,7 @@ public class FingerprintApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **eventId** | **String**| The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). | |
+| **eventId** | **String**| The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-v4-get-function#event_id). A value that is not a valid identifier is rejected before a request is sent. | |
 | **eventUpdate** | [**EventUpdate**](EventUpdate.md)|  | |
 
 ### Return type
