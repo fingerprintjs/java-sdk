@@ -239,6 +239,8 @@ public class PathParameterTest {
                     ApiException exception =
                         assertThrows(ApiException.class, () -> endpoint.call.call(api, id.id));
 
+                    // Same contract as the missing-required-parameter check in the same method.
+                    assertEquals(400, exception.getCode());
                     // The message names the offending value, which is safe to embed because it
                     // is the escaped form: anything that could break out is percent-encoded.
                     assertEquals(
