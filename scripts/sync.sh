@@ -2,7 +2,7 @@
 
 set -ex
 
-curl -s -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-v4.yaml
+curl -fsL -o ./res/fingerprint-server-api.yaml https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/schemas/fingerprint-server-api-v4.yaml
 
 examplesList=(
   'webhook/webhook_event.json'
@@ -37,5 +37,5 @@ examplesList=(
 )
 
 for example in "${examplesList[@]}"; do
-  curl --create-dirs -s -o ./sdk/src/test/resources/mocks/"$example" https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/"$example"
+  curl --create-dirs -fsL -o ./sdk/src/test/resources/mocks/"$example" https://fingerprintjs.github.io/fingerprint-pro-server-api-openapi/examples/"$example"
 done
