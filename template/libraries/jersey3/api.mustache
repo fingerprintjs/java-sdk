@@ -234,12 +234,7 @@ public class {{classname}} {
       throw new ApiException(400, "Missing the required parameter '{{paramName}}' when calling {{operationId}}");
     }
     {{/required}}{{/allParams}}
-    {{! A path parameter has to survive as a single, opaque path segment. Percent-encoding keeps }}
-    {{! slashes from injecting extra segments, but "." and ".." stay literal dots once escaped, so }}
-    {{! a URL normalizer between the SDK and the API would collapse the segment and address a }}
-    {{! different endpoint than the caller asked for. No resource is identified by such a value. }}
-    {{! The thrown message stays generic on purpose: it must not tell a caller which values are }}
-    {{! rejected, since it can surface to end users. }}
+    {{! "." and ".." are not valid path parameters}}
     {{#pathParams}}
     // verify the path parameter '{{paramName}}' is a valid identifier
     String escaped{{#lambda.titlecase}}{{paramName}}{{/lambda.titlecase}} = apiClient.escapeString({{{paramName}}}.toString());
