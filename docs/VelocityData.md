@@ -2,7 +2,7 @@
 
 # VelocityData
 
-Is absent if the velocity data could not be generated for the visitor Id. 
+Is absent if the velocity data could not be generated for the visitor ID. 
 
 ## Properties
 
