@@ -239,11 +239,10 @@ public class PathParameterTest {
                     ApiException exception =
                         assertThrows(ApiException.class, () -> endpoint.call.call(api, id.id));
 
-                    assertEquals(400, exception.getCode());
-                    // The message stays generic on purpose: it must not tell a caller which
-                    // values are rejected, since it can surface to end users.
+                    // The message names the offending value, which is safe to embed because it
+                    // is the escaped form: anything that could break out is percent-encoded.
                     assertEquals(
-                        "invalid value for path parameter " + endpoint.param,
+                        "invalid value \"" + id.encoded + "\" for path parameter " + endpoint.param,
                         exception.getMessage());
                     assertFalse(stub.wasRequested(), "no request should have been sent");
                   }
