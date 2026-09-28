@@ -48,7 +48,7 @@ public class LabelsInner {
   }
 
   /**
-   * Get label
+   * Customer-facing label name defined by the customer.
    * @return label
    */
   @jakarta.annotation.Nonnull
@@ -92,7 +92,7 @@ public class LabelsInner {
   }
 
   /**
-   * Get mlScore
+   * Raw model score between 0 and 1.
    * minimum: 0
    * maximum: 1
    * @return mlScore

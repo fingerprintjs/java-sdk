@@ -54,6 +54,7 @@ import java.util.Objects;
   Event.JSON_PROPERTY_BOT_INFO,
   Event.JSON_PROPERTY_CLONED_APP,
   Event.JSON_PROPERTY_DEVELOPER_TOOLS,
+  Event.JSON_PROPERTY_DEVICE_DETAILS,
   Event.JSON_PROPERTY_EMULATOR,
   Event.JSON_PROPERTY_FACTORY_RESET_TIMESTAMP,
   Event.JSON_PROPERTY_FRIDA,
@@ -185,6 +186,9 @@ public class Event {
 
   public static final String JSON_PROPERTY_DEVELOPER_TOOLS = "developer_tools";
   @jakarta.annotation.Nullable private Boolean developerTools;
+
+  public static final String JSON_PROPERTY_DEVICE_DETAILS = "device_details";
+  @jakarta.annotation.Nullable private DeviceDetails deviceDetails;
 
   public static final String JSON_PROPERTY_EMULATOR = "emulator";
   @jakarta.annotation.Nullable private Boolean emulator;
@@ -395,7 +399,7 @@ public class Event {
   }
 
   /**
-   * A customer-provided id that was sent with the request.
+   * A customer-provided ID that was sent with the request.
    * @return linkedId
    */
   @jakarta.annotation.Nullable
@@ -417,7 +421,7 @@ public class Event {
   }
 
   /**
-   * Environment Id of the event.
+   * Environment ID of the event.
    * @return environmentId
    */
   @jakarta.annotation.Nullable
@@ -439,7 +443,7 @@ public class Event {
   }
 
   /**
-   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-v4-update-event).
+   * Field is `true` if you have previously set the `suspect` flag for this event using the [Server API Update event endpoint](https://docs.fingerprint.com/reference/server-api-update-event).
    * @return suspect
    */
   @jakarta.annotation.Nullable
@@ -603,7 +607,7 @@ public class Event {
   }
 
   /**
-   * Bundle Id of the iOS application integrated with the Fingerprint SDK for the event.
+   * Bundle ID of the iOS application integrated with the Fingerprint SDK for the event.
    * @return bundleId
    */
   @jakarta.annotation.Nullable
@@ -947,6 +951,28 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDeveloperTools(@jakarta.annotation.Nullable Boolean developerTools) {
     this.developerTools = developerTools;
+  }
+
+  public Event deviceDetails(@jakarta.annotation.Nullable DeviceDetails deviceDetails) {
+    this.deviceDetails = deviceDetails;
+    return this;
+  }
+
+  /**
+   * Get deviceDetails
+   * @return deviceDetails
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_DEVICE_DETAILS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public DeviceDetails getDeviceDetails() {
+    return deviceDetails;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_DEVICE_DETAILS, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDeviceDetails(@jakarta.annotation.Nullable DeviceDetails deviceDetails) {
+    this.deviceDetails = deviceDetails;
   }
 
   public Event emulator(@jakarta.annotation.Nullable Boolean emulator) {
@@ -1805,6 +1831,7 @@ public class Event {
         && Objects.equals(this.botInfo, event.botInfo)
         && Objects.equals(this.clonedApp, event.clonedApp)
         && Objects.equals(this.developerTools, event.developerTools)
+        && Objects.equals(this.deviceDetails, event.deviceDetails)
         && Objects.equals(this.emulator, event.emulator)
         && Objects.equals(this.factoryResetTimestamp, event.factoryResetTimestamp)
         && Objects.equals(this.frida, event.frida)
@@ -1875,6 +1902,7 @@ public class Event {
         botInfo,
         clonedApp,
         developerTools,
+        deviceDetails,
         emulator,
         factoryResetTimestamp,
         frida,
@@ -1950,6 +1978,7 @@ public class Event {
     sb.append("    botInfo: ").append(toIndentedString(botInfo)).append("\n");
     sb.append("    clonedApp: ").append(toIndentedString(clonedApp)).append("\n");
     sb.append("    developerTools: ").append(toIndentedString(developerTools)).append("\n");
+    sb.append("    deviceDetails: ").append(toIndentedString(deviceDetails)).append("\n");
     sb.append("    emulator: ").append(toIndentedString(emulator)).append("\n");
     sb.append("    factoryResetTimestamp: ")
         .append(toIndentedString(factoryResetTimestamp))

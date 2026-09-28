@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import java.util.Objects;
 
 /**
- * Is absent if the velocity data could not be generated for the visitor Id.
+ * Is absent if the velocity data could not be generated for the visitor ID.
  */
 @JsonPropertyOrder({
   VelocityData.JSON_PROPERTY_5MINUTES,
