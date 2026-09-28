@@ -1,5 +1,15 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.8.0
+
+### Minor Changes
+
+- **events**: Add `device_details` smart signal to `Event` ([8cd8c32](https://github.com/fingerprintjs/java-sdk/commit/8cd8c32e8c17127ef2aa8e0ea319ac28f184a344))
+
+### Patch Changes
+
+- **events**: Fix descriptions to use ID rather than Id. Clarify descriptions for Labels. ([8cd8c32](https://github.com/fingerprintjs/java-sdk/commit/8cd8c32e8c17127ef2aa8e0ea319ac28f184a344))
+
 ## 8.7.1
 
 ### Patch Changes
