@@ -26,7 +26,7 @@ Use the Gradle build to invoke `openapi-generator` and generate the code and doc
 ./gradlew build
 ```
 
-To download the latest OpenAPI schema from [fingerprintjs/fingerprint-pro-server-api-openapi](https://github.com/fingerprintjs/fingerprint-pro-server-api-openapi), run `./scripts/sync.sh`
+To download the latest OpenAPI schema from [fingerprintjs/openapi](https://github.com/fingerprintjs/openapi), run `./scripts/sync.sh`
 
 ### Updating the codegen engine and templates
 
