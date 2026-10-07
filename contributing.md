@@ -71,13 +71,14 @@ BREAKING CHANGE: The minimum supported Java version is now 17.
 This repository includes optional Git hooks in the [.git_hooks](./.git_hooks) folder. To enable them, run:
 
 ```shell
+pnpm install
 ./install_hooks.sh
 ```
 
 The script sets `core.hooksPath` to `.git_hooks` and installs commitlint globally with npm, so you need Node.js. The hooks do the following:
 
 - `commit-msg` checks the commit message with commitlint and rejects the commit if the message is invalid.
-- `pre-push` blocks pushing directly to `main`.
+- `pre-push` tries to stop accidental pushes to `main`.
 
 Commit messages are also checked in CI. If the check fails, reword the offending commits (for example, with `git rebase -i`) and force-push the branch.
 
@@ -148,7 +149,7 @@ If a PR has several user-facing changes, add one changeset for each. When severa
 #### Release flow
 
 1. On every PR, a bot comments with a preview of the release notes that the PR's changesets will produce. If the PR has no changesets, the comment reminds you to add one.
-2. After the PR is merged to `main`, the [Release](./.github/workflows/release.yml) workflow opens a `Release [changeset]` PR, or updates it if it's already open. That PR consumes all pending changesets, bumps the version and updates `CHANGELOG.md`.
+2. After a PR with changesets is merged to `main`, the [Release](./.github/workflows/release.yml) workflow opens a `Release [changeset]` PR, or updates it if it's already open. That PR consumes all pending changesets, bumps the version and updates `CHANGELOG.md`.
 3. Merging the `Release [changeset]` PR creates the Git tag and the GitHub release. [JitPack](https://jitpack.io/#fingerprintjs/java-sdk) builds the new version from the tag.
 
 #### Prereleases
