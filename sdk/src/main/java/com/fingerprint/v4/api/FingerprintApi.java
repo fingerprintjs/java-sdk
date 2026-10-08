@@ -183,9 +183,10 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. The event ID provided is not valid. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The event ID cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
-   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
+   * <tr><td> 503 </td><td> Service Temporarily Unavailable. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. </td><td>  -  </td></tr>
    * </table>
    */
   public Event getEvent(String eventId) throws ApiException {
@@ -206,9 +207,10 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. The event ID provided is not valid. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The event ID cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
-   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
+   * <tr><td> 503 </td><td> Service Temporarily Unavailable. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. </td><td>  -  </td></tr>
    * </table>
    */
   public Event getEvent(String eventId, GetEventOptionalParams getEventOptionalParams)
@@ -230,9 +232,10 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. The event ID provided is not valid. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The event ID cannot be found in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
-   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
+   * <tr><td> 503 </td><td> Service Temporarily Unavailable. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. </td><td>  -  </td></tr>
    * </table>
    */
   public ApiResponse<Event> getEventWithHttpInfo(
@@ -1199,9 +1202,10 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The requested visitor does not exist in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
-   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
+   * <tr><td> 503 </td><td> Service Temporarily Unavailable. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. </td><td>  -  </td></tr>
    * </table>
    */
   public EventSearch searchEvents(SearchEventsOptionalParams searchEventsOptionalParams)
@@ -1222,9 +1226,10 @@ public class FingerprintApi {
    * <tr><td> 400 </td><td> Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. </td><td>  -  </td></tr>
    * <tr><td> 403 </td><td> Forbidden. Access to this API is denied. </td><td>  -  </td></tr>
    * <tr><td> 404 </td><td> Not found. The requested visitor does not exist in this workspace&#39;s data. </td><td>  -  </td></tr>
-   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message &#x60;too many search requests&#x60; even if you are within your assigned rate limits.  </td><td>  -  </td></tr>
+   * <tr><td> 429 </td><td> Too Many Requests. The request is throttled.  </td><td>  -  </td></tr>
    * <tr><td> 500 </td><td> Workspace error. </td><td>  -  </td></tr>
-   * <tr><td> 504 </td><td> Gateway Timeout. Search execution exceeded the allowed timeout window. </td><td>  -  </td></tr>
+   * <tr><td> 503 </td><td> Service Temporarily Unavailable. </td><td>  -  </td></tr>
+   * <tr><td> 504 </td><td> Gateway Timeout. </td><td>  -  </td></tr>
    * </table>
    */
   public ApiResponse<EventSearch> searchEventsWithHttpInfo(
