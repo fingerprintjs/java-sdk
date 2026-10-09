@@ -68,7 +68,7 @@ public class DeviceDetails {
   }
 
   /**
-   * Raw device model identifier, as reported by the mobile OS.
+   * Raw device model identifier, as reported by the mobile OS. On Android, this is the vendor-defined model string (e.g., `SM-G991U`). On iOS, this is an Apple board code (e.g., `D84AP`).
    * @return deviceModel
    */
   @jakarta.annotation.Nullable

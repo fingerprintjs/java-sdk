@@ -202,9 +202,10 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **400** | Bad request. The event ID provided is not valid. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
 | **404** | Not found. The event ID cannot be found in this workspace's data. |  -  |
-| **429** | Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message `too many search requests` even if you are within your assigned rate limits.  |  -  |
+| **429** | Too Many Requests. The request is throttled.  |  -  |
 | **500** | Workspace error. |  -  |
-| **504** | Gateway Timeout. Search execution exceeded the allowed timeout window. |  -  |
+| **503** | Service Temporarily Unavailable. |  -  |
+| **504** | Gateway Timeout. |  -  |
 
 
 ## searchEvents
@@ -475,9 +476,10 @@ Object containing optional parameters for API method. Supports a fluent interfac
 | **400** | Bad request. One or more supplied search parameters are invalid, or a required parameter is missing. |  -  |
 | **403** | Forbidden. Access to this API is denied. |  -  |
 | **404** | Not found. The requested visitor does not exist in this workspace's data. |  -  |
-| **429** | Too Many Requests. The request is throttled. To protect service stability during rare periods of extreme load, we may return HTTP 429 responses with message `too many search requests` even if you are within your assigned rate limits.  |  -  |
+| **429** | Too Many Requests. The request is throttled.  |  -  |
 | **500** | Workspace error. |  -  |
-| **504** | Gateway Timeout. Search execution exceeded the allowed timeout window. |  -  |
+| **503** | Service Temporarily Unavailable. |  -  |
+| **504** | Gateway Timeout. |  -  |
 
 
 ## updateEvent
