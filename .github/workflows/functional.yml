@@ -32,7 +32,6 @@ jobs:
           distribution: zulu
           java-version: |
             ${{ matrix.java }}
-            17
 
       # Gradle will detect the JVM installation from the ubuntu-latest image and use it
       - run: ./gradlew runFunctionalTests -PjavaVersion=${{ matrix.java }} --stacktrace
