@@ -26,6 +26,14 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: zulu
+          java-version: |
+            ${{ matrix.java }}
+            17
+
       # Gradle will detect the JVM installation from the ubuntu-latest image and use it
       - run: ./gradlew runFunctionalTests -PjavaVersion=${{ matrix.java }} --stacktrace
         env:
