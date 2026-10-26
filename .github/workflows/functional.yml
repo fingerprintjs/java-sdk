@@ -29,9 +29,9 @@ jobs:
 
       - uses: actions/setup-java@v6
         with:
-          distribution: zulu
-          java-version: |
-            ${{ matrix.java }}
+          distribution: temurin
+          # Gradle 8 can't run on the runner's default JDK 25
+          java-version: 17
 
       # Gradle will detect the JVM installation from the ubuntu-latest image and use it
       - run: ./gradlew runFunctionalTests -PjavaVersion=${{ matrix.java }} --stacktrace
