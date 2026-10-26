@@ -1,9 +1,8 @@
 import java.net.URL
-import javax.inject.Inject
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
 
-val projectVersion = property("projectVersion") as String
+val projectVersion: String by project
 
 allprojects {
     group = "com.github.fingerprintjs"
@@ -59,15 +58,7 @@ tasks.register("downloadGoogleJavaFormat") {
 }
 
 
-// Project.exec was removed in Gradle 9; ExecOperations is the supported replacement
-interface InjectedExecOps {
-    @get:Inject
-    val execOps: ExecOperations
-}
-
 fun Project.registerFormatTasks() {
-    val execOps = objects.newInstance<InjectedExecOps>().execOps
-
     // Resolve lazily: files may be deleted/regenerated between configuration and execution
     // (e.g., openApiGenerate removes and rewrites sources before format runs).
     fun srcJavaFiles(): List<String> = fileTree("src") {
@@ -85,14 +76,14 @@ fun Project.registerFormatTasks() {
             val inputFiles = srcJavaFiles()
 
             // First, fix the imports
-            execOps.exec {
+            exec {
                 executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
                 args = listOf("--replace", "--fix-imports-only") + inputFiles
             }
 
             // Second, format the code. This ensures that the removal of unused imports does not
             // introduce the need to run another formatting pass to pass the formatting checks.
-            execOps.exec {
+            exec {
                 executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
                 args = listOf("--replace", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + inputFiles
             }
@@ -104,7 +95,7 @@ fun Project.registerFormatTasks() {
 
         doLast {
             println("The following source files need to be formatted:")
-            execOps.exec {
+            exec {
                 executable = googleJavaFormatExeFile.get().asFile.toPath().toString()
                 args = listOf("--dry-run", "--set-exit-if-changed", "--skip-javadoc-formatting", "--skip-reflowing-long-strings") + srcJavaFiles()
             }

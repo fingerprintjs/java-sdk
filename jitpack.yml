@@ -1,5 +1,5 @@
 jdk:
-  - openjdk17
+  - openjdk11
 install:
-  - ./gradlew clean build -PjavaVersion=17
-  - ./gradlew sdk:publishToMavenLocal -PjavaVersion=17
+  - ./gradlew clean build
+  - ./gradlew sdk:publishToMavenLocal

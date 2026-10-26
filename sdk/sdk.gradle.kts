@@ -1,5 +1,5 @@
 
-val projectVersion = property("projectVersion") as String
+val projectVersion: String by project
 
 group = "com.github.fingerprintjs"
 version = projectVersion
