@@ -1,4 +1,4 @@
-val projectVersion: String by project
+val projectVersion = property("projectVersion") as String
 
 group = "com.fingerprint"
 version = projectVersion

@@ -30,8 +30,10 @@ jobs:
       - uses: actions/setup-java@v6
         with:
           distribution: zulu
+          # Last version becomes JAVA_HOME and runs Gradle (needs 17+); matrix version is picked up as toolchain
           java-version: |
             ${{ matrix.java }}
+            21
 
       # Gradle will detect the JVM installation from the ubuntu-latest image and use it
       - run: ./gradlew runFunctionalTests -PjavaVersion=${{ matrix.java }} --stacktrace
