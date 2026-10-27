@@ -10,4 +10,5 @@ jobs:
   check-template-consistency:
     uses: fingerprintjs/dx-team-toolkit/.github/workflows/check-template-consistency.yml@v1
     with:
-      generate-command: 'bash ./scripts/generate.sh'
+      # Gradle 8 can't run on the runner's default JDK 25, use the preinstalled JDK 17
+      generate-command: 'JAVA_HOME=$JAVA_HOME_17_X64 bash ./scripts/generate.sh'
