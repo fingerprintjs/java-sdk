@@ -2,9 +2,11 @@ package com.fingerprint.v4;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -14,6 +16,7 @@ import com.fingerprint.v4.model.ErrorCode;
 import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.model.EventRuleAction;
+import com.fingerprint.v4.model.EventSource;
 import com.fingerprint.v4.sdk.JSON;
 import java.io.File;
 import java.io.IOException;
@@ -102,6 +105,54 @@ public class SerializationTest {
     Event event = sdkObjectMapper.treeToValue(eventNode, Event.class);
 
     assertInstanceOf(EventRuleAction.UnknownEventRuleAction.class, event.getRuleAction());
+  }
+
+  @Test
+  public void deserializeEventWithoutSource() throws IOException {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+
+    ObjectNode eventNode =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream(EVENTS_DIR + "/get_event_200.json"), ObjectNode.class);
+    eventNode.remove("source");
+
+    Event event = sdkObjectMapper.treeToValue(eventNode, Event.class);
+
+    assertNull(event.getSource());
+    assertNotNull(event.getIdentification());
+    assertEquals(eventNode.get("event_id").asText(), event.getEventId());
+    assertFalse(sdkObjectMapper.writeValueAsString(event).contains("\"source\""));
+  }
+
+  @Test
+  public void deserializeEdgeEvent() throws IOException {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+
+    Event event =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream(EVENTS_DIR + "/get_event_with_edge_200.json"), Event.class);
+
+    assertEquals(EventSource.EDGE, event.getSource());
+    assertNull(event.getIdentification());
+    assertNotNull(event.getIpInfo());
+    assertNotNull(event.getBotInfo());
+    assertEquals(
+        "edge",
+        sdkObjectMapper.readTree(sdkObjectMapper.writeValueAsString(event)).get("source").asText());
+  }
+
+  @Test
+  public void deserializeEventWithUnknownSource() throws IOException {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+
+    ObjectNode eventNode =
+        sdkObjectMapper.readValue(
+            getFileAsIOStream(EVENTS_DIR + "/get_event_200.json"), ObjectNode.class);
+    eventNode.put("source", "something_new");
+
+    Event event = sdkObjectMapper.treeToValue(eventNode, Event.class);
+
+    assertEquals(EventSource.UNSUPPORTED_VALUE_SDK_UPGRADE_REQUIRED, event.getSource());
   }
 
   @TestFactory
