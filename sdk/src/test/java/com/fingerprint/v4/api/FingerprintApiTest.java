@@ -218,6 +218,7 @@ public class FingerprintApiTest {
     assertFalse(response.getVirtualMachine());
     assertInstanceOf(VelocityData.class, response.getVelocity().getDistinctCountry());
     assertFalse(response.getLocationSpoofing());
+    assertFalse(response.getCompromisedDeviceIntegrity());
     assertEquals(0L, response.getFactoryResetTimestamp());
     assertNotNull(response.getTags());
     assertTrue(response.getTags().isEmpty());
@@ -447,6 +448,7 @@ public class FingerprintApiTest {
     assertFalse(event.getVirtualMachine());
     assertInstanceOf(VelocityData.class, event.getVelocity().getDistinctVisitorIdByLinkedId());
     assertFalse(event.getLocationSpoofing());
+    assertFalse(event.getCompromisedDeviceIntegrity());
     assertEquals(0L, event.getFactoryResetTimestamp());
   }
 
