@@ -4,5 +4,8 @@
   "initialVersions": {
     "java-sdk": "8.9.0"
   },
-  "changesets": []
+  "changesets": [
+    "compromised-device-integrity-events-search",
+    "compromised-device-integrity-events"
+  ]
 }
