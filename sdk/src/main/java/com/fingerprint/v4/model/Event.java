@@ -53,6 +53,7 @@ import java.util.Objects;
   Event.JSON_PROPERTY_BOT_TYPE,
   Event.JSON_PROPERTY_BOT_INFO,
   Event.JSON_PROPERTY_CLONED_APP,
+  Event.JSON_PROPERTY_COMPROMISED_DEVICE_INTEGRITY,
   Event.JSON_PROPERTY_DEVELOPER_TOOLS,
   Event.JSON_PROPERTY_DEVICE_DETAILS,
   Event.JSON_PROPERTY_EMULATOR,
@@ -183,6 +184,10 @@ public class Event {
 
   public static final String JSON_PROPERTY_CLONED_APP = "cloned_app";
   @jakarta.annotation.Nullable private Boolean clonedApp;
+
+  public static final String JSON_PROPERTY_COMPROMISED_DEVICE_INTEGRITY =
+      "compromised_device_integrity";
+  @jakarta.annotation.Nullable private Boolean compromisedDeviceIntegrity;
 
   public static final String JSON_PROPERTY_DEVELOPER_TOOLS = "developer_tools";
   @jakarta.annotation.Nullable private Boolean developerTools;
@@ -929,6 +934,30 @@ public class Event {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setClonedApp(@jakarta.annotation.Nullable Boolean clonedApp) {
     this.clonedApp = clonedApp;
+  }
+
+  public Event compromisedDeviceIntegrity(
+      @jakarta.annotation.Nullable Boolean compromisedDeviceIntegrity) {
+    this.compromisedDeviceIntegrity = compromisedDeviceIntegrity;
+    return this;
+  }
+
+  /**
+   * `true` if the Android device's boot or system integrity is compromised (e.g., an unlocked bootloader or a failed verified boot), so the device cannot be trusted. `false` if no integrity issue was detected. Available from Android SDK 2.6.0+.
+   * @return compromisedDeviceIntegrity
+   */
+  @jakarta.annotation.Nullable
+  @JsonProperty(value = JSON_PROPERTY_COMPROMISED_DEVICE_INTEGRITY, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public Boolean getCompromisedDeviceIntegrity() {
+    return compromisedDeviceIntegrity;
+  }
+
+  @JsonProperty(value = JSON_PROPERTY_COMPROMISED_DEVICE_INTEGRITY, required = false)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCompromisedDeviceIntegrity(
+      @jakarta.annotation.Nullable Boolean compromisedDeviceIntegrity) {
+    this.compromisedDeviceIntegrity = compromisedDeviceIntegrity;
   }
 
   public Event developerTools(@jakarta.annotation.Nullable Boolean developerTools) {
@@ -1830,6 +1859,7 @@ public class Event {
         && Objects.equals(this.botType, event.botType)
         && Objects.equals(this.botInfo, event.botInfo)
         && Objects.equals(this.clonedApp, event.clonedApp)
+        && Objects.equals(this.compromisedDeviceIntegrity, event.compromisedDeviceIntegrity)
         && Objects.equals(this.developerTools, event.developerTools)
         && Objects.equals(this.deviceDetails, event.deviceDetails)
         && Objects.equals(this.emulator, event.emulator)
@@ -1901,6 +1931,7 @@ public class Event {
         botType,
         botInfo,
         clonedApp,
+        compromisedDeviceIntegrity,
         developerTools,
         deviceDetails,
         emulator,
@@ -1977,6 +2008,9 @@ public class Event {
     sb.append("    botType: ").append(toIndentedString(botType)).append("\n");
     sb.append("    botInfo: ").append(toIndentedString(botInfo)).append("\n");
     sb.append("    clonedApp: ").append(toIndentedString(clonedApp)).append("\n");
+    sb.append("    compromisedDeviceIntegrity: ")
+        .append(toIndentedString(compromisedDeviceIntegrity))
+        .append("\n");
     sb.append("    developerTools: ").append(toIndentedString(developerTools)).append("\n");
     sb.append("    deviceDetails: ").append(toIndentedString(deviceDetails)).append("\n");
     sb.append("    emulator: ").append(toIndentedString(emulator)).append("\n");
