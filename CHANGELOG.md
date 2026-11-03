@@ -1,5 +1,12 @@
 # Fingerprint Pro Server Java SDK
 
+## 8.10.0
+
+### Minor Changes
+
+- **events-search**: Add `compromised_device_integrity` filter parameter ([ce6529c](https://github.com/fingerprintjs/java-sdk/commit/ce6529c2875cc10b1c558eafde719a97b4dd666e))
+- **events**: Add `compromised_device_integrity` to `Event` ([7cd6966](https://github.com/fingerprintjs/java-sdk/commit/7cd69663cc0809e876d4bc6811687179982cb258))
+
 ## 8.10.0-rc.0
 
 ### Minor Changes
