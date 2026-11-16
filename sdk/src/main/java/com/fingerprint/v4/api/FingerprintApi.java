@@ -344,8 +344,8 @@ public class FingerprintApi {
     private Boolean torNode;
     private SearchEventsIncrementalIdentificationStatus incrementalIdentificationStatus;
     private Boolean simulator;
-    private Boolean activeCall;
     private List<SearchEventsSource> source;
+    private Boolean activeCall;
     private Boolean compromisedDeviceIntegrity;
 
     /**
@@ -1145,32 +1145,17 @@ public class FingerprintApi {
     }
 
     /**
-     * getter for simulator - Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.
+     * getter for simulator - Filter events by the Simulator Detection result (native iOS SDK and Safari on iOS).  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.
      */
     public Boolean getSimulator() {
       return simulator;
     }
 
     /**
-     * setter for simulator - Filter events by iOS Simulator Detection result.  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.
+     * setter for simulator - Filter events by the Simulator Detection result (native iOS SDK and Safari on iOS).  > Note: When using this parameter, only events with the `simulator` property set to `true` or `false` are returned. Events without a `simulator` Smart Signal result are left out of the response.
      */
     public SearchEventsOptionalParams setSimulator(Boolean simulator) {
       this.simulator = simulator;
-      return this;
-    }
-
-    /**
-     * getter for activeCall - Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.
-     */
-    public Boolean getActiveCall() {
-      return activeCall;
-    }
-
-    /**
-     * setter for activeCall - Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.
-     */
-    public SearchEventsOptionalParams setActiveCall(Boolean activeCall) {
-      this.activeCall = activeCall;
       return this;
     }
 
@@ -1186,6 +1171,21 @@ public class FingerprintApi {
      */
     public SearchEventsOptionalParams setSource(List<SearchEventsSource> source) {
       this.source = source;
+      return this;
+    }
+
+    /**
+     * getter for activeCall - Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.
+     */
+    public Boolean getActiveCall() {
+      return activeCall;
+    }
+
+    /**
+     * setter for activeCall - Filter events by Active Call Detection result on mobile devices.  > Note: When using this parameter, only events with the `active_call` property set to `true` or `false` are returned. Events without an `active_call` Smart Signal result are left out of the response.
+     */
+    public SearchEventsOptionalParams setActiveCall(Boolean activeCall) {
+      this.activeCall = activeCall;
       return this;
     }
 
@@ -1397,10 +1397,10 @@ public class FingerprintApi {
       localVarQueryParams.addAll(
           apiClient.parameterToPairs("", "simulator", searchEventsOptionalParams.getSimulator()));
       localVarQueryParams.addAll(
+          apiClient.parameterToPairs("multi", "source", searchEventsOptionalParams.getSource()));
+      localVarQueryParams.addAll(
           apiClient.parameterToPairs(
               "", "active_call", searchEventsOptionalParams.getActiveCall()));
-      localVarQueryParams.addAll(
-          apiClient.parameterToPairs("multi", "source", searchEventsOptionalParams.getSource()));
       localVarQueryParams.addAll(
           apiClient.parameterToPairs(
               "",
