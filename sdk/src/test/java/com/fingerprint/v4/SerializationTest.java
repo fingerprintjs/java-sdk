@@ -14,6 +14,7 @@ import com.fingerprint.v4.model.ErrorCode;
 import com.fingerprint.v4.model.ErrorResponse;
 import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.model.EventRuleAction;
+import com.fingerprint.v4.model.EventSearch;
 import com.fingerprint.v4.sdk.JSON;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class SerializationTest {
 
   private static final String ERRORS_DIR = "mocks/errors";
   private static final String EVENTS_DIR = "mocks/events";
+  private static final String EVENTS_SEARCH_DIR = "mocks/events/search";
 
   private InputStream getFileAsIOStream(final String fileName) {
     InputStream ioStream = this.getClass().getClassLoader().getResourceAsStream(fileName);
@@ -160,6 +162,43 @@ public class SerializationTest {
                           eventNode.get("timestamp").asLong(), event.getTimestamp().longValue());
 
                       getMapper().writeValueAsString(event);
+                    }));
+  }
+
+  @TestFactory
+  public Stream<DynamicTest> deserializeSerializeEventSearches() {
+    ObjectMapper sdkObjectMapper = JSON.getDefault().getMapper();
+
+    return listMockFileNames(EVENTS_SEARCH_DIR, name -> name.startsWith("get_event_search"))
+        .stream()
+        .map(
+            fileName ->
+                DynamicTest.dynamicTest(
+                    fileName,
+                    () -> {
+                      String resource = EVENTS_SEARCH_DIR + "/" + fileName;
+
+                      ObjectNode searchNode =
+                          sdkObjectMapper.readValue(getFileAsIOStream(resource), ObjectNode.class);
+                      EventSearch eventSearch =
+                          sdkObjectMapper.readValue(getFileAsIOStream(resource), EventSearch.class);
+
+                      assertNotNull(eventSearch.getEvents());
+                      assertEquals(searchNode.get("events").size(), eventSearch.getEvents().size());
+                      for (int i = 0; i < eventSearch.getEvents().size(); i++) {
+                        Event event = eventSearch.getEvents().get(i);
+                        assertEquals(
+                            searchNode.at("/events/" + i + "/event_id").asText(),
+                            event.getEventId());
+                        assertEquals(
+                            searchNode.at("/events/" + i + "/timestamp").asLong(),
+                            event.getTimestamp().longValue());
+                      }
+                      assertEquals(
+                          searchNode.path("pagination_key").asText(null),
+                          eventSearch.getPaginationKey());
+
+                      getMapper().writeValueAsString(eventSearch);
                     }));
   }
 
