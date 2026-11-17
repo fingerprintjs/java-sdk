@@ -36,7 +36,7 @@ public class FunctionalTests {
     // The start and end timestamp for a search can be specified as UNIX epoch milliseconds
     // value or an OffsetDateTime
     long end = Instant.now().toEpochMilli();
-    OffsetDateTime start = OffsetDateTime.now().minus(89, ChronoUnit.DAYS);
+    OffsetDateTime start = OffsetDateTime.now().minus(29, ChronoUnit.DAYS);
 
     String eventId = "";
 
