@@ -22,6 +22,7 @@ jobs:
       - uses: fingerprintjs/dx-team-toolkit/.github/actions/seed-identification-events@v1
         with:
           public-api-key: ${{ secrets.FINGERPRINT_PUBLIC_KEY }}
+          region: ${{ secrets.FPJS_API_REGION || 'us' }}
 
   functional_tests:
     name: "Functional Tests Java ${{ matrix.java }}"
