@@ -46,6 +46,25 @@ The generator version is pinned as the `openapi` entry in [gradle/libs.versions.
 2. Compare each file in [template](./template) against the matching upstream `java` or `jersey3` generator template at the new version, and merge in any upstream changes the same way you would resolve a merge conflict.
 3. Update the engine and the templates in the same change. Using the new engine with old templates, or the other way around, can break code generation without a clear error.
 
+### Updating dependencies and build tools
+
+Gradle checks every dependency and plugin against the SHA-256 checksums in
+[gradle/verification-metadata.xml](./gradle/verification-metadata.xml). After changing a version in
+[gradle/libs.versions.toml](./gradle/libs.versions.toml), refresh the checksums from an empty Gradle cache, so that
+every downloaded file is recorded:
+
+```
+export GRADLE_USER_HOME=$(mktemp -d)
+./gradlew --write-verification-metadata sha256 build
+JITPACK=true ./gradlew --write-verification-metadata sha256 clean build sdk:publishToMavenLocal
+unset GRADLE_USER_HOME
+```
+
+Two build tools are pinned outside that file:
+
+- The Gradle distribution: upgrade with `./gradlew wrapper --gradle-version <version> --gradle-distribution-sha256-sum <sha256>`, using the checksum published on [gradle.org/release-checksums](https://gradle.org/release-checksums/).
+- `google-java-format`: when bumping its version, replace every digest in `googleJavaFormatSha256` in [build.gradle.kts](./build.gradle.kts) with the ones shown on the GitHub release page.
+
 ## Testing the local source code of the SDK
 
 Use the [./src/examples/java/com/fingerprint/example/FunctionalTests.java](./src/examples/java/com/fingerprint/example/FunctionalTests.java) file to make API requests using the local version of the SDK.
