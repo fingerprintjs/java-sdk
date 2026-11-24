@@ -2,12 +2,17 @@ package com.fingerprint.v4.sdk;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Hex;
 
 public class WebhookValidation {
+
+  private static final String ALGORITHM = "HmacSHA256";
+  private static final String SIGNATURE_VERSION = "v1";
+  private static final int SIGNATURE_LENGTH = 64;
 
   /**
    * Verifies the HMAC signature extracted from the "fpjs-event-signature" header of the incoming request.
@@ -21,33 +26,46 @@ public class WebhookValidation {
    */
   public static boolean isSignatureValid(String header, byte[] data, String secret)
       throws NoSuchAlgorithmException {
-    String[] signatures = header.split(",");
-    for (String signature : signatures) {
+    if (secret == null || secret.isEmpty()) {
+      throw new IllegalArgumentException("Webhook secret must not be empty");
+    }
+
+    byte[] expected = null;
+
+    for (String signature : header.split(",")) {
       String[] parts = signature.split("=");
-      if (parts.length == 2) {
-        final String version = parts[0];
-        final String hash = parts[1];
-        if (version.equals("v1") && isValidHmacSignature(hash, data, secret)) {
-          return true;
+      if (parts.length != 2
+          || !parts[0].equals(SIGNATURE_VERSION)
+          || parts[1].length() != SIGNATURE_LENGTH) {
+        continue;
+      }
+
+      if (expected == null) {
+        expected = computeSignature(data, secret);
+        if (expected == null) {
+          return false;
         }
+      }
+
+      if (MessageDigest.isEqual(expected, parts[1].getBytes(StandardCharsets.UTF_8))) {
+        return true;
       }
     }
     return false;
   }
 
-  private static final String ALGORITHM = "HmacSHA256";
-
-  private static boolean isValidHmacSignature(String signature, byte[] data, String secret)
+  /**
+   * Returns the lowercase hex HMAC-SHA256 of the data as ASCII bytes, or null for an unusable key.
+   */
+  private static byte[] computeSignature(byte[] data, String secret)
       throws NoSuchAlgorithmException {
     SecretKeySpec spec = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), ALGORITHM);
     Mac mac = Mac.getInstance(ALGORITHM);
     try {
       mac.init(spec);
-      byte[] computed = mac.doFinal(data);
-      String computedHash = Hex.encodeHexString(computed).replace("-", "").toLowerCase();
-      return computedHash.equals(signature);
     } catch (InvalidKeyException e) {
-      return false;
+      return null;
     }
+    return Hex.encodeHexString(mac.doFinal(data)).getBytes(StandardCharsets.US_ASCII);
   }
 }
