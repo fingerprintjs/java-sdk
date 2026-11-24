@@ -140,14 +140,14 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on createApiClient function's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
         Region.EUROPE
         Region.ASIA
         */
-        ApiClient client = Configuration.getDefaultApiClient(FPJS_API_SECRET, Region.EUROPE);
+        ApiClient client = Configuration.createApiClient(FPJS_API_SECRET, Region.EUROPE);
         FingerprintApi api = new FingerprintApi(client);
         // Get an event with a given requestId
         try {
@@ -301,17 +301,17 @@ import com.fingerprint.v4.api.FingerprintApi;
 
 // ...
 
-ApiClient defaultClient = Configuration.getDefaultApiClient();
-ClientConfig clientConfig = defaultClient.getClientConfig();
+ApiClient client = Configuration.createApiClient("Default Fingerprint APIClient", Region.GLOBAL);
+ClientConfig clientConfig = client.getClientConfig();
 
 // The following properties configure the ApacheConnectorProvider, which is the default.
 clientConfig.property(ClientProperties.PROXY_URI, "http://proxy_url_here");
 clientConfig.property(ClientProperties.PROXY_USERNAME, "proxy_username");
 clientConfig.property(ClientProperties.PROXY_PASSWORD, "proxy_password");
 
-defaultClient.setClientConfig(clientConfig);
+client.setClientConfig(clientConfig);
 
-FingerprintApi apiInstance = new FingerprintApi(defaultClient);
+FingerprintApi apiInstance = new FingerprintApi(client);
 
 ```
 
@@ -398,7 +398,10 @@ Class | Method | HTTP request | Description
 
 ## Recommendation
 
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+Create a separate `ApiClient` for each API key and region with `Configuration.createApiClient`, or use the
+`FingerprintApi(apiKey, region)` constructor, which does the same. `Configuration.getDefaultApiClient()` returns one
+client shared by the whole process. It's recommended to create an instance of `ApiClient` per thread in a multithreaded
+environment to avoid any potential issues.
 
 ## Version support
 

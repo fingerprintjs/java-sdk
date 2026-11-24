@@ -65,7 +65,7 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on the FingerprintApi constructor's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
@@ -144,7 +144,7 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on the FingerprintApi constructor's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
@@ -261,7 +261,7 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on the FingerprintApi constructor's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
@@ -523,7 +523,7 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on the FingerprintApi constructor's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
