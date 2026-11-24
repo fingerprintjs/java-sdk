@@ -69,6 +69,12 @@ public class WebhookValidationTest {
   }
 
   @Test
+  public void trailingDelimiterTest() throws NoSuchAlgorithmException {
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(validHeader + "=", data, secret));
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(validHeader + "==", data, secret));
+  }
+
+  @Test
   public void nonAsciiSignatureTest() throws NoSuchAlgorithmException {
     String header = "v1=" + "\u00e9".repeat(64);
     Assertions.assertFalse(WebhookValidation.isSignatureValid(header, data, secret));

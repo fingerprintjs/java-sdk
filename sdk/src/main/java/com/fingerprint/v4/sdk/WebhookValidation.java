@@ -33,7 +33,7 @@ public class WebhookValidation {
     byte[] expected = null;
 
     for (String signature : header.split(",")) {
-      String[] parts = signature.split("=");
+      String[] parts = signature.split("=", -1);
       if (parts.length != 2
           || !parts[0].equals(SIGNATURE_VERSION)
           || parts[1].length() != SIGNATURE_LENGTH) {
