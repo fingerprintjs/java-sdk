@@ -45,6 +45,7 @@ jobs:
       # Gradle will detect the JVM installation from the ubuntu-latest image and use it
       - run: ./gradlew runFunctionalTests -PjavaVersion=${{ matrix.java }} --stacktrace
         env:
+          JITPACK: true
           FPJS_API_SECRET: "${{ secrets.FPJS_API_SECRET }}"
           FPJS_API_REGION: "${{ secrets.FPJS_API_REGION }}"
 

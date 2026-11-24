@@ -6,6 +6,13 @@ on:
       - main
 
 jobs:
+  wrapper-validation:
+    runs-on: ubuntu-latest
+    name: Validate Gradle wrapper
+    steps:
+      - uses: actions/checkout@v7
+      - uses: gradle/actions/wrapper-validation@v6
+
   format-check:
     runs-on: ubuntu-latest
     name: Check source code formatting
