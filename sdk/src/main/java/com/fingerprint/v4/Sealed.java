@@ -7,7 +7,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 import javax.crypto.Cipher;
@@ -30,12 +29,7 @@ public class Sealed {
 
     @Override
     public String toString() {
-      return "DecryptionKey{"
-          + "key="
-          + Base64.getEncoder().encodeToString(key)
-          + ", algorithm="
-          + algorithm
-          + '}';
+      return "DecryptionKey{algorithm=" + algorithm + '}';
     }
   }
 
@@ -68,9 +62,27 @@ public class Sealed {
 
     public final String decryptionKeyDescription;
 
+    /**
+     * Index of the key that failed in the array passed to {@link Sealed#unseal}.
+     */
+    public final int decryptionKeyIndex;
+
     public UnsealException(String message, Throwable cause, DecryptionKey decryptionKey) {
+      this(message, cause, decryptionKey, -1);
+    }
+
+    public UnsealException(
+        String message, Throwable cause, DecryptionKey decryptionKey, int decryptionKeyIndex) {
       super(message, cause);
-      this.decryptionKeyDescription = decryptionKey.toString();
+      this.decryptionKeyIndex = decryptionKeyIndex;
+      this.decryptionKeyDescription =
+          decryptionKeyIndex < 0
+              ? decryptionKey.toString()
+              : "DecryptionKey{index="
+                  + decryptionKeyIndex
+                  + ", algorithm="
+                  + decryptionKey.algorithm
+                  + '}';
     }
 
     @Override
@@ -99,7 +111,8 @@ public class Sealed {
 
     UnsealAggregateException aggregateException = new UnsealAggregateException();
 
-    for (DecryptionKey key : keys) {
+    for (int i = 0; i < keys.length; i++) {
+      DecryptionKey key = keys[i];
       switch (key.algorithm) {
         case AES_256_GCM:
           try {
@@ -107,7 +120,7 @@ public class Sealed {
                 Arrays.copyOfRange(sealed, SEAL_HEADER.length, sealed.length), key.key);
           } catch (Exception exception) {
             aggregateException.addSuppressed(
-                new UnsealException("Failed to decrypt", exception, key));
+                new UnsealException("Failed to decrypt", exception, key, i));
           }
 
           break;
