@@ -1,6 +1,5 @@
 [versions]
 google-java-format = "1.36.1"
-google-osdetector = "1.7.3"
 jackson = "2.22.1"
 jackson-annotations = "2.22"
 jakarta-annotation-api = "2.1.1"
@@ -28,4 +27,3 @@ mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 
 [plugins]
 openapi-generator = { id = "org.openapi.generator", version.ref = "openapi" }
-google-osdetector = { id = "com.google.osdetector", version.ref = "google-osdetector" }

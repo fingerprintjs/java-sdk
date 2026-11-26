@@ -1,6 +1,7 @@
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
+import java.security.MessageDigest
 
 val projectVersion: String by project
 
@@ -9,51 +10,88 @@ allprojects {
     version = projectVersion
 }
 
-plugins {
-    alias(libs.plugins.google.osdetector)
+val googleJavaFormatExeFile = layout.buildDirectory.file("google-java-format.exe")
+
+// SHA-256 of each google-java-format native binary, keyed by the platform part of the release
+// asset name. These belong to the version in gradle/libs.versions.toml
+// (`versions.google-java-format`)
+//
+// NOTE: When bumping it, take the new digests from the GitHub release page and replace all of
+// them.
+val googleJavaFormatSha256 = mapOf(
+    "darwin-arm64" to "572c8be5ea4e15c674f7f9c89f9c0a4b9336950d9c42c07220557e97a4002bce",
+    "linux-arm64" to "37d27263fce029fc59aa4e1b556ac6997d0eb2266a38ba2b8746b709f6c77b11",
+    "linux-x86-64" to "8dc71663a6c9cb17b02ba9709bfab5c4de59de6f4ac133fd7a1d5a4394b1193b",
+    "windows-x86-64.exe" to "23a6acedcfd9253da8413984dd1e3aecab32f00543477566d1abe5ae5aab1019",
+)
+
+fun googleJavaFormatPlatform(): String {
+    val osName = System.getProperty("os.name").lowercase()
+    val os = when {
+        osName.startsWith("mac") -> "darwin"
+        osName.startsWith("linux") -> "linux"
+        osName.startsWith("windows") -> "windows"
+        else -> throw GradleException("google-java-format: unsupported OS '$osName'")
+    }
+    val arch = when (val osArch = System.getProperty("os.arch").lowercase()) {
+        "aarch64", "arm64" -> "arm64"
+        "x86_64", "amd64" -> "x86-64"
+        else -> throw GradleException("google-java-format: unsupported architecture '$osArch'")
+    }
+    return if (os == "windows") "$os-$arch.exe" else "$os-$arch"
 }
 
-// Register formatting tasks for each subproject
-
-val googleJavaFormatExeFile = layout.buildDirectory.file("google-java-format.exe")
-val googleJavaFormatOsSuffixMap = mapOf(
-    "osx" to "darwin",
-    "linux" to "linux",
-    "windows" to "windows",
-)
-val googleJavaFormatArchSuffixMap = mapOf(
-    "x86_64" to "x86-64",
-    "aarch_64" to "arm64"
-)
-val googleJavaFormatBinarySuffixMap = mapOf(
-    "osx" to "",
-    "linux" to "",
-    "windows" to ".exe"
-)
+fun sha256Hex(file: File): String {
+    val digest = MessageDigest.getInstance("SHA-256")
+    file.inputStream().use { input ->
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        while (true) {
+            val read = input.read(buffer)
+            if (read < 0) break
+            digest.update(buffer, 0, read)
+        }
+    }
+    return digest.digest().joinToString("") { "%02x".format(it) }
+}
 
 tasks.register("downloadGoogleJavaFormat") {
-    val osSuffix = googleJavaFormatOsSuffixMap[osdetector.os]
-    val archSuffix = googleJavaFormatArchSuffixMap[osdetector.arch]
-    val binarySuffix = googleJavaFormatBinarySuffixMap[osdetector.os]
     val googleJavaFormatVersion = libs.versions.google.java.format.get()
-    val downloadUrl = "https://github.com/google/google-java-format/releases/download/v$googleJavaFormatVersion/google-java-format_${osSuffix}-${archSuffix}${binarySuffix}"
     outputs.file(googleJavaFormatExeFile)
 
     onlyIf {
-        System.getenv("JITPACK")?.lowercase() != "true"
+        System.getenv("JITPACK")?.lowercase() != "true" &&
+            System.getenv("DISABLE_FORMATTING")?.lowercase() != "true"
     }
 
     doLast {
+        val platform = googleJavaFormatPlatform()
+        val expectedSha256 = googleJavaFormatSha256[platform]
+            ?: throw GradleException("google-java-format: no pinned SHA-256 for '$platform'")
         val file = googleJavaFormatExeFile.get().asFile
-        if (!file.exists()) {
-            println("Downloading google-java-format for $osSuffix-$archSuffix")
-            URL(downloadUrl).openStream().use { input ->
-                Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING)
-            }
-            file.setExecutable(true)
-        } else {
+
+        if (file.exists() && sha256Hex(file) == expectedSha256) {
             println("google-java-format already downloaded")
+            return@doLast
         }
+
+        println("Downloading google-java-format $googleJavaFormatVersion for $platform")
+        val downloadUrl = "https://github.com/google/google-java-format/releases/download/v$googleJavaFormatVersion/google-java-format_$platform"
+        val tempFile = File(file.parentFile, "${file.name}.download")
+        file.parentFile.mkdirs()
+        URL(downloadUrl).openStream().use { input ->
+            Files.copy(input, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING)
+        }
+
+        val actualSha256 = sha256Hex(tempFile)
+        if (actualSha256 != expectedSha256) {
+            tempFile.delete()
+            throw GradleException(
+                "google-java-format: SHA-256 mismatch for $downloadUrl (expected $expectedSha256, got $actualSha256)"
+            )
+        }
+
+        Files.move(tempFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING)
+        file.setExecutable(true)
     }
 }
 
@@ -69,7 +107,8 @@ fun Project.registerFormatTasks() {
         dependsOn(rootProject.tasks.named("downloadGoogleJavaFormat"))
 
         onlyIf {
-            System.getenv("JITPACK")?.lowercase() != "true"
+            System.getenv("JITPACK")?.lowercase() != "true" &&
+                System.getenv("DISABLE_FORMATTING")?.lowercase() != "true"
         }
 
         doLast {
@@ -134,7 +173,7 @@ subprojects {
             }
         }
 
-        // Print Java toolchain used for running 
+        // Print Java toolchain used for running
         tasks.withType<JavaExec>().configureEach {
             doFirst {
                 val launcher = javaLauncher.orNull
