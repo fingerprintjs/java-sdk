@@ -67,6 +67,11 @@ public class Sealed {
      */
     public final int decryptionKeyIndex;
 
+    /**
+     * @deprecated No longer used by the SDK. Use {@link #UnsealException(String, Throwable,
+     *     DecryptionKey, int)} instead.
+     */
+    @Deprecated
     public UnsealException(String message, Throwable cause, DecryptionKey decryptionKey) {
       this(message, cause, decryptionKey, -1);
     }
