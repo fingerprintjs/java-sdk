@@ -214,26 +214,34 @@ package com.fingerprint.example;
 import com.fingerprint.v4.Sealed;
 import com.fingerprint.v4.model.Event;
 
+import java.io.IOException;
 import java.util.Base64;
 
 public class SealedResults {
-    public static void main(String... args) throws Exception {
+    public static void main(String... args) {
         // Sealed result from the frontend.
         String SEALED_RESULT = System.getenv("BASE64_SEALED_RESULT");
 
         // Base64 encoded key generated in the dashboard.
         String SEALED_KEY = System.getenv("BASE64_KEY");
 
-        final Event event = Sealed.unsealEventResponse(
-                Base64.getDecoder().decode(SEALED_RESULT),
-                // You can provide more than one key to support key rotation. The SDK will try to decrypt the result with each key.
-                new Sealed.DecryptionKey[]{
-                        new Sealed.DecryptionKey(
-                                Base64.getDecoder().decode(SEALED_KEY),
-                                Sealed.DecryptionAlgorithm.AES_256_GCM
-                        )
-                }
-        );
+        final Event event;
+        try {
+            event = Sealed.unsealEventResponse(
+                    Base64.getDecoder().decode(SEALED_RESULT),
+                    // You can provide more than one key to support key rotation. The SDK will try to decrypt the result with each key.
+                    new Sealed.DecryptionKey[]{
+                            new Sealed.DecryptionKey(
+                                    Base64.getDecoder().decode(SEALED_KEY),
+                                    Sealed.DecryptionAlgorithm.AES_256_GCM
+                            )
+                    }
+            );
+        } catch (Sealed.UnsealAggregateException | IOException | IllegalArgumentException e) {
+            System.err.println("Failed to unseal the sealed result");
+            System.exit(1);
+            return;
+        }
 
         // Do something with unsealed response, e.g: send it back to the frontend.
     }

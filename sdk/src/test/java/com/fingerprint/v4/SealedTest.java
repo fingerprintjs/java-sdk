@@ -6,7 +6,14 @@ import com.fasterxml.jackson.core.io.JsonEOFException;
 import com.fingerprint.v4.Sealed.InvalidSealedDataException;
 import com.fingerprint.v4.model.Event;
 import com.fingerprint.v4.sdk.JSON;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import org.apache.commons.codec.binary.Hex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -248,5 +255,70 @@ public class SealedTest {
     Sealed.UnsealException unsealException = (Sealed.UnsealException) exception.getSuppressed()[2];
 
     assertEquals(unsealException.getCause().getMessage(), "12 > 3");
+  }
+
+  @Test
+  public void unsealExceptionsDoNotExposeKeyTest() throws Exception {
+    byte[] sealedResult =
+        Base64.getDecoder()
+            .decode("noXc7VOpBstjjcavDKSKr4HTavt4mdq8h6NC32T0hUtw9S0jXT8lPjZiWL8SyHxmrF3uTGqO+g==");
+    byte[][] keys =
+        new byte[][] {
+          Base64.getDecoder().decode("p2PA7MGy5tx56cnyJaFZMr96BCFwZeHjZV2EqMvTq54="),
+          Base64.getDecoder().decode("aW52YWxpZA==")
+        };
+
+    Sealed.UnsealAggregateException exception =
+        assertThrows(
+            Sealed.UnsealAggregateException.class,
+            () ->
+                Sealed.unseal(
+                    sealedResult,
+                    new Sealed.DecryptionKey[] {
+                      new Sealed.DecryptionKey(keys[0], Sealed.DecryptionAlgorithm.AES_256_GCM),
+                      new Sealed.DecryptionKey(keys[1], Sealed.DecryptionAlgorithm.AES_256_GCM)
+                    }));
+
+    StringWriter stackTrace = new StringWriter();
+    exception.printStackTrace(new PrintWriter(stackTrace));
+
+    List<String> outputs = new ArrayList<>();
+    outputs.add(stackTrace.toString());
+    outputs.add(exception.toString());
+    outputs.add(String.valueOf(exception.getMessage()));
+
+    Throwable[] suppressed = exception.getSuppressed();
+    assertEquals(keys.length, suppressed.length);
+    for (int i = 0; i < suppressed.length; i++) {
+      Sealed.UnsealException unsealException = (Sealed.UnsealException) suppressed[i];
+      assertEquals(i, unsealException.decryptionKeyIndex);
+      assertEquals(
+          "DecryptionKey{algorithm=AES_256_GCM} @ index = " + i,
+          unsealException.decryptionKeyDescription);
+      outputs.add(unsealException.toString());
+      outputs.add(String.valueOf(unsealException.getMessage()));
+      outputs.add(unsealException.decryptionKeyDescription);
+      outputs.add(String.valueOf(unsealException.getCause()));
+    }
+    for (byte[] key : keys) {
+      outputs.add(new Sealed.DecryptionKey(key, Sealed.DecryptionAlgorithm.AES_256_GCM).toString());
+    }
+
+    for (byte[] key : keys) {
+      List<String> encodings =
+          Arrays.asList(
+              Base64.getEncoder().encodeToString(key),
+              Base64.getEncoder().withoutPadding().encodeToString(key),
+              Base64.getUrlEncoder().withoutPadding().encodeToString(key),
+              Hex.encodeHexString(key, true),
+              Hex.encodeHexString(key, false),
+              Arrays.toString(key),
+              new String(key, StandardCharsets.ISO_8859_1));
+      for (String output : outputs) {
+        for (String encoding : encodings) {
+          assertFalse(output.contains(encoding), "Key found in: " + output);
+        }
+      }
+    }
   }
 }
