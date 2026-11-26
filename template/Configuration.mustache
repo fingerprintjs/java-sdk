@@ -16,7 +16,11 @@ public class Configuration {
      * instances without providing an API client.
      *
      * @return Default API client
+     * @deprecated The default API client is shared by the whole process. Create a client with
+     *     {@link #createApiClient(String, Region)} and share it through your own dependency
+     *     injection or singleton instead.
      */
+    @Deprecated
     public static ApiClient getDefaultApiClient() {
         ApiClient client = defaultApiClient.get();
         if (client == null) {
@@ -147,7 +151,11 @@ public class Configuration {
      * instances without providing an API client.
      *
      * @param apiClient API client
+     * @deprecated The default API client is shared by the whole process. Create a client with
+     *     {@link #createApiClient(String, Region)} and share it through your own dependency
+     *     injection or singleton instead.
      */
+    @Deprecated
     public static void setDefaultApiClient(ApiClient apiClient) {
         defaultApiClient.set(apiClient);
     }
