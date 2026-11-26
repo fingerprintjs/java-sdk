@@ -47,4 +47,48 @@ public class WebhookValidationTest {
     boolean result = WebhookValidation.isSignatureValid(validHeader, "".getBytes(), secret);
     assert !result;
   }
+
+  @Test
+  public void validSignatureAfterOtherEntriesTest() throws NoSuchAlgorithmException {
+    String header = "v1=invalid,v2=" + "0".repeat(64) + ",v1=" + "0".repeat(64) + "," + validHeader;
+    Assertions.assertTrue(WebhookValidation.isSignatureValid(header, data, secret));
+  }
+
+  @Test
+  public void truncatedSignatureTest() throws NoSuchAlgorithmException {
+    String header = validHeader.substring(0, validHeader.length() - 1);
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(header, data, secret));
+  }
+
+  @Test
+  public void malformedEntriesTest() throws NoSuchAlgorithmException {
+    String header = "v1,v1=,=,v1=a=b,,=" + "0".repeat(64);
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(header, data, secret));
+  }
+
+  @Test
+  public void trailingDelimiterTest() throws NoSuchAlgorithmException {
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(validHeader + "=", data, secret));
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(validHeader + "==", data, secret));
+  }
+
+  @Test
+  public void nonAsciiSignatureTest() throws NoSuchAlgorithmException {
+    String header = "v1=" + "\u00e9".repeat(64);
+    Assertions.assertFalse(WebhookValidation.isSignatureValid(header, data, secret));
+  }
+
+  @Test
+  public void emptySecretWithWellFormedHeaderTest() {
+    Assertions.assertThrows(
+        IllegalArgumentException.class,
+        () -> WebhookValidation.isSignatureValid(validHeader, data, ""));
+  }
+
+  @Test
+  public void nullSecretTest() {
+    Assertions.assertThrows(
+        IllegalArgumentException.class,
+        () -> WebhookValidation.isSignatureValid(validHeader, data, null));
+  }
 }
