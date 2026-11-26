@@ -25,9 +25,9 @@ public class ConfigurationTest {
 
   @Test
   public void apiInstancesKeepTheirOwnKeyAndRegionTest() {
-    FingerprintApi europe = new FingerprintApi("key-a", Region.EUROPE);
-    FingerprintApi global = new FingerprintApi("key-b");
-    FingerprintApi asia = new FingerprintApi("key-c", Region.ASIA);
+    FingerprintApi europe = FingerprintApi.create("key-a", Region.EUROPE);
+    FingerprintApi global = FingerprintApi.create("key-b");
+    FingerprintApi asia = FingerprintApi.create("key-c", Region.ASIA);
 
     assertEquals("key-a", bearerToken(europe.getApiClient()));
     assertEquals(Region.EUROPE.toString(), europe.getApiClient().getBasePath());
