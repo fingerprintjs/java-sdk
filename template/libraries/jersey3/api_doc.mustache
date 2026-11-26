@@ -39,14 +39,14 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on FingerprintApi.create function's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
         Region.EUROPE
         Region.ASIA
         */
-        {{classname}} api = new {{classname}}(FPJS_API_SECRET, Region.EUROPE);
+        {{classname}} api = {{classname}}.create(FPJS_API_SECRET, Region.EUROPE);
         {{#allParams}}
         {{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{dataType}}} | {{{description}}}
         {{/allParams}}

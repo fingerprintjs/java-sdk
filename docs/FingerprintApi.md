@@ -65,14 +65,14 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on FingerprintApi.create function's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
         Region.EUROPE
         Region.ASIA
         */
-        FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
+        FingerprintApi api = FingerprintApi.create(FPJS_API_SECRET, Region.EUROPE);
         String visitorId = "Ibk1527CUFmcnjLwIs4A9"; // String | The [visitor ID](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) you want to delete.
         try {
             api.deleteVisitorData(visitorId);
@@ -144,14 +144,14 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on FingerprintApi.create function's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
         Region.EUROPE
         Region.ASIA
         */
-        FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
+        FingerprintApi api = FingerprintApi.create(FPJS_API_SECRET, Region.EUROPE);
         String eventId = "1708102555327.NLOjmg"; // String | The unique [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id) of each identification request (`requestId` can be used in its place).
         String rulesetId = "D6N9Kbk9HRWrIWGz"; // String | The ID of the ruleset to evaluate against the event, producing the action to take for this event. The resulting action is returned in the `rule_action` attribute of the response. 
         try {
@@ -261,14 +261,14 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on FingerprintApi.create function's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
         Region.EUROPE
         Region.ASIA
         */
-        FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
+        FingerprintApi api = FingerprintApi.create(FPJS_API_SECRET, Region.EUROPE);
         Integer limit = 10; // Integer | Maximum number of events to return. Defaults to 10 when omitted. Results are selected from the time range (`start`, `end`), ordered by `reverse`, then truncated to provided `limit` size. So `reverse=true` returns the oldest N=`limit` events, otherwise the newest N=`limit` events. 
         String paginationKey = "S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q"; // String | Use `pagination_key` to get the next page of results.  When more results are available (e.g., you requested up to 100 results for your query using `limit`, but there are more than 100 events total matching your request), the `pagination_key` field is added to the response. The pagination key is an arbitrary string that should not be interpreted in any way and should be passed as-is. In the following request, use that value in the `pagination_key` parameter to get the next page of results:  1. First request, returning most recent 100 events: `GET api-base-url/events?limit=100` 2. Use `response.pagination_key` to get the next page of results: `GET api-base-url/events?limit=100&pagination_key=S9rgMMUb4z3X5t5pr_tSgoSZlmyF0O8X7kCV2m981-iY1LmRTjraa1rTk3L-hQExnDWCi0RA-zAIjaVSTNO2AN2eqQWgzT0RjbieMxRfSdkM-HmOhdOgdQvYfPG3vqU1DJKh4Q` 
         String visitorId = "Ibk1527CUFmcnjLwIs4A9"; // String | Unique [visitor identifier](https://docs.fingerprint.com/reference/js-agent-get-function#visitor_id) issued by Fingerprint Identification and all active Smart Signals.  Filter events by matching Visitor ID (`identification.visitor_id` property). 
@@ -523,14 +523,14 @@ public class FingerprintApiExample {
     public static void main(String... args) {
         // Create a new api client instance from Configuration with your Fingerprint Server API Key and your Fingerprint Server API Region.
         /*
-        You can specify a region on getDefaultApiClient function's second parameter
+        You can specify a region on FingerprintApi.create function's second parameter
         If you leave the second parameter empty, then Region.GLOBAL will be used as a default region
         Options for regions are:
         Region.GLOBAL
         Region.EUROPE
         Region.ASIA
         */
-        FingerprintApi api = new FingerprintApi(FPJS_API_SECRET, Region.EUROPE);
+        FingerprintApi api = FingerprintApi.create(FPJS_API_SECRET, Region.EUROPE);
         String eventId = "1708102555327.NLOjmg"; // String | The unique event [identifier](https://docs.fingerprint.com/reference/js-agent-get-function#event_id).
         EventUpdate eventUpdate = new EventUpdate(); // EventUpdate | 
         try {

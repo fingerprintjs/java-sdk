@@ -30,8 +30,7 @@ public class FunctionalTests {
     final String region =
         regionEnv != null ? regionEnv.toLowerCase(Locale.getDefault()).trim() : "us";
 
-    final FingerprintApi api =
-        new FingerprintApi(Configuration.getDefaultApiClient(apiSecret, region));
+    final FingerprintApi api = new FingerprintApi(Configuration.createApiClient(apiSecret, region));
 
     // The start and end timestamp for a search can be specified as UNIX epoch milliseconds
     // value or an OffsetDateTime

@@ -33,6 +33,13 @@ public class FingerprintApi {
   public static final String INTEGRATION_INFO = "fingerprint-pro-server-java-sdk/8.10.0";
   private ApiClient apiClient;
 
+  /**
+   * Create an instance that uses the shared default API client.
+   *
+   * @deprecated The default API client is shared by the whole process. Use
+   *     {@link #FingerprintApi(ApiClient)} or {@link #create(String, Region)} instead.
+   */
+  @Deprecated
   public FingerprintApi() {
     this(Configuration.getDefaultApiClient());
   }
@@ -41,12 +48,51 @@ public class FingerprintApi {
     this.apiClient = apiClient;
   }
 
+  /**
+   * Create an instance that sets the API key and the global region on the shared default API
+   * client.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @deprecated This changes the key and region for every user of the default API client. Use
+   *     {@link #create(String)} instead.
+   */
+  @Deprecated
   public FingerprintApi(String apiKey) {
     this(Configuration.getDefaultApiClient(apiKey));
   }
 
+  /**
+   * Create an instance that sets the API key and region on the shared default API client.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @param region Fingerprint Server API region
+   * @deprecated This changes the key and region for every user of the default API client. Use
+   *     {@link #create(String, Region)} instead.
+   */
+  @Deprecated
   public FingerprintApi(String apiKey, Region region) {
     this(Configuration.getDefaultApiClient(apiKey, region));
+  }
+
+  /**
+   * Create an instance with its own API client for the given API key and the global region.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @return New API instance
+   */
+  public static FingerprintApi create(String apiKey) {
+    return new FingerprintApi(Configuration.createApiClient(apiKey));
+  }
+
+  /**
+   * Create an instance with its own API client for the given API key and region.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @param region Fingerprint Server API region
+   * @return New API instance
+   */
+  public static FingerprintApi create(String apiKey, Region region) {
+    return new FingerprintApi(Configuration.createApiClient(apiKey, region));
   }
 
   /**

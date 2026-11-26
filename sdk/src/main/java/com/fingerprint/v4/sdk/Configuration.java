@@ -28,7 +28,11 @@ public class Configuration {
    * instances without providing an API client.
    *
    * @return Default API client
+   * @deprecated The default API client is shared by the whole process. Create a client with
+   *     {@link #createApiClient(String, Region)} and share it through your own dependency
+   *     injection or singleton instead.
    */
+  @Deprecated
   public static ApiClient getDefaultApiClient() {
     ApiClient client = defaultApiClient.get();
     if (client == null) {
@@ -44,6 +48,53 @@ public class Configuration {
     return client;
   }
 
+  /**
+   * Create a new API client for the given API key and the global region.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @return New API client
+   */
+  public static ApiClient createApiClient(String apiKey) {
+    return createApiClient(apiKey, Region.GLOBAL);
+  }
+
+  /**
+   * Create a new API client for the given API key and region.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @param region Fingerprint Server API region
+   * @return New API client
+   */
+  public static ApiClient createApiClient(String apiKey, Region region) {
+    ApiClient client = apiClientFactory.get();
+    client.setBearerToken(apiKey);
+    client.setBasePath(region.toString());
+    return client;
+  }
+
+  /**
+   * Create a new API client for the given API key and region.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @param regionStr Region name, such as "eu" or "asia", or a custom base URL
+   * @return New API client
+   */
+  public static ApiClient createApiClient(String apiKey, String regionStr) {
+    ApiClient client = apiClientFactory.get();
+    client.setBasePath(resolveBasePath(regionStr));
+    client.setBearerToken(apiKey);
+    return client;
+  }
+
+  /**
+   * Configure the default API client with the given API key and region, and return it.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @param region Fingerprint Server API region
+   * @return Default API client
+   * @deprecated Use {@link #createApiClient(String, Region)} instead.
+   */
+  @Deprecated
   public static ApiClient getDefaultApiClient(String apiKey, Region region) {
     ApiClient client = getDefaultApiClient();
     client.setBearerToken(apiKey);
@@ -51,15 +102,44 @@ public class Configuration {
     return client;
   }
 
+  /**
+   * Configure the default API client with the given API key and region, and return it.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @param regionStr Region name, such as "eu" or "asia", or a custom base URL
+   * @return Default API client
+   * @deprecated Use {@link #createApiClient(String, String)} instead.
+   */
+  @Deprecated
   public static ApiClient getDefaultApiClient(String apiKey, String regionStr) {
     ApiClient client = getDefaultApiClient();
+    client.setBasePath(resolveBasePath(regionStr));
+    client.setBearerToken(apiKey);
+    return client;
+  }
+
+  /**
+   * Configure the default API client with the given API key and the global region, and return it.
+   *
+   * @param apiKey Fingerprint Secret API Key
+   * @return Default API client
+   * @deprecated Use {@link #createApiClient(String)} instead.
+   */
+  @Deprecated
+  public static ApiClient getDefaultApiClient(String apiKey) {
+    ApiClient client = getDefaultApiClient();
+    client.setBearerToken(apiKey);
+    client.setBasePath(Region.GLOBAL.toString());
+    return client;
+  }
+
+  private static String resolveBasePath(String regionStr) {
     switch (regionStr) {
       case "eu":
       case "EU":
       case "EUROPE":
       case "europe":
-        client.setBasePath(Region.EUROPE.toString());
-        break;
+        return Region.EUROPE.toString();
       case "global":
       case "GLOBAL":
       case "us":
@@ -69,26 +149,15 @@ public class Configuration {
       case "America":
       case "america":
       case "AMERICA":
-        client.setBasePath(Region.GLOBAL.toString());
-        break;
+        return Region.GLOBAL.toString();
       case "asia":
       case "Asia":
       case "as":
       case "AS":
-        client.setBasePath(Region.ASIA.toString());
-        break;
+        return Region.ASIA.toString();
       default:
-        client.setBasePath(regionStr);
+        return regionStr;
     }
-    client.setBearerToken(apiKey);
-    return client;
-  }
-
-  public static ApiClient getDefaultApiClient(String apiKey) {
-    ApiClient client = getDefaultApiClient();
-    client.setBearerToken(apiKey);
-    client.setBasePath(Region.GLOBAL.toString());
-    return client;
   }
 
   /**
@@ -96,7 +165,11 @@ public class Configuration {
    * instances without providing an API client.
    *
    * @param apiClient API client
+   * @deprecated The default API client is shared by the whole process. Create a client with
+   *     {@link #createApiClient(String, Region)} and share it through your own dependency
+   *     injection or singleton instead.
    */
+  @Deprecated
   public static void setDefaultApiClient(ApiClient apiClient) {
     defaultApiClient.set(apiClient);
   }
