@@ -56,6 +56,7 @@ every downloaded file is recorded:
 ```
 export GRADLE_USER_HOME=$(mktemp -d)
 ./gradlew --write-verification-metadata sha256 build
+# Repeat the JitPack build (jitpack.yml) so its files are recorded too
 JITPACK=true ./gradlew --write-verification-metadata sha256 clean build sdk:publishToMavenLocal
 unset GRADLE_USER_HOME
 ```
