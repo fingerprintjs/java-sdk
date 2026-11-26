@@ -50,14 +50,22 @@ The generator version is pinned as the `openapi` entry in [gradle/libs.versions.
 
 Gradle checks every dependency and plugin against the SHA-256 checksums in
 [gradle/verification-metadata.xml](./gradle/verification-metadata.xml). After changing a version in
-[gradle/libs.versions.toml](./gradle/libs.versions.toml), refresh the checksums from an empty Gradle cache, so that
-every downloaded file is recorded:
+[gradle/libs.versions.toml](./gradle/libs.versions.toml), the checksums need to be refreshed.
+
+The easiest way is to open a PR. The "Dependency verification metadata" workflow regenerates the file on a clean
+runner, and if it differs from the committed one, the check fails and uploads the new file as the
+`verification-metadata` artifact. Download it, replace `gradle/verification-metadata.xml` and push.
+
+To do it locally, use empty Gradle and Maven caches, so every downloaded file is recorded and nothing comes from
+`~/.m2`:
 
 ```
 export GRADLE_USER_HOME=$(mktemp -d)
-./gradlew --write-verification-metadata sha256 build
+MAVEN_REPO_LOCAL=$(mktemp -d)
+rm gradle/verification-metadata.xml
+./gradlew -Dmaven.repo.local="$MAVEN_REPO_LOCAL" --write-verification-metadata sha256 build
 # Repeat the JitPack build (jitpack.yml) so its files are recorded too
-JITPACK=true ./gradlew --write-verification-metadata sha256 clean build sdk:publishToMavenLocal
+JITPACK=true ./gradlew -Dmaven.repo.local="$MAVEN_REPO_LOCAL" --write-verification-metadata sha256 clean build sdk:publishToMavenLocal
 unset GRADLE_USER_HOME
 ```
 
