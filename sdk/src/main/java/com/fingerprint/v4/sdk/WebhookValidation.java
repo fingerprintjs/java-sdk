@@ -40,6 +40,7 @@ public class WebhookValidation {
         continue;
       }
 
+      // Header can contain many signatures, compute the HMAC only once and reuse it.
       if (expected == null) {
         expected = computeSignature(data, secret);
         if (expected == null) {
