@@ -301,7 +301,7 @@ import com.fingerprint.v4.api.FingerprintApi;
 
 // ...
 
-ApiClient client = Configuration.createApiClient("Default Fingerprint APIClient", Region.GLOBAL);
+ApiClient client = Configuration.createApiClient("Fingerprint Secret API Key", Region.GLOBAL);
 ClientConfig clientConfig = client.getClientConfig();
 
 // The following properties configure the ApacheConnectorProvider, which is the default.
@@ -398,10 +398,9 @@ Class | Method | HTTP request | Description
 
 ## Recommendation
 
-Create a separate `ApiClient` for each API key and region with `Configuration.createApiClient`, or use the
-`FingerprintApi(apiKey, region)` constructor, which does the same. `Configuration.getDefaultApiClient()` returns one
-client shared by the whole process. It's recommended to create an instance of `ApiClient` per thread in a multithreaded
-environment to avoid any potential issues.
+Create your API instance with `FingerprintApi.create(apiKey, region)`, or build a client with `Configuration.createApiClient` and pass it to `new FingerprintApi(client)`. Don't rely on the default API client, it's shared across the whole app and is deprecated.
+
+It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
 
 ## Version support
 

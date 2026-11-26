@@ -2,4 +2,4 @@
 'java-sdk': minor
 ---
 
-Add `Configuration.createApiClient(apiKey[, region])`, which returns a new `ApiClient` instead of changing the shared default one. The `FingerprintApi(apiKey)` and `FingerprintApi(apiKey, region)` constructors now use it, so each instance keeps its own key and region. The `Configuration.getDefaultApiClient(apiKey, ...)` overloads are deprecated because they change the key and region for every user of the default client.
+Add `FingerprintApi.create(apiKey[, region])` and `Configuration.createApiClient(apiKey[, region])`, which build a new `ApiClient` instead of using the shared default one. The `FingerprintApi()`, `FingerprintApi(apiKey)` and `FingerprintApi(apiKey, region)` constructors, `Configuration.getDefaultApiClient(...)` and `Configuration.setDefaultApiClient` are deprecated because they share one client across the whole process. Their behavior is unchanged.
