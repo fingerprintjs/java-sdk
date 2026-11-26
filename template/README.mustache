@@ -239,6 +239,7 @@ public class SealedResults {
             );
         } catch (Sealed.UnsealAggregateException | IOException | IllegalArgumentException e) {
             System.err.println("Failed to unseal the sealed result");
+            System.exit(1);
             return;
         }
 
