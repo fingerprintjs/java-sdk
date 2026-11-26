@@ -293,7 +293,7 @@ public class SealedTest {
       Sealed.UnsealException unsealException = (Sealed.UnsealException) suppressed[i];
       assertEquals(i, unsealException.decryptionKeyIndex);
       assertEquals(
-          "DecryptionKey{index=" + i + ", algorithm=AES_256_GCM}",
+          "DecryptionKey{algorithm=AES_256_GCM} @ index = " + i,
           unsealException.decryptionKeyDescription);
       outputs.add(unsealException.toString());
       outputs.add(String.valueOf(unsealException.getMessage()));

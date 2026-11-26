@@ -81,13 +81,8 @@ public class Sealed {
       super(message, cause);
       this.decryptionKeyIndex = decryptionKeyIndex;
       this.decryptionKeyDescription =
-          decryptionKeyIndex < 0
-              ? decryptionKey.toString()
-              : "DecryptionKey{index="
-                  + decryptionKeyIndex
-                  + ", algorithm="
-                  + decryptionKey.algorithm
-                  + '}';
+          decryptionKey.toString()
+              + (decryptionKeyIndex >= 0 ? " @ index = " + decryptionKeyIndex : "");
     }
 
     @Override
